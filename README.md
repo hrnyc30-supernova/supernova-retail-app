@@ -14,7 +14,7 @@ To run in hot module reloading mode:
 npm start
 ```
 
-To create a production build:
+To create a production build (for deployment):
 
 ```sh
 npm run build-prod
@@ -29,3 +29,13 @@ npm run build-dev
 ## Running
 
 Open the file `dist/index.html` in your browser
+
+Tech Stack
+
+- React
+- Redux
+- Webpack
+- Babel
+- Jest
+- Enzyme
+- Axios
