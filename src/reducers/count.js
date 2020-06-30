@@ -1,11 +1,9 @@
-import { addNumber, ADD_NUMBER } from '../actions/testaction.js';
-
-const count = (state = 0, action) => {
+const count = (count = 0, action) => {
   switch (action.type) {
-    case ADD_NUMBER:
-      return state + action.payload;
+    case 'ADD_NUMBER':
+      return (count += 1);
     default:
-      return state;
+      return count;
   }
 };
 

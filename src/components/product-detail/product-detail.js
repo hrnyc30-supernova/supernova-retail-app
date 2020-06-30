@@ -1,7 +1,7 @@
 import React from 'react';
 
-const ProductDetail = () => {
-  return <h1>Product Detail</h1>;
+const ProductDetail = (props) => {
+  return <h1 onClick={props.onClick}>{props.count}</h1>;
 };
 
 export default ProductDetail;
