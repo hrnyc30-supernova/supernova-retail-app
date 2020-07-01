@@ -12,7 +12,7 @@ class Stars extends React.Component {
       <>
         {[...Array(5)].map((star, i) => {
           const ratingValue = i + 1;
-          return <FaStar color={ratingValue <= this.props.rating ? "#ffd500" : "lightgray"}/>
+          return <FaStar key={i} color={ratingValue <= this.props.rating ? "#ffd500" : "lightgray"}/>
         })}
       </>
 
