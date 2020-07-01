@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaStar } from 'react-icons/fa';
 
 class Stars extends React.Component {
   constructor(props) {
@@ -7,7 +8,15 @@ class Stars extends React.Component {
   }
 
   render() {
-    return <h1>{this.props.averageRating}</h1>;
+    return (
+      <>
+        {[...Array(5)].map((star, i) => {
+          const ratingValue = i + 1;
+          return <FaStar color={ratingValue <= this.props.rating ? "#ffd500" : "lightgray"}/>
+        })}
+      </>
+
+    );
   }
 }
 
