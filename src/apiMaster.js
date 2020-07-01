@@ -19,6 +19,7 @@ const getRelatedProducts = (id = 1) => {
 const getQA = (id = 1) => {
   return axios.get(`http://18.224.200.47/qa/${id}`);
 };
+
 const apiHelpers = {
   getProductList: getProductList,
   getProductInfo: getProductInfo,

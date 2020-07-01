@@ -1,7 +1,9 @@
 import React from 'react';
+import ProductTitle from '../../containers/product-detail/product-title-container';
 
 const ProductDetail = (props) => {
-  return <h1 onClick={props.onClick}>{props.count}</h1>;
+  console.log(props);
+  return <ProductTitle />;
 };
 
 export default ProductDetail;

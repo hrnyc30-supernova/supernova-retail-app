@@ -13,10 +13,3 @@ describe('First React component test with Enzyme', () => {
     expect(wrapper.exists()).toBeTruthy();
   });
 });
-
-// describe('App', () => {
-//   it('should render', () => {
-//     const wrapper = shallow(<App />);
-//     expect(wrapper.exists()).toBeTruthy();
-//   });
-// });
