@@ -33,6 +33,7 @@ Open the file `dist/index.html` in your browser
 Tech Stack
 
 - React
+- react-router
 - Redux
 - Webpack
 - Babel
