@@ -30,7 +30,7 @@ class App extends React.Component {
     apiMaster
       .getReviewMetaData()
       .then(({ data }) => {
-        console.log('should be ratings', data);
+        // console.log('should be ratings', data);
         let averageRating = this.calculateAverageRating(data.ratings);
         this.setState({ averageRating: averageRating });
       })
