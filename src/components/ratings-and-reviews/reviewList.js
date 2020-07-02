@@ -100,27 +100,3 @@ class ReviewList extends React.Component {
 }
 
 export default ReviewList;
-
-// return(
-//     <div className='review-list-container'>
-//         {this.state.reviews.length === 0 ? null :
-//                 this.state.reviews.map(review => {
-//                     console.log('review object', review);
-//                     return <ReviewTile key={review.review_id} review={review}/>
-//                 })
-//         }
-//         {this.state.reviews.length > 2 ? <MoreReviewsButton /> : null}
-//         <AddReviewButton />
-//     </div>
-// );
-
-
-// let temp = this.state.reviews;
-        // let filtered = temp.sort((a, b) => {
-        //     let key = sortString.toString();
-        //     console.log('key we are searching for', key);
-        //     let sort = b[key] - a[key];
-        //     console.log('sort', sort);
-        // })
-        // console.log('filtered reviews array', filtered);
-        // return filtered;
