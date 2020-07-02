@@ -1,5 +1,6 @@
 import React from 'react';
 import apiMaster from '../../apiMaster';
+import ProductCard from './productCard';
 
 class RelatedItems extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class RelatedItems extends React.Component {
 
   componentDidMount() {
     // console.log('apiMaster: ', apiMaster);
+    // console.log('this.props: ', this.props);
     this.getRelatedIds();
   }
 
@@ -20,8 +22,13 @@ class RelatedItems extends React.Component {
     apiMaster
       .getRelatedProducts(this.props.currentProductID)
       .then((ids) => {
-        this.setState({ relatedProductIds: ids.data });
+        this.setState({
+          relatedProductIds: ids.data,
+        });
       })
+      // .then(() => {
+      //   console.log('state: ', this.state);
+      // })
       .catch((err) => {
         console.log('err in getRelatedIds: ', err);
       });
@@ -31,7 +38,10 @@ class RelatedItems extends React.Component {
     return (
       <>
         <h1>Related Products</h1>
-        <div>{this.props.currentProductID}</div>
+        <ProductCard
+          relatedProducts={this.state}
+          currentProductId={this.props.currentProductID}
+        />
       </>
     );
   }
