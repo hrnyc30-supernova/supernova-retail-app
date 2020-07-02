@@ -8,7 +8,7 @@ class RatingsReviews extends React.Component {
   }
   componentDidMount() {}
   render() {
-    return <Stars averageRating={this.props.averageRating} />;
+    return <Stars rating={this.props.averageRating} />;
   }
 }
 
