@@ -39,7 +39,7 @@ class RelatedItems extends React.Component {
       <>
         <h1>Related Products</h1>
         <ProductCard
-          relatedProducts={this.state}
+          relatedProducts={this.state.relatedProductIds}
           currentProductId={this.props.currentProductID}
         />
       </>

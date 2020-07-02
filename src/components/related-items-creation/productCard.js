@@ -7,18 +7,31 @@ class ProductCard extends React.Component {
     this.state = {
       cardDetails: [],
     };
+
+    this.getCardDetails = this.getCardDetails.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.relatedProducts !== prevProps.relatedProducts) {
+      console.log('props: ', this.props.relatedProducts);
+      this.getCardDetails();
+    }
   }
 
   getCardDetails() {
-    let cardDetails = [];
-    let promises = [];
-    for (let i = 0; i < this.props.relatedProductIds.length; i++) {
-      promises.push(
-        apiMaster
-          .getProductInfo(this.props.relatedProductIds[i])
-          .then((info) => cardDetails.push(info.data))
-      );
-      Promise.all(promises);
+    // let cardDetails = [];
+    for (let i = 0; i < this.props.relatedProducts.length; i++) {
+      apiMaster
+        .getProductInfo(this.props.relatedProducts[i])
+        .then((info) => {
+          this.setState((prevState) => ({
+            cardDetails: [...prevState.cardDetails, info.data],
+          }));
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+      // console.log('cardDetails: ', i, cardDetails);
     }
   }
 
