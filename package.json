@@ -10,16 +10,15 @@
     "clean": "rm dist/bundle.js",
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
-    "start": "webpack-dev-server --hot --mode development"
+    "start": "webpack-dev-server --hot --mode development",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.19.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
-    "react-redux": "^7.2.0",
     "react-router": "^5.2.0",
-    "redux": "^4.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -33,7 +32,6 @@
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",
     "jest": "^26.1.0",
-    "redux-devtools": "^3.5.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",
     "webpack-cli": "^3.3.12",
