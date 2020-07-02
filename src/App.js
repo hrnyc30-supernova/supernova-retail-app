@@ -1,7 +1,7 @@
 import React from 'react';
 import apiMaster from './apiMaster';
 import { hot } from 'react-hot-loader/root';
-
+// Widgets
 import ProductDetail from './components/product-detail/productDetail';
 import RelatedItems from './components/related-items-creation/relatedItems';
 import QuestionsAndAnswers from './components/questions-and-answers/questionsAndAnswers';
