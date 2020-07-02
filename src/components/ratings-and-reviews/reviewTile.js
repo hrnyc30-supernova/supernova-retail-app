@@ -16,7 +16,7 @@ class ReviewTile extends React.Component {
                 <p>{this.props.review.date}</p>
                 <p>{this.props.review.summary}</p>
                 <p>{this.props.review.body}</p>
-                <img src={this.props.review.photos[0].url}/>
+                {this.props.review.photos.length > 0 ? <img src={this.props.review.photos[0].url}/> : null}
                 <p>{this.props.review.recommend === 0 ? 'I recommend this product' : null}</p>
                 <p>{this.props.review.response === null ? null : this.props.review.response}</p>
                 <p>{this.props.review.helpfulness}</p>
