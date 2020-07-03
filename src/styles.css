@@ -12,4 +12,12 @@ body {
 
 .cards-wrapper {
   display: flex;
+  height: 25em;
+  flex-direction: row;
+}
+
+.card-img-top {
+  max-height: 15em;
+  max-width: 100%;
+  align-items: center;
 }
