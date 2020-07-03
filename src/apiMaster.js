@@ -27,7 +27,7 @@ const getReviewMetaData = (id = 1) => {
 const getReviewsOfProduct = (id = 1) => {
   return axios.get(`http://18.224.200.47/reviews/${id}/list`, {
     params: {
-      sort: 'newest'
+      sort: 'relevant'
     }
   });
 };
