@@ -9,7 +9,6 @@ class ReviewTile extends React.Component {
     }
 
     render() {
-        console.log('revew', this.props.review)
         let date = moment(this.props.review.date).format("MMMM D, YYYY");
         return(
             <div className='review-tile-container'>
