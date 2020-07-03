@@ -6,7 +6,7 @@ const RatingsReviews = props => {
     return (
       <div className='reviews-ratings-container'>RATINGS AND REVIEWS
         <ReviewList currentProductID={props.currentProductID}/>
-        <RatingsBreakdown currentProductID={props.currentProductID} averageRating={props.averageRating} ratingBreakdown={props.ratingBreakdown}/>
+        <RatingsBreakdown currentProductID={props.currentProductID} averageRating={props.averageRating} />
       </div>
     );
 }

@@ -16,7 +16,7 @@ class ReviewList extends React.Component {
         this.handleSortByChange = this.handleSortByChange.bind(this);
     }
 
-    handleSortByChange(sortString, id) {
+    handleSortByChange(sortString) {
         apiMaster.getReviewsOfProduct(this.props.currentProductId, sortString)
             .then(({ data }) => {
                 if (sortString === 'newest') {

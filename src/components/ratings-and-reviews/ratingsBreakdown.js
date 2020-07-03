@@ -1,8 +1,6 @@
 import React from 'react';
 import Stars from './stars.js';
-import MoreReviewsButton from './moreReviewsButton.js';
-import AddReviewButton from './addReviewButton.js';
-import SortBy from './sortBy.js';
+import RatingFilters from './ratingFilters.js';
 import apiMaster from '../../apiMaster.js';
 
 class RatingsBreakdown extends React.Component {
@@ -30,6 +28,9 @@ class RatingsBreakdown extends React.Component {
         (this.state.currentRating !== undefined && this.state.currentRating.characteristics !== undefined) ? chars = this.state.currentRating.characteristics : chars = null;
         return (
             <div className='ratings-breakdown-container'>Current Product Rating Breakdown: 
+            <p>{Number(this.props.averageRating).toFixed(1)}</p>
+            <Stars rating={this.props.averageRating} />
+            <RatingFilters />
                 {
                     chars !== null ? 
                         Object.entries(chars).map(([char, val]) => {
@@ -37,7 +38,6 @@ class RatingsBreakdown extends React.Component {
                         })
                         : null
                 }
-                <Stars rating={this.props.averageRating} />
             </div>
         );
     }
