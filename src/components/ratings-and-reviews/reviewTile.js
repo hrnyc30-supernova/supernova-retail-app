@@ -12,7 +12,7 @@ class ReviewTile extends React.Component {
         let date = moment(this.props.review.date).format("MMMM D, YYYY");
         return(
             <div className='review-tile-container'>
-                <Stars averageRating={this.props.review.rating}/>
+                <Stars rating={this.props.review.rating}/>
                 <p>{`${this.props.review.reviewer_name}, ${date}`}</p>
                 <p>{this.props.review.summary}</p>
                 <p>{this.props.review.body}</p>
