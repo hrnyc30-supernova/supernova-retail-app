@@ -12,6 +12,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProduct: {},
+      productRatingBreakdown: {},
       averageRating: 'calculating',
     };
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
@@ -32,7 +33,10 @@ class App extends React.Component {
       .then(({ data }) => {
         // console.log('should be ratings', data);
         let averageRating = this.calculateAverageRating(data.ratings);
-        this.setState({ averageRating: averageRating });
+        this.setState({ 
+          productRatingBreakdown: data,
+          averageRating: averageRating 
+        });
       })
       .catch((err) => {
         console.log(err);
@@ -63,6 +67,7 @@ class App extends React.Component {
         <RatingsReviews
           currentProductID={this.state.currentProduct.id}
           averageRating={this.state.averageRating}
+          ratingBreakdown={this.state.productRatingBreakdown}
         />
       </div>
     );
