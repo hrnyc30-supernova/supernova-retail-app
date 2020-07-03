@@ -8,7 +8,6 @@ class ProductCard extends React.Component {
     this.state = {
       cardDetails: [],
       cardImages: [],
-      test: ['kitty', 'puppy', 'turtle', 'dolphin'],
     };
 
     this.clearList = this.clearList.bind(this);
@@ -33,39 +32,46 @@ class ProductCard extends React.Component {
   }
 
   getCardDetails() {
-    // let cardDetails = [];
+    let promises = [];
     for (let i = 0; i < this.props.relatedProducts.length; i++) {
-      apiMaster
-        .getProductInfo(this.props.relatedProducts[i])
-        .then((info) => {
-          this.setState((prevState) => ({
-            cardDetails: [...prevState.cardDetails, info.data],
-          }));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      promises.push(
+        apiMaster
+          .getProductInfo(this.props.relatedProducts[i])
+          .then((res) => res.data)
+          .catch((err) => {
+            console.log(err);
+          })
+      );
       // console.log('cardDetails: ', i, cardDetails);
     }
+    Promise.all(promises).then((res) => {
+      // console.log('res: ', res);
+      this.setState({ cardDetails: res });
+    });
   }
 
   getCardImages() {
+    let promises = [];
     for (let i = 0; i < this.props.relatedProducts.length; i++) {
-      apiMaster
-        .getProductStyles(this.props.relatedProducts[i])
-        .then((info) => {
-          this.setState((prevState) => ({
-            cardImages: [
-              ...prevState.cardImages,
-              info.data.results[0].photos[0].thumbnail_url ||
-                'https://images.unsplash.com/photo-1529088148495-2d9f231db829?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80',
-            ],
-          }));
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      promises.push(
+        apiMaster
+          .getProductStyles(this.props.relatedProducts[i])
+          .then(
+            (res) =>
+              res.data.results[0].photos[0].thumbnail_url ||
+              'https://images.unsplash.com/photo-1529088148495-2d9f231db829?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80'
+          )
+          .catch((err) => {
+            console.log(err);
+          })
+      );
     }
+    Promise.all(promises).then((res) => {
+      // console.log('res: ', res);
+      this.setState({
+        cardImages: res,
+      });
+    });
   }
 
   render() {
