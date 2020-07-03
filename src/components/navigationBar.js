@@ -1,6 +1,6 @@
 import React from "react";
 
-import search from "../assets/search-white.png";
+import { FaSearch } from "react-icons/fa";
 
 class NavigationBar extends React.Component {
   constructor(props) {
@@ -30,7 +30,9 @@ class NavigationBar extends React.Component {
             value={this.state.search}
             onChange={(event) => this.handleFormChange(event)}
           ></input>
-          <img type="submit" className="search-icon" src={search}></img>
+          <span type="submit" className="search-icon">
+            <FaSearch />
+          </span>
         </span>
       </div>
     );
