@@ -15,28 +15,9 @@ class ReviewList extends React.Component {
             isSorted: false
         };
         this.handleSortByChange = this.handleSortByChange.bind(this);
-        // this.filterReviews = this.filterReviews.bind(this);
     }
-    
- // this.filterReviewsByDate = this.filterReviewsByDate.bind(this);
-        // this.filterReviewsByHelpfulness = this.filterReviewsByHelpfulness.bind(this);
-    
-    // filterReviewsByDate() {
-    //     return this.state.reviews.sort(function(a, b) {
-    //         let dateA = new Date(a.date);
-    //         let dateB = new Date(b.date)
-    //         return dateB - dateA;
-    //     });
-    // }
-    
-    // filterReviewsByHelpfulness() {
-    //     return this.state.reviews.sort(function(a, b) {
-    //         return b.helpfulness - a.helpfulness;
-    //     });
-    // }
 
     handleSortByChange(sortString, id) {
-        console.log('getting to handleSort');
         apiMaster.getReviewsOfProduct(this.props.currentProductId, sortString)
             .then(({ data }) => {
                 if (sortString === 'newest') {
@@ -46,7 +27,6 @@ class ReviewList extends React.Component {
                         return dateB - dateA;
                     });
                 }
-                console.log('results from API', data.results);
                 if(sortString === 'newest' || sortString === 'helpful') {
                     this.setState({
                         sortedReviews: data.results, 
@@ -70,8 +50,6 @@ class ReviewList extends React.Component {
           .then(({ data }) => {
             this.setState({
               reviews: data.results
-            }, () => {
-                console.log('check sorting in order of date', this.state.reviews)
             })
           })
           .catch(err => {
