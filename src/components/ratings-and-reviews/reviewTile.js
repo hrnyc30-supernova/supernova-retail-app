@@ -1,6 +1,6 @@
 import React from 'react';
 import Stars from './stars.js';
-import Moment from 'moment';
+import moment from 'moment';
 
 class ReviewTile extends React.Component {
     constructor(props) {
@@ -9,11 +9,12 @@ class ReviewTile extends React.Component {
     }
 
     render() {
+        console.log(this.props);
+        let date = moment(this.props.review.date).format("MMMM D, YYYY");
         return(
             <div className='review-tile-container'>
                 <Stars averageRating={this.props.review.rating}/>
-                <p>{this.props.review.reviewer_name}</p>
-                <p>{this.props.review.date}</p>
+                <p>{`${this.props.review.reviewer_name}, ${date}`}</p>
                 <p>{this.props.review.summary}</p>
                 <p>{this.props.review.body}</p>
                 {this.props.review.photos.length > 0 ? <img src={this.props.review.photos[0].url}/> : null}

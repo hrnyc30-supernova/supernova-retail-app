@@ -5,7 +5,7 @@ import AddReviewButton from './addReviewButton.js';
 
 const RatingsReviews = props => {
     return (
-      <div className='reviews-ratings-container'>
+      <div className='reviews-ratings-container'>RATINGS AND REVIEWS
         <ReviewList currentProductID={props.currentProductID}/>
         <Stars averageRating={props.averageRating} />
       </div>

@@ -14,28 +14,27 @@ class ReviewList extends React.Component {
             isSorted: false
         };
         this.handleSortByChange = this.handleSortByChange.bind(this);
-        this.filterReviewsByDate = this.filterReviewsByDate.bind(this);
-        this.filterReviewsByHelpfulness = this.filterReviewsByHelpfulness.bind(this);
+        this.filterReviews = this.filterReviews.bind(this);
     }
     
-    filterReviewsByDate() {
-        return this.state.reviews.sort(function(a, b) {
-            let dateA = new Date(a.date);
-            let dateB = new Date(b.date)
-            return dateB - dateA;
-        });
+    filterReviews(sortString) {
+        if (sortString === 'date') {
+            return this.state.reviews.sort(function(a, b) {
+                let dateA = new Date(a.date);
+                let dateB = new Date(b.date)
+                return dateB - dateA;
+            });
+        } else {
+            return this.state.reviews.sort(function(a, b) {
+                return b.helpfulness - a.helpfulness;
+            });
+        }
     }
     
-    filterReviewsByHelpfulness() {
-        return this.state.reviews.sort(function(a, b) {
-            return b.helpfulness - a.helpfulness;
-        });
-    }
-
     handleSortByChange(sortString) {
         let reviewsToRender;
         if (sortString === 'date' || sortString === 'helpfulness') {
-            (sortString === 'date') ? reviewsToRender = this.filterReviewsByDate() : reviewsToRender = this.filterReviewsByHelpfulness();
+            reviewsToRender = this.filterReviews(sortString);
             this.setState({
                 sortedReviews: reviewsToRender,
                 isSorted: true  
