@@ -1,7 +1,6 @@
 import React from 'react';
 import Stars from './stars.js';
 import ReviewList from './reviewList.js';
-import AddReviewButton from './addReviewButton.js';
 
 const RatingsReviews = props => {
     return (
