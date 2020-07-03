@@ -9,7 +9,6 @@ class ReviewList extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            reviews: [],
             sortedReviews: [], 
             isSorted: false
         };
@@ -33,7 +32,6 @@ class ReviewList extends React.Component {
                     })
                 } else {
                     this.setState({
-                        reviews: data.results,
                         sortedReviews: [],
                         isSorted: false
                     })
@@ -44,22 +42,10 @@ class ReviewList extends React.Component {
             })
     }
 
-    componentDidMount() {
-        apiMaster.getReviewsOfProduct(this.props.currentProductId)
-          .then(({ data }) => {
-            this.setState({
-              reviews: data.results
-            })
-          })
-          .catch(err => {
-            console.error(err);
-          })
-    }
-
     render() {
         return (
             <>
-                {this.state.reviews.length === 0 ? 
+                {this.props.reviews.length === 0 ? 
                     <div className='review-list-container'>
                         <AddReviewButton /> 
                     </div>
@@ -68,7 +54,7 @@ class ReviewList extends React.Component {
                         {this.state.isSorted === false ? 
                             <>
                                 {
-                                    this.state.reviews.map(review => {
+                                    this.props.reviews.map(review => {
                                         return <ReviewTile key={review.review_id} review={review}/>
                                     })
                                 }
@@ -81,7 +67,7 @@ class ReviewList extends React.Component {
                                 }
                             </>
                         }
-                        {this.state.reviews.length > 2 ? <MoreReviewsButton /> : null}
+                        {this.props.reviews.length > 2 ? <MoreReviewsButton /> : null}
                         <AddReviewButton />
                     </div>
                 }           
