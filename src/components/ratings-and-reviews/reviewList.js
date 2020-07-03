@@ -4,6 +4,7 @@ import MoreReviewsButton from './moreReviewsButton.js';
 import AddReviewButton from './addReviewButton.js';
 import SortBy from './sortBy.js';
 import apiMaster from '../../apiMaster.js';
+import axios from 'axios';
 
 class ReviewList extends React.Component {
     constructor(props) {
@@ -14,54 +15,63 @@ class ReviewList extends React.Component {
             isSorted: false
         };
         this.handleSortByChange = this.handleSortByChange.bind(this);
-        this.filterReviews = this.filterReviews.bind(this);
+        // this.filterReviews = this.filterReviews.bind(this);
     }
     
-    filterReviews(sortString) {
-        return this.state.reviews.sort(function(a, b) {
-            if (sortString === 'date') {
-                let dateA = new Date(a.date);
-                let dateB = new Date(b.date)
-                return dateB - dateA;
-            } else {
-                return b.helpfulness - a.helpfulness;
-            }
-        });
-    }
+ // this.filterReviewsByDate = this.filterReviewsByDate.bind(this);
+        // this.filterReviewsByHelpfulness = this.filterReviewsByHelpfulness.bind(this);
     
-    handleSortByChange(sortString) {
-        let reviewsToRender;
-        if (sortString === 'date' || sortString === 'helpfulness') {
-            reviewsToRender = this.filterReviews(sortString);
-            this.setState({
-                sortedReviews: reviewsToRender,
-                isSorted: true  
-            });
-        } else {
-            this.setState({
-                sortedReviews: [],
-                isSorted: false
-            }, () => {
-                console.log(this.state);
+    // filterReviewsByDate() {
+    //     return this.state.reviews.sort(function(a, b) {
+    //         let dateA = new Date(a.date);
+    //         let dateB = new Date(b.date)
+    //         return dateB - dateA;
+    //     });
+    // }
+    
+    // filterReviewsByHelpfulness() {
+    //     return this.state.reviews.sort(function(a, b) {
+    //         return b.helpfulness - a.helpfulness;
+    //     });
+    // }
+
+    handleSortByChange(sortString, id) {
+        console.log('getting to handleSort');
+        apiMaster.getReviewsOfProduct(this.props.currentProductId, sortString)
+            .then(({ data }) => {
+                if (sortString === 'newest') {
+                    data.results.sort((a, b) => {
+                        let dateA = new Date(a.date);
+                        let dateB = new Date(b.date);
+                        return dateB - dateA;
+                    });
+                }
+                console.log('results from API', data.results);
+                if(sortString === 'newest' || sortString === 'helpful') {
+                    this.setState({
+                        sortedReviews: data.results, 
+                        isSorted: true
+                    })
+                } else {
+                    this.setState({
+                        reviews: data.results,
+                        sortedReviews: [],
+                        isSorted: false
+                    })
+                }
             })
-        }
+            .catch(err => {
+                console.error(err);
+            })
     }
 
     componentDidMount() {
         apiMaster.getReviewsOfProduct(this.props.currentProductId)
           .then(({ data }) => {
-            data.results.sort((a, b) => {
-                let dateA = new Date(a.date);
-                let dateB = new Date(b.date);
-                if (dateB === dateA) {
-                    return b.helpfulness - a.helpfulness
-                } 
-                return dateB - dateA;
-            });
             this.setState({
               reviews: data.results
             }, () => {
-                console.log(this.state);
+                console.log('check sorting in order of date', this.state.reviews)
             })
           })
           .catch(err => {
@@ -77,7 +87,7 @@ class ReviewList extends React.Component {
                         <AddReviewButton /> 
                     </div>
                     : <div className='review-list-container'>
-                        <SortBy onSelect={this.handleSortByChange}/>
+                        <SortBy currentProductID={this.props.currentProductID} onSelect={this.handleSortByChange}/>
                         {this.state.isSorted === false ? 
                             <>
                                 {
