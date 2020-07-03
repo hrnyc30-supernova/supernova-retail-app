@@ -1,6 +1,7 @@
 import React from 'react';
 import apiMaster from './apiMaster';
 import { hot } from 'react-hot-loader/root';
+import 'bootstrap/dist/css/bootstrap.min.css';
 // Widgets
 import ProductDetail from './components/product-detail/productDetail';
 import RelatedItems from './components/related-items-creation/relatedItems';
