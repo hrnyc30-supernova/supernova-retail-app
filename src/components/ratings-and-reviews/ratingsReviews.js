@@ -5,10 +5,9 @@ import ReviewList from './reviewList.js';
 const RatingsReviews = props => {
     return (
       <div className='reviews-ratings-container'>
-        <ReviewList currentProductID={props.currentProductID}/>
-        <Stars averageRating={props.averageRating} />
+        <ReviewList averageRating={props.averageRating} currentProductID={props.currentProductID}/>
       </div>
-    );
+    )
 }
 
 export default RatingsReviews;

@@ -41,6 +41,8 @@ class ReviewList extends React.Component {
             this.setState({
                 sortedReviews: [],
                 isSorted: false
+            }, () => {
+                console.log(this.state);
             })
         }
     }
@@ -51,10 +53,15 @@ class ReviewList extends React.Component {
             data.results.sort((a, b) => {
                 let dateA = new Date(a.date);
                 let dateB = new Date(b.date);
+                if (dateB === dateA) {
+                    return b.helpfulness - a.helpfulness
+                } 
                 return dateB - dateA;
             });
             this.setState({
               reviews: data.results
+            }, () => {
+                console.log(this.state);
             })
           })
           .catch(err => {
