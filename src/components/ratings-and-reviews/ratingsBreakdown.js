@@ -40,15 +40,27 @@ class RatingsBreakdown extends React.Component {
     }
 
     render() {
-        console.log(this.state.currentRating.characteristics);
-        let chars = this.state.currentRating.characteristics;
+        console.log(this.state.currentRating);
+        let chars;
+        if (this.state.currentRating === undefined) {
+            chars = null;
+        } else if (this.state.currentRating.characteristics !== undefined) {
+            chars = this.state.currentRating.characteristics
+        } else {
+            chars = null;
+        }
+        console.log('should be null', chars)
         return (
             <div className='ratings-breakdown-container'>Current Product Rating Breakdown: 
-                <p>{chars !== undefined ? (chars.Size !== undefined ? `Size: ${chars.Size.value}` : 'Does not have a size') : null}</p>
-                <p>{chars !== undefined ? (chars.Fit !== undefined ? `Fit: ${chars.Fit.value}` : 'Does not have a Fit') : null}</p>
-                <p>{chars !== undefined ? (chars.Length !== undefined ? `Length: ${chars.Length.value}` : 'Does not have a Length') : null}</p>
-                <p>{chars !== undefined ? (chars.Quality !== undefined ? `Quality: ${chars.Quality.value}` : 'Does not have a Quality') : null}</p>
-                <p>{chars !== undefined ? (chars.Comfort !== undefined ? `Comfort: ${chars.Comfort.value}` : 'Does not have a Comfort') : null}</p>
+                {
+                    chars !== null ? 
+                        Object.entries(chars).map(([key, val]) => {
+                            console.log('this is the key', key);
+                            console.log('this is the val', val);
+                            return <p key={val.id}>{`${key}: ${val.value}`}</p>
+                        })
+                        : null
+                }
                 <Stars rating={this.props.averageRating} />
             </div>
         );
