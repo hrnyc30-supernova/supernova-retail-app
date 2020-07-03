@@ -1,18 +1,19 @@
-import React from 'react';
-import apiMaster from './apiMaster';
-import { hot } from 'react-hot-loader/root';
-// Widgets
-import ProductDetail from './components/product-detail/productDetail';
-import RelatedItems from './components/related-items-creation/relatedItems';
-import QuestionsAndAnswers from './components/questions-and-answers/questionsAndAnswers';
-import RatingsReviews from './components/ratings-and-reviews/ratingsReviews';
+import React from "react";
+import apiMaster from "./apiMaster";
+import { hot } from "react-hot-loader/root";
+
+import NavigationBar from "./components/navigationBar";
+import ProductDetail from "./components/product-detail/productDetail";
+import RelatedItems from "./components/related-items-creation/relatedItems";
+import QuestionsAndAnswers from "./components/questions-and-answers/questionsAndAnswers";
+import RatingsReviews from "./components/ratings-and-reviews/ratingsReviews";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentProduct: {},
-      averageRating: 'calculating',
+      averageRating: "calculating",
     };
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
   }
@@ -54,6 +55,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <NavigationBar />
         <ProductDetail
           currentProduct={this.state.currentProduct}
           averageRating={this.state.averageRating}
