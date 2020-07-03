@@ -46,17 +46,21 @@ class ProductCard extends React.Component {
 
   render() {
     return (
-      <>
-        <Card style={{ width: '15rem' }}>
-          <Card.Img variant="top" src="" />
-          <Card.Text>Super awesome image placeholder</Card.Text>
-          <Card.Body>
-            <Card.Subtitle>Category</Card.Subtitle>
-            <Card.Title>Expanded Product Name With Extra Text</Card.Title>
-            <Card.Text>Price</Card.Text>
-          </Card.Body>
-        </Card>
-      </>
+      <div className="cards-wrapper">
+        {this.state.cardDetails.map((card, i) => {
+          return (
+            <Card style={{ width: '15rem' }} key={i}>
+              <Card.Img variant="top" src="" />
+              <Card.Text>Super awesome image placeholder</Card.Text>
+              <Card.Body>
+                <Card.Subtitle>{card.category}</Card.Subtitle>
+                <Card.Title>{card.name}</Card.Title>
+                <Card.Text>Price</Card.Text>
+              </Card.Body>
+            </Card>
+          );
+        })}
+      </div>
     );
   }
 }

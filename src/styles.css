@@ -9,3 +9,7 @@ body {
   border-width: 1px;
   border-color: darkslategrey;
 }
+
+.cards-wrapper {
+  display: flex;
+}
