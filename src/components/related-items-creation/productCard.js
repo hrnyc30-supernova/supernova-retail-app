@@ -8,6 +8,12 @@ class ProductCard extends React.Component {
     this.state = {
       cardDetails: [],
       cardImages: [],
+      testPrices: [
+        { original_price: '40', sale_price: '35' },
+        { original_price: '100', sale_price: '0' },
+        { original_price: '300', sale_price: '0' },
+        { original_price: '30', sale_price: '0' },
+      ],
     };
 
     this.clearList = this.clearList.bind(this);
@@ -84,7 +90,49 @@ class ProductCard extends React.Component {
               <Card.Body>
                 <Card.Subtitle>{card.category}</Card.Subtitle>
                 <Card.Title>{card.name}</Card.Title>
-                <Card.Text>Price</Card.Text>
+                <span
+                  style={{
+                    textDecoration:
+                      this.state.testPrices[i].sale_price !== '0'
+                        ? 'line-through'
+                        : 'none',
+                  }}
+                >
+                  {Number(
+                    this.state.testPrices[i].original_price
+                  ).toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  })}
+                </span>
+                <span
+                  className={
+                    this.state.testPrices[i].sale_price === '0'
+                      ? 'discounted-price-hidden'
+                      : ''
+                  }
+                  style={
+                    ({
+                      textDecoration:
+                        this.state.testPrices[i].sale_price !== '0'
+                          ? 'line-through'
+                          : 'none',
+                    },
+                    { color: 'red' })
+                  }
+                >
+                  {Number(this.state.testPrices[i].sale_price).toLocaleString(
+                    'en-US',
+                    {
+                      style: 'currency',
+                      currency: 'USD',
+                      minimumFractionDigits: 0,
+                      maximumFractionDigits: 0,
+                    }
+                  )}
+                </span>
               </Card.Body>
             </Card>
           );
