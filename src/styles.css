@@ -15,18 +15,23 @@ input {
 
 /* -------- NAVIGATION BAR -------- */
 
-#logo {
-  font-family: "Kanit", sans-serif;
-  font-size: 24px;
-  text-decoration: underline;
-}
-
 #nav-bar {
   color: white;
   background-color: #525252;
   height: 75px;
   padding: 20px 28px;
   box-sizing: border-box;
+}
+
+#logo {
+  font-family: "Kanit", sans-serif;
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+#main-search {
+  color: white;
+  float: right;
 }
 
 #search-bar {
@@ -41,11 +46,6 @@ input {
 #search-bar:focus {
   caret-color: white;
   outline: none;
-}
-
-#main-search {
-  color: white;
-  float: right;
 }
 
 .search-icon {
@@ -92,6 +92,7 @@ input {
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */
+
 .card {
   color: #525252;
   border-style: solid;
