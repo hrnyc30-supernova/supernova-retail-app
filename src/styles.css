@@ -50,7 +50,7 @@ input:focus {
 .card {
   color: #525252;
   border-style: solid;
-  border-width: 1px;
+  border-width: 2px;
   border-color: #525252;
   min-height: 15rem;
   max-height: 15rem;
@@ -78,9 +78,16 @@ input:focus {
 
 .action-button {
   position: absolute;
+  color: lightgray;
   top: 5px;
   right: 5px;
   text-align: right;
+  transition: color 1s, transform 0.3s;
+}
+
+.action-button:hover {
+  transform: scale(1.2);
+  color: #ffd500;
 }
 
 .discounted-price-hidden {
