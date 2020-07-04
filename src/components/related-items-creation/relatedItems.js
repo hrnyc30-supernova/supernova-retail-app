@@ -6,7 +6,7 @@ class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProductIds: [],
+      relatedProductIds: null,
     };
 
     this.getRelatedIds = this.getRelatedIds.bind(this);
