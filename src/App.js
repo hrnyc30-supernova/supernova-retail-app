@@ -13,7 +13,6 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProduct: {},
-      styles: [],
       averageRating: "calculating",
     };
 
@@ -41,15 +40,6 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-
-    apiMaster
-      .getProductStyles()
-      .then(({ data }) => {
-        this.setState({ styles: data.results });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
   }
 
   calculateAverageRating(obj) {
@@ -71,7 +61,6 @@ class App extends React.Component {
         <ProductDetail
           currentProduct={this.state.currentProduct}
           averageRating={this.state.averageRating}
-          styles={this.state.styles}
         />
         <RelatedItems currentProductID={this.state.currentProduct.id} />
         <QuestionsAndAnswers currentProductID={this.state.currentProduct.id} />

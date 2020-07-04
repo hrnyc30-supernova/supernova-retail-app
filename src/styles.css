@@ -46,6 +46,13 @@ input:focus {
   cursor: pointer;
 }
 
+/* -------- PRODUCT DETAILS WIDGET -------- */
+
+#main-product-photo {
+  max-height: 595px;
+  max-width: 755px;
+}
+
 /* -------- RELATED ITEMS WIDGET -------- */
 .card {
   color: #525252;
