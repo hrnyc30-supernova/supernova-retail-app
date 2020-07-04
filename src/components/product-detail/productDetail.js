@@ -23,18 +23,22 @@ class ProductDetail extends React.Component {
   render() {
     return (
       <div>
-        {this.state.styles[0] !== undefined ? (
-          <img
-            id="main-product-photo"
-            src={this.state.styles[0].photos[0].url}
-          ></img>
-        ) : null}
-        <div className="product-category">
-          {this.props.currentProduct.category}
+        <div id="main-product-photo-container">
+          {this.state.styles[0] !== undefined ? (
+            <img
+              id="main-product-photo"
+              src={this.state.styles[0].photos[0].url}
+            ></img>
+          ) : null}
         </div>
-        <h1 className="product-title">{this.props.currentProduct.name}</h1>
-        <div className="product-price">
-          ${this.props.currentProduct.default_price}
+        <div id="main-product-text-container">
+          <div className="product-category">
+            {this.props.currentProduct.category}
+          </div>
+          <h1 className="product-title">{this.props.currentProduct.name}</h1>
+          <div className="product-price">
+            ${this.props.currentProduct.default_price}
+          </div>
         </div>
       </div>
     );
