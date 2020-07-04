@@ -130,10 +130,12 @@ class ProductCard extends React.Component {
             {this.state.cardDetails.map((card, i) => {
               return (
                 <div className="card" key={i}>
-                  <img
-                    className="card-img-top"
-                    src={this.state.cardImages[i]}
-                  />
+                  <div className="img-wrapper">
+                    <img
+                      className="card-img-top"
+                      src={this.state.cardImages[i]}
+                    />
+                  </div>
                   <div className="card-body">
                     <div className="card-subtitle">{card.category}</div>
                     <div className="card-title">{card.name}</div>
