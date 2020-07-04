@@ -62,8 +62,10 @@ input:focus {
 }
 
 #main-product-photo {
+  display: block;
   max-height: 600px;
   max-width: 750px;
+  margin: auto;
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */
