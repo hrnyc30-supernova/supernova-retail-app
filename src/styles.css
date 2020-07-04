@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
 
 body {
@@ -45,6 +45,24 @@ input:focus {
 
 .search-icon {
   cursor: pointer;
+}
+
+/* -------- ALERT BAR -------- */
+
+#alert-bar {
+  font-size: 14px;
+  height: 45px;
+  text-align: center;
+  box-sizing: border-box;
+  padding-top: 13px;
+}
+
+.alert::before {
+  content: "\00a0\00a0\00a0";
+}
+
+.alert::after {
+  content: "\00a0\00a0\00a0";
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */

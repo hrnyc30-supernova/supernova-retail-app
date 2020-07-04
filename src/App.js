@@ -3,6 +3,7 @@ import apiMaster from "./apiMaster";
 import { hot } from "react-hot-loader/root";
 
 import NavigationBar from "./components/navigationBar";
+import AlertBar from "./components/alertBar";
 import ProductDetail from "./components/product-detail/productDetail";
 import RelatedItems from "./components/related-items-creation/relatedItems";
 import QuestionsAndAnswers from "./components/questions-and-answers/questionsAndAnswers";
@@ -58,6 +59,7 @@ class App extends React.Component {
     return (
       <div>
         <NavigationBar />
+        <AlertBar />
         <ProductDetail
           currentProduct={this.state.currentProduct}
           averageRating={this.state.averageRating}
