@@ -97,6 +97,7 @@ input {
   position: absolute;
   font-size: 20px;
   top: 300px;
+  cursor: pointer;
 }
 
 #left-arrow {
