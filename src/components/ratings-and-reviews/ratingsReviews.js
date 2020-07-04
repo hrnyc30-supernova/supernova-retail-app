@@ -8,7 +8,7 @@ const RatingsReviews = props => {
         <ReviewList currentProductID={props.currentProductID}/>
         <RatingsBreakdown currentProductID={props.currentProductID} averageRating={props.averageRating} />
       </div>
-    );
+    )
 }
 
 export default RatingsReviews;
