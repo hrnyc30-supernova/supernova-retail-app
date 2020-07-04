@@ -11,7 +11,7 @@
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "start": "webpack-dev-server --hot --mode development",
-    "test": "jest --coverage  "
+    "test": "jest --coverage"
   },
   "dependencies": {
     "axios": "^0.19.2",
@@ -23,7 +23,8 @@
     "react-dom": "^16.13.1",
     "react-hot-loader": "^4.12.21",
     "react-icons": "^3.10.0",
-    "react-router": "^5.2.0"
+    "react-router": "^5.2.0",
+    "url-loader": "^4.1.0"
   },
   "devDependencies": {
     "@babel/core": "^7.10.3",
@@ -36,6 +37,7 @@
     "enzyme": "^3.11.0",
     "enzyme-adapter-react-16": "^1.15.2",
     "enzyme-to-json": "^3.5.0",
+    "file-loader": "^6.0.0",
     "jest": "^26.1.0",
     "style-loader": "^1.2.1",
     "webpack": "^4.43.0",

@@ -4,6 +4,7 @@ import MoreReviewsButton from './moreReviewsButton.js';
 import AddReviewButton from './addReviewButton.js';
 import SortBy from './sortBy.js';
 import apiMaster from '../../apiMaster.js';
+import axios from 'axios';
 
 class ReviewList extends React.Component {
     constructor(props) {
