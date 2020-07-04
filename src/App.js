@@ -13,8 +13,10 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProduct: {},
+      styles: [],
       averageRating: "calculating",
     };
+
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
   }
 
@@ -31,11 +33,19 @@ class App extends React.Component {
     apiMaster
       .getReviewMetaData()
       .then(({ data }) => {
-        // console.log('should be ratings', data);
         let averageRating = this.calculateAverageRating(data.ratings);
-        this.setState({ 
-          averageRating: averageRating 
+        this.setState({
+          averageRating: averageRating,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    apiMaster
+      .getProductStyles()
+      .then(({ data }) => {
+        this.setState({ styles: data.results });
       })
       .catch((err) => {
         console.log(err);
@@ -61,6 +71,7 @@ class App extends React.Component {
         <ProductDetail
           currentProduct={this.state.currentProduct}
           averageRating={this.state.averageRating}
+          styles={this.state.styles}
         />
         <RelatedItems currentProductID={this.state.currentProduct.id} />
         <QuestionsAndAnswers currentProductID={this.state.currentProduct.id} />
