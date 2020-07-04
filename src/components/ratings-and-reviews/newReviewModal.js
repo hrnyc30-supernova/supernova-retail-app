@@ -43,9 +43,14 @@ class NewReview extends React.Component {
                 <label htmlFor='summary'>*Review Summary</label><br/>
                 <textarea type='text' id='summary' name='summary' placeholder='Example: Best purchase ever!' maxLength='60'></textarea><br/>
                 <label htmlFor='body'>*Review Body</label><br/>
-                <textarea type='text' id='body' name='summary' placeholder='Why did you like the product or not?' maxLength='1000' minLength='50'></textarea>
+                <textarea type='text' id='body' name='body' placeholder='Why did you like the product or not?' maxLength='1000' minLength='50'></textarea>
                 <p>Upload Photos</p>
-                <p>*Nickname</p>
+                <label htmlFor='nickname'>*Nickname</label><br/>
+                <textarea type='text' id='nickname' name='nickname' placeholder='Example: jackson11!' maxLength='60'></textarea><br/>
+                <small>For privacy reasons, do not use your full name or email address</small><br/>
+                <label htmlFor='email'>*Email</label><br/>
+                <textarea type='text' id='email' name='email' placeholder='Example: jackson11@email.com' maxLength='60'></textarea><br/>
+                <small>For authentication reasons, you will not be emailed</small>
                 <p>Email</p>
             </form>
           <button onClick={e => this.sendReview(this.state)}>Submit Review</button>

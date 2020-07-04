@@ -96,3 +96,7 @@ input:focus {
   opacity: 1;
   visibility: visible;
 } */
+
+small{
+  color: rgb(211, 211, 211);
+}
