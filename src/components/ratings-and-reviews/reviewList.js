@@ -14,48 +14,39 @@ class ReviewList extends React.Component {
             isSorted: false
         };
         this.handleSortByChange = this.handleSortByChange.bind(this);
-        this.filterReviewsByDate = this.filterReviewsByDate.bind(this);
-        this.filterReviewsByHelpfulness = this.filterReviewsByHelpfulness.bind(this);
-    }
-    
-    filterReviewsByDate() {
-        return this.state.reviews.sort(function(a, b) {
-            let dateA = new Date(a.date);
-            let dateB = new Date(b.date)
-            return dateB - dateA;
-        });
-    }
-    
-    filterReviewsByHelpfulness() {
-        return this.state.reviews.sort(function(a, b) {
-            return b.helpfulness - a.helpfulness;
-        });
     }
 
     handleSortByChange(sortString) {
-        let reviewsToRender;
-        if (sortString === 'date' || sortString === 'helpfulness') {
-            (sortString === 'date') ? reviewsToRender = this.filterReviewsByDate() : reviewsToRender = this.filterReviewsByHelpfulness();
-            this.setState({
-                sortedReviews: reviewsToRender,
-                isSorted: true  
-            });
-        } else {
-            this.setState({
-                sortedReviews: [],
-                isSorted: false
+        apiMaster.getReviewsOfProduct(this.props.currentProductId, sortString)
+            .then(({ data }) => {
+                if (sortString === 'newest') {
+                    data.results.sort((a, b) => {
+                        let dateA = new Date(a.date);
+                        let dateB = new Date(b.date);
+                        return dateB - dateA;
+                    });
+                }
+                if(sortString === 'newest' || sortString === 'helpful') {
+                    this.setState({
+                        sortedReviews: data.results, 
+                        isSorted: true
+                    })
+                } else {
+                    this.setState({
+                        reviews: data.results,
+                        sortedReviews: [],
+                        isSorted: false
+                    })
+                }
             })
-        }
+            .catch(err => {
+                console.error(err);
+            })
     }
 
     componentDidMount() {
         apiMaster.getReviewsOfProduct(this.props.currentProductId)
           .then(({ data }) => {
-            data.results.sort((a, b) => {
-                let dateA = new Date(a.date);
-                let dateB = new Date(b.date);
-                return dateB - dateA;
-            });
             this.setState({
               reviews: data.results
             })
@@ -73,7 +64,7 @@ class ReviewList extends React.Component {
                         <AddReviewButton /> 
                     </div>
                     : <div className='review-list-container'>
-                        <SortBy onSelect={this.handleSortByChange}/>
+                        <SortBy currentProductID={this.props.currentProductID} onSelect={this.handleSortByChange}/>
                         {this.state.isSorted === false ? 
                             <>
                                 {
