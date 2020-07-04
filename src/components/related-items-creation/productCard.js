@@ -1,6 +1,5 @@
 import React from 'react';
 import apiMaster from '../../apiMaster';
-import Card from 'react-bootstrap/Card';
 
 class ProductCard extends React.Component {
   constructor(props) {
@@ -8,6 +7,7 @@ class ProductCard extends React.Component {
     this.state = {
       cardDetails: [],
       cardImages: [],
+      cardPrices: [],
       testPrices: [
         { original_price: '40', sale_price: '35' },
         { original_price: '100', sale_price: '0' },
@@ -85,28 +85,11 @@ class ProductCard extends React.Component {
       <div className="cards-wrapper">
         {this.state.cardDetails.map((card, i) => {
           return (
-            <Card style={{ width: '15rem' }} key={i}>
-              <Card.Img variant="top" src={this.state.cardImages[i]} />
-              <Card.Body>
-                <Card.Subtitle>{card.category}</Card.Subtitle>
-                <Card.Title>{card.name}</Card.Title>
-                <span
-                  style={{
-                    textDecoration:
-                      this.state.testPrices[i].sale_price !== '0'
-                        ? 'line-through'
-                        : 'none',
-                  }}
-                >
-                  {Number(
-                    this.state.testPrices[i].original_price
-                  ).toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                  })}
-                </span>
+            <div className="card" style={{ width: '15rem' }} key={i}>
+              <img className="card-img-top" src={this.state.cardImages[i]} />
+              <div className="card-body">
+                <div className="card-subtitle">{card.category}</div>
+                <div className="card-title">{card.name}</div>
                 <span
                   className={
                     this.state.testPrices[i].sale_price === '0'
@@ -133,8 +116,25 @@ class ProductCard extends React.Component {
                     }
                   )}
                 </span>
-              </Card.Body>
-            </Card>
+                <span
+                  style={{
+                    textDecoration:
+                      this.state.testPrices[i].sale_price !== '0'
+                        ? 'line-through'
+                        : 'none',
+                  }}
+                >
+                  {Number(
+                    this.state.testPrices[i].original_price
+                  ).toLocaleString('en-US', {
+                    style: 'currency',
+                    currency: 'USD',
+                    minimumFractionDigits: 0,
+                    maximumFractionDigits: 0,
+                  })}
+                </span>
+              </div>
+            </div>
           );
         })}
       </div>
