@@ -20,7 +20,7 @@ class AddReviewButton extends React.Component {
         return(
             <>
                 <button onClick={e => this.showModal()}>Add New Review</button>
-                <NewReview show={this.state.show} currentProductName={this.props.currentProductName}/> 
+                <NewReview currentProductCharacteristics={this.props.currentProductCharacteristics} show={this.state.show} currentProductName={this.props.currentProductName}/> 
             </>
         );
     }

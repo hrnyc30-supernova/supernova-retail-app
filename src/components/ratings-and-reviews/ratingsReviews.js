@@ -9,7 +9,8 @@ class RatingsReviews extends React.Component {
     this.state ={
       reviews: [],
       currentProductRatings: [],
-      recommendProduct: 0
+      recommendProduct: 0, 
+      currentRating: {}
     };
     this.getRatings = this.getRatings.bind(this);
     this.getRecommendation = this.getRecommendation.bind(this);
@@ -28,6 +29,16 @@ class RatingsReviews extends React.Component {
       })
       .catch(err => {
         console.error(err);
+      });
+
+    apiMaster.getReviewMetaData(this.props.currentProductId)
+      .then(({ data }) => {
+        this.setState({
+            currentRating: data
+        })
+      })
+      .catch(err => {
+          console.log(err);
       })
   }
 
@@ -49,8 +60,8 @@ class RatingsReviews extends React.Component {
   render() {
     return (
       <div className='reviews-ratings-container'>RATINGS AND REVIEWS
-        <ReviewList currentProductName={this.props.currentProductName} reviews={this.state.reviews} currentProductID={this.props.currentProductID}/>
-        <RatingsBreakdown recommend={this.state.recommendProduct} currentProductRatings={this.state.currentProductRatings} currentProductID={this.props.currentProductID} averageRating={this.props.averageRating} />
+        <ReviewList currentProductCharacteristics={this.state.currentRating.characteristics} currentProductName={this.props.currentProductName} reviews={this.state.reviews} currentProductID={this.props.currentProductID}/>
+        <RatingsBreakdown currentRating={this.state.currentRating} recommend={this.state.recommendProduct} currentProductRatings={this.state.currentProductRatings} currentProductID={this.props.currentProductID} averageRating={this.props.averageRating} />
       </div>
     );
   }
