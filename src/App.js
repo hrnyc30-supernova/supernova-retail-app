@@ -61,7 +61,7 @@ class App extends React.Component {
         <NavigationBar />
         <AlertBar />
         <ProductDetail
-          currentProduct={this.state.currentProduct}
+          product={this.state.currentProduct}
           averageRating={this.state.averageRating}
         />
         <RelatedItems currentProductID={this.state.currentProduct.id} />
