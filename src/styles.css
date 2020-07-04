@@ -53,3 +53,15 @@ input:focus {
   border-width: 1px;
   border-color: #525252;
 }
+
+.cards-wrapper {
+  display: flex;
+  height: 25em;
+  flex-direction: row;
+}
+
+.card-img-top {
+  max-height: 15em;
+  max-width: 100%;
+  align-items: center;
+}

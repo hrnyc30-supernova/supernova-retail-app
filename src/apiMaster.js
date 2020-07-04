@@ -9,7 +9,7 @@ const getProductInfo = (id = 1) => {
 };
 
 const getProductStyles = (id = 1) => {
-  return axios.get(`/products/${id}/styles`);
+  return axios.get(`http://18.224.200.47/products/${id}/styles`);
 };
 
 const getRelatedProducts = (id = 1) => {
