@@ -73,6 +73,7 @@ input {
 /* -------- PRODUCT DETAILS WIDGET -------- */
 
 #main-product-photo-container {
+  position: relative;
   width: 750px;
   height: 600px;
   float: left;
@@ -89,6 +90,21 @@ input {
   max-height: 600px;
   max-width: 750px;
   margin: auto;
+}
+
+.arrow {
+  z-index: 1;
+  position: absolute;
+  font-size: 20px;
+  top: 300px;
+}
+
+#left-arrow {
+  left: 50px;
+}
+
+#right-arrow {
+  right: 50px;
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */

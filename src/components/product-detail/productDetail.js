@@ -1,6 +1,9 @@
 import React from "react";
 import apiMaster from "../../apiMaster";
 
+import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +33,12 @@ class ProductDetail extends React.Component {
               src={this.state.styles[0].photos[0].url}
             ></img>
           ) : null}
+          <span className="arrow" id="left-arrow">
+            <FaArrowLeft />
+          </span>
+          <span className="arrow" id="right-arrow">
+            <FaArrowRight />
+          </span>
         </div>
         <div id="main-product-text-container">
           <div className="product-category">
