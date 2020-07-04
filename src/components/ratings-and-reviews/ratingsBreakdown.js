@@ -30,7 +30,8 @@ class RatingsBreakdown extends React.Component {
             <div className='ratings-breakdown-container'>Current Product Rating Breakdown: 
                 <p>{Number(this.props.averageRating).toFixed(1)}</p>
                 <div><Stars rating={this.props.averageRating} /><br/><span>{`${this.props.currentProductRatings.length} Reviews`}</span></div>
-                <RatingFilters currentProductRatings={this.props.currentProductRatings}/>
+                <RatingFilters recommend={this.props.recommend} currentProductRatings={this.props.currentProductRatings}/>
+                <p>{`${this.props.recommend}% of reviews recommend this product`}</p>
                 {
                     chars !== null ? 
                         Object.entries(chars).map(([char, val]) => {
