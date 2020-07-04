@@ -1,14 +1,14 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #525252;
   margin: 0% 15%;
 }
 
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: white;
   background-color: #525252;
   font-size: 14px;
@@ -24,7 +24,7 @@ input:focus {
 }
 
 #logo {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -52,17 +52,15 @@ input:focus {
   border-style: solid;
   border-width: 1px;
   border-color: #525252;
-}
-
-.cards-wrapper {
-  display: flex;
-  height: 25em;
-  flex-direction: row;
+  min-height: 15rem;
+  max-height: 15rem;
+  width: auto;
 }
 
 .card-img-top {
-  max-height: 15em;
   max-width: 100%;
+  min-height: 10rem;
+  max-height: 10rem;
   align-items: center;
 }
 
