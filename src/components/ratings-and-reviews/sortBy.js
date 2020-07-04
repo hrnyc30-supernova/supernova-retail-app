@@ -4,7 +4,7 @@ class SortBy extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            currentSort: 'relevance'
+            currentSort: 'relevant'
         };
         this.handleChange = this.handleChange.bind(this);
     }
@@ -13,7 +13,7 @@ class SortBy extends React.Component {
         this.setState({
             currentSort: e.target.value
         }, () => {
-            this.props.onSelect(this.state.currentSort);
+            this.props.onSelect(this.state.currentSort, this.props.currentProductId);
         });
     }
 
@@ -22,9 +22,9 @@ class SortBy extends React.Component {
             <div className='sort-by-container'>
                 <label htmlFor="sort-by">Sort by </label>
                 <select value={this.state.currentSort} onChange={e => this.handleChange(e)}name="sort" id="sort-by">
-                    <option value="relevance">Relevance</option>
-                    <option value="helpfulness">Helpfulness</option>
-                    <option value="date">Most Recent</option>
+                    <option value="relevant">Relevance</option>
+                    <option value="helpful">Helpfulness</option>
+                    <option value="newest">Most Recent</option>
                 </select>
             </div>
         );

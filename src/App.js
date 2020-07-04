@@ -33,7 +33,9 @@ class App extends React.Component {
       .then(({ data }) => {
         // console.log('should be ratings', data);
         let averageRating = this.calculateAverageRating(data.ratings);
-        this.setState({ averageRating: averageRating });
+        this.setState({ 
+          averageRating: averageRating 
+        });
       })
       .catch((err) => {
         console.log(err);
