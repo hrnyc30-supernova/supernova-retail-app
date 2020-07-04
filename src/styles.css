@@ -10,19 +10,10 @@ body {
 
 input {
   font-family: "Open Sans", sans-serif;
-  color: white;
-  background-color: #525252;
   font-size: 14px;
-  border: none;
-  border-bottom: 2px solid white;
-  width: 120px;
-  height: 30px;
 }
 
-input:focus {
-  caret-color: white;
-  outline: none;
-}
+/* -------- NAVIGATION BAR -------- */
 
 #logo {
   font-family: "Kanit", sans-serif;
@@ -36,6 +27,20 @@ input:focus {
   height: 75px;
   padding: 20px 28px;
   box-sizing: border-box;
+}
+
+#search-bar {
+  color: white;
+  background-color: #525252;
+  border: none;
+  border-bottom: 2px solid white;
+  width: 120px;
+  height: 30px;
+}
+
+#search-bar:focus {
+  caret-color: white;
+  outline: none;
 }
 
 #main-search {
