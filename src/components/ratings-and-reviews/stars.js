@@ -47,7 +47,7 @@ class Stars extends React.Component {
   render() {
     return (
       <> 
-      {
+      { 
         this.getStars(this.props.rating).map((value, i) => {
           return this.getStar(value, i);
         })
