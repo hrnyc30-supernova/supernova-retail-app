@@ -59,6 +59,7 @@ input:focus {
 
 .img-wrapper {
   overflow: hidden;
+  position: relative;
 }
 
 .card-img-top {
@@ -67,10 +68,19 @@ input:focus {
   max-height: 10rem;
   align-items: center;
   transition: transform 0.5s;
+  z-index: -1;
+  image-rendering: optimizeQuality;
 }
 
 .card-img-top:hover {
   transform: scale(1.5);
+}
+
+.action-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  text-align: right;
 }
 
 .discounted-price-hidden {
