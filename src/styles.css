@@ -9,3 +9,8 @@ body {
   border-width: 1px;
   border-color: darkslategrey;
 }
+
+
+.ratings-filters-container {
+  width: 200px;
+}
