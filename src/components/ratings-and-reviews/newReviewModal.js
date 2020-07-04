@@ -25,19 +25,22 @@ class NewReview extends React.Component {
   render() {
     if (this.props.show === false) return null;
     return (
-      <div>
-          <h4>Write Your Review</h4><h6>{`About the ${this.props.currentProductName}`}</h6>
-          <p>*Overall Rating <Stars/></p>
-          <p>*Recommendation</p>
-          <p>*Characteristics</p>
-          <p>*Review Summary</p>
-          <p>*Review Body</p>
-          <p>Upload Photos</p>
-          <p>*Nickname</p>
-          <p>Email</p>
+        <div>
+            <h4>Write Your Review</h4><h6>{`About the ${this.props.currentProductName}`}</h6>
+            <form>
+                <p>*Overall Rating <Stars/></p>
+                <label htmlFor='recommend'>*Do you recommend this product?</label>
+                <input type="radio" name="recommend" value="yes"/> Yes
+                <input type="radio" name="recommend" value="no"/> No
+                <p>*Characteristics</p>
+                <p>*Review Summary</p>
+                <p>*Review Body</p>
+                <p>Upload Photos</p>
+                <p>*Nickname</p>
+                <p>Email</p>
+            </form>
           <button onClick={e => this.sendReview(this.state)}>Submit Review</button>
-
-      </div>
+        </div>
     );
   }
 } 
