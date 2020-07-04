@@ -1,11 +1,55 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+
 body {
-  color: darkslategrey;
+  font-family: "Open Sans", sans-serif;
+  color: #525252;
+  margin: 0% 15%;
+}
+
+input {
+  font-family: "Open Sans", sans-serif;
+  color: white;
+  background-color: #525252;
+  font-size: 14px;
+  border: none;
+  border-bottom: 2px solid white;
+  width: 120px;
+  height: 30px;
+}
+
+input:focus {
+  caret-color: white;
+  outline: none;
+}
+
+#logo {
+  font-family: "Kanit", sans-serif;
+  font-size: 24px;
+  text-decoration: underline;
+}
+
+#nav-bar {
+  color: white;
+  background-color: #525252;
+  height: 75px;
+  padding: 20px 28px;
+  box-sizing: border-box;
+}
+
+#main-search {
+  color: white;
+  float: right;
+}
+
+.search-icon {
+  cursor: pointer;
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */
 .card {
-  color: darkslategrey;
+  color: #525252;
   border-style: solid;
   border-width: 1px;
-  border-color: darkslategrey;
+  border-color: #525252;
 }
