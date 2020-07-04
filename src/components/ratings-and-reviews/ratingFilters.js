@@ -9,44 +9,47 @@ class RatingFilters extends React.Component {
         super(props);
         this.state = {
             ratingPercentages: {
-                1: 0, 
-                2: 0, 
-                3: 0, 
-                4: 0, 
-                5: 0
+                '1': 0, 
+                '2': 0, 
+                '3': 0, 
+                '4': 0, 
+                '5': 0
             }
         };
     }
-
-    // findPercentage(i) {
-    //     let sum = 0;
-    //     let countObj = this.props.currentProductRatings.reduce((obj, rating) => {
-    //         console.log('object', obj);
-    //         return obj[rating]++;
-    //         // let string = rating.toString();
-    //         // return obj[string] === undefined ? obj[string] = 1 : obj[string]++;
-    //     }, {1:0, 2:0, 3:0, 4:0, 5:0});
-    //     let numOfRatings = this.props.currentProductRatings.length;
-    //     let percentage;
-    //     for (let num in countObj) {
-    //         percentage = countObj[num]/numOfRatings;
-    //         countObj[num] = percentage;
-    //     }
-    //     console.log(countObj);
-    //     // this.setState({
-    //     //     ratingPercentages: countObj
-    //     // }, () => {console.log('STATE', this.state.ratingPercentages)});
-
-    // }
     
+    findPercentage(i) {
+        let countObj = this.defineCountObj();
+        let numOfRatings = this.props.currentProductRatings.length;
+        let percentage;
+        for (var num in countObj) {
+            percentage = countObj[num]/numOfRatings*100;
+            countObj[num] = percentage;
+        }
+        return countObj[i];
+    }
+    
+    defineCountObj() {
+        let countObj = this.props.currentProductRatings.reduce((obj, rating) => {
+            let string = rating.toString();
+            obj[string]++;
+            return obj;
+        }, {'1':0, '2':0, '3':0, '4':0, '5':0});
+        return countObj;
+    }
+
+    getReviewsWithRating(i) {
+        i = i.toString();
+        let countObj = this.defineCountObj();
+        return countObj[i];
+    }
 
     render() {
         return (
-            <div className='ratings-filters-container'>Rating Breakdown
-            {/* <button onClick={this.findPercentage(1)}>Test</button> */}
+            <div className='ratings-filters-container'>Rating Breakdown <br/>
                 {[...Array(5)].map((possibleRating, i) => {
-                    return <><ProgressBar key={i + 1} now={this.state.ratingPercentages[i + 1]} /><br/></>;
-                })}
+                    return <><label>{`${i + 1} Stars`}</label><ProgressBar key={i + 1} now={this.findPercentage(i + 1)} /><p>{`${this.getReviewsWithRating(i + 1)} Reviews`}</p><br/></>;
+                }).reverse()}
             </div>
         );
     }
