@@ -70,3 +70,14 @@ input:focus {
 .ratings-filters-container {
   width: 200px;
 }
+
+.progress-bar{
+  background-color: #25b354;
+}
+
+.progress-gray {
+  background-color: rgb(221, 217, 217);
+}
+.progress:hover {
+  background-color: lightgray;
+}
