@@ -23,7 +23,6 @@ class NewReview extends React.Component {
   }
 
   render() {
-      console.log(this.props.currentProductCharacteristics);
     if (this.props.show === false) return null;
     return (
         <div>
@@ -35,10 +34,10 @@ class NewReview extends React.Component {
                 <input type="radio" name="recommend" value="no"/> No<br/>
                 <label htmlFor='characteristics'>*Characteristics</label><br/>
                 {Object.keys(this.props.currentProductCharacteristics).map(char => {
-                    return <><label htmlFor={char}>{`${char}: `}</label>{[...Array(5)].map((item, i) => {
-                        return <><label htmlFor={char}>{i + 1}</label><input type="radio" name={char} value={i + 1}/></> 
+                    return <div key={char.id}><label htmlFor={char}>{`${char}: `}</label>{[...Array(5)].map((item, i) => {
+                        return <span key={i+1}><label htmlFor={char}>{i + 1}</label><input type="radio" name={char} value={i + 1}/></span> 
 
-                    })}</>
+                    })}</div>
                 })}
                 <p>*Review Summary</p>
                 <p>*Review Body</p>
