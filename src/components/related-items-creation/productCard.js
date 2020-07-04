@@ -8,33 +8,22 @@ class ProductCard extends React.Component {
       cardDetails: [],
       cardImages: [],
       cardPrices: [],
-      testPrices: [
-        { original_price: '40', sale_price: '35' },
-        { original_price: '100', sale_price: '0' },
-        { original_price: '300', sale_price: '0' },
-        { original_price: '30', sale_price: '0' },
-      ],
+      cardDetailsLoaded: false,
+      cardImagesLoaded: false,
+      cardPricesLoaded: false,
     };
 
-    this.clearList = this.clearList.bind(this);
     this.getCardDetails = this.getCardDetails.bind(this);
     this.getCardImages = this.getCardImages.bind(this);
+    this.getCardPrices = this.getCardPrices.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.relatedProducts !== prevProps.relatedProducts) {
-      // console.log('props: ', this.props.relatedProducts);
-      this.clearList();
-      this.getCardDetails();
+      this.getCardPrices();
       this.getCardImages();
+      this.getCardDetails();
     }
-  }
-
-  clearList() {
-    this.setState({
-      cardDetails: [],
-      cardImages: [],
-    });
   }
 
   getCardDetails() {
@@ -52,7 +41,7 @@ class ProductCard extends React.Component {
     }
     Promise.all(promises).then((res) => {
       // console.log('res: ', res);
-      this.setState({ cardDetails: res });
+      this.setState({ cardDetails: res, cardDetailsLoaded: true });
     });
   }
 
@@ -76,69 +65,103 @@ class ProductCard extends React.Component {
       // console.log('res: ', res);
       this.setState({
         cardImages: res,
+        cardImagesLoaded: true,
+      });
+    });
+  }
+
+  getCardPrices() {
+    let promises = [];
+    for (let i = 0; i < this.props.relatedProducts.length; i++) {
+      promises.push(
+        apiMaster
+          .getProductStyles(this.props.relatedProducts[i])
+          .then((res) => ({
+            original_price: res.data.results[0].original_price,
+            sale_price: res.data.results[0].sale_price,
+          }))
+          .catch((err) => {
+            console.log(err);
+          })
+      );
+    }
+    Promise.all(promises).then((res) => {
+      // console.log('res: ', res);
+      this.setState({
+        cardPrices: res,
+        cardPricesLoaded: true,
       });
     });
   }
 
   render() {
-    return (
-      <div className="cards-wrapper">
-        {this.state.cardDetails.map((card, i) => {
-          return (
-            <div className="card" style={{ width: '15rem' }} key={i}>
-              <img className="card-img-top" src={this.state.cardImages[i]} />
-              <div className="card-body">
-                <div className="card-subtitle">{card.category}</div>
-                <div className="card-title">{card.name}</div>
-                <span
-                  className={
-                    this.state.testPrices[i].sale_price === '0'
-                      ? 'discounted-price-hidden'
-                      : ''
-                  }
-                  style={
-                    ({
+    const areDetailsLoaded = this.state.cardDetailsLoaded;
+    const areImagesLoaded = this.state.cardImagesLoaded;
+    const arePricesLoaded = this.state.cardPricesLoaded;
+    if (areDetailsLoaded && areImagesLoaded && arePricesLoaded) {
+      return (
+        <div className="cards-wrapper">
+          {this.state.cardDetails.map((card, i) => {
+            // console.log('this.state.cardDetails: ', this.state.cardDetails);
+            // console.log('this.state.cardPrices: ', this.state.cardPrices);
+            return (
+              <div className="card" style={{ width: '15rem' }} key={i}>
+                <img className="card-img-top" src={this.state.cardImages[i]} />
+                <div className="card-body">
+                  <div className="card-subtitle">{card.category}</div>
+                  <div className="card-title">{card.name}</div>
+                  <span
+                    className={
+                      this.state.cardPrices[i].sale_price === '0'
+                        ? 'discounted-price-hidden'
+                        : ''
+                    }
+                    style={
+                      ({
+                        textDecoration:
+                          this.state.cardPrices[i].sale_price !== '0'
+                            ? 'line-through'
+                            : 'none',
+                      },
+                      { color: 'red' })
+                    }
+                  >
+                    {Number(this.state.cardPrices[i].sale_price).toLocaleString(
+                      'en-US',
+                      {
+                        style: 'currency',
+                        currency: 'USD',
+                        minimumFractionDigits: 0,
+                        maximumFractionDigits: 0,
+                      }
+                    )}
+                  </span>
+                  <span
+                    style={{
                       textDecoration:
-                        this.state.testPrices[i].sale_price !== '0'
+                        this.state.cardPrices[i].sale_price !== '0'
                           ? 'line-through'
                           : 'none',
-                    },
-                    { color: 'red' })
-                  }
-                >
-                  {Number(this.state.testPrices[i].sale_price).toLocaleString(
-                    'en-US',
-                    {
+                    }}
+                  >
+                    {Number(
+                      this.state.cardPrices[i].original_price
+                    ).toLocaleString('en-US', {
                       style: 'currency',
                       currency: 'USD',
                       minimumFractionDigits: 0,
                       maximumFractionDigits: 0,
-                    }
-                  )}
-                </span>
-                <span
-                  style={{
-                    textDecoration:
-                      this.state.testPrices[i].sale_price !== '0'
-                        ? 'line-through'
-                        : 'none',
-                  }}
-                >
-                  {Number(
-                    this.state.testPrices[i].original_price
-                  ).toLocaleString('en-US', {
-                    style: 'currency',
-                    currency: 'USD',
-                    minimumFractionDigits: 0,
-                    maximumFractionDigits: 0,
-                  })}
-                </span>
+                    })}
+                  </span>
+                </div>
               </div>
-            </div>
-          );
-        })}
-      </div>
-    );
+            );
+          })}
+        </div>
+      );
+    } else {
+      return null;
+    }
   }
 }
 
