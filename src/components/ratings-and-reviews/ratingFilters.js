@@ -1,7 +1,5 @@
 import React from 'react';
 import ProgressBar from 'react-bootstrap/ProgressBar'
-import Stars from './stars.js';
-import apiMaster from '../../apiMaster.js';
 
 
 class RatingFilters extends React.Component {
