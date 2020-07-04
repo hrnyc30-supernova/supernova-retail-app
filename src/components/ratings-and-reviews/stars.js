@@ -4,16 +4,21 @@ import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
 class Stars extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      value: 0
+    };
   }
 
   getStar(val, key) {
     switch(val) {
       case 0:
+        // return <span onClick={() => console.log('clicked', value)} value={this.state.value} key={i+1} color='lightgray'>★</span>
         return <FaStar key={key} color='lightgray'/>;
       case 50:
+        // return <span onClick={() => console.log('clicked', value)} value={this.state.value} key={i+1} color={this.state.value >= i + 1 ? '#ffd500' : 'lightgray'}>★</span>
         return <FaStarHalfAlt key={key} color='#ffd500'/>;
       case 100:
+        // return <span onClick={() => console.log('clicked', value)} value={this.state.value} key={i+1} color={this.state.value >= i + 1 ? '#ffd500' : 'lightgray'}>★</span>
         return <FaStar key={key} color='#ffd500'/>;
     }
   }
@@ -42,15 +47,31 @@ class Stars extends React.Component {
       } else { 
         return [100, 100, 100, 100, 100];
       }
-    }
+  }
+
+  handleClick(e, value) {
+    console.log('clicked', e);
+    console.log('value on click', value);
+    e.preventDefault();
+    // this.setState
+  }
+
 
   render() {
+    // console.log(&#9733)
     return (
       <> 
       { 
-        this.getStars(this.props.rating).map((value, i) => {
-          return this.getStar(value, i);
-        })
+        this.props.rating !== undefined ?
+          // [...Array(5)].map((item, i) => {
+          //   return <><button name='rating' onClick={(e, value) => this.handleClick(e, value)} id={i+1} key={i+1} color={this.state.value >= i + 1 ? '#ffd500' : 'lightgray'}>★</button> </>
+          // }) : null
+          this.getStars(this.props.rating).map((value, i) => {
+            return this.getStar(value, i);
+          })
+          : [...Array(5)].map((item, i) => {
+            return <><button type='button' onClick={e => this.handleClick(e)} value={i+1}>★</button></>
+          })
       }
       </>
     );
@@ -58,3 +79,5 @@ class Stars extends React.Component {
 }
 
 export default Stars;
+
+{/* <FaStar onClick={(e) => this.handleClick(e)} key={i+1} value={i+1} color={this.state.value >= i + 1 ? '#ffd500' : 'lightgray'}/> */}
