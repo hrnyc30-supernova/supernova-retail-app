@@ -8,17 +8,19 @@ const RatingsBreakdown = props => {
         (props.currentRating !== undefined && props.currentRating.characteristics !== undefined) ? chars = props.currentRating.characteristics : chars = null;
         return (
             <div className='ratings-breakdown-container'>Current Product Rating Breakdown: 
-                <p>{Number(props.averageRating).toFixed(1)}</p>
+            {(props.currentProductRatings && props.averageRating && props.recommend && props.currentRating) ? 
+                <><p>{Number(props.averageRating).toFixed(1)}</p>
                 <div><Stars rating={props.averageRating} /><br/><span>{`${props.currentProductRatings.length} Reviews`}</span></div>
                 <RatingFilters recommend={props.recommend} currentProductRatings={props.currentProductRatings}/>
                 <p>{`${props.recommend}% of reviews recommend this product`}</p>
-                {
+                <>{
                     chars !== null ? 
                         Object.entries(chars).map(([char, val]) => {
                             return <p key={val.id}>{`${char}: ${val.value}`}</p>
                         })
                         : null
-                }
+                }</></>
+                : null}
             </div>
         );
 }
