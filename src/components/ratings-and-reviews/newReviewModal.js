@@ -76,7 +76,8 @@ class NewReview extends React.Component {
 
   render() {
     return (
-        <Modal show={this.props.show} animation={false}>
+      <Modal show={this.props.show} animation={false}>
+      {this.props.currentProductCharacteristics && this.props.currentProductName ? <>
             <Modal.Header>
                 <Modal.Title><h4>Write Your Review</h4><small>{`About the ${this.props.currentProductName}`}</small></Modal.Title>
             </Modal.Header>
@@ -114,6 +115,7 @@ class NewReview extends React.Component {
             <Modal.Footer>
                 <button onClick={e => this.sendReview(this.state)}>Submit Review</button>
             </Modal.Footer>
+          </> : null}
         </Modal>
       );
     }
