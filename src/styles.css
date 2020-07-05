@@ -195,7 +195,7 @@ input {
 #product-category {
   text-transform: uppercase;
   margin-top: 15px;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
 #product-name {
@@ -205,6 +205,15 @@ input {
 
 #product-price {
   margin-top: 10px;
+}
+
+#styles-menu {
+  margin-top: 25px;
+}
+
+#styles-menu-heading {
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
 }
 
 #product-description {

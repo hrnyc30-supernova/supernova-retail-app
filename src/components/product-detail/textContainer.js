@@ -19,6 +19,11 @@ class TextContainer extends React.Component {
         <div id="product-category">{this.props.product.category}</div>
         <div id="product-name">{this.props.product.name}</div>
         <div id="product-price">${this.props.product.default_price}</div>
+        <div id="styles-menu">
+          <div id="styles-menu-heading">
+            <strong>Style ></strong> Selected Style
+          </div>
+        </div>
       </div>
     );
   }
