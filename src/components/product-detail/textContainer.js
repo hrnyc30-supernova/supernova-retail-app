@@ -7,7 +7,7 @@ class TextContainer extends React.Component {
 
   render() {
     return (
-      <div id="main-product-text-container">
+      <div id="product-detail-text-container">
         <div className="product-category">{this.props.product.category}</div>
         <h1 className="product-title">{this.props.product.name}</h1>
         <div className="product-price">${this.props.product.default_price}</div>
