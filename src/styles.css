@@ -218,6 +218,11 @@ input {
   background-color: lightgray;
 }
 
+.link{
+  cursor: pointer;
+  color: blue;
+  text-decoration: underline;
+}
 /* .modal {
   width: 500px;
   background: white;

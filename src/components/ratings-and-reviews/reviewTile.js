@@ -19,6 +19,7 @@ class ReviewTile extends React.Component {
     }
 
     render() {
+        console.log(this.props.review);
         let date = this.props.review ? moment(this.props.review.date).format("MMMM D, YYYY"): null;
         return(
             <div id='review-tile-container'>
@@ -26,8 +27,10 @@ class ReviewTile extends React.Component {
                     <Stars rating={this.props.review.rating}/>
                     <p>{`${this.props.review.reviewer_name}, ${date}`}</p>
                     <p><strong>{this.props.review.summary.length <= 60 ? this.props.review.summary : this.props.review.summary.slice(0, 61)}</strong></p>
-                    <p>{this.props.review.body.length <= 50 ? this.props.review.body : (<span onClick={this.handleClick}>Show More</span>)}</p>
-                    {this.props.review.photos.length > 0 ? <img src={this.props.review.photos[0].url}/> : null}
+                    <p>{this.props.review.body.length > 250 ? (this.state.showAll === false ? <>{this.props.review.body.slice(0, 251)}<br/><span className='link' onClick={this.handleClick}>Show More</span></> : <>{this.props.review.body}<br/><span className='link' onClick={this.handleClick}>Show Less</span></>) : this.props.review.body}</p>
+                    <>{this.props.review.photos.map((photo) => {
+                        return <img key={photo.id} src={photo.url} />
+                    })}</>
                     <p>{this.props.review.recommend === 0 ? 'I recommend this product' : null}</p>
                     <p>{this.props.review.response === null ? null : ('Response:', this.props.review.response)}</p>
                     <p>Helpful? ({this.props.review.helpfulness})    |    Report Link HERE</p> 
