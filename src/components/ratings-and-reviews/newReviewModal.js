@@ -76,12 +76,12 @@ class NewReview extends React.Component {
 
   render() {
     return (
-      <Modal className='modal' show={this.props.show} animation={false}>
+      <Modal className='modal' show={this.props.show} animation={false} centered>
       {this.props.currentProductCharacteristics && this.props.currentProductName ? <>
             <Modal.Header>
-                <Modal.Title><h4>Write Your Review</h4><small>{`About the ${this.props.currentProductName}`}</small></Modal.Title>
+                <Modal.Title><h4>Write Your Review</h4><h6><small>{`About the ${this.props.currentProductName}`}</small></h6></Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body scrollable>
                 <form>
                     <div>*Overall Rating <Stars rating={Number(0)} allowChange={true}/></div>
                     <label className='label-container' htmlFor='recommend' required>*Do you recommend this product?
