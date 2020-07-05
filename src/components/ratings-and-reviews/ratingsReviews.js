@@ -17,7 +17,7 @@ class RatingsReviews extends React.Component {
   }
 
   componentDidMount() {
-    apiMaster.getReviewsOfProduct(this.props.currentProductId)
+    apiMaster.getReviewsOfProduct(this.props.currentProductId, 20)
       .then(({ data }) => {
         let ratings = this.getRatings(data.results);
         let recommend = this.getRecommendation(data.results);

@@ -11,13 +11,15 @@ class ReviewList extends React.Component {
         super(props);
         this.state = {
             sortedReviews: [], 
-            isSorted: false
+            isSorted: false, 
+            count: 2
         };
         this.handleSortByChange = this.handleSortByChange.bind(this);
+        this.showMoreReviews = this.showMoreReviews.bind(this);
     }
 
     handleSortByChange(sortString) {
-        apiMaster.getReviewsOfProduct(this.props.currentProductId, sortString)
+        apiMaster.getReviewsOfProduct(this.props.currentProductId, sortString, this.state.count)
             .then(({ data }) => {
                 if (sortString === 'newest') {
                     data.results.sort((a, b) => {
@@ -43,38 +45,35 @@ class ReviewList extends React.Component {
             })
     }
 
+    showMoreReviews() {
+        let tempCount = this.state.count + 2;
+        this.setState({
+            count: tempCount
+        })
+    }
+
     render() {
+        let reviewsToShow = this.state.isSorted === true ? this.state.sortedReviews : this.props.reviews.slice(0, this.state.count);
         return (
-            <>
+            <div id='review-list-container'>
                 {this.props.reviews.length === 0 ? 
-                    <div id='review-list-container'>
-                        <AddReviewButton currentProductCharacteristics={this.props.currentProductCharacteristics} currentProductName={this.props.currentProductName}/> 
-                    </div>
-                    : <div id='review-list-container'>
+                    <div> There are currently no reviews for this product <br/>
+                    <AddReviewButton currentProductCharacteristics={this.props.currentProductCharacteristics} currentProductName={this.props.currentProductName}/> </div>: <>
                         <SortBy currentProductID={this.props.currentProductID} onSelect={this.handleSortByChange}/>
-                        {this.state.isSorted === false ? 
-                            <>
-                                {
-                                    this.props.reviews.map(review => {
-                                        return <ReviewTile key={review.review_id} review={review}/>
-                                    })
-                                }
-                            </> :
-                            <>
-                                {
-                                    this.state.sortedReviews.map(review => {
-                                        return <ReviewTile key={review.review_id} review={review}/>
-                                    })
-                                }
-                            </>
+                        {
+                            reviewsToShow.map(review => {
+                                return <ReviewTile key={review.review_id} review={review}/>
+                            })
                         }
-                        {this.props.reviews.length > 2 ? <MoreReviewsButton /> : null}
+                        {this.state.count < this.props.reviews.length ? <MoreReviewsButton showMoreReviews={this.showMoreReviews}/> : null}
                         <AddReviewButton currentProductCharacteristics={this.props.currentProductCharacteristics} currentProductName={this.props.currentProductName}/>
-                    </div>
+                </>
                 }           
-            </>
+            </div>
         );
     }
 }
 
 export default ReviewList;
+
+

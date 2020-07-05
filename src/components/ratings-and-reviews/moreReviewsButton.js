@@ -2,7 +2,7 @@ import React from 'react';
 
 const MoreReviewsButton = (props) => {
     return(
-        <button>More Reviews</button>
+        <button onClick={props.showMoreReviews}>More Reviews</button>
     );
 }
 
