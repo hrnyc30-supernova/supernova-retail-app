@@ -110,6 +110,11 @@ input {
 
 /* -------- RELATED ITEMS WIDGET -------- */
 
+.carousel-wrapper {
+  width: 1000px;
+  padding-left: 60px;
+}
+
 .card {
   color: #525252;
   border-style: solid;
