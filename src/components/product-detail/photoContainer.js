@@ -12,6 +12,7 @@ class PhotoContainer extends React.Component {
 
     this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
     this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
+    this.handleIconClick = this.handleIconClick.bind(this);
   }
 
   handleLeftArrowClick() {
@@ -38,6 +39,12 @@ class PhotoContainer extends React.Component {
     }
   }
 
+  handleIconClick(index) {
+    this.setState({
+      currentPhoto: index,
+    });
+  }
+
   render() {
     return (
       <div id="product-detail-photo-container">
@@ -49,8 +56,11 @@ class PhotoContainer extends React.Component {
         ) : null}
         <div id="product-photo-icon-container">
           {this.props.styles[0] !== undefined
-            ? this.props.styles[0].photos.map((photo) => (
-                <div className="product-photo-icon-frame">
+            ? this.props.styles[0].photos.map((photo, index) => (
+                <div
+                  className="product-photo-icon-frame"
+                  onClick={() => this.handleIconClick(index)}
+                >
                   <img
                     className="product-photo-icon"
                     src={photo.thumbnail_url}
