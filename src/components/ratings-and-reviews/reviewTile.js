@@ -1,6 +1,7 @@
 import React from 'react';
 import Stars from './stars.js';
 import moment from 'moment';
+import { FaCheck, FaCheckCircle } from 'react-icons/fa';
 
 class ReviewTile extends React.Component {
     constructor(props) {
@@ -31,7 +32,7 @@ class ReviewTile extends React.Component {
                     <>{this.props.review.photos.map((photo) => {
                         return <img key={photo.id} src={photo.url} />
                     })}</>
-                    <p>{this.props.review.recommend === 0 ? 'I recommend this product' : null}</p>
+                    <p>{this.props.review.recommend === 0 ? <><FaCheck size='.75em'/>I recommend this product</> : null}</p>
                     <p>{this.props.review.response === null ? null : ('Response:', this.props.review.response)}</p>
                     <p>Helpful? ({this.props.review.helpfulness})    |    Report Link HERE</p> 
                 </> : null}
