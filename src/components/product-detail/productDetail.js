@@ -9,7 +9,12 @@ class ProductDetail extends React.Component {
     super(props);
     this.state = {
       styles: [],
+      textContainerVisibility: "text-container-visible",
     };
+
+    this.updateTextContainerVisibility = this.updateTextContainerVisibility.bind(
+      this
+    );
   }
 
   componentDidMount() {
@@ -23,11 +28,32 @@ class ProductDetail extends React.Component {
       });
   }
 
+  updateTextContainerVisibility() {
+    if (this.state.textContainerVisibility === "text-container-visible") {
+      this.setState({
+        textContainerVisibility: "text-container-hidden",
+      });
+    } else {
+      this.setState({
+        textContainerVisibility: "text-container-visible",
+      });
+    }
+  }
+
   render() {
     return (
       <div>
-        <PhotoContainer styles={this.state.styles} />
-        <TextContainer product={this.props.product} />
+        <div id="product-detail-columns-container">
+          <PhotoContainer
+            styles={this.state.styles}
+            updateTextContainerVisibility={this.updateTextContainerVisibility}
+          />
+          <TextContainer
+            product={this.props.product}
+            textContainerVisibility={this.state.textContainerVisibility}
+          />
+        </div>
+        <div id="product-description">Description goes here.</div>
       </div>
     );
   }

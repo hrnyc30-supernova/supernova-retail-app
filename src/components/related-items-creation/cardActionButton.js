@@ -1,6 +1,6 @@
-import React from 'react';
-import apiMaster from '../../apiMaster';
-import { AiFillStar } from 'react-icons/ai';
+import React from "react";
+import apiMaster from "../../apiMaster";
+import { AiFillStar } from "react-icons/ai";
 
 function CardActionButton(props) {
   return (
@@ -11,7 +11,7 @@ function CardActionButton(props) {
 }
 
 function handleClick(e) {
-  console.log('clicked!');
+  console.log("clicked!");
 }
 
 export default CardActionButton;
