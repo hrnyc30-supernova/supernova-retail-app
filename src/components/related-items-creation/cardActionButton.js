@@ -11,7 +11,7 @@ function CardActionButton(props) {
 }
 
 function handleClick(e) {
-  console.log('clicked!');
+  console.log(e);
 }
 
 export default CardActionButton;
