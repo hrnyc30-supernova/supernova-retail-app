@@ -13,9 +13,12 @@ class TextContainer extends React.Component {
         className={this.props.textContainerVisibility}
       >
         <Stars rating={this.props.averageRating} />
-        <div className="product-category">{this.props.product.category}</div>
-        <h1 className="product-title">{this.props.product.name}</h1>
-        <div className="product-price">${this.props.product.default_price}</div>
+        <a href="#reviews-ratings-container" id="reviews-link">
+          Read all reviews
+        </a>
+        <div id="product-category">{this.props.product.category}</div>
+        <div id="product-name">{this.props.product.name}</div>
+        <div id="product-price">${this.props.product.default_price}</div>
       </div>
     );
   }
