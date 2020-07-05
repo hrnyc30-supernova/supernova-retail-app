@@ -22,9 +22,9 @@ const QuestionsAndAnswers = (props) => {
   } else {
     return (
       <div>
-        <h1>Questions and Answers Main Component</h1>
+        <h1>Questions and Answers</h1>
         <SearchQuestion />
-        <QuestionDisplay />
+        <QuestionDisplay productID={props.currentProductID} />
         <Button variant="primary">More Questions</Button>{' '}
         <Button
           variant="success"
