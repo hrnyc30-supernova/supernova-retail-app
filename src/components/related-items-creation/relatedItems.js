@@ -36,13 +36,13 @@ class RelatedItems extends React.Component {
 
   render() {
     return (
-      <>
+      <div className="related-products-container">
         <h1>Related Products</h1>
         <ProductCard
           relatedProducts={this.state.relatedProductIds}
           currentProductId={this.props.currentProductID}
         />
-      </>
+      </div>
     );
   }
 }

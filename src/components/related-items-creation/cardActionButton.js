@@ -1,17 +1,33 @@
 import React from 'react';
 import apiMaster from '../../apiMaster';
 import { AiFillStar } from 'react-icons/ai';
+import ProductCompareModal from './productCompareModal';
 
-function CardActionButton(props) {
-  return (
-    <a className="action-button" href="#" onClick={handleClick}>
-      <AiFillStar />
-    </a>
-  );
-}
+class CardActionButton extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { wasClicked: false };
 
-function handleClick(e) {
-  console.log(e);
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState({ wasClicked: !this.state.wasClicked });
+  }
+
+  render() {
+    return (
+      <>
+        <a className="action-button" href="#" onClick={this.handleClick}>
+          <AiFillStar />
+        </a>
+        <ProductCompareModal
+          clicked={this.state.wasClicked}
+          handleClick={this.handleClick}
+        />
+      </>
+    );
+  }
 }
 
 export default CardActionButton;
