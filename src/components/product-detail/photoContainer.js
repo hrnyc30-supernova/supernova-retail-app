@@ -2,6 +2,7 @@ import React from "react";
 
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { FaExpand } from "react-icons/fa";
 
 class PhotoContainer extends React.Component {
   constructor(props) {
@@ -69,6 +70,12 @@ class PhotoContainer extends React.Component {
               ))
             : null}
         </div>
+        <span
+          id="product-photo-expand"
+          onClick={(event) => this.handleProductPhotoExpand(event)}
+        >
+          <FaExpand />
+        </span>
         <span
           className="arrow"
           id="left-arrow"

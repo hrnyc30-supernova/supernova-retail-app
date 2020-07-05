@@ -82,7 +82,9 @@ input {
 #product-detail-text-container {
   width: 450px;
   height: 600px;
+  padding: 20px;
   float: left;
+  box-sizing: border-box;
 }
 
 #product-photo-main {
@@ -130,6 +132,14 @@ input {
 
 #right-arrow {
   right: 50px;
+}
+
+#product-photo-expand {
+  z-index: 1;
+  position: absolute;
+  top: 30px;
+  right: 30px;
+  cursor: pointer;
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */
