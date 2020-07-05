@@ -1,6 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
 
+/* -------- BOOTSTRAP DEFAULT STYLES TO WATCH OUT FOR -------- */
+
+* {
+  box-sizing: border-box;
+}
+
+/* -------- GLOBAL -------- */
+
 body {
   font-family: "Open Sans", sans-serif;
   color: #525252;
@@ -20,7 +28,6 @@ input {
   background-color: #525252;
   height: 75px;
   padding: 20px 28px;
-  box-sizing: border-box;
 }
 
 #logo {
@@ -58,15 +65,14 @@ input {
   font-size: 14px;
   height: 45px;
   text-align: center;
-  box-sizing: border-box;
   padding-top: 13px;
 }
 
-.alert::before {
+.alert-bar-message::before {
   content: "\00a0\00a0\00a0";
 }
 
-.alert::after {
+.alert-bar-message::after {
   content: "\00a0\00a0\00a0";
 }
 
@@ -103,9 +109,8 @@ input {
 #product-detail-text-container {
   width: 450px;
   height: 600px;
-  padding: 20px;
+  padding: 30px;
   float: left;
-  box-sizing: border-box;
 }
 
 .text-container-visible {
@@ -145,6 +150,7 @@ input {
   width: 60px;
   margin-bottom: 20px;
   cursor: pointer;
+  box-sizing: content-box;
 }
 
 .product-photo-icon {
@@ -239,16 +245,15 @@ input {
   display: none;
 }
 
-
 /*----------- RATINGS & REVIEWS WIDGET -----------*/
 
-#reviews-ratings-container{
+#reviews-ratings-container {
   position: relative;
   width: 1200px;
   margin-top: 50px;
 }
 
-#ratings-breakdown-container{
+#ratings-breakdown-container {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -257,18 +262,18 @@ input {
   float: left;
 }
 
-#review-list-container{
+#review-list-container {
   position: absolute;
   margin-left: 420px;
   width: 600px;
   display: block;
   float: left;
 }
-#review-tile-container{
+#review-tile-container {
   border-bottom: 1px solid #525252;
 }
 
-#add-new-review{
+#add-new-review {
   margin-top: 20px;
 }
 
@@ -284,11 +289,11 @@ input {
   align-content: baseline space-between;
 }
 
-.filter-elem{
+.filter-elem {
   padding: 10px 0;
 }
 
-.progress-bar{
+.progress-bar {
   background-color: #25b354;
 }
 
@@ -303,7 +308,7 @@ input {
   background-color: lightgray;
   padding: 15px;
 }
-.link{
+.link {
   cursor: pointer;
   color: blue;
   text-decoration: underline;
@@ -321,6 +326,6 @@ input {
   visibility: visible;
 } */
 
-small{
+small {
   color: rgb(211, 211, 211);
 }

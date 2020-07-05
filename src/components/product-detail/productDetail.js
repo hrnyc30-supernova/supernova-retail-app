@@ -51,6 +51,7 @@ class ProductDetail extends React.Component {
           <TextContainer
             product={this.props.product}
             textContainerVisibility={this.state.textContainerVisibility}
+            averageRating={this.props.averageRating}
           />
         </div>
         <div id="product-description">Description goes here.</div>

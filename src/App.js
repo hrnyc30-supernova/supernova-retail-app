@@ -1,7 +1,8 @@
-import React from 'react';
-import apiMaster from './apiMaster';
-import { hot } from 'react-hot-loader/root';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
+import apiMaster from "./apiMaster";
+import { hot } from "react-hot-loader/root";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 // Widgets
 import NavigationBar from "./components/navigationBar";
 import AlertBar from "./components/alertBar";
