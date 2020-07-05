@@ -1,19 +1,33 @@
 import React from "react";
+import apiMaster from "../../apiMaster";
+
+import PhotoContainer from "./photoContainer.js";
+import TextContainer from "./textContainer.js";
 
 class ProductDetail extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      styles: [],
+    };
   }
+
+  componentDidMount() {
+    apiMaster
+      .getProductStyles()
+      .then(({ data }) => {
+        this.setState({ styles: data.results });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div>
-        <div className="product-category">
-          {this.props.currentProduct.category}
-        </div>
-        <h1 className="product-title">{this.props.currentProduct.name}</h1>
-        <div className="product-price">
-          ${this.props.currentProduct.default_price}
-        </div>
+        <PhotoContainer styles={this.state.styles} />
+        <TextContainer product={this.props.product} />
       </div>
     );
   }
