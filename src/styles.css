@@ -217,7 +217,10 @@ input {
 .progress:hover {
   background-color: lightgray;
 }
-
+.review-response {
+  background-color: lightgray;
+  padding: 15px;
+}
 .link{
   cursor: pointer;
   color: blue;

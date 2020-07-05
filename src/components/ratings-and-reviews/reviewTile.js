@@ -33,7 +33,7 @@ class ReviewTile extends React.Component {
                         return <img key={photo.id} src={photo.url} />
                     })}</>
                     <p>{this.props.review.recommend === 0 ? <><FaCheck size='.75em'/>I recommend this product</> : null}</p>
-                    <p>{this.props.review.response === null ? null : ('Response:', this.props.review.response)}</p>
+                    {this.props.review.response === null ? null : <p className='review-response'>Response from seller: {this.props.review.response}</p>}
                     <p>Helpful? ({this.props.review.helpfulness})    |    Report Link HERE</p> 
                 </> : null}
             </div>
