@@ -48,7 +48,7 @@ class RatingFilters extends React.Component {
                 {this.props.currentProductRatings ? <>
                 Rating Breakdown <br/>
                 {[...Array(5)].map((possibleRating, i) => {
-                    return <><label>{`${i + 1} Stars`}</label><ProgressBar key={i + 1} now={this.findPercentage(i + 1)} className='progress-gray'/><p>{`${this.getReviewsWithRating(i + 1)} Reviews`}</p><br/></>;
+                    return <span id='rating-filter-container'><label className='filter-elem'>{`${i + 1} Stars`}</label><ProgressBar key={i + 1} now={this.findPercentage(i + 1)} className='progress-gray'/><>{'   '}</><small className='filter-elem'>{`${this.getReviewsWithRating(i + 1)} Reviews`}</small></span>;
                 }).reverse()}
                 </> : null}
             </div>

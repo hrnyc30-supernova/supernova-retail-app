@@ -61,7 +61,7 @@ class RatingsReviews extends React.Component {
     return (
       <div id='reviews-ratings-container'>RATINGS AND REVIEWS
         <ReviewList currentProductCharacteristics={this.state.currentRating.characteristics} currentProductName={this.props.currentProductName} reviews={this.state.reviews} currentProductID={this.props.currentProductID}/>
-        <RatingsBreakdown currentRating={this.state.currentRating} recommend={this.state.recommendProduct} currentProductRatings={this.state.currentProductRatings} currentProductID={this.props.currentProductID} averageRating={this.props.averageRating} />
+        <RatingsBreakdown currentRating={this.state.currentRating} recommend={this.state.recommendProduct} currentProductRatings={this.state.currentProductRatings} currentProductName={this.props.currentProductName} currentProductID={this.props.currentProductID} averageRating={this.props.averageRating} />
       </div>
     );
   }

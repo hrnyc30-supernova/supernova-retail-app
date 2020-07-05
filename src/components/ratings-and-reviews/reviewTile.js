@@ -21,7 +21,7 @@ class ReviewTile extends React.Component {
     render() {
         let date = this.props.review ? moment(this.props.review.date).format("MMMM D, YYYY"): null;
         return(
-            <div className='review-tile-container'>
+            <div id='review-tile-container'>
                 {(this.props.review) ? <> 
                     <Stars rating={this.props.review.rating}/>
                     <p>{`${this.props.review.reviewer_name}, ${date}`}</p>

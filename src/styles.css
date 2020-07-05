@@ -168,6 +168,9 @@ input {
 
 #ratings-breakdown-container{
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  /* align-items: baseline; */
   width: 400px;
   float: left;
 }
@@ -175,14 +178,32 @@ input {
 #review-list-container{
   position: absolute;
   margin-left: 420px;
-  /* width: 600px;
+  width: 600px;
   display: block;
-  float: left; */
+  float: left;
+}
+#review-tile-container{
+  border-bottom: 1px solid #525252;
 }
 
+#add-new-review{
+  margin-top: 20px;
+}
 
 .ratings-filters-container {
-  width: 200px;
+  width: 300px;
+}
+
+#avg-rating,
+#rating-filter-container {
+  display: flex;
+  flex-direction: row;
+  /* check below - should move stars and progress bars to center vertically*/
+  align-content: baseline space-between;
+}
+
+.filter-elem{
+  padding: 10px 0;
 }
 
 .progress-bar{
@@ -190,6 +211,7 @@ input {
 }
 
 .progress-gray {
+  width: 150px;
   background-color: rgb(221, 217, 217);
 }
 .progress:hover {
