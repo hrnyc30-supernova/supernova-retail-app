@@ -1,38 +1,42 @@
-import React from 'react';
+import React, { useState } from 'react';
 import SearchQuestion from './searchQuestion';
 import QuestionDisplay from './questionDisplay';
-import MoreQuestionsBtn from './moreQuestionsBtn';
-import AddQuestionBtn from './addQuestionBtn';
-import QuestionForm from './questionForm.js';
+import AskQuestionModal from './questionForm.js';
+import Button from 'react-bootstrap/Button';
 
-class QuestionsAndAnswers extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      questionFormVisible: false,
-    };
-    this.renderForm = this.renderForm.bind(this);
-    this.loadMoreQuestions = this.loadMoreQuestions.bind(this);
+const QuestionsAndAnswers = (props) => {
+  const [AddQuestionModal, setAddQuestionModal] = useState(false);
+
+  const closeModal = () => {
+    setAddQuestionModal(false);
+  };
+  if (AddQuestionModal) {
+    return (
+      <AskQuestionModal
+        closeModal={closeModal}
+        show={AddQuestionModal}
+        name={props.currentProductName}
+        productID={props.currentProductID}
+      />
+    );
+  } else {
+    return (
+      <div>
+        <h1>Questions and Answers Main Component</h1>
+        <SearchQuestion />
+        <QuestionDisplay />
+        <Button variant="primary">More Questions</Button>{' '}
+        <Button
+          variant="success"
+          onClick={() => {
+            setAddQuestionModal(true);
+          }}
+        >
+          Add A Question
+        </Button>
+      </div>
+    );
   }
-  renderForm() {
-    // render form action
-  }
-  loadMoreQuestions() {}
-  render() {
-    if (this.state.questionFormVisible) {
-      return <QuestionForm />;
-    } else {
-      return (
-        <div>
-          <h1>Questions and Answers Main Component</h1>
-          <SearchQuestion />
-          <QuestionDisplay />
-          <MoreQuestionsBtn loadMoreQuestions={this.loadMoreQuestions} />
-          <AddQuestionBtn renderForm={this.renderForm} />
-        </div>
-      );
-    }
-  }
-}
+};
 
 export default QuestionsAndAnswers;

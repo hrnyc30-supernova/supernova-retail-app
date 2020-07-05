@@ -15,10 +15,13 @@
   },
   "dependencies": {
     "axios": "^0.19.2",
+    "bootstrap": "^4.5.0",
     "moment": "^2.27.0",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
+    "react-bootstrap": "^1.0.1",
     "react-dom": "^16.13.1",
+    "react-hook-form": "^6.0.1",
     "react-hot-loader": "^4.12.21",
     "react-icons": "^3.10.0",
     "react-items-carousel": "^2.8.0",
