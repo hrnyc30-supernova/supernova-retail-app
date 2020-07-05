@@ -19,9 +19,10 @@ class ReviewTile extends React.Component {
     }
 
     render() {
-        let date = moment(this.props.review.date).format("MMMM D, YYYY");
+        let date = this.props.review ? moment(this.props.review.date).format("MMMM D, YYYY"): null;
         return(
             <div className='review-tile-container'>
+                {(this.props.review) ? <> 
                 <Stars rating={this.props.review.rating}/>
                 <p>{`${this.props.review.reviewer_name}, ${date}`}</p>
                 <p><strong>{this.props.review.summary.length <= 60 ? this.props.review.summary : this.props.review.summary.slice(0, 61)}</strong></p>
@@ -29,7 +30,8 @@ class ReviewTile extends React.Component {
                 {this.props.review.photos.length > 0 ? <img src={this.props.review.photos[0].url}/> : null}
                 <p>{this.props.review.recommend === 0 ? 'I recommend this product' : null}</p>
                 <p>{this.props.review.response === null ? null : ('Response:', this.props.review.response)}</p>
-                <p>Helpful? ({this.props.review.helpfulness})    |    Report Link HERE</p>
+                <p>Helpful? ({this.props.review.helpfulness})    |    Report Link HERE</p> 
+                </> : null}
             </div>
         );
     }
