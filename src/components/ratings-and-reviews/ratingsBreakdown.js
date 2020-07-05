@@ -7,7 +7,7 @@ const RatingsBreakdown = props => {
         let chars;
         (props.currentRating !== undefined && props.currentRating.characteristics !== undefined) ? chars = props.currentRating.characteristics : chars = null;
         return (
-            <div className='ratings-breakdown-container'>Current Product Rating Breakdown: 
+            <div id='ratings-breakdown-container'>Current Product Rating Breakdown: 
             {(props.currentProductRatings && props.averageRating && props.recommend && props.currentRating) ? 
                 <><p>{Number(props.averageRating).toFixed(1)}</p>
                 <div><Stars rating={props.averageRating} /><br/><span>{`${props.currentProductRatings.length} Reviews`}</span></div>

@@ -160,6 +160,27 @@ input {
 
 /*----------- RATINGS & REVIEWS WIDGET -----------*/
 
+#reviews-ratings-container{
+  position: relative;
+  width: 1200px;
+  margin-top: 50px;
+}
+
+#ratings-breakdown-container{
+  position: absolute;
+  width: 400px;
+  float: left;
+}
+
+#review-list-container{
+  position: absolute;
+  margin-left: 420px;
+  /* width: 600px;
+  display: block;
+  float: left; */
+}
+
+
 .ratings-filters-container {
   width: 200px;
 }
