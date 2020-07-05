@@ -285,8 +285,9 @@ input {
 }
 
 .review-photo{
-  width: 50px; 
+  width: 70px; 
   height: 'auto';
+  padding: 5px 10px;
 }
 
 .filter-elem{
