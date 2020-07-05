@@ -72,11 +72,32 @@ input {
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
 
+#product-detail-columns-container {
+  width: 1200px;
+  height: 600px;
+  overflow: hidden;
+}
+
 #product-detail-photo-container {
   position: relative;
-  width: 750px;
   height: 600px;
   float: left;
+}
+
+.photo-container-standard {
+  width: 750px;
+  -webkit-transition: width 300ms ease-in-out;
+  -moz-transition: width 300ms ease-in-out;
+  -o-transition: width 300ms ease-in-out;
+  transition: width 300ms ease-in-out;
+}
+
+.photo-container-expanded {
+  width: 1200px;
+  -webkit-transition: width 300ms ease-in-out;
+  -moz-transition: width 300ms ease-in-out;
+  -o-transition: width 300ms ease-in-out;
+  transition: width 300ms ease-in-out;
 }
 
 #product-detail-text-container {
@@ -85,6 +106,22 @@ input {
   padding: 20px;
   float: left;
   box-sizing: border-box;
+}
+
+.text-container-visible {
+  display: block;
+  -webkit-transition: display 300ms ease-in-out;
+  -moz-transition: display 300ms ease-in-out;
+  -o-transition: display 300ms ease-in-out;
+  transition: display 300ms ease-in-out;
+}
+
+.text-container-hidden {
+  display: none;
+  -webkit-transition: display 300ms ease-in-out;
+  -moz-transition: display 300ms ease-in-out;
+  -o-transition: display 300ms ease-in-out;
+  transition: display 300ms ease-in-out;
 }
 
 #product-photo-main {
@@ -140,6 +177,12 @@ input {
   top: 30px;
   right: 30px;
   cursor: pointer;
+}
+
+#product-description {
+  clear: both;
+  text-align: center;
+  padding: 40px;
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */

@@ -9,11 +9,13 @@ class PhotoContainer extends React.Component {
     super(props);
     this.state = {
       currentPhoto: 0,
+      photoContainerWidth: "photo-container-standard",
     };
 
     this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
     this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
     this.handleIconClick = this.handleIconClick.bind(this);
+    this.handleProductPhotoExpand = this.handleProductPhotoExpand.bind(this);
   }
 
   handleLeftArrowClick() {
@@ -46,9 +48,25 @@ class PhotoContainer extends React.Component {
     });
   }
 
+  handleProductPhotoExpand() {
+    if (this.state.photoContainerWidth === "photo-container-standard") {
+      this.setState({
+        photoContainerWidth: "photo-container-expanded",
+      });
+    } else {
+      this.setState({
+        photoContainerWidth: "photo-container-standard",
+      });
+    }
+    this.props.updateTextContainerVisibility();
+  }
+
   render() {
     return (
-      <div id="product-detail-photo-container">
+      <div
+        id="product-detail-photo-container"
+        className={this.state.photoContainerWidth}
+      >
         {this.props.styles[0] !== undefined ? (
           <img
             id="product-photo-main"
