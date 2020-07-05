@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow, configure } from 'enzyme';
 import Stars from './stars.js';
-import { FaStar } from 'react-icons/fa';
+import StarRatings from 'react-star-ratings';
 
 import Adapter from 'enzyme-adapter-react-16';
 
@@ -16,7 +16,7 @@ describe('Should Render', () => {
 
   it('renders 5 stars', () => {
     const wrapper = shallow(<Stars />);
-    expect(wrapper.find(FaStar)).toHaveLength(5);
+    expect(wrapper.find(StarRatings)).toBeTruthy();
   });
   
 });
