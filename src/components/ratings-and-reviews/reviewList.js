@@ -47,10 +47,10 @@ class ReviewList extends React.Component {
         return (
             <>
                 {this.props.reviews.length === 0 ? 
-                    <div className='review-list-container'>
+                    <div id='review-list-container'>
                         <AddReviewButton currentProductCharacteristics={this.props.currentProductCharacteristics} currentProductName={this.props.currentProductName}/> 
                     </div>
-                    : <div className='review-list-container'>
+                    : <div id='review-list-container'>
                         <SortBy currentProductID={this.props.currentProductID} onSelect={this.handleSortByChange}/>
                         {this.state.isSorted === false ? 
                             <>

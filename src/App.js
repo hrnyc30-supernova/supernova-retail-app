@@ -4,11 +4,11 @@ import { hot } from 'react-hot-loader/root';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // Widgets
 import NavigationBar from "./components/navigationBar";
-import ProductDetail from './components/product-detail/productDetail';
-import RelatedItems from './components/related-items-creation/relatedItems';
-import QuestionsAndAnswers from './components/questions-and-answers/questionsAndAnswers';
-import RatingsReviews from './components/ratings-and-reviews/ratingsReviews';
-
+import AlertBar from "./components/alertBar";
+import ProductDetail from "./components/product-detail/productDetail";
+import RelatedItems from "./components/related-items-creation/relatedItems";
+import QuestionsAndAnswers from "./components/questions-and-answers/questionsAndAnswers";
+import RatingsReviews from "./components/ratings-and-reviews/ratingsReviews";
 
 class App extends React.Component {
   constructor(props) {
@@ -17,6 +17,7 @@ class App extends React.Component {
       currentProduct: {},
       averageRating: "calculating",
     };
+
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
   }
 
@@ -33,10 +34,9 @@ class App extends React.Component {
     apiMaster
       .getReviewMetaData()
       .then(({ data }) => {
-        // console.log('should be ratings', data);
         let averageRating = this.calculateAverageRating(data.ratings);
-        this.setState({ 
-          averageRating: averageRating 
+        this.setState({
+          averageRating: averageRating,
         });
       })
       .catch((err) => {
@@ -60,8 +60,9 @@ class App extends React.Component {
     return (
       <div>
         <NavigationBar />
+        <AlertBar />
         <ProductDetail
-          currentProduct={this.state.currentProduct}
+          product={this.state.currentProduct}
           averageRating={this.state.averageRating}
         />
         <RelatedItems currentProductID={this.state.currentProduct.id} />
