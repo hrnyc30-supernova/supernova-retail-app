@@ -15,7 +15,7 @@ class App extends React.Component {
     super(props);
     this.state = {
       currentProduct: {},
-      averageRating: "calculating",
+      averageRating: 0,
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);

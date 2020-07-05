@@ -83,17 +83,17 @@ class NewReview extends React.Component {
             </Modal.Header>
             <Modal.Body>
                 <form>
-                    <p>*Overall Rating <Stars rating='0' /></p>
+                    <div>*Overall Rating <Stars rating={Number(0)} allowChange={true}/></div>
                     <label className='label-container' htmlFor='recommend' required>*Do you recommend this product?
                         <input type="radio" name="recommend" id="recommend" default value="1" /> Yes
                         <input type="radio" name="recommend" id="recommend"value="0" /> No
                     </label><br/>
                     <label className='label-container' htmlFor='characteristics'>*Characteristics<br/>
                     {Object.keys(this.props.currentProductCharacteristics).map(char => {
-                        return <><label className='label-container' required htmlFor={char}>{`${char}: `}</label>{['1', '2', '3', '4', '5'].map((item, i) => {
-                            return <><input type="radio" name={char} value={i+1}/><small>{this.getScaleValue(char, item)}</small></> 
+                        return <div key={char.id}><label className='label-container' required htmlFor={char}>{`${char}: `}</label>{['1', '2', '3', '4', '5'].map((item, i) => {
+                            return <div key={i+5}><input type="radio" name={char} value={i+1}/><small>{this.getScaleValue(char, item)}</small></div> 
 
-                        })}<br/></>
+                        })}<br/></div>
                     })} </label><br/>
                     <label className='label-container' required htmlFor='summary'>*Review Summary<br/>
                         <textarea type='text' id='summary' required name='summary' placeholder='Example: Best purchase ever!' maxLength='60'></textarea>

@@ -34,7 +34,7 @@ class ReviewTile extends React.Component {
         return(
             <div id='review-tile-container'>
                 {(this.props.review) ? <> 
-                    <Stars rating={this.props.review.rating}/>
+                    <Stars rating={Number(this.props.review.rating)}/>
                     <p>{`${this.props.review.reviewer_name}, ${date}`}</p>
                     <p><strong>{this.props.review.summary.length <= 60 ? this.props.review.summary : this.props.review.summary.slice(0, 61)}</strong></p>
                     <p>{this.props.review.body.length > 250 ? (this.state.showAll === false ? <>{this.props.review.body.slice(0, 251)}<br/><span className='link' onClick={this.handleClick}>Show More</span></> : <>{this.props.review.body}<br/><span className='link' onClick={this.handleClick}>Show Less</span></>) : this.props.review.body}</p>

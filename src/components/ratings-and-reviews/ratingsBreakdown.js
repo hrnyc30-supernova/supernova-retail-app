@@ -9,7 +9,7 @@ const RatingsBreakdown = props => {
         return (
             <div id='ratings-breakdown-container'>Current Product Rating Breakdown: 
             {(props.currentProductRatings && props.averageRating && props.recommend && props.currentRating) ? 
-                <><div id='avg-rating'><h1><strong>{Number(props.averageRating).toFixed(1)}</strong></h1><Stars rating={props.averageRating} /></div>
+                <><div id='avg-rating'><h1><strong>{Number(props.averageRating).toFixed(1)}</strong></h1><Stars rating={Number(props.averageRating)} /></div>
                 <span>{`${props.currentProductRatings.length} Reviews Related to '${props.currentProductName}'`}</span>
                 <RatingFilters recommend={props.recommend} currentProductRatings={props.currentProductRatings}/>
                 <p>{`${props.recommend}% of reviews recommend this product`}</p>
