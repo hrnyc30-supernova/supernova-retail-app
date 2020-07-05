@@ -2,15 +2,20 @@ import React from "react";
 
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { FaExpand } from "react-icons/fa";
 
 class PhotoContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       currentPhoto: 0,
+      photoContainerWidth: "photo-container-standard",
     };
+
     this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
     this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
+    this.handleIconClick = this.handleIconClick.bind(this);
+    this.handleProductPhotoExpand = this.handleProductPhotoExpand.bind(this);
   }
 
   handleLeftArrowClick() {
@@ -37,15 +42,58 @@ class PhotoContainer extends React.Component {
     }
   }
 
+  handleIconClick(index) {
+    this.setState({
+      currentPhoto: index,
+    });
+  }
+
+  handleProductPhotoExpand() {
+    if (this.state.photoContainerWidth === "photo-container-standard") {
+      this.setState({
+        photoContainerWidth: "photo-container-expanded",
+      });
+    } else {
+      this.setState({
+        photoContainerWidth: "photo-container-standard",
+      });
+    }
+    this.props.updateTextContainerVisibility();
+  }
+
   render() {
     return (
-      <div id="main-product-photo-container">
+      <div
+        id="product-detail-photo-container"
+        className={this.state.photoContainerWidth}
+      >
         {this.props.styles[0] !== undefined ? (
           <img
-            id="main-product-photo"
+            id="product-photo-main"
             src={this.props.styles[0].photos[this.state.currentPhoto].url}
           ></img>
         ) : null}
+        <div id="product-photo-icon-container">
+          {this.props.styles[0] !== undefined
+            ? this.props.styles[0].photos.map((photo, index) => (
+                <div
+                  className="product-photo-icon-frame"
+                  onClick={() => this.handleIconClick(index)}
+                >
+                  <img
+                    className="product-photo-icon"
+                    src={photo.thumbnail_url}
+                  ></img>
+                </div>
+              ))
+            : null}
+        </div>
+        <span
+          id="product-photo-expand"
+          onClick={(event) => this.handleProductPhotoExpand(event)}
+        >
+          <FaExpand />
+        </span>
         <span
           className="arrow"
           id="left-arrow"
