@@ -75,7 +75,8 @@ class NewReview extends React.Component {
   render() {
     if (this.props.show === false) return null;
     return (
-        <div>
+        <div className='modal'>
+            {this.props.currentProductName && this.props.currentProductCharacteristics ? <>
             <h4>Write Your Review</h4><h6>{`About the ${this.props.currentProductName}`}</h6>
             <form>
                 <p>*Overall Rating <Stars rating='0' /></p>
@@ -109,6 +110,7 @@ class NewReview extends React.Component {
                 </label>
             </form>
           <button onClick={e => this.sendReview(this.state)}>Submit Review</button>
+          </> : null}
         </div>
     );
   }
