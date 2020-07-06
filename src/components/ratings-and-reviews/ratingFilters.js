@@ -48,7 +48,6 @@ class RatingFilters extends React.Component {
 
   getScaleValue(characteristic, rating) {
     rating = rating.toString();
-    console.log('rating', charScales);
     return charScales[characteristic][rating];
   }
 
