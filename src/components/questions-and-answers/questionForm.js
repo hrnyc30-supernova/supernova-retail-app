@@ -4,7 +4,6 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
 import apiMaster from '../../apiMaster';
-import axios from 'axios';
 
 const AskQuestionModal = (props) => {
   const { register, handleSubmit, errors } = useForm();
@@ -16,7 +15,8 @@ const AskQuestionModal = (props) => {
       .then(() => {
         setShow(false);
         props.closeModal();
-      });
+      })
+      .catch((err) => console.log(err));
   };
 
   return (

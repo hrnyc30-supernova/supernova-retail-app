@@ -60,19 +60,27 @@ class App extends React.Component {
       <div>
         <NavigationBar />
         <AlertBar />
-        <ProductDetail
-          product={this.state.currentProduct}
-          averageRating={this.state.averageRating}
-        />
-        <RelatedItems currentProductID={this.state.currentProduct.id} />
-        <QuestionsAndAnswers
-          currentProductID={this.state.currentProduct.id}
-          currentProductName={this.state.currentProduct.name}
-        />
-        <RatingsReviews
-          currentProductID={this.state.currentProduct.id}
-          averageRating={this.state.averageRating}
-        />
+        <div className="widget">
+          <ProductDetail
+            product={this.state.currentProduct}
+            averageRating={this.state.averageRating}
+          />
+        </div>
+        <div className="widget">
+          <RelatedItems currentProductID={this.state.currentProduct.id} />
+        </div>
+        <div className="widget">
+          <QuestionsAndAnswers
+            currentProductID={this.state.currentProduct.id}
+            currentProductName={this.state.currentProduct.name}
+          />
+        </div>
+        <div className="widget">
+          <RatingsReviews
+            currentProductID={this.state.currentProduct.id}
+            averageRating={this.state.averageRating}
+          />
+        </div>
       </div>
     );
   }

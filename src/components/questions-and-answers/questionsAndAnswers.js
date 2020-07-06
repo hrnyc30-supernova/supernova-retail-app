@@ -3,6 +3,8 @@ import SearchQuestion from './searchQuestion';
 import QuestionDisplay from './questionDisplay';
 import AskQuestionModal from './questionForm.js';
 import Button from 'react-bootstrap/Button';
+import { RecoilRoot } from 'recoil';
+import MoreQuestions from './moreQuestions';
 
 const QuestionsAndAnswers = (props) => {
   const [AddQuestionModal, setAddQuestionModal] = useState(false);
@@ -10,6 +12,7 @@ const QuestionsAndAnswers = (props) => {
   const closeModal = () => {
     setAddQuestionModal(false);
   };
+
   if (AddQuestionModal) {
     return (
       <AskQuestionModal
@@ -21,20 +24,23 @@ const QuestionsAndAnswers = (props) => {
     );
   } else {
     return (
-      <div>
-        <h1>Questions and Answers</h1>
-        <SearchQuestion />
-        <QuestionDisplay productID={props.currentProductID} />
-        <Button variant="primary">More Questions</Button>{' '}
-        <Button
-          variant="success"
-          onClick={() => {
-            setAddQuestionModal(true);
-          }}
-        >
-          Add A Question
-        </Button>
-      </div>
+      <RecoilRoot>
+        <div>
+          <h1>Questions and Answers</h1>
+          <SearchQuestion />
+          <QuestionDisplay productID={props.currentProductID} />
+          <br></br>
+          <MoreQuestions />
+          <Button
+            variant="success"
+            onClick={() => {
+              setAddQuestionModal(true);
+            }}
+          >
+            Add A Question
+          </Button>
+        </div>
+      </RecoilRoot>
     );
   }
 };

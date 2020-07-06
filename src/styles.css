@@ -8,6 +8,11 @@ body {
   margin: auto;
 }
 
+/* ---------Temp Widget Styler -------- */
+.widget {
+  margin: 100px 0px;
+}
+
 input {
   font-family: 'Open Sans', sans-serif;
   font-size: 14px;
@@ -155,4 +160,9 @@ input {
 
 .discounted-price-hidden {
   display: none;
+}
+
+/* -------- QA WIDGET -------- */
+.question {
+  margin: 20px 0px;
 }
