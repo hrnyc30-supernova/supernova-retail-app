@@ -235,6 +235,7 @@ input {
 }
 
 .product-style-icon {
+  position: relative;
   background-size: cover;
   background-position: center;
   border: 1px solid #525252;
@@ -244,6 +245,22 @@ input {
   margin: 12.5px 25px 12.5px 0px;
   border-radius: 50%;
   cursor: pointer;
+}
+
+#selected-style-checkmark-frame {
+  background-color: white;
+  border: 1px solid #525252;
+  position: absolute;
+  left: 45px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+}
+
+#selected-style-checkmark {
+  position: absolute;
+  top: -6px;
+  left: 45px;
 }
 
 #product-description {

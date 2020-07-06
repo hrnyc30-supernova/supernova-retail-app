@@ -8,7 +8,7 @@ class PhotoContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPhoto: 0,
+      selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
     };
 
@@ -19,13 +19,13 @@ class PhotoContainer extends React.Component {
   }
 
   handleLeftArrowClick() {
-    if (this.state.currentPhoto === 0) {
+    if (this.state.selectedPhotoIndex === 0) {
       this.setState({
-        currentPhoto: this.props.selectedStyle.photos.length - 1,
+        selectedPhotoIndex: this.props.selectedStyle.photos.length - 1,
       });
     } else {
       this.setState({
-        currentPhoto: this.state.currentPhoto - 1,
+        selectedPhotoIndex: this.state.selectedPhotoIndex - 1,
       });
     }
   }
@@ -33,21 +33,21 @@ class PhotoContainer extends React.Component {
   handleRightArrowClick() {
     if (
       this.props.selectedStyle.photos.length ===
-      this.state.currentPhoto + 1
+      this.state.selectedPhotoIndex + 1
     ) {
       this.setState({
-        currentPhoto: 0,
+        selectedPhotoIndex: 0,
       });
     } else {
       this.setState({
-        currentPhoto: this.state.currentPhoto + 1,
+        selectedPhotoIndex: this.state.selectedPhotoIndex + 1,
       });
     }
   }
 
   handleIconClick(index) {
     this.setState({
-      currentPhoto: index,
+      selectedPhotoIndex: index,
     });
   }
 
@@ -73,7 +73,9 @@ class PhotoContainer extends React.Component {
         {this.props.selectedStyle !== null ? (
           <img
             id="product-photo-main"
-            src={this.props.selectedStyle.photos[this.state.currentPhoto].url}
+            src={
+              this.props.selectedStyle.photos[this.state.selectedPhotoIndex].url
+            }
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
@@ -86,7 +88,7 @@ class PhotoContainer extends React.Component {
                   }}
                   onClick={() => this.handleIconClick(index)}
                 >
-                  {this.state.currentPhoto === index ? (
+                  {this.state.selectedPhotoIndex === index ? (
                     <span id="selected-photo-bar"></span>
                   ) : null}
                 </div>

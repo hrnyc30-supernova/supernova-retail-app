@@ -1,5 +1,7 @@
 import React from "react";
+
 import Stars from "../ratings-and-reviews/stars.js";
+import { GrFormCheckmark } from "react-icons/gr";
 
 class TextContainer extends React.Component {
   constructor(props) {
@@ -32,7 +34,16 @@ class TextContainer extends React.Component {
                       backgroundImage: `url(${style.photos[0].thumbnail_url})`,
                     }}
                     onClick={() => this.props.updateSelectedStyle(index)}
-                  ></div>
+                  >
+                    {this.props.selectedStyle === style ? (
+                      <span>
+                        <span id="selected-style-checkmark-frame"></span>
+                        <span id="selected-style-checkmark">
+                          <GrFormCheckmark />
+                        </span>
+                      </span>
+                    ) : null}
+                  </div>
                 ))
               : null}
           </div>
