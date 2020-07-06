@@ -1,6 +1,6 @@
 import React from 'react';
 import apiMaster from '../../apiMaster';
-import Stars from './stars';
+import CardStars from './cardStars';
 import ItemsCarousel from 'react-items-carousel';
 import {
   FaRegArrowAltCircleLeft,
@@ -138,6 +138,7 @@ class ProductCard extends React.Component {
                     />
                     <CardActionButton
                       currentProductFeatures={this.props.currentProductFeatures}
+                      relatedProductFeatures={this.props.relatedItemFeatures[i]}
                     />
                   </div>
                   <div className="card-body">
@@ -185,9 +186,9 @@ class ProductCard extends React.Component {
                         maximumFractionDigits: 0,
                       })}
                     </span>
-                  </div>
-                  <div className="stars-body">
-                    <Stars />
+                    <div className="stars-body">
+                      <CardStars />
+                    </div>
                   </div>
                 </div>
               );

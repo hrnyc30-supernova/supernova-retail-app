@@ -275,6 +275,10 @@ input {
   transform: scale(1.5);
 }
 
+.stars-body {
+  padding-bottom: 15px;
+}
+
 .action-button {
   position: absolute;
   color: lightgray;
@@ -291,6 +295,25 @@ input {
 
 .discounted-price-hidden {
   display: none;
+}
+
+.modal-content {
+  align-items: center;
+}
+
+.close-card-modal {
+  max-width: 100px;
+  text-align: center;
+}
+
+ul.characteristics {
+  white-space: nowrap;
+  text-align: left;
+  padding: 0;
+}
+
+.show-grid {
+  width: 480px;
 }
 
 /* -------- QA WIDGET -------- */
