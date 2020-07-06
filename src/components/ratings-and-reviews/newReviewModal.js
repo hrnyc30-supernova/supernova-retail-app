@@ -21,7 +21,6 @@ class NewReview extends React.Component {
       showImgModal: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getScaleValue = this.getScaleValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleCharChange = this.handleCharChange.bind(this);
@@ -38,11 +37,6 @@ class NewReview extends React.Component {
     //   .catch(err => {
     //     console.error(err);
     //   })
-  }
-
-  getScaleValue(characteristic, rating) {
-    rating = rating.toString();
-    return charScales[characteristic][rating];
   }
 
   handleChange(e) {
@@ -134,7 +128,7 @@ class NewReview extends React.Component {
                               <Form.Check
                                 type="radio"
                                 name={char}
-                                label={this.getScaleValue(char, item)}
+                                label={charScales[char][item]}
                                 value={item}
                                 onChange={(e) => this.handleCharChange(e)}
                                 id={`${char}${item}`}
