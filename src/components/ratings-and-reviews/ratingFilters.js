@@ -1,5 +1,6 @@
 import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import {charScales} from "./constants.js";
 
 class RatingFilters extends React.Component {
   constructor(props) {
@@ -13,6 +14,7 @@ class RatingFilters extends React.Component {
         "5": 0,
       },
     };
+    this.getScaleValue = this.getScaleValue.bind(this);
   }
 
   findPercentage(i) {
@@ -42,6 +44,12 @@ class RatingFilters extends React.Component {
     i = i.toString();
     let countObj = this.defineCountObj();
     return countObj[i];
+  }
+
+  getScaleValue(characteristic, rating) {
+    rating = rating.toString();
+    console.log('rating', charScales);
+    return charScales[characteristic][rating];
   }
 
   render() {
@@ -93,7 +101,7 @@ class RatingFilters extends React.Component {
                         <br />
                         <small>
                           {[1, 5].map((item, i) => {
-                            return <span></span>;
+                            return <span key={i}>{this.getScaleValue(char, item)}</span>;
                           })}
                         </small>
                       </div>

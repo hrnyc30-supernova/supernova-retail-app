@@ -302,6 +302,13 @@ small{
   font: 100px;
 }
 
+#characteristic-rating-container>small>span:first-child {
+  padding-left: 40px;
+}
+#characteristic-rating-container>small>span:last-child {
+  padding-left: 160px;
+}
+
 .progress-bar{
   background-color: #25b354;
 }
