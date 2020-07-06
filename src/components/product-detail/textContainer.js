@@ -25,12 +25,13 @@ class TextContainer extends React.Component {
           </div>
           <div id="product-style-icon-container">
             {this.props.styles !== []
-              ? this.props.styles.map((style) => (
+              ? this.props.styles.map((style, index) => (
                   <div
                     className="product-style-icon"
                     style={{
                       backgroundImage: `url(${style.photos[0].thumbnail_url})`,
                     }}
+                    onClick={() => this.props.updateSelectedStyle(index)}
                   ></div>
                 ))
               : null}
