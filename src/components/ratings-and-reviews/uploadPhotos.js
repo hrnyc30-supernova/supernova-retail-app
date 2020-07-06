@@ -7,6 +7,17 @@ class UploadPhotos extends React.Component {
     this.state = {
       images: [],
     };
+    this.handleChange = this.handleChange.bind(this);
+  }
+  handleChange(e) {
+      console.log(e.target.files[e.target.id].name);
+      let temp = this.state.images;
+      temp.push(e.target.files[e.target.id]);
+      this.setState({
+          images: temp
+      }, () => {
+          console.log(this.state.images);
+      })
   }
 
   render() {
@@ -28,11 +39,10 @@ class UploadPhotos extends React.Component {
         <Modal.Body>
           <form>
             <label className='label-container' htmlFor='photo'>Choose up to 5 photos: <br/>
-                <input type="file" id="photo1" name="photo" accept="image/png, image/jpeg"/>
-                <input type="file" id="photo2" name="photo" accept="image/png, image/jpeg"/>
-                <input type="file" id="photo3" name="photo" accept="image/png, image/jpeg"/>
-                <input type="file" id="photo4" name="photo" accept="image/png, image/jpeg"/>
-                <input type="file" id="photo5" name="photo" accept="image/png, image/jpeg"/>
+                {['1', '2', '3', '4', '5'].map((item, i) => {
+                    console.log((this.state.images.length === i))
+                    return this.state.images.length >= item ? <><img src={`${this.state.images[i].name}`} className="review-photo"/><br/></> : <input type="file" id={i} name="photo" onChange={this.handleChange} accept="image/png, image/jpeg"/>
+                }) }
             </label>
           </form>
         </Modal.Body>
