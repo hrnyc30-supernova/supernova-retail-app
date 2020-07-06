@@ -2,6 +2,9 @@ import React from "react";
 
 import Stars from "../ratings-and-reviews/stars.js";
 import { GrFormCheckmark } from "react-icons/gr";
+import { FiChevronDown } from "react-icons/fi";
+import { FiPlus } from "react-icons/fi";
+import { AiOutlineStar } from "react-icons/ai";
 
 class TextContainer extends React.Component {
   constructor(props) {
@@ -52,6 +55,29 @@ class TextContainer extends React.Component {
               : null}
           </div>
         </div>
+        <span className="main-action-button" id="size-selector">
+          Select Size
+          <span className="main-action-button-symbol main-action-button-symbol-floated">
+            <FiChevronDown />
+          </span>
+        </span>
+        <span className="main-action-button" id="quantity-selector">
+          1
+          <span className="main-action-button-symbol main-action-button-symbol-floated">
+            <FiChevronDown />
+          </span>
+        </span>
+        <span className="main-action-button" id="add-to-bag-button">
+          Add to Bag
+          <span className="main-action-button-symbol main-action-button-symbol-floated">
+            <FiPlus />
+          </span>
+        </span>
+        <span className="main-action-button" id="favorite-button">
+          <span className="main-action-button-symbol">
+            <AiOutlineStar />
+          </span>
+        </span>
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React from "react";
 import apiMaster from "../../apiMaster";
 
+import { GrFormCheckmark } from "react-icons/gr";
+
 import PhotoContainer from "./photoContainer.js";
 import TextContainer from "./textContainer.js";
 
@@ -68,7 +70,34 @@ class ProductDetail extends React.Component {
             updateSelectedStyle={this.updateSelectedStyle}
           />
         </div>
-        <div id="product-description">Description goes here.</div>
+        <div id="product-notes">
+          <span id="product-description">
+            <div id="product-slogan">
+              <strong>{this.props.product.slogan}</strong>
+            </div>
+            <div>{this.props.product.description}</div>
+          </span>
+          <span id="product-features">
+            <div>
+              <span className="product-features-checkmark">
+                <GrFormCheckmark />
+              </span>
+              A feature
+            </div>
+            <div>
+              <span className="product-features-checkmark">
+                <GrFormCheckmark />
+              </span>
+              Another feature
+            </div>
+            <div>
+              <span className="product-features-checkmark">
+                <GrFormCheckmark />
+              </span>
+              Yet another feature
+            </div>
+          </span>
+        </div>
       </div>
     );
   }
