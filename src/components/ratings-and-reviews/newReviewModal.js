@@ -19,6 +19,7 @@ class NewReview extends React.Component {
     };
     this.sendReview = this.sendReview.bind(this);
     this.getScaleValue = this.getScaleValue.bind(this);
+    this.handleChange = this.handleChange.bind(this);
   }
 
   sendReview(reviewObj) {
@@ -29,6 +30,14 @@ class NewReview extends React.Component {
   getScaleValue(characteristic, rating) {
     rating = rating.toString();
     return charScales[characteristic][rating];
+  }
+
+  handleChange(e) {
+    console.log(e.target.value)
+    let temp = e.target.value;
+    this.setState({
+      body: temp
+    })
   }
 
   render() {
@@ -126,9 +135,11 @@ class NewReview extends React.Component {
                     placeholder="Why did you like the product or not?"
                     maxLength="1000"
                     minLength="50"
-                  ></textarea>
-                </label>
-                <p>Upload your photos</p>
+                    value={this.state.body}
+                    onChange={e => this.handleChange(e)}
+                  ></textarea> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : null}</small>
+                </label><br/>
+                <button>Upload your photos</button>
                 <label className="label-container" required htmlFor="nickname">
                   *What is your nickname
                   <br />
