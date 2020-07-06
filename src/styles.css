@@ -8,6 +8,12 @@ body {
   margin: auto;
 }
 
+/* ---------TEMP WIDGET STYLER -------- */
+
+.widget {
+  margin: 100px 0px;
+}
+
 input {
   font-family: "Open Sans", sans-serif;
   font-size: 14px;
@@ -239,6 +245,11 @@ input {
   display: none;
 }
 
+/* -------- QA WIDGET -------- */
+
+.question {
+  margin: 20px 0px;
+}
 
 /*----------- RATINGS & REVIEWS WIDGET -----------*/
 
@@ -305,6 +316,7 @@ small{
 #characteristic-rating-container>small>span:first-child {
   padding-left: 20px;
 }
+
 #characteristic-rating-container>small>span:last-child {
   padding-right: 20px;
 }
@@ -317,22 +329,27 @@ small{
   width: 150px;
   background-color: rgb(221, 217, 217);
 }
+
 .progress-characteristic {
   width: 270px;
   background-color: rgb(221, 217, 217);
 }
+
 .progress:hover {
   background-color: lightgray;
 }
+
 .review-response {
   background-color: lightgray;
   padding: 15px;
 }
+
 .link{
   cursor: pointer;
   color: blue;
   text-decoration: underline;
 }
+
 .modal {
   max-height: calc(100vh - 210px);
   overflow-y: 'auto';
