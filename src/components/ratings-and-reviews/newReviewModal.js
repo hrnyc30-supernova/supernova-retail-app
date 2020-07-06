@@ -2,6 +2,7 @@ import React from "react";
 import Stars from "./stars.js";
 import UploadPhotos from "./uploadPhotos.js";
 import Modal from "react-bootstrap/Modal";
+import Form from "react-bootstrap/Form";
 import {charScales} from "./constants.js";
 import apiMaster from "../../apiMaster.js";
 
@@ -19,7 +20,7 @@ class NewReview extends React.Component {
       email: "",
       showImgModal: false,
     };
-    this.sendReview = this.sendReview.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
     this.getScaleValue = this.getScaleValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
@@ -27,7 +28,7 @@ class NewReview extends React.Component {
     this.toggleModal = this.toggleModal.bind(this)
   }
 
-  sendReview(reviewObj) {
+  handleSubmit(reviewObj) {
     console.log('this is the review that we will send to the API', reviewObj);
     this.props.toggleModal();
     // apiMaster.postReview({ rating, summary, body, recommend, nickname, email, photos, characteristics })
@@ -77,8 +78,6 @@ class NewReview extends React.Component {
       <Modal
         className="modal"
         show={this.props.show}
-        animation={false}
-        centered
       >
         {this.props.currentProductCharacteristics &&
         this.props.currentProductName ? (
@@ -92,134 +91,137 @@ class NewReview extends React.Component {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-              <form>
-                <div>
-                  *Overall Rating{" "}
+              <Form onSubmit={e => this.handleSubmit(e)}>
+                <Form.Group controlId="overallRating">
+                  <Form.Label>* Overall Rating</Form.Label>
                   <Stars name='rating' value={this.state.rating} handleChange={this.handleRatingChange} rating={Number(0)} allowChange={true} />
-                </div>
-                <label className="label-container" htmlFor="recommend" required>
-                  *Do you recommend this product?
-                  <input
+                </Form.Group>
+                <Form.Group controlId="recommendation">
+                  <Form.Label>* Do you recommend this product?</Form.Label><br/>
+                  <Form.Check
                     type="radio"
                     name="recommend"
-                    default
-                    value="1"
-                    onClick={e => this.handleChange(e)}
-                  />{" "}
-                  Yes
-                  <input
+                    value='1'
+                    label='Yes'
+                    id='1'
+                    onChange={e => this.handleChange(e)}
+                  />
+                  <Form.Check
                     type="radio"
                     name="recommend"
-                    value="0"
-                  />{" "}
-                  No
-                </label>
-                <br />
-                <label className="label-container" htmlFor="characteristics">
-                  *Characteristics
-                  <br />
+                    value='0'
+                    label='No'
+                    id='0'
+                    onChange={e => this.handleChange(e)}
+                  />
+                </Form.Group>
+                <Form.Group controlId="characteristicFilters">
+                  <Form.Label>* Characteristics</Form.Label><br/>
                   {Object.keys(this.props.currentProductCharacteristics).map(
                     (char) => {
-                      return (
-                        <div key={char.id}>
-                          <label
-                            className="label-container"
-                            required
-                            htmlFor={char}
-                          >{`${char}: `}</label>
-                          {["1", "2", "3", "4", "5"].map((item, i) => {
-                            return (
-                              <div key={i + 5}>
-                                <input type="radio" onClick={e => this.handleCharChange(e)} name={char} value={i + 1} />
-                                <small>{this.getScaleValue(char, item)}</small>
-                              </div>
-                            );
-                          })}
-                          <br />
-                        </div>
+                      return (<>
+                        <Form.Label>{char}</Form.Label> <br/>
+                        {["1", "2", "3", "4", "5"].map((item, i) => {
+                          return (<>
+                            <Form.Check
+                              type="radio"
+                              name="characteristic"
+                              label={this.getScaleValue(char, item)}
+                              value={item}
+                              onChange={e => this.handleChange(e)}
+                              id={`${char}${item}`}
+                            />
+                          </>)
+                            
+                          })}</>
                       );
                     }
                   )}{" "}
-                </label>
-                <br />
-                <label className="label-container" required htmlFor="summary">
-                  *Review Summary
-                  <br />
-                  <textarea
+                  <Form.Text className="text-muted">
+                    <p style={{ color: 'red' }}>Characteristics are required</p>
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group controlId="reviewSummary">
+                  <Form.Label>* Review Summary</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows="2"
                     type="text"
-                    id="summary"
-                    required
+                    placeholder="Example: Best purchase ever!"
                     name="summary"
+                    maxLength={60}
                     value={this.state.summary}
                     onChange={e => this.handleChange(e)}
-                    placeholder="Example: Best purchase ever!"
-                    maxLength="60"
-                  ></textarea>
-                </label>
-                <br />
-                <label className="label-container" required htmlFor="body">
-                  *Review Body
-                  <br />
-                  <textarea
+                  />
+                  <Form.Text className="text-muted">
+                    <p style={{ color: 'red' }}>Summary is required</p>
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group controlId="reviewBody">
+                  <Form.Label>* Review Body</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows="2"
                     type="text"
-                    id="body"
-                    required
-                    name="body"
                     placeholder="Why did you like the product or not?"
-                    maxLength="1000"
-                    minLength="50"
+                    name="body"
+                    maxLength={1000}
+                    minLength={50}
                     value={this.state.body}
                     onChange={e => this.handleChange(e)}
-                  ></textarea><br/> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
-                </label><br/>
-                <button className='main-action-button review-button' onClick={e => this.toggleModal(e)}>Upload your photos</button>
-                {this.state.showImgModal ? <UploadPhotos currentProductName={this.props.currentProductName} showImgModal={this.state.showImgModal} onClick={this.toggleModal}/> : null}
-                <label className="label-container" required htmlFor="nickname">
-                  *What is your nickname
-                  <br />
-                  <textarea
-                    type="text"
-                    id="nickname"
-                    required
+                  />
+                  <Form.Text><small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small></Form.Text>
+                  <Form.Text className="text-muted">
+                    <p style={{ color: 'red' }}>Body is required</p>
+                  </Form.Text>
+                </Form.Group>
+                <button id='upload-photos-modal-button' className='main-action-button review-button' onClick={e => this.toggleModal(e)}>
+                  Upload your photos
+                </button>
+                {this. state.showImgModal ? <UploadPhotos currentProductName={this.props.currentProductName} showImgModal={this.state.showImgModal} onClick={this.toggleModal}/> : null}
+                <br/>
+                <Form.Group controlId="nickname">
+                  <Form.Label>* What is your nickname?</Form.Label>
+                  <Form.Control
+                    type='text'
+                    placeholder="Enter email"
                     name="nickname"
                     value={this.state.nickname}
                     onChange={e => this.handleChange(e)}
                     placeholder="Example: jackson11!"
-                    maxLength="60"
-                  ></textarea>
-                  <br />
-                  <small>
+                    maxLength={60}
+                  />
+                  <Form.Text><small>
                     For privacy reasons, do not use your full name or email
                     address
-                  </small>
-                  <br />
-                </label>
-                <br />
-                <label className="label-container" required htmlFor="email">
-                  *Your email
-                  <br />
-                  <textarea
-                    type="text"
-                    id="email"
-                    required
+                  </small></Form.Text>
+                  <Form.Text className="text-muted">
+                    <p style={{ color: 'red' }}>Nickname is required</p>
+                  </Form.Text>
+                </Form.Group>
+                <Form.Group controlId="formBasicEmail">
+                  <Form.Label>* Your Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    placeholder="Enter email"
                     name="email"
                     value={this.state.email}
                     onChange={e => this.handleChange(e)}
                     placeholder="Example: jackson11@email.com"
-                    maxLength="60"
-                  ></textarea>
-                  <br />
-                  <small>
+                    maxLength={60}
+                  />
+                  <Form.Text><small>
                     For authentication reasons, you will not be emailed
-                  </small>
-                </label>
-              </form>
+                  </small></Form.Text>
+                  <Form.Text className="text-muted">
+                    <p style={{ color: 'red' }}>Email is required</p>
+                  </Form.Text>
+                </Form.Group>
+                <button className='main-action-button review-button' onClick={(e) => this.handleSubmit(this.state)}>
+                  Submit Review
+                </button>
+              </Form>
             </Modal.Body>
-            <Modal.Footer>
-              <button className='main-action-button review-button' onClick={(e) => this.sendReview(this.state)}>
-                Submit Review
-              </button>
-            </Modal.Footer>
           </>
         ) : null}
       </Modal>
@@ -228,3 +230,130 @@ class NewReview extends React.Component {
 }
 
 export default NewReview;
+                    // <Form.Text className="text-muted">
+                    //   For privacy reasons, do not use your full name or email address
+                    //   {errors.name && <p style={{ color: 'red' }}>Name is required</p>}
+                    // </Form.Text>
+
+// <form>
+// <div>
+//   *Overall Rating{" "}
+//   <Stars name='rating' value={this.state.rating} handleChange={this.handleRatingChange} rating={Number(0)} allowChange={true} />
+// </div>
+// <label className="label-container" htmlFor="recommend" required>
+//   *Do you recommend this product?
+//   <input
+//     type="radio"
+//     name="recommend"
+//     default
+//     value="1"
+//     onClick={e => this.handleChange(e)}
+//   />{" "}
+//   Yes
+//   <input
+//     type="radio"
+//     name="recommend"
+//     value="0"
+//   />{" "}
+//   No
+// </label>
+// <br />
+// <label className="label-container" htmlFor="characteristics">
+//   *Characteristics
+//   <br />
+//   {Object.keys(this.props.currentProductCharacteristics).map(
+//     (char) => {
+//       return (
+//         <div key={char.id}>
+//           <label
+//             className="label-container"
+//             required
+//             htmlFor={char}
+//           >{`${char}: `}</label>
+//           {["1", "2", "3", "4", "5"].map((item, i) => {
+//             return (
+//               <div key={i + 5}>
+//                 <input type="radio" onClick={e => this.handleCharChange(e)} name={char} value={i + 1} />
+//                 <small>{this.getScaleValue(char, item)}</small>
+//               </div>
+//             );
+//           })}
+//           <br />
+//         </div>
+//       );
+//     }
+//   )}{" "}
+// </label>
+// <br />
+// <label className="label-container" required htmlFor="summary">
+//   *Review Summary
+//   <br />
+//   <textarea
+//     type="text"
+//     id="summary"
+//     required
+//     name="summary"
+//     value={this.state.summary}
+//     onChange={e => this.handleChange(e)}
+//     placeholder="Example: Best purchase ever!"
+//     maxLength="60"
+//   ></textarea>
+// </label>
+// <br />
+// <label className="label-container" required htmlFor="body">
+//   *Review Body
+//   <br />
+//   <textarea
+//     type="text"
+//     id="body"
+//     required
+//     name="body"
+//     placeholder="Why did you like the product or not?"
+//     maxLength="1000"
+//     minLength="50"
+//     value={this.state.body}
+//     onChange={e => this.handleChange(e)}
+//   ></textarea><br/> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
+// </label><br/>
+// <button className='main-action-button review-button' onClick={e => this.toggleModal(e)}>Upload your photos</button>
+// {this.state.showImgModal ? <UploadPhotos currentProductName={this.props.currentProductName} showImgModal={this.state.showImgModal} onClick={this.toggleModal}/> : null}
+// <label className="label-container" required htmlFor="nickname">
+//   *What is your nickname
+//   <br />
+//   <textarea
+//     type="text"
+//     id="nickname"
+//     required
+//     name="nickname"
+//     value={this.state.nickname}
+//     onChange={e => this.handleChange(e)}
+//     placeholder="Example: jackson11!"
+//     maxLength="60"
+//   ></textarea>
+//   <br />
+//   <small>
+//     For privacy reasons, do not use your full name or email
+//     address
+//   </small>
+//   <br />
+// </label>
+// <br />
+// <label className="label-container" required htmlFor="email">
+//   *Your email
+//   <br />
+//   <textarea
+//     type="text"
+//     id="email"
+//     required
+//     name="email"
+//     value={this.state.email}
+//     onChange={e => this.handleChange(e)}
+//     placeholder="Example: jackson11@email.com"
+//     maxLength="60"
+//   ></textarea>
+//   <br />
+//   <small>
+//     For authentication reasons, you will not be emailed
+//   </small>
+// </label>
+// </form>

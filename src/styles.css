@@ -464,6 +464,10 @@ ul.characteristics {
   background-color: white;
 }
 
+#upload-photos-modal-button{
+  width: 300px;
+}
+
 #sort-by{
   margin:5px;
   padding: 5px;
