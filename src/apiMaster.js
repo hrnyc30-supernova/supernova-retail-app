@@ -24,10 +24,9 @@ const getReviewMetaData = (id = 1) => {
   return axios.get(`http://18.224.200.47/reviews/${id}/meta`);
 };
 
-const getReviewsOfProduct = (id = 1, sortString = 'relevant') => {
-  return axios.get(`http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc`);
+const getReviewsOfProduct = (id = 1, sortString = 'relevant', count = 20) => {
+  return axios.get(`http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`);
 };
-
 
 const reportReview = (reviewId) => {
   return axios.put(`http://18.224.200.47/reviews/report/${reviewId}`);
@@ -60,7 +59,7 @@ const getCart = (userToken) => {
   return axios.get(`http://18.224.200.47/cart/${userToken}`);
 };
 
-const getSpecificAnsers = (questionId) => {
+const getSpecificAnswers = (questionId) => {
   return axios.get(`http://18.224.200.47/qa/${questionId}/answers`);
 };
 
@@ -103,7 +102,7 @@ const apiMaster = {
   getProductStyles: getProductStyles,
   getRelatedProducts: getRelatedProducts,
   getQA: getQA,
-  getSpecificAnsers: getSpecificAnsers,
+  getSpecificAnswers: getSpecificAnswers,
   askQuestion: askQuestion,
   answerQuestion: answerQuestion,
   markQAsHelpful: markQAsHelpful,
