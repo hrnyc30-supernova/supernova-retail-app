@@ -51,17 +51,15 @@ class ReviewTile extends React.Component {
                 this.state.showAll === false ? (
                   <>
                     {this.props.review.body.slice(0, 251)}
-                    <br />
                     <span className="link" onClick={this.handleClick}>
-                      Show More
+                      ...Show More
                     </span>
                   </>
                 ) : (
                   <>
                     {this.props.review.body}
-                    <br />
                     <span className="link" onClick={this.handleClick}>
-                      Show Less
+                      ...Show Less
                     </span>
                   </>
                 )

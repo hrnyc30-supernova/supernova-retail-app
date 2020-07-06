@@ -20,11 +20,11 @@ const getQA = (id = 1) => {
   return axios.get(`http://18.224.200.47/qa/${id}`);
 };
 
-const getReviewMetaData = (id = 1) => {
+const getReviewMetaData = (id = 13) => {
   return axios.get(`http://18.224.200.47/reviews/${id}/meta`);
 };
 
-const getReviewsOfProduct = (id = 1, sortString = 'relevant', count = 20) => {
+const getReviewsOfProduct = (id = 13, sortString = 'relevant', count = 20) => {
   return axios.get(`http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`);
 };
 
