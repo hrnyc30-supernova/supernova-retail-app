@@ -23,6 +23,7 @@ body {
   border: 1px solid #525252;
   padding: 20px;
   letter-spacing: 0.4px;
+  cursor: pointer;
 }
 
 .main-action-button-symbol {

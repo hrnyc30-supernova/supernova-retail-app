@@ -5,10 +5,45 @@ import { GrFormCheckmark } from "react-icons/gr";
 import { FiChevronDown } from "react-icons/fi";
 import { FiPlus } from "react-icons/fi";
 import { AiOutlineStar } from "react-icons/ai";
+import { AiFillStar } from "react-icons/ai";
 
 class TextContainer extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      bagMessage: "Add to Bag",
+      bagIcon: <FiPlus />,
+      favoriteStatus: false,
+      favoriteIcon: <AiOutlineStar />,
+    };
+
+    this.handleAddToBag = this.handleAddToBag.bind(this);
+    this.handleFavorite = this.handleFavorite.bind(this);
+  }
+
+  handleAddToBag() {
+    this.setState({
+      bagMessage: "Added",
+      bagIcon: <GrFormCheckmark />,
+    });
+    setTimeout(
+      () => this.setState({ bagMessage: "Add to Bag", bagIcon: <FiPlus /> }),
+      3000
+    );
+  }
+
+  handleFavorite() {
+    if (this.state.favoriteStatus === false) {
+      this.setState({
+        favoriteStatus: true,
+        favoriteIcon: <AiFillStar />,
+      });
+    } else {
+      this.setState({
+        favoriteStatus: false,
+        favoriteIcon: <AiOutlineStar />,
+      });
+    }
   }
 
   render() {
@@ -82,15 +117,23 @@ class TextContainer extends React.Component {
             <FiChevronDown />
           </span>
         </span>
-        <span className="main-action-button" id="add-to-bag-button">
-          Add to Bag
+        <span
+          className="main-action-button"
+          id="add-to-bag-button"
+          onClick={(event) => this.handleAddToBag(event)}
+        >
+          {this.state.bagMessage}
           <span className="main-action-button-symbol main-action-button-symbol-floated">
-            <FiPlus />
+            {this.state.bagIcon}
           </span>
         </span>
-        <span className="main-action-button" id="favorite-button">
+        <span
+          className="main-action-button"
+          id="favorite-button"
+          onClick={(event) => this.handleFavorite(event)}
+        >
           <span className="main-action-button-symbol">
-            <AiOutlineStar />
+            {this.state.favoriteIcon}
           </span>
         </span>
       </div>
