@@ -416,9 +416,15 @@ input {
 #review-list-container {
   position: absolute;
   margin-left: 420px;
-  width: 600px;
+  width: 700px;
   display: block;
   float: left;
+}
+
+.scroll{
+  height: 85vh; 
+  overflow: auto; 
+  text-align:justify; 
 }
 
 #review-tile-container {
@@ -464,7 +470,7 @@ small {
 }
 
 #characteristic-rating-container > small > span:last-child {
-  padding-right: 20px;
+  padding-left: 80px;
 }
 
 .progress-bar {
