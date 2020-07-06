@@ -85,7 +85,11 @@ class PhotoContainer extends React.Component {
                     backgroundImage: `url(${photo.thumbnail_url})`,
                   }}
                   onClick={() => this.handleIconClick(index)}
-                ></div>
+                >
+                  {this.state.currentPhoto === index ? (
+                    <span id="selected-photo-bar"></span>
+                  ) : null}
+                </div>
               ))
             : null}
         </div>

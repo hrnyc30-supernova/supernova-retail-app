@@ -154,6 +154,7 @@ input {
 }
 
 .product-photo-icon {
+  position: relative;
   background-size: cover;
   background-position: center;
   border: 1px solid #525252;
@@ -162,6 +163,15 @@ input {
   margin-bottom: 20px;
   cursor: pointer;
   box-sizing: content-box;
+}
+
+#selected-photo-bar {
+  position: absolute;
+  top: 64px;
+  left: 0px;
+  background-color: #525252;
+  width: 62px;
+  height: 4px;
 }
 
 .arrow {
