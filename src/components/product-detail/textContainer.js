@@ -30,7 +30,10 @@ class TextContainer extends React.Component {
         ) : null}
         <div id="styles-menu">
           <div id="styles-menu-heading">
-            <strong>Style ></strong> Selected Style
+            <strong>STYLE ></strong>
+            {this.props.selectedStyle !== null ? (
+              <span> {this.props.selectedStyle.name}</span>
+            ) : null}
           </div>
           <div id="product-style-icon-container">
             {this.props.styles !== []
