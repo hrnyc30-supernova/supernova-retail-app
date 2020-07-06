@@ -460,7 +460,13 @@ ul.characteristics {
 }
 
 .review-button {
-  width: 150px;
+  width: 200px;
+  background-color: white;
+}
+
+#sort-by{
+  margin:5px;
+  padding: 5px;
 }
 
 .ratings-filters-container {
