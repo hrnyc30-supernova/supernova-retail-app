@@ -1,7 +1,7 @@
 import React from "react";
 import Stars from "./stars.js";
 import Modal from "react-bootstrap/Modal";
-import charScales from "./constants.js";
+import {charScales} from "./constants.js";
 import apiMaster from "../../apiMaster.js";
 
 class NewReview extends React.Component {
