@@ -1,5 +1,6 @@
 import React from "react";
 import Stars from "./stars.js";
+import UploadPhotos from "./uploadPhotos.js";
 import Modal from "react-bootstrap/Modal";
 import {charScales} from "./constants.js";
 import apiMaster from "../../apiMaster.js";
@@ -172,6 +173,7 @@ class NewReview extends React.Component {
                   ></textarea><br/> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
                 </label><br/>
                 <button className='main-action-button' onClick={e => this.toggleModal(e)}>Upload your photos</button>
+                {this.state.showImgModal ? <UploadPhotos currentProductName={this.props.currentProductName} showImgModal={this.state.showImgModal} onClick={this.toggleModal}/> : null}
                 <label className="label-container" required htmlFor="nickname">
                   *What is your nickname
                   <br />
