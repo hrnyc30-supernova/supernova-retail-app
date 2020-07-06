@@ -25,7 +25,19 @@ class TextContainer extends React.Component {
         <div id="product-name">{this.props.product.name}</div>
         {this.props.selectedStyle !== null ? (
           <div id="product-price">
-            ${this.props.selectedStyle.original_price}
+            {this.props.selectedStyle !== null &&
+            this.props.selectedStyle.sale_price != 0 &&
+            this.props.selectedStyle.sale_price !==
+              this.props.selectedStyle.original_price ? (
+              <span>
+                <span id="overridden-price">
+                  ${this.props.selectedStyle.original_price}
+                </span>
+                ${this.props.selectedStyle.sale_price}
+              </span>
+            ) : (
+              <span>${this.props.selectedStyle.original_price}</span>
+            )}
           </div>
         ) : null}
         <div id="styles-menu">

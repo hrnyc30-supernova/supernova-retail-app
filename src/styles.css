@@ -238,6 +238,11 @@ input {
   margin-top: 10px;
 }
 
+#overridden-price {
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
 #styles-menu {
   margin-top: 25px;
 }
