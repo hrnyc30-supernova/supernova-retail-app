@@ -22,7 +22,8 @@ class Stars extends React.Component {
       return (
         <StarRatings
           rating={this.props.rating}
-          starRatedColor="#ffd500"
+          starEmptyColor="#ebebeb"
+          starRatedColor="#525252"
           starDimension="20px"
           starSpacing="1px"
           changeRating={(e) => this.changeRating(e)}
@@ -34,7 +35,8 @@ class Stars extends React.Component {
       return (
         <StarRatings
           rating={this.props.rating}
-          starRatedColor="#ffd500"
+          starEmptyColor="#ebebeb"
+          starRatedColor="#525252"
           starDimension="20px"
           starSpacing="1px"
           numberOfStars={5}
