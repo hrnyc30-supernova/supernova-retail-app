@@ -21,6 +21,7 @@ class NewReview extends React.Component {
     this.getScaleValue = this.getScaleValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
+    this.handleCharChange = this.handleCharChange.bind(this);
   }
 
   sendReview(reviewObj) {
@@ -36,7 +37,15 @@ class NewReview extends React.Component {
   handleChange(e) {
     let temp = {};
     temp[e.target.name] = e.target.value;
-    this.setState(temp, () => {console.log(this.state)})
+    this.setState(temp)
+  }
+
+  handleCharChange(e) {
+    let temp = this.state.characteristics;
+    temp[e.target.name] = e.target.value
+    this.setState({
+      characteristics: temp
+    })
   }
 
   handleRatingChange(newRating) {
@@ -75,15 +84,14 @@ class NewReview extends React.Component {
                   <input
                     type="radio"
                     name="recommend"
-                    id="recommend"
                     default
                     value="1"
+                    onClick={e => this.handleChange(e)}
                   />{" "}
                   Yes
                   <input
                     type="radio"
                     name="recommend"
-                    id="recommend"
                     value="0"
                   />{" "}
                   No
@@ -104,7 +112,7 @@ class NewReview extends React.Component {
                           {["1", "2", "3", "4", "5"].map((item, i) => {
                             return (
                               <div key={i + 5}>
-                                <input type="radio" name={char} value={i + 1} />
+                                <input type="radio" onClick={e => this.handleCharChange(e)} name={char} value={i + 1} />
                                 <small>{this.getScaleValue(char, item)}</small>
                               </div>
                             );
@@ -144,7 +152,7 @@ class NewReview extends React.Component {
                     minLength="50"
                     value={this.state.body}
                     onChange={e => this.handleChange(e)}
-                  ></textarea> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
+                  ></textarea><br/> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
                 </label><br/>
                 <button>Upload your photos</button>
                 <label className="label-container" required htmlFor="nickname">
