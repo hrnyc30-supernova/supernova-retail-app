@@ -3,6 +3,8 @@ import apiMaster from "./apiMaster";
 import { hot } from "react-hot-loader/root";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Cookies from "universal-cookie";
+
 import NavigationBar from "./components/navigationBar";
 import AlertBar from "./components/alertBar";
 import ProductDetail from "./components/product-detail/productDetail";
@@ -22,6 +24,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
+    this.generateUserToken();
     apiMaster
       .getProductInfo()
       .then(({ data }) => {
@@ -42,6 +45,13 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  generateUserToken() {
+    const cookies = new Cookies();
+    var userid = 7;
+    cookies.set("user", userid, { path: "/" });
+    console.log(cookies.get("user"));
   }
 
   calculateAverageRating(obj) {
