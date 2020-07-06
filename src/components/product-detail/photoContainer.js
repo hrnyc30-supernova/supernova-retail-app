@@ -18,6 +18,14 @@ class PhotoContainer extends React.Component {
     this.handleProductPhotoExpand = this.handleProductPhotoExpand.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.selectedStyle !== this.props.selectedStyle) {
+      this.setState({
+        selectedPhotoIndex: 0,
+      });
+    }
+  }
+
   handleLeftArrowClick() {
     if (this.state.selectedPhotoIndex === 0) {
       this.setState({
