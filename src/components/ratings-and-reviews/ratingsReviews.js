@@ -1,51 +1,53 @@
-import React from 'react';
-import ReviewList from './reviewList.js';
-import RatingsBreakdown from './ratingsBreakdown.js';
-import apiMaster from '../../apiMaster.js';
+import React from "react";
+import ReviewList from "./reviewList.js";
+import RatingsBreakdown from "./ratingsBreakdown.js";
+import apiMaster from "../../apiMaster.js";
 
 class RatingsReviews extends React.Component {
   constructor(props) {
     super(props);
-    this.state ={
+    this.state = {
       reviews: [],
       currentProductRatings: [],
-      recommendProduct: 0, 
-      currentRating: {}
+      recommendProduct: 0,
+      currentRating: {},
     };
     this.getRatings = this.getRatings.bind(this);
     this.getRecommendation = this.getRecommendation.bind(this);
   }
 
   componentDidMount() {
-    apiMaster.getReviewsOfProduct(this.props.currentProductId, 20)
+    apiMaster
+      .getReviewsOfProduct(this.props.currentProductId, 20)
       .then(({ data }) => {
         let ratings = this.getRatings(data.results);
         let recommend = this.getRecommendation(data.results);
         this.setState({
           reviews: data.results,
           currentProductRatings: ratings,
-          recommendProduct: recommend
-        })
+          recommendProduct: recommend,
+        });
       })
-      .catch(err => {
+      .catch((err) => {
         console.error(err);
       });
 
-    apiMaster.getReviewMetaData(this.props.currentProductId)
+    apiMaster
+      .getReviewMetaData(this.props.currentProductId)
       .then(({ data }) => {
         this.setState({
-            currentRating: data
-        })
+          currentRating: data,
+        });
       })
-      .catch(err => {
-          console.log(err);
-      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   getRatings(reviewsArray) {
     return reviewsArray.map((review) => {
       return review.rating;
-    })
+    });
   }
 
   getRecommendation(reviewsArray) {
@@ -54,17 +56,32 @@ class RatingsReviews extends React.Component {
       return num;
     }, 0);
     let length = reviewsArray.length;
-    return numRec / length * 100;
+    return (numRec / length) * 100;
   }
 
   render() {
     return (
-      <div id='reviews-ratings-container'>RATINGS AND REVIEWS
-        <ReviewList currentProductCharacteristics={this.state.currentRating.characteristics} currentProductName={this.props.currentProductName} reviews={this.state.reviews} currentProductID={this.props.currentProductID}/>
-        <RatingsBreakdown currentRating={this.state.currentRating} recommend={this.state.recommendProduct} currentProductRatings={this.state.currentProductRatings} currentProductName={this.props.currentProductName} currentProductID={this.props.currentProductID} averageRating={this.props.averageRating} />
+      <div id="reviews-ratings-container">
+        RATINGS AND REVIEWS
+        <ReviewList
+          currentProductCharacteristics={
+            this.state.currentRating.characteristics
+          }
+          currentProductName={this.props.currentProductName}
+          reviews={this.state.reviews}
+          currentProductID={this.props.currentProductID}
+        />
+        <RatingsBreakdown
+          currentRating={this.state.currentRating}
+          recommend={this.state.recommendProduct}
+          currentProductRatings={this.state.currentProductRatings}
+          currentProductName={this.props.currentProductName}
+          currentProductID={this.props.currentProductID}
+          averageRating={this.props.averageRating}
+        />
       </div>
     );
   }
-} 
+}
 
 export default RatingsReviews;

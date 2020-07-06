@@ -294,12 +294,24 @@ input {
   padding: 10px 0;
 }
 
+small{
+  color: rgb(148, 148, 148);
+}
+
+#ratings-breakdown-container > span > small {
+  font: 100px;
+}
+
 .progress-bar{
   background-color: #25b354;
 }
 
-.progress-gray {
+.progress-rating {
   width: 150px;
+  background-color: rgb(221, 217, 217);
+}
+.progress-characteristic {
+  width: 270px;
   background-color: rgb(221, 217, 217);
 }
 .progress:hover {
@@ -317,8 +329,4 @@ input {
 .modal {
   max-height: calc(100vh - 210px);
   overflow-y: 'auto';
-}
-
-small{
-  color: rgb(148, 148, 148);
 }
