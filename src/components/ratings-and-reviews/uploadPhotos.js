@@ -30,7 +30,7 @@ class UploadPhotos extends React.Component {
             </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-
+            <input type='file'/>
         </Modal.Body>
         <Modal.Footer>
             <button className='main-action-button' onClick={e => this.props.onClick(e)}>
