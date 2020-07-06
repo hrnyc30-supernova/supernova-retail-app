@@ -143,22 +143,15 @@ input {
   overflow: scroll;
 }
 
-.product-photo-icon-frame {
-  background-color: white;
+.product-photo-icon {
+  background-size: cover;
+  background-position: center;
   border: 1px solid #525252;
   height: 60px;
   width: 60px;
   margin-bottom: 20px;
   cursor: pointer;
   box-sizing: content-box;
-}
-
-.product-photo-icon {
-  background-color: white;
-  display: block;
-  max-height: 60px;
-  max-width: 60px;
-  margin: auto;
 }
 
 .arrow {
@@ -214,6 +207,23 @@ input {
 #styles-menu-heading {
   text-transform: uppercase;
   letter-spacing: 0.4px;
+}
+
+#product-style-icon-container {
+  width: 315px;
+  height: 145px;
+}
+
+.product-style-icon {
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #525252;
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin: 0px 12.5px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 #product-description {

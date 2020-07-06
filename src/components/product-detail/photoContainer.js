@@ -77,14 +77,12 @@ class PhotoContainer extends React.Component {
           {this.props.styles[0] !== undefined
             ? this.props.styles[0].photos.map((photo, index) => (
                 <div
-                  className="product-photo-icon-frame"
+                  className="product-photo-icon"
+                  style={{
+                    backgroundImage: `url(${photo.thumbnail_url})`,
+                  }}
                   onClick={() => this.handleIconClick(index)}
-                >
-                  <img
-                    className="product-photo-icon"
-                    src={photo.thumbnail_url}
-                  ></img>
-                </div>
+                ></div>
               ))
             : null}
         </div>

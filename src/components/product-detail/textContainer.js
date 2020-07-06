@@ -23,6 +23,18 @@ class TextContainer extends React.Component {
           <div id="styles-menu-heading">
             <strong>Style ></strong> Selected Style
           </div>
+          <div id="product-style-icon-container">
+            {this.props.styles !== []
+              ? this.props.styles.map((style) => (
+                  <div
+                    className="product-style-icon"
+                    style={{
+                      backgroundImage: `url(${style.photos[0].thumbnail_url})`,
+                    }}
+                  ></div>
+                ))
+              : null}
+          </div>
         </div>
       </div>
     );
