@@ -497,6 +497,7 @@ ul.characteristics {
 
 small {
   color: rgb(148, 148, 148);
+  padding-left: 10px;
 }
 
 #ratings-breakdown-container > span > small {

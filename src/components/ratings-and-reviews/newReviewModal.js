@@ -3,7 +3,7 @@ import Stars from "./stars.js";
 import UploadPhotos from "./uploadPhotos.js";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
-import { charScales } from "./constants.js";
+import { charScales, ratingScale } from "./constants.js";
 import apiMaster from "../../apiMaster.js";
 
 class NewReview extends React.Component {
@@ -93,6 +93,7 @@ class NewReview extends React.Component {
                   rating={Number(0)}
                   allowChange={true}
                 />
+                {this.state.rating === 0 ? null : <small>{ratingScale[this.state.rating.toString()]}</small>}
               </Form.Group>
               <Form.Group controlId="recommendation">
                 <Form.Label>* Do you recommend this product?</Form.Label>
