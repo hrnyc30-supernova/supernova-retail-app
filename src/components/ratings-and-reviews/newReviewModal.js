@@ -1,7 +1,8 @@
 import React from "react";
 import Stars from "./stars.js";
+import UploadPhotos from "./uploadPhotos.js";
 import Modal from "react-bootstrap/Modal";
-import charScales from "./constants.js";
+import {charScales} from "./constants.js";
 import apiMaster from "../../apiMaster.js";
 
 class NewReview extends React.Component {
@@ -16,19 +17,59 @@ class NewReview extends React.Component {
       photos: {},
       nickname: "",
       email: "",
+      showImgModal: false,
     };
     this.sendReview = this.sendReview.bind(this);
     this.getScaleValue = this.getScaleValue.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleRatingChange = this.handleRatingChange.bind(this);
+    this.handleCharChange = this.handleCharChange.bind(this);
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   sendReview(reviewObj) {
-    // console.log('this is the review that we will send to the API', reviewObj);
+    console.log('this is the review that we will send to the API', reviewObj);
     this.props.toggleModal();
+    // apiMaster.postReview({ rating, summary, body, recommend, nickname, email, photos, characteristics })
+    //   .then(() => {
+    //     console.log('the review was posted successfully!')
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //   })
   }
 
   getScaleValue(characteristic, rating) {
     rating = rating.toString();
     return charScales[characteristic][rating];
+  }
+
+  handleChange(e) {
+    let temp = {};
+    temp[e.target.name] = e.target.value;
+    this.setState(temp)
+  }
+
+  handleCharChange(e) {
+    let temp = this.state.characteristics;
+    temp[e.target.name] = e.target.value
+    this.setState({
+      characteristics: temp
+    })
+  }
+
+  handleRatingChange(newRating) {
+    this.setState ({
+      rating: newRating
+    })
+  }
+
+  toggleModal(e) {
+    e.preventDefault();
+    let temp = this.state.showImgModal;
+    this.setState({
+      showImgModal: !temp
+    })
   }
 
   render() {
@@ -50,26 +91,25 @@ class NewReview extends React.Component {
                 </h6>
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body scrollable>
+            <Modal.Body>
               <form>
                 <div>
                   *Overall Rating{" "}
-                  <Stars rating={Number(0)} allowChange={true} />
+                  <Stars name='rating' value={this.state.rating} handleChange={this.handleRatingChange} rating={Number(0)} allowChange={true} />
                 </div>
                 <label className="label-container" htmlFor="recommend" required>
                   *Do you recommend this product?
                   <input
                     type="radio"
                     name="recommend"
-                    id="recommend"
                     default
                     value="1"
+                    onClick={e => this.handleChange(e)}
                   />{" "}
                   Yes
                   <input
                     type="radio"
                     name="recommend"
-                    id="recommend"
                     value="0"
                   />{" "}
                   No
@@ -90,7 +130,7 @@ class NewReview extends React.Component {
                           {["1", "2", "3", "4", "5"].map((item, i) => {
                             return (
                               <div key={i + 5}>
-                                <input type="radio" name={char} value={i + 1} />
+                                <input type="radio" onClick={e => this.handleCharChange(e)} name={char} value={i + 1} />
                                 <small>{this.getScaleValue(char, item)}</small>
                               </div>
                             );
@@ -110,6 +150,8 @@ class NewReview extends React.Component {
                     id="summary"
                     required
                     name="summary"
+                    value={this.state.summary}
+                    onChange={e => this.handleChange(e)}
                     placeholder="Example: Best purchase ever!"
                     maxLength="60"
                   ></textarea>
@@ -126,9 +168,12 @@ class NewReview extends React.Component {
                     placeholder="Why did you like the product or not?"
                     maxLength="1000"
                     minLength="50"
-                  ></textarea>
-                </label>
-                <p>Upload your photos</p>
+                    value={this.state.body}
+                    onChange={e => this.handleChange(e)}
+                  ></textarea><br/> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
+                </label><br/>
+                <button className='main-action-button' onClick={e => this.toggleModal(e)}>Upload your photos</button>
+                {this.state.showImgModal ? <UploadPhotos currentProductName={this.props.currentProductName} showImgModal={this.state.showImgModal} onClick={this.toggleModal}/> : null}
                 <label className="label-container" required htmlFor="nickname">
                   *What is your nickname
                   <br />
@@ -137,6 +182,8 @@ class NewReview extends React.Component {
                     id="nickname"
                     required
                     name="nickname"
+                    value={this.state.nickname}
+                    onChange={e => this.handleChange(e)}
                     placeholder="Example: jackson11!"
                     maxLength="60"
                   ></textarea>
@@ -156,6 +203,8 @@ class NewReview extends React.Component {
                     id="email"
                     required
                     name="email"
+                    value={this.state.email}
+                    onChange={e => this.handleChange(e)}
                     placeholder="Example: jackson11@email.com"
                     maxLength="60"
                   ></textarea>
@@ -167,7 +216,7 @@ class NewReview extends React.Component {
               </form>
             </Modal.Body>
             <Modal.Footer>
-              <button onClick={(e) => this.sendReview(this.state)}>
+              <button className='main-action-button' onClick={(e) => this.sendReview(this.state)}>
                 Submit Review
               </button>
             </Modal.Footer>
