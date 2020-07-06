@@ -21,14 +21,14 @@ const RatingsBreakdown = (props) => {
             </h1>
             <Stars rating={Number(props.averageRating)} />
           </div>
-          <small>{`${props.currentProductRatings.length} Reviews Related to '${props.currentProductName}'`}</small>
+          <small>{`${props.currentProductRatings.length} Reviews of this product`}</small>
           <RatingFilters
             class="ratings-filters-container"
             recommend={props.recommend}
             currentProductRatings={props.currentProductRatings}
             currentRating={props.currentRating}
           />
-          <p>{`${props.recommend}% of reviews recommend this product`}</p>
+          <small>{`${props.recommend}% of reviews recommend this product`}</small>
           <RatingFilters
             class="characteristics-ratings-container"
             recommend={props.recommend}

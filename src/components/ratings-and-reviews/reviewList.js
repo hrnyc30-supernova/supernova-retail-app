@@ -62,39 +62,37 @@ class ReviewList extends React.Component {
       this.state.isSorted === true
         ? this.state.sortedReviews
         : this.props.reviews.slice(0, this.state.count);
-    return (
+    return this.props.reviews.length === 0 ? (
       <div id="review-list-container">
-        {this.props.reviews.length === 0 ? (
-          <div>
-            {" "}
-            There are currently no reviews for this product <br />
-            <AddReviewButton
-              currentProductCharacteristics={
-                this.props.currentProductCharacteristics
-              }
-              currentProductName={this.props.currentProductName}
-            />{" "}
-          </div>
-        ) : (
-          <>
-            <SortBy
-              currentProductID={this.props.currentProductID}
-              onSelect={this.handleSortByChange}
-            />
-            {reviewsToShow.map((review) => {
-              return <ReviewTile key={review.review_id} review={review} />;
-            })}
-            {this.state.count < this.props.reviews.length ? (
-              <MoreReviewsButton showMoreReviews={this.showMoreReviews} />
-            ) : null}
-            <AddReviewButton
-              currentProductCharacteristics={
-                this.props.currentProductCharacteristics
-              }
-              currentProductName={this.props.currentProductName}
-            />
-          </>
-        )}
+        {" "}
+        There are currently no reviews for this product <br />
+        <AddReviewButton
+          currentProductCharacteristics={
+            this.props.currentProductCharacteristics
+          }
+          currentProductName={this.props.currentProductName}
+        />{" "}
+      </div>
+    ) : (
+      <div id='review-list-container'>
+        <SortBy
+          currentProductID={this.props.currentProductID}
+          onSelect={this.handleSortByChange}
+        />
+        <div className="scroll">
+          {reviewsToShow.map((review) => {
+            return <ReviewTile key={review.review_id} review={review} />;
+          })}
+          {this.state.count < this.props.reviews.length ? (
+            <MoreReviewsButton showMoreReviews={this.showMoreReviews} />
+          ) : null}
+        </div>
+        <AddReviewButton
+          currentProductCharacteristics={
+            this.props.currentProductCharacteristics
+          }
+          currentProductName={this.props.currentProductName}
+        />
       </div>
     );
   }
