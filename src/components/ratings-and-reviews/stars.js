@@ -1,59 +1,47 @@
-import React from 'react';
-import { FaStar, FaStarHalfAlt } from 'react-icons/fa';
+import React from "react";
+import StarRatings from "react-star-ratings";
 
 class Stars extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      rating: this.props.rating,
+    };
+    this.changeRating = this.changeRating.bind(this);
   }
 
-  getStar(val, key) {
-    switch(val) {
-      case 0:
-        return <FaStar key={key} color='lightgray'/>;
-      case 50:
-        return <FaStarHalfAlt key={key} color='#ffd500'/>;
-      case 100:
-        return <FaStar key={key} color='#ffd500'/>;
-    }
+  changeRating(e) {
+    e = Number(e);
+    this.setState({
+      rating: e,
+    });
   }
-  
-  getStars(val) {
-      if (val === 0 || val < 0.5) {
-        return [0, 0, 0, 0, 0];
-      } else if (val >= 0.5 && val < 1) {
-        return [50, 0, 0, 0, 0];
-      } else if (val >= 1 && val < 1.5) {
-        return [100, 0, 0, 0, 0];
-      } else if (val >= 1.5 && val < 2) { 
-        return [100, 50, 0, 0, 0];
-      } else if (val >= 2 && val < 2.5) {
-        return [100, 100, 0, 0, 0];
-      } else if (val >= 2.5 && val < 3) {
-        return [100, 100, 50, 0, 0];
-      } else if (val >= 3 && val < 3.5) {
-        return [100, 100, 100, 0, 0];
-      } else if (val >= 3.5 && val < 4) {
-        return [100, 100, 100, 50, 0];
-      } else if (val >= 4 && val < 4.5) {
-        return [100, 100, 100, 100, 0];
-      } else if (val >= 4.5 && val < 5) {
-        return [100, 100, 100, 100, 50];
-      } else { 
-        return [100, 100, 100, 100, 100];
-      }
-    }
 
   render() {
-    return (
-      <> 
-      {
-        this.getStars(this.props.rating).map((value, i) => {
-          return this.getStar(value, i);
-        })
-      }
-      </>
-    );
+    if (this.props.allowChange) {
+      return (
+        <StarRatings
+          rating={this.props.rating}
+          starRatedColor="#ffd500"
+          starDimension="20px"
+          starSpacing="1px"
+          changeRating={(e) => this.changeRating(e)}
+          numberOfStars={5}
+          name="rating"
+        />
+      );
+    } else {
+      return (
+        <StarRatings
+          rating={this.props.rating}
+          starRatedColor="#ffd500"
+          starDimension="20px"
+          starSpacing="1px"
+          numberOfStars={5}
+          name="rating"
+        />
+      );
+    }
   }
 }
 

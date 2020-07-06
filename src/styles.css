@@ -1,11 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
 
+/* -------- BOOTSTRAP DEFAULT STYLES TO WATCH OUT FOR -------- */
+
+* {
+  box-sizing: border-box;
+}
+
+/* -------- GLOBAL -------- */
+
 body {
   font-family: 'Open Sans', sans-serif;
   color: #525252;
   width: 1200px;
   margin: auto;
+}
+
+/* ---------TEMP WIDGET STYLER -------- */
+
+.widget {
+  margin: 100px 0px;
 }
 
 input {
@@ -20,7 +34,6 @@ input {
   background-color: #525252;
   height: 75px;
   padding: 20px 28px;
-  box-sizing: border-box;
 }
 
 #logo {
@@ -58,16 +71,24 @@ input {
   font-size: 14px;
   height: 45px;
   text-align: center;
-  box-sizing: border-box;
   padding-top: 13px;
 }
 
+<<<<<<< HEAD
 .alert::before {
   content: '\00a0\00a0\00a0';
 }
 
 .alert::after {
   content: '\00a0\00a0\00a0';
+=======
+.alert-bar-message::before {
+  content: "\00a0\00a0\00a0";
+}
+
+.alert-bar-message::after {
+  content: "\00a0\00a0\00a0";
+>>>>>>> e3f511b27040de2eef64cdc2a45a516bcfa8a2f2
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -103,9 +124,8 @@ input {
 #product-detail-text-container {
   width: 450px;
   height: 600px;
-  padding: 20px;
+  padding: 30px;
   float: left;
-  box-sizing: border-box;
 }
 
 .text-container-visible {
@@ -138,21 +158,15 @@ input {
   overflow: scroll;
 }
 
-.product-photo-icon-frame {
-  background-color: white;
+.product-photo-icon {
+  background-size: cover;
+  background-position: center;
   border: 1px solid #525252;
   height: 60px;
   width: 60px;
   margin-bottom: 20px;
   cursor: pointer;
-}
-
-.product-photo-icon {
-  background-color: white;
-  display: block;
-  max-height: 60px;
-  max-width: 60px;
-  margin: auto;
+  box-sizing: content-box;
 }
 
 .arrow {
@@ -176,6 +190,54 @@ input {
   position: absolute;
   top: 30px;
   right: 30px;
+  cursor: pointer;
+}
+
+#reviews-link {
+  color: #525252;
+  font-size: 12px;
+  text-decoration: underline;
+  margin-left: 7px;
+}
+
+#product-category {
+  text-transform: uppercase;
+  margin-top: 15px;
+  letter-spacing: 0.4px;
+}
+
+#product-name {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#product-price {
+  margin-top: 10px;
+}
+
+#styles-menu {
+  margin-top: 25px;
+}
+
+#styles-menu-heading {
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+#product-style-icon-container {
+  width: 340px;
+  height: 145px;
+}
+
+.product-style-icon {
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #525252;
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin: 12.5px 25px 12.5px 0px;
+  border-radius: 50%;
   cursor: pointer;
 }
 
@@ -240,6 +302,15 @@ input {
   display: none;
 }
 
+<<<<<<< HEAD
+=======
+/* -------- QA WIDGET -------- */
+
+.question {
+  margin: 20px 0px;
+}
+
+>>>>>>> e3f511b27040de2eef64cdc2a45a516bcfa8a2f2
 /*----------- RATINGS & REVIEWS WIDGET -----------*/
 
 #reviews-ratings-container {
@@ -264,6 +335,10 @@ input {
   display: block;
   float: left;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e3f511b27040de2eef64cdc2a45a516bcfa8a2f2
 #review-tile-container {
   border-bottom: 1px solid #525252;
 }
@@ -284,30 +359,72 @@ input {
   align-content: baseline space-between;
 }
 
+<<<<<<< HEAD
 .filter-elem {
   padding: 10px 0;
 }
 
 .progress-bar {
+=======
+.review-photo{
+  width: 70px; 
+  height: 'auto';
+  padding: 5px 10px;
+}
+
+.filter-elem{
+  padding: 10px 0;
+}
+
+small{
+  color: rgb(148, 148, 148);
+}
+
+#ratings-breakdown-container > span > small {
+  font: 100px;
+}
+
+#characteristic-rating-container>small>span:first-child {
+  padding-left: 20px;
+}
+
+#characteristic-rating-container>small>span:last-child {
+  padding-right: 20px;
+}
+
+.progress-bar{
+>>>>>>> e3f511b27040de2eef64cdc2a45a516bcfa8a2f2
   background-color: #25b354;
 }
 
-.progress-gray {
+.progress-rating {
   width: 150px;
   background-color: rgb(221, 217, 217);
 }
+
+.progress-characteristic {
+  width: 270px;
+  background-color: rgb(221, 217, 217);
+}
+
 .progress:hover {
   background-color: lightgray;
 }
+
 .review-response {
   background-color: lightgray;
   padding: 15px;
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> e3f511b27040de2eef64cdc2a45a516bcfa8a2f2
 .link {
   cursor: pointer;
   color: blue;
   text-decoration: underline;
 }
+<<<<<<< HEAD
 /* .modal {
   width: 500px;
   background: white;
@@ -323,4 +440,10 @@ input {
 
 small {
   color: rgb(211, 211, 211);
+=======
+
+.modal {
+  max-height: calc(100vh - 210px);
+  overflow-y: 'auto';
+>>>>>>> e3f511b27040de2eef64cdc2a45a516bcfa8a2f2
 }
