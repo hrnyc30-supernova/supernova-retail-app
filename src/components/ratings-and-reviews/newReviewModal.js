@@ -25,8 +25,15 @@ class NewReview extends React.Component {
   }
 
   sendReview(reviewObj) {
-    // console.log('this is the review that we will send to the API', reviewObj);
+    console.log('this is the review that we will send to the API', reviewObj);
     this.props.toggleModal();
+    // apiMaster.postReview({ rating, summary, body, recommend, nickname, email, photos, characteristics })
+    //   .then(() => {
+    //     console.log('the review was posted successfully!')
+    //   })
+    //   .catch(err => {
+    //     console.error(err);
+    //   })
   }
 
   getScaleValue(characteristic, rating) {
