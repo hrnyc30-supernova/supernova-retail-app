@@ -16,12 +16,14 @@ class NewReview extends React.Component {
       photos: {},
       nickname: "",
       email: "",
+      showImgModal: false,
     };
     this.sendReview = this.sendReview.bind(this);
     this.getScaleValue = this.getScaleValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleCharChange = this.handleCharChange.bind(this);
+    this.toggleModal = this.toggleModal.bind(this)
   }
 
   sendReview(reviewObj) {
@@ -58,6 +60,14 @@ class NewReview extends React.Component {
   handleRatingChange(newRating) {
     this.setState ({
       rating: newRating
+    })
+  }
+
+  toggleModal(e) {
+    e.preventDefault();
+    let temp = this.state.showImgModal;
+    this.setState({
+      showImgModal: !temp
     })
   }
 
@@ -161,7 +171,7 @@ class NewReview extends React.Component {
                     onChange={e => this.handleChange(e)}
                   ></textarea><br/> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
                 </label><br/>
-                <button className='main-action-button'>Upload your photos</button>
+                <button className='main-action-button' onClick={e => this.toggleModal(e)}>Upload your photos</button>
                 <label className="label-container" required htmlFor="nickname">
                   *What is your nickname
                   <br />
