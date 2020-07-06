@@ -4,6 +4,7 @@ import { hot } from "react-hot-loader/root";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import Cookies from "universal-cookie";
+import randomToken from "random-token";
 
 import NavigationBar from "./components/navigationBar";
 import AlertBar from "./components/alertBar";
@@ -18,6 +19,7 @@ class App extends React.Component {
     this.state = {
       currentProduct: {},
       averageRating: 0,
+      userToken: null,
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
@@ -49,9 +51,14 @@ class App extends React.Component {
 
   generateUserToken() {
     const cookies = new Cookies();
-    var userid = 7;
-    cookies.set("user", userid, { path: "/" });
-    console.log(cookies.get("user"));
+    if (cookies.get("user") === undefined) {
+      var userid = randomToken(16);
+      cookies.set("user", userid);
+      console.log(cookies.get("user"));
+    }
+    this.setState({
+      userToken: cookies.get("user"),
+    });
   }
 
   calculateAverageRating(obj) {
