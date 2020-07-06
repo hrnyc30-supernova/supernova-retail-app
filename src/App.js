@@ -65,7 +65,10 @@ class App extends React.Component {
           product={this.state.currentProduct}
           averageRating={this.state.averageRating}
         />
-        <RelatedItems currentProductID={this.state.currentProduct.id} />
+        <RelatedItems
+          currentProductID={this.state.currentProduct.id}
+          currentProductFeatures={this.state.currentProduct.features}
+        />
         <QuestionsAndAnswers currentProductID={this.state.currentProduct.id} />
         <RatingsReviews
           currentProductName={this.state.currentProduct.name}

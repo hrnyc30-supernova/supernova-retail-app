@@ -136,7 +136,9 @@ class ProductCard extends React.Component {
                       className="card-img-top"
                       src={this.state.cardImages[i]}
                     />
-                    <CardActionButton />
+                    <CardActionButton
+                      currentProductFeatures={this.props.currentProductFeatures}
+                    />
                   </div>
                   <div className="card-body">
                     <div className="card-subtitle">{card.category}</div>

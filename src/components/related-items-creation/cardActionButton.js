@@ -28,6 +28,7 @@ class CardActionButton extends React.Component {
         <ProductCompareModal
           clicked={this.state.wasClicked}
           handleClick={this.handleClick}
+          currentProductFeatures={this.props.currentProductFeatures}
         />
       </>
     );
