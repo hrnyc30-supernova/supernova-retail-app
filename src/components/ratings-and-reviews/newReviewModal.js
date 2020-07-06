@@ -20,6 +20,7 @@ class NewReview extends React.Component {
     this.sendReview = this.sendReview.bind(this);
     this.getScaleValue = this.getScaleValue.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleRatingChange = this.handleRatingChange.bind(this);
   }
 
   sendReview(reviewObj) {
@@ -33,10 +34,14 @@ class NewReview extends React.Component {
   }
 
   handleChange(e) {
-    console.log(e.target.value)
-    let temp = e.target.value;
-    this.setState({
-      body: temp
+    let temp = {};
+    temp[e.target.name] = e.target.value;
+    this.setState(temp, () => {console.log(this.state)})
+  }
+
+  handleRatingChange(newRating) {
+    this.setState ({
+      rating: newRating
     })
   }
 
@@ -59,11 +64,11 @@ class NewReview extends React.Component {
                 </h6>
               </Modal.Title>
             </Modal.Header>
-            <Modal.Body scrollable>
+            <Modal.Body>
               <form>
                 <div>
                   *Overall Rating{" "}
-                  <Stars rating={Number(0)} allowChange={true} />
+                  <Stars name='rating' value={this.state.rating} handleChange={this.handleRatingChange} rating={Number(0)} allowChange={true} />
                 </div>
                 <label className="label-container" htmlFor="recommend" required>
                   *Do you recommend this product?
@@ -119,6 +124,8 @@ class NewReview extends React.Component {
                     id="summary"
                     required
                     name="summary"
+                    value={this.state.summary}
+                    onChange={e => this.handleChange(e)}
                     placeholder="Example: Best purchase ever!"
                     maxLength="60"
                   ></textarea>
@@ -137,7 +144,7 @@ class NewReview extends React.Component {
                     minLength="50"
                     value={this.state.body}
                     onChange={e => this.handleChange(e)}
-                  ></textarea> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : null}</small>
+                  ></textarea> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
                 </label><br/>
                 <button>Upload your photos</button>
                 <label className="label-container" required htmlFor="nickname">
@@ -148,6 +155,8 @@ class NewReview extends React.Component {
                     id="nickname"
                     required
                     name="nickname"
+                    value={this.state.nickname}
+                    onChange={e => this.handleChange(e)}
                     placeholder="Example: jackson11!"
                     maxLength="60"
                   ></textarea>
@@ -167,6 +176,8 @@ class NewReview extends React.Component {
                     id="email"
                     required
                     name="email"
+                    value={this.state.email}
+                    onChange={e => this.handleChange(e)}
                     placeholder="Example: jackson11@email.com"
                     maxLength="60"
                   ></textarea>
