@@ -16,6 +16,24 @@ body {
   margin: auto;
 }
 
+.main-action-button {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid #525252;
+  padding: 20px;
+  letter-spacing: 0.4px;
+}
+
+.main-action-button-symbol {
+  line-height: 16px;
+  font-size: 22px;
+}
+
+.main-action-button-symbol-floated {
+  float: right;
+}
+
 /* ---------TEMP WIDGET STYLER -------- */
 
 .widget {
@@ -115,7 +133,7 @@ input {
 #product-detail-text-container {
   width: 450px;
   height: 600px;
-  padding: 30px;
+  padding: 30px 0px 30px 30px;
   float: left;
 }
 
@@ -136,7 +154,11 @@ input {
 }
 
 #product-photo-main {
-  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   max-height: 600px;
   max-width: 750px;
   margin: auto;
@@ -150,6 +172,7 @@ input {
 }
 
 .product-photo-icon {
+  position: relative;
   background-size: cover;
   background-position: center;
   border: 1px solid #525252;
@@ -158,6 +181,15 @@ input {
   margin-bottom: 20px;
   cursor: pointer;
   box-sizing: content-box;
+}
+
+#selected-photo-bar {
+  position: absolute;
+  top: 64px;
+  left: 0px;
+  background-color: #525252;
+  width: 62px;
+  height: 4px;
 }
 
 .arrow {
@@ -221,6 +253,7 @@ input {
 }
 
 .product-style-icon {
+  position: relative;
   background-size: cover;
   background-position: center;
   border: 1px solid #525252;
@@ -232,10 +265,75 @@ input {
   cursor: pointer;
 }
 
-#product-description {
+#selected-style-checkmark-frame {
+  background-color: white;
+  border: 1px solid #525252;
+  position: absolute;
+  left: 45px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+}
+
+#selected-style-checkmark {
+  position: absolute;
+  top: -6px;
+  left: 45px;
+}
+
+#size-selector {
+  width: 245px;
+  margin-top: 25px;
+  margin-right: 25px;
+}
+
+#quantity-selector {
+  width: 130px;
+  margin-top: 25px;
+}
+
+#add-to-bag-button {
+  width: 310px;
+  margin-top: 25px;
+  margin-right: 25px;
+}
+
+#favorite-button {
+  width: 65px;
+  margin-top: 25px;
+}
+
+#product-notes {
+  display: inline-block;
   clear: both;
   text-align: center;
-  padding: 40px;
+  margin: 55px 120px;
+}
+
+#product-description {
+  font-size: 14px;
+  text-align: left;
+  width: 665px;
+  float: left;
+}
+
+#product-slogan {
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+#product-features {
+  border-left: 2px solid #525252;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  width: 294px;
+  padding-left: 10px;
+  float: left;
+}
+
+.product-features-checkmark {
+  font-size: 32px;
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */
@@ -349,17 +447,17 @@ input {
   align-content: baseline space-between;
 }
 
-.review-photo{
-  width: 70px; 
-  height: 'auto';
+.review-photo {
+  width: 70px;
+  height: "auto";
   padding: 5px 10px;
 }
 
-.filter-elem{
+.filter-elem {
   padding: 10px 0;
 }
 
-small{
+small {
   color: rgb(148, 148, 148);
 }
 
@@ -367,15 +465,15 @@ small{
   font: 100px;
 }
 
-#characteristic-rating-container>small>span:first-child {
+#characteristic-rating-container > small > span:first-child {
   padding-left: 20px;
 }
 
-#characteristic-rating-container>small>span:last-child {
+#characteristic-rating-container > small > span:last-child {
   padding-left: 80px;
 }
 
-.progress-bar{
+.progress-bar {
   background-color: #25b354;
 }
 
@@ -406,5 +504,5 @@ small{
 
 .modal {
   max-height: calc(100vh - 210px);
-  overflow-y: 'auto';
+  overflow-y: "auto";
 }
