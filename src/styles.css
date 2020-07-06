@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
 
 /* -------- BOOTSTRAP DEFAULT STYLES TO WATCH OUT FOR -------- */
 
@@ -10,7 +10,7 @@
 /* -------- GLOBAL -------- */
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #525252;
   width: 1200px;
   margin: auto;
@@ -41,7 +41,7 @@ body {
 }
 
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
 }
 
@@ -55,7 +55,7 @@ input {
 }
 
 #logo {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -93,11 +93,11 @@ input {
 }
 
 .alert-bar-message::before {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 .alert-bar-message::after {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -340,6 +340,7 @@ input {
 
 .carousel-wrapper {
   width: 1000px;
+  height: 25rem;
   padding-left: 60px;
 }
 
@@ -348,20 +349,20 @@ input {
   border-style: solid;
   border-width: 2px;
   border-color: #525252;
-  min-height: 15rem;
-  max-height: 15rem;
-  width: auto;
+  height: 95%;
+  width: 15rem;
 }
 
 .img-wrapper {
   overflow: hidden;
   position: relative;
+  min-height: 15rem;
+  max-height: 15rem;
 }
 
 .card-img-top {
-  max-width: 100%;
-  min-height: 10rem;
-  max-height: 10rem;
+  width: 15rem;
+  height: auto;
   align-items: center;
   transition: transform 0.5s;
   z-index: -1;
@@ -370,6 +371,10 @@ input {
 
 .card-img-top:hover {
   transform: scale(1.5);
+}
+
+.stars-body {
+  padding-bottom: 15px;
 }
 
 .action-button {
@@ -388,6 +393,25 @@ input {
 
 .discounted-price-hidden {
   display: none;
+}
+
+.modal-content {
+  align-items: center;
+}
+
+.close-card-modal {
+  max-width: 100px;
+  text-align: center;
+}
+
+ul.characteristics {
+  white-space: nowrap;
+  text-align: left;
+  padding: 0;
+}
+
+.show-grid {
+  width: 480px;
 }
 
 /* -------- QA WIDGET -------- */
@@ -495,7 +519,6 @@ small {
   background-color: lightgray;
   padding: 15px;
 }
-
 .link {
   cursor: pointer;
   color: blue;

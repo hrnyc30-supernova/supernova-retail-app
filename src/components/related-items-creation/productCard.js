@@ -1,6 +1,6 @@
 import React from 'react';
 import apiMaster from '../../apiMaster';
-import Stars from './stars';
+import CardStars from './cardStars';
 import ItemsCarousel from 'react-items-carousel';
 import {
   FaRegArrowAltCircleLeft,
@@ -136,7 +136,10 @@ class ProductCard extends React.Component {
                       className="card-img-top"
                       src={this.state.cardImages[i]}
                     />
-                    <CardActionButton />
+                    <CardActionButton
+                      currentProductFeatures={this.props.currentProductFeatures}
+                      relatedProductFeatures={this.props.relatedItemFeatures[i]}
+                    />
                   </div>
                   <div className="card-body">
                     <div className="card-subtitle">{card.category}</div>
@@ -183,9 +186,9 @@ class ProductCard extends React.Component {
                         maximumFractionDigits: 0,
                       })}
                     </span>
-                  </div>
-                  <div className="stars-body">
-                    <Stars />
+                    <div className="stars-body">
+                      <CardStars />
+                    </div>
                   </div>
                 </div>
               );

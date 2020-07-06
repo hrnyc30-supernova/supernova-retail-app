@@ -68,7 +68,10 @@ class App extends React.Component {
           />
         </div>
         <div>
-          <RelatedItems currentProductID={this.state.currentProduct.id} />
+          <RelatedItems
+            currentProductID={this.state.currentProduct.id}
+            currentProductFeatures={this.state.currentProduct.features}
+          />
         </div>
         <div className="widget">
           <QuestionsAndAnswers
