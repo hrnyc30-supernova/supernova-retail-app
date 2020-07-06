@@ -82,6 +82,7 @@ class App extends React.Component {
           <ProductDetail
             product={this.state.currentProduct}
             averageRating={this.state.averageRating}
+            userToken={this.state.userToken}
           />
         </div>
         <div>

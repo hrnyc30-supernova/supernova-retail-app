@@ -65,6 +65,7 @@ class ProductDetail extends React.Component {
             product={this.props.product}
             styles={this.state.styles}
             selectedStyle={this.state.selectedStyle}
+            userToken={this.props.userToken}
             textContainerVisibility={this.state.textContainerVisibility}
             averageRating={this.props.averageRating}
             updateSelectedStyle={this.updateSelectedStyle}
