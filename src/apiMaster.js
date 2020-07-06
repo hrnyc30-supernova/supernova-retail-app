@@ -24,10 +24,8 @@ const getReviewMetaData = (id = 1) => {
   return axios.get(`http://18.224.200.47/reviews/${id}/meta`);
 };
 
-const getReviewsOfProduct = (id = 1, sortString = 'relevant') => {
-  return axios.get(
-    `http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc`
-  );
+const getReviewsOfProduct = (id = 1, sortString = 'relevant', count = 20) => {
+  return axios.get(`http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`);
 };
 
 const reportReview = (reviewId) => {

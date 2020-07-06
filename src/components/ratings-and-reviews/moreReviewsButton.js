@@ -1,9 +1,7 @@
-import React from 'react';
+import React from "react";
 
 const MoreReviewsButton = (props) => {
-    return(
-        <button>More Reviews</button>
-    );
-}
+  return <button onClick={props.showMoreReviews}>More Reviews</button>;
+};
 
 export default MoreReviewsButton;
