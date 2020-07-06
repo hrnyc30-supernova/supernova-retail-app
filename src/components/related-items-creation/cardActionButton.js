@@ -18,7 +18,11 @@ class CardActionButton extends React.Component {
   render() {
     return (
       <>
-        <a className="action-button" href="#" onClick={this.handleClick}>
+        <a
+          className="action-button"
+          href="javascript:void(0);"
+          onClick={this.handleClick}
+        >
           <AiFillStar />
         </a>
         <ProductCompareModal

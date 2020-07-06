@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #525252;
   width: 1200px;
   margin: auto;
 }
 
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
 }
 
@@ -24,7 +24,7 @@ input {
 }
 
 #logo {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -63,11 +63,11 @@ input {
 }
 
 .alert::before {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 .alert::after {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -189,7 +189,7 @@ input {
 
 .carousel-wrapper {
   width: 1000px;
-  height: 15rem;
+  height: 25rem;
   padding-left: 60px;
 }
 
@@ -198,20 +198,20 @@ input {
   border-style: solid;
   border-width: 2px;
   border-color: #525252;
-  min-height: 15rem;
-  max-height: 15rem;
-  width: auto;
+  height: 95%;
+  width: 15rem;
 }
 
 .img-wrapper {
   overflow: hidden;
   position: relative;
+  min-height: 15rem;
+  max-height: 15rem;
 }
 
 .card-img-top {
-  max-width: 100%;
-  min-height: 10rem;
-  max-height: 10rem;
+  width: 15rem;
+  height: auto;
   align-items: center;
   transition: transform 0.5s;
   z-index: -1;
@@ -240,16 +240,15 @@ input {
   display: none;
 }
 
-
 /*----------- RATINGS & REVIEWS WIDGET -----------*/
 
-#reviews-ratings-container{
+#reviews-ratings-container {
   position: relative;
   width: 1200px;
   margin-top: 50px;
 }
 
-#ratings-breakdown-container{
+#ratings-breakdown-container {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -258,18 +257,18 @@ input {
   float: left;
 }
 
-#review-list-container{
+#review-list-container {
   position: absolute;
   margin-left: 420px;
   width: 600px;
   display: block;
   float: left;
 }
-#review-tile-container{
+#review-tile-container {
   border-bottom: 1px solid #525252;
 }
 
-#add-new-review{
+#add-new-review {
   margin-top: 20px;
 }
 
@@ -285,11 +284,11 @@ input {
   align-content: baseline space-between;
 }
 
-.filter-elem{
+.filter-elem {
   padding: 10px 0;
 }
 
-.progress-bar{
+.progress-bar {
   background-color: #25b354;
 }
 
@@ -304,7 +303,7 @@ input {
   background-color: lightgray;
   padding: 15px;
 }
-.link{
+.link {
   cursor: pointer;
   color: blue;
   text-decoration: underline;
@@ -314,14 +313,14 @@ input {
   background: white;
   border: 1px solid #ccc;
   transition: 1.1s ease-out;
-  box-shadow: 
+  box-shadow:
     -2rem 2rem 2rem rgba(black, 0.2);
   filter: blur(0);
-  transform: scale(1);  
+  transform: scale(1);
   opacity: 1;
   visibility: visible;
 } */
 
-small{
+small {
   color: rgb(211, 211, 211);
 }
