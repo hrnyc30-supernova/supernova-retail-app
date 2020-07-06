@@ -172,7 +172,7 @@ class NewReview extends React.Component {
                     onChange={e => this.handleChange(e)}
                   ></textarea><br/> <small>{this.state.body.length < 51 ? `Minimum required characters left: ${50 - Number(this.state.body.length)}` : 'Minimum reached'}</small>
                 </label><br/>
-                <button className='main-action-button' onClick={e => this.toggleModal(e)}>Upload your photos</button>
+                <button className='main-action-button review-button' onClick={e => this.toggleModal(e)}>Upload your photos</button>
                 {this.state.showImgModal ? <UploadPhotos currentProductName={this.props.currentProductName} showImgModal={this.state.showImgModal} onClick={this.toggleModal}/> : null}
                 <label className="label-container" required htmlFor="nickname">
                   *What is your nickname
@@ -216,7 +216,7 @@ class NewReview extends React.Component {
               </form>
             </Modal.Body>
             <Modal.Footer>
-              <button className='main-action-button' onClick={(e) => this.sendReview(this.state)}>
+              <button className='main-action-button review-button' onClick={(e) => this.sendReview(this.state)}>
                 Submit Review
               </button>
             </Modal.Footer>

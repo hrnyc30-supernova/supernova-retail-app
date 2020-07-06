@@ -337,6 +337,10 @@ input {
   margin-top: 20px;
 }
 
+.review-button {
+  width: 150px;
+}
+
 .ratings-filters-container {
   width: 300px;
 }

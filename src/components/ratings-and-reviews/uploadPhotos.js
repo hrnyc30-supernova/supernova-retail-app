@@ -38,7 +38,7 @@ class UploadPhotos extends React.Component {
         </Modal.Body>
         <Modal.Footer>
           <button
-            className="main-action-button"
+            className="main-action-button review-button"
             onClick={(e) => this.props.onClick(e)}
           >
             Upload
