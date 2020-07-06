@@ -21,7 +21,7 @@ class PhotoContainer extends React.Component {
   handleLeftArrowClick() {
     if (this.state.currentPhoto === 0) {
       this.setState({
-        currentPhoto: this.props.styles[0].photos.length - 1,
+        currentPhoto: this.props.selectedStyle.photos.length - 1,
       });
     } else {
       this.setState({
@@ -31,7 +31,10 @@ class PhotoContainer extends React.Component {
   }
 
   handleRightArrowClick() {
-    if (this.props.styles[0].photos.length === this.state.currentPhoto + 1) {
+    if (
+      this.props.selectedStyle.photos.length ===
+      this.state.currentPhoto + 1
+    ) {
       this.setState({
         currentPhoto: 0,
       });
@@ -67,24 +70,22 @@ class PhotoContainer extends React.Component {
         id="product-detail-photo-container"
         className={this.state.photoContainerWidth}
       >
-        {this.props.styles[0] !== undefined ? (
+        {this.props.selectedStyle !== null ? (
           <img
             id="product-photo-main"
-            src={this.props.styles[0].photos[this.state.currentPhoto].url}
+            src={this.props.selectedStyle.photos[this.state.currentPhoto].url}
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
-          {this.props.styles[0] !== undefined
-            ? this.props.styles[0].photos.map((photo, index) => (
+          {this.props.selectedStyle !== null
+            ? this.props.selectedStyle.photos.map((photo, index) => (
                 <div
-                  className="product-photo-icon-frame"
+                  className="product-photo-icon"
+                  style={{
+                    backgroundImage: `url(${photo.thumbnail_url})`,
+                  }}
                   onClick={() => this.handleIconClick(index)}
-                >
-                  <img
-                    className="product-photo-icon"
-                    src={photo.thumbnail_url}
-                  ></img>
-                </div>
+                ></div>
               ))
             : null}
         </div>
