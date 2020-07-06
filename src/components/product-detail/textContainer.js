@@ -1,4 +1,5 @@
 import React from "react";
+import apiMaster from "../../apiMaster";
 
 import Stars from "../ratings-and-reviews/stars.js";
 import { GrFormCheckmark } from "react-icons/gr";
@@ -22,14 +23,25 @@ class TextContainer extends React.Component {
   }
 
   handleAddToBag() {
-    this.setState({
-      bagMessage: "Added",
-      bagIcon: <GrFormCheckmark />,
-    });
-    setTimeout(
-      () => this.setState({ bagMessage: "Add to Bag", bagIcon: <FiPlus /> }),
-      3000
-    );
+    console.log(parseInt(this.props.userToken));
+    console.log(this.props.product.id);
+    var tokenAsNum = parseInt(this.props.userToken);
+    apiMaster
+      .addToCart(tokenAsNum, this.props.product.id)
+      .then(() => {
+        this.setState({
+          bagMessage: "Added",
+          bagIcon: <GrFormCheckmark />,
+        });
+        setTimeout(
+          () =>
+            this.setState({ bagMessage: "Add to Bag", bagIcon: <FiPlus /> }),
+          3000
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   handleFavorite() {

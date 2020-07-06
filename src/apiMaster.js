@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 const getProductList = () => {
   return axios.get(`http://18.224.200.47/products`);
@@ -24,8 +24,10 @@ const getReviewMetaData = (id = 13) => {
   return axios.get(`http://18.224.200.47/reviews/${id}/meta`);
 };
 
-const getReviewsOfProduct = (id = 13, sortString = 'relevant', count = 20) => {
-  return axios.get(`http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`);
+const getReviewsOfProduct = (id = 13, sortString = "relevant", count = 20) => {
+  return axios.get(
+    `http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
+  );
 };
 
 const reportReview = (reviewId) => {
@@ -57,6 +59,15 @@ const postReview = (
 
 const getCart = (userToken) => {
   return axios.get(`http://18.224.200.47/cart/${userToken}`);
+};
+
+const addToCart = (user_token, sku_id) => {
+  console.log(user_token);
+  console.log(sku_id);
+  return axios.post(`http://18.224.200.47/cart/`, {
+    user_token: user_token,
+    sku_id: sku_id,
+  });
 };
 
 const getSpecificAnswers = (questionId) => {
@@ -114,6 +125,7 @@ const apiMaster = {
   postReview: postReview,
   reportReview: reportReview,
   getCart: getCart,
+  addToCart: addToCart,
 };
 
 export default apiMaster;
