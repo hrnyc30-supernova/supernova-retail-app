@@ -73,6 +73,7 @@ class CardActionButton extends React.Component {
           characteristicsList={this.state.characteristicsList}
           handleClick={this.handleClick}
           currentProductFeatures={this.props.currentProductFeatures}
+          currentProductName={this.props.currentProductName}
         />
       </>
     );

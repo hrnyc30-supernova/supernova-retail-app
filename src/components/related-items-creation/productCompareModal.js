@@ -32,7 +32,7 @@ class ProductCompareModal extends React.Component {
             <Container>
               <Row className="show-grid-row">
                 <Col xs={6} md={4}>
-                  <div>Current Product Name</div>
+                  <div>{this.props.currentProductName}</div>
                 </Col>
                 <Col xs={6} md={4}></Col>
                 <Col xs={6} md={4}>
