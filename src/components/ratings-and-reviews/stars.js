@@ -5,8 +5,9 @@ const Stars = props => {
     if (props.allowChange) {
       return (
         <StarRatings
+          starEmptyColor="#ebebeb"
+          starRatedColor="#525252"
           rating={props.rating}
-          starRatedColor="#ffd500"
           starDimension="20px"
           starSpacing="1px"
           changeRating={(e) => props.handleChange(e)}
@@ -17,8 +18,9 @@ const Stars = props => {
     } else {
       return (
         <StarRatings
+          starEmptyColor="#ebebeb"
+          starRatedColor="#525252"
           rating={props.rating}
-          starRatedColor="#ffd500"
           starDimension="20px"
           starSpacing="1px"
           numberOfStars={5}
