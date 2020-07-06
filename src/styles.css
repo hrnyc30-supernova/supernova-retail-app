@@ -324,7 +324,7 @@ input {
 }
 
 .scroll{
-  height: 80vh; 
+  height: 85vh; 
   overflow: auto; 
   text-align:justify; 
 }

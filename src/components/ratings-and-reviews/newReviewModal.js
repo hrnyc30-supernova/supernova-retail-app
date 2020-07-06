@@ -216,7 +216,7 @@ class NewReview extends React.Component {
               </form>
             </Modal.Body>
             <Modal.Footer>
-              <button classname='main-action-button' onClick={(e) => this.sendReview(this.state)}>
+              <button className='main-action-button' onClick={(e) => this.sendReview(this.state)}>
                 Submit Review
               </button>
             </Modal.Footer>
