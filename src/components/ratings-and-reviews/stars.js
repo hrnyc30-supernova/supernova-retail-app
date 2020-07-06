@@ -1,31 +1,16 @@
 import React from "react";
 import StarRatings from "react-star-ratings";
 
-class Stars extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      rating: this.props.rating,
-    };
-    this.changeRating = this.changeRating.bind(this);
-  }
-
-  changeRating(e) {
-    e = Number(e);
-    this.setState({
-      rating: e,
-    });
-  }
-
-  render() {
-    if (this.props.allowChange) {
+const Stars = props => {
+    if (props.allowChange) {
       return (
         <StarRatings
-          rating={this.props.rating}
-          starRatedColor="#ffd500"
+          starEmptyColor="#ebebeb"
+          starRatedColor="#525252"
+          rating={props.rating}
           starDimension="20px"
           starSpacing="1px"
-          changeRating={(e) => this.changeRating(e)}
+          changeRating={(e) => props.handleChange(e)}
           numberOfStars={5}
           name="rating"
         />
@@ -33,8 +18,9 @@ class Stars extends React.Component {
     } else {
       return (
         <StarRatings
-          rating={this.props.rating}
-          starRatedColor="#ffd500"
+          starEmptyColor="#ebebeb"
+          starRatedColor="#525252"
+          rating={props.rating}
           starDimension="20px"
           starSpacing="1px"
           numberOfStars={5}
@@ -42,7 +28,6 @@ class Stars extends React.Component {
         />
       );
     }
-  }
 }
 
 export default Stars;
