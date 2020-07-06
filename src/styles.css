@@ -284,16 +284,41 @@ input {
   align-content: baseline space-between;
 }
 
+.review-photo{
+  width: 70px; 
+  height: 'auto';
+  padding: 5px 10px;
+}
+
 .filter-elem{
   padding: 10px 0;
+}
+
+small{
+  color: rgb(148, 148, 148);
+}
+
+#ratings-breakdown-container > span > small {
+  font: 100px;
+}
+
+#characteristic-rating-container>small>span:first-child {
+  padding-left: 20px;
+}
+#characteristic-rating-container>small>span:last-child {
+  padding-right: 20px;
 }
 
 .progress-bar{
   background-color: #25b354;
 }
 
-.progress-gray {
+.progress-rating {
   width: 150px;
+  background-color: rgb(221, 217, 217);
+}
+.progress-characteristic {
+  width: 270px;
   background-color: rgb(221, 217, 217);
 }
 .progress:hover {
@@ -308,19 +333,7 @@ input {
   color: blue;
   text-decoration: underline;
 }
-/* .modal {
-  width: 500px;
-  background: white;
-  border: 1px solid #ccc;
-  transition: 1.1s ease-out;
-  box-shadow: 
-    -2rem 2rem 2rem rgba(black, 0.2);
-  filter: blur(0);
-  transform: scale(1);  
-  opacity: 1;
-  visibility: visible;
-} */
-
-small{
-  color: rgb(211, 211, 211);
+.modal {
+  max-height: calc(100vh - 210px);
+  overflow-y: 'auto';
 }
