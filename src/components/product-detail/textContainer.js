@@ -131,6 +131,16 @@ class TextContainer extends React.Component {
               <FiChevronDown />
             </span>
             <div className="main-action-dropdown-content">
+              {this.props.selectedStyle !== null ? (
+                this.state.currentlySelectedSize !== "Select Size" ? (
+                  <a
+                    id="Select Size"
+                    onClick={(event) => this.selectSize(event)}
+                  >
+                    Select Size
+                  </a>
+                ) : null
+              ) : null}
               {this.props.selectedStyle !== null
                 ? Object.keys(this.props.selectedStyle.skus).map((key) =>
                     key != this.state.currentlySelected ? (
