@@ -9,17 +9,17 @@ class CardActionButton extends React.Component {
     this.state = {
       wasClicked: false,
       characteristicsList: null,
+      featureCharacteristicsList: null,
+      relatedCharacteristicsList: null,
     };
 
     this.handleClick = this.handleClick.bind(this);
-    this.createCombinedCharacteristics = this.createCombinedCharacteristics.bind(
-      this
-    );
+    this.createCharacteristics = this.createCharacteristics.bind(this);
   }
 
   componentDidUpdate(prevProps) {
     if (this.props !== prevProps) {
-      this.createCombinedCharacteristics();
+      this.createCharacteristics();
     }
   }
 
@@ -27,14 +27,32 @@ class CardActionButton extends React.Component {
     this.setState({ wasClicked: !this.state.wasClicked });
   }
 
-  async createCombinedCharacteristics() {
+  createCharacteristics() {
     let combinedFeatures = [];
+    let featureProductFeatures = [];
+    let relatedProductFeatures = [];
+    // console.log(
+    //   'this.props.currentProductFeatures: ',
+    //   this.props.currentProductFeatures
+    // );
+    // console.log(
+    //   'this.props.relatedProductFeatures',
+    //   this.props.relatedProductFeatures
+    // );
     for (let i = 0; i < this.props.currentProductFeatures.length; i++) {
-      combinedFeatures.push(
-        this.props.currentProductFeatures[i].value +
-          ' ' +
-          this.props.currentProductFeatures[i].feature
-      );
+      let valueText, featureText;
+      if (this.props.currentProductFeatures[i].value === 'null') {
+        valueText = '';
+      } else {
+        valueText = this.props.currentProductFeatures[i].value + ' ';
+      }
+      if (this.props.currentProductFeatures[i].feature === 'null') {
+        featureText = '';
+      } else {
+        featureText = this.props.currentProductFeatures[i].feature;
+      }
+      combinedFeatures.push(valueText + featureText);
+      featureProductFeatures.push(valueText + featureText);
     }
     for (let i = 0; i < this.props.relatedProductFeatures.length; i++) {
       let valueText, featureText;
@@ -49,11 +67,14 @@ class CardActionButton extends React.Component {
         featureText = this.props.relatedProductFeatures[i].feature;
       }
       combinedFeatures.push(valueText + featureText);
+      relatedProductFeatures.push(valueText + featureText);
     }
     const uniqueFeatures = await new Set(combinedFeatures);
     const uniqueFeaturesArray = Array.from(uniqueFeatures);
     this.setState({
       characteristicsList: uniqueFeaturesArray,
+      featureCharacteristicsList: featureProductFeatures,
+      relatedCharacteristicsList: relatedProductFeatures,
     });
   }
 
@@ -71,7 +92,10 @@ class CardActionButton extends React.Component {
           clicked={this.state.wasClicked}
           characteristicsList={this.state.characteristicsList}
           handleClick={this.handleClick}
-          currentProductFeatures={this.props.currentProductFeatures}
+          currentProductFeatures={this.state.featureCharacteristicsList}
+          relatedProductFeatures={this.state.relatedCharacteristicsList}
+          currentProductName={this.props.currentProductName}
+          relatedProductName={this.props.relatedProductName}
         />
       </>
     );

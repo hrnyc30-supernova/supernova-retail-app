@@ -342,6 +342,7 @@ input {
   width: 1000px;
   height: 25rem;
   padding-left: 60px;
+  padding-top: 16px;
 }
 
 .products-card {
@@ -402,16 +403,45 @@ input {
 .close-card-modal {
   max-width: 100px;
   text-align: center;
+  margin-bottom: 16px;
 }
 
 ul.characteristics {
   white-space: nowrap;
   text-align: left;
   padding: 0;
+  padding-top: 11px;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .show-grid {
   width: 480px;
+  padding-top: 45px;
+}
+
+.product-features-checkmark-hidden {
+  visibility: hidden;
+}
+
+.characteristics-icon {
+  min-height: 32px;
+  text-align: center;
+  padding-left: 0;
+}
+
+.modal-title {
+  font-size: 14px;
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  padding-left: 36px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.col-md-4 {
+  text-align: center;
 }
 
 /* -------- QA WIDGET -------- */
@@ -444,10 +474,10 @@ ul.characteristics {
   float: left;
 }
 
-.scroll{
-  height: 85vh; 
-  overflow: auto; 
-  text-align:justify; 
+.scroll {
+  height: 85vh;
+  overflow: auto;
+  text-align: justify;
 }
 
 #review-tile-container {
@@ -495,7 +525,7 @@ ul.characteristics {
 
 .review-photo {
   width: 70px;
-  height: "auto";
+  height: 'auto';
   padding: 5px 10px;
 }
 
@@ -553,5 +583,5 @@ small {
 
 .modal {
   max-height: calc(100vh - 210px);
-  overflow-y: "auto";
+  overflow-y: 'auto';
 }
