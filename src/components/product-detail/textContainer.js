@@ -12,6 +12,7 @@ class TextContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      bagError: "",
       bagMessage: "Add to Bag",
       bagIcon: <FiPlus />,
       favoriteStatus: false,
@@ -25,25 +26,31 @@ class TextContainer extends React.Component {
   }
 
   handleAddToBag() {
-    console.log(parseInt(this.props.userToken));
-    console.log(this.props.product.id);
-    var tokenAsNum = parseInt(this.props.userToken);
-    apiMaster
-      .addToCart(tokenAsNum, this.props.product.id)
-      .then(() => {
-        this.setState({
-          bagMessage: "Added",
-          bagIcon: <GrFormCheckmark />,
+    if (
+      this.state.currentlySelectedSize !== "Select Size" &&
+      this.state.currentlySelectedQuantity !== "-"
+    ) {
+      apiMaster
+        .addToCart(parseInt(this.props.userToken), this.props.product.id)
+        .then(() => {
+          this.setState({
+            bagMessage: "Added",
+            bagIcon: <GrFormCheckmark />,
+          });
+          setTimeout(
+            () =>
+              this.setState({ bagMessage: "Add to Bag", bagIcon: <FiPlus /> }),
+            3000
+          );
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        setTimeout(
-          () =>
-            this.setState({ bagMessage: "Add to Bag", bagIcon: <FiPlus /> }),
-          3000
-        );
-      })
-      .catch((err) => {
-        console.log(err);
+    } else {
+      this.setState({
+        bagError: "Please select a size and quantity!",
       });
+    }
   }
 
   handleFavorite() {
@@ -72,6 +79,7 @@ class TextContainer extends React.Component {
     }
 
     this.setState({
+      bagError: "",
       currentlySelectedSize: event.target.id,
     });
 
@@ -89,6 +97,7 @@ class TextContainer extends React.Component {
 
   selectQuantity(event) {
     this.setState({
+      bagError: "",
       currentlySelectedQuantity: event.target.id,
     });
   }
@@ -233,6 +242,7 @@ class TextContainer extends React.Component {
             {this.state.favoriteIcon}
           </span>
         </span>
+        <div id="bag-error">{this.state.bagError}</div>
       </div>
     );
   }
