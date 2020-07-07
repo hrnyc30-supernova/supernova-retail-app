@@ -22,7 +22,7 @@ class RelatedItems extends React.Component {
     if (this.props.currentProductID !== prevProps.currentProductID) {
       // console.log('apiMaster: ', apiMaster);
       // console.log('this.props: ', this.props);
-      console.log('componentDidUpdate for RelatedItems ran!');
+      // console.log('componentDidUpdate for RelatedItems ran!');
       this.getRelatedIds();
     }
   }

@@ -104,7 +104,7 @@ class ProductCard extends React.Component {
       );
     }
     Promise.all(promises).then((res) => {
-      console.log('getCardPrices res: ', res);
+      // console.log('getCardPrices res: ', res);
       this.setState({
         cardPrices: res,
         cardPricesLoaded: true,
