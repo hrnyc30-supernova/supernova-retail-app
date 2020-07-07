@@ -29,10 +29,14 @@ class ProductCard extends React.Component {
   componentDidUpdate(prevProps) {
     if (
       JSON.stringify(this.props.relatedProducts) !==
-        JSON.stringify(prevProps.relatedProducts) &&
-      this.props.relatedProducts.length > 0
+      JSON.stringify(prevProps.relatedProducts)
     ) {
-      console.log('componentDidUpdate for ProductCard ran!');
+      // console.log('componentDidUpdate for ProductCard ran!');
+      this.setState({
+        cardDetailsLoaded: false,
+        cardImagesLoaded: false,
+        cardPricesLoaded: false,
+      });
       this.getCardDetails();
       this.getCardImages();
       this.getCardPrices();
@@ -53,7 +57,7 @@ class ProductCard extends React.Component {
       // console.log('cardDetails: ', i, cardDetails);
     }
     Promise.all(promises).then((res) => {
-      console.log('res: ', res);
+      // console.log('res: ', res);
       this.setState({ cardDetails: res, cardDetailsLoaded: true });
     });
   }
@@ -85,7 +89,7 @@ class ProductCard extends React.Component {
 
   getCardPrices() {
     let promises = [];
-    console.log('getCardPrices ran!');
+    // console.log('getCardPrices ran!');
     for (let i = 0; i < this.props.relatedProducts.length; i++) {
       promises.push(
         apiMaster
@@ -100,7 +104,7 @@ class ProductCard extends React.Component {
       );
     }
     Promise.all(promises).then((res) => {
-      console.log('res: ', res);
+      console.log('getCardPrices res: ', res);
       this.setState({
         cardPrices: res,
         cardPricesLoaded: true,
