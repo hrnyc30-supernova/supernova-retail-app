@@ -59,16 +59,12 @@ class ReviewList extends React.Component {
 
   filterReviews(reviews) {
     let showReviews = [];
-    console.log(this.props.filteredReviews);
     this.props.filteredReviews.forEach(filteredReview => {
-      console.log(filteredReview.review_id)
       let temp = reviews.filter(review => {
-        console.log(review.review_id === filteredReview.review_id);
         return review.review_id === filteredReview.review_id
       })
       showReviews = showReviews.concat(temp);
     })
-    console.log(showReviews);
     return showReviews;
   }
 
