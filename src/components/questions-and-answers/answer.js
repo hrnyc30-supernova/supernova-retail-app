@@ -13,7 +13,16 @@ const Answer = (props) => {
     apiMaster
       .getSpecificAnswers(props.id)
       .then(({ data }) => {
-        setAnswer(data.results);
+        data.results.sort((a, b) => (a.helpfulness > b.helpfulness ? -1 : 1));
+        const sellerAnswers = [];
+        data.results.forEach((answer, i, arr) => {
+          if (answer.answerer_name === 'Seller') {
+            sellerAnswers.push(answer);
+            data.results.pop(i);
+          }
+        });
+        const finalResults = sellerAnswers.concat(data.results);
+        setAnswer(finalResults);
         if (data.results.length > 2) setShowMore(true);
       })
       .catch((err) => console.log(err));
