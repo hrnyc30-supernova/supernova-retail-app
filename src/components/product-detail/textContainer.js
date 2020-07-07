@@ -16,6 +16,7 @@ class TextContainer extends React.Component {
       bagIcon: <FiPlus />,
       favoriteStatus: false,
       favoriteIcon: <AiOutlineStar />,
+      currentlySelectedSize: "Select Size",
     };
 
     this.handleAddToBag = this.handleAddToBag.bind(this);
@@ -117,18 +118,38 @@ class TextContainer extends React.Component {
               : null}
           </div>
         </div>
-        <span className="main-action-button" id="size-selector">
-          Select Size
-          <span className="main-action-button-symbol main-action-button-symbol-floated">
-            <FiChevronDown />
+        <div className="main-action-dropdown">
+          <span className="main-action-button" id="size-selector">
+            Select Size
+            <span className="main-action-button-symbol main-action-button-symbol-floated">
+              <FiChevronDown />
+            </span>
+            <div className="main-action-dropdown-content">
+              {this.props.selectedStyle !== null
+                ? Object.keys(this.props.selectedStyle.skus).map((key) => (
+                    <a id={key}>{key}</a>
+                  ))
+                : null}
+            </div>
           </span>
-        </span>
-        <span className="main-action-button" id="quantity-selector">
-          1
-          <span className="main-action-button-symbol main-action-button-symbol-floated">
-            <FiChevronDown />
+        </div>
+        <div className="main-action-dropdown">
+          <span className="main-action-button" id="quantity-selector">
+            1
+            <span className="main-action-button-symbol main-action-button-symbol-floated">
+              <FiChevronDown />
+            </span>
+            <div className="main-action-dropdown-content">
+              {this.props.selectedStyle !== null
+                ? Object.keys(this.props.selectedStyle.skus).map((key) => (
+                    <a id={this.props.selectedStyle.skus[key]}>
+                      {this.props.selectedStyle.skus[key]}
+                    </a>
+                  ))
+                : null}
+            </div>
           </span>
-        </span>
+        </div>
         <span
           className="main-action-button"
           id="add-to-bag-button"
