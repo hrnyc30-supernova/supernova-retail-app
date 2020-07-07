@@ -19,6 +19,7 @@ class NewReview extends React.Component {
       nickname: "",
       email: "",
       showImgModal: false,
+      validated: false
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
@@ -27,9 +28,16 @@ class NewReview extends React.Component {
     this.toggleModal = this.toggleModal.bind(this);
   }
 
-  handleSubmit(reviewObj) {
+  handleSubmit(e, reviewObj) {
     console.log("this is the review that we will send to the API", reviewObj);
-    this.props.toggleModal();
+    const form = e.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    this.setState({
+      validated: true
+    })
     // apiMaster.postReview({ rating, summary, body, recommend, nickname, email, photos, characteristics })
     //   .then(() => {
     //     console.log('the review was posted successfully!')
@@ -88,22 +96,26 @@ class NewReview extends React.Component {
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <Form onSubmit={(e) => this.handleSubmit(e)}>
+            <Form noValidate validated={this.state.validated} onSubmit={e => this.handleSubmit(e, this.state)}>
               <Form.Group controlId="overallRating">
                 <Form.Label>* Overall Rating</Form.Label>
                 <Stars
+                  required
                   name="rating"
                   value={this.state.rating}
                   handleChange={this.handleRatingChange}
                   rating={Number(0)}
                   allowChange={true}
                 />
+                <Form.Control.Feedback type='invalid'>Rating Required</Form.Control.Feedback>
                 {this.state.rating === 0 ? null : <small>{ratingScale[this.state.rating.toString()]}</small>}
               </Form.Group>
               <Form.Group controlId="recommendation">
                 <Form.Label>* Do you recommend this product?</Form.Label>
                 <br />
                 <Form.Check
+                  inline
+                  checked
                   type="radio"
                   name="recommend"
                   value="1"
@@ -112,6 +124,7 @@ class NewReview extends React.Component {
                   onChange={(e) => this.handleChange(e)}
                 />
                 <Form.Check
+                  inline
                   type="radio"
                   name="recommend"
                   value="0"
@@ -130,25 +143,24 @@ class NewReview extends React.Component {
                         <Form.Label>{char}</Form.Label> <br />
                         {["1", "2", "3", "4", "5"].map((item, i) => {
                           return (
-                            <div key={i}>
-                              <Form.Check
+                            <Form.Check>
+                              <Form.Check.Input
                                 type="radio"
                                 name={char}
-                                label={charScales[char][item]}
                                 value={item}
                                 onChange={(e) => this.handleCharChange(e)}
                                 id={`${char}${item}`}
-                              />
-                            </div>
+                                required
+                              /><Form.Check.Label>{charScales[char][item]}</Form.Check.Label>
+                              <Form.Control.Feedback type='invalid'>Characteristics Ratings Required</Form.Control.Feedback>
+                            </Form.Check>
                           );
                         })}
                       </div>
                     );
                   }
                 )}{" "}
-                <Form.Text className="text-muted">
-                  <p style={{ color: "red" }}>Characteristics are required</p>
-                </Form.Text>
+                {/* <Form.Check.Feedback type='invalid'>Characteristics Ratings Required</Form.Check.Feedback> */}
               </Form.Group>
               <Form.Group controlId="reviewSummary">
                 <Form.Label>* Review Summary</Form.Label>
@@ -158,13 +170,12 @@ class NewReview extends React.Component {
                   type="text"
                   placeholder="Example: Best purchase ever!"
                   name="summary"
+                  required
                   maxLength={60}
                   value={this.state.summary}
                   onChange={(e) => this.handleChange(e)}
                 />
-                <Form.Text className="text-muted">
-                  <p style={{ color: "red" }}>Summary is required</p>
-                </Form.Text>
+                <Form.Control.Feedback type='invalid'>Summary Required</Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="reviewBody">
                 <Form.Label>* Review Body</Form.Label>
@@ -178,6 +189,8 @@ class NewReview extends React.Component {
                   minLength={50}
                   value={this.state.body}
                   onChange={(e) => this.handleChange(e)}
+                  required
+                  feedback="Body is required"
                 />
                 <Form.Text>
                   <small>
@@ -188,9 +201,7 @@ class NewReview extends React.Component {
                       : "Minimum reached"}
                   </small>
                 </Form.Text>
-                <Form.Text className="text-muted">
-                  <p style={{ color: "red" }}>Body is required</p>
-                </Form.Text>
+                <Form.Control.Feedback type='invalid'>Body Required (minimum of 50 characters)</Form.Control.Feedback>
               </Form.Group>
               <button
                 id="upload-photos-modal-button"
@@ -217,6 +228,7 @@ class NewReview extends React.Component {
                   onChange={(e) => this.handleChange(e)}
                   placeholder="Example: jackson11!"
                   maxLength={60}
+                  required
                 />
                 <Form.Text>
                   <small>
@@ -224,9 +236,7 @@ class NewReview extends React.Component {
                     address
                   </small>
                 </Form.Text>
-                <Form.Text className="text-muted">
-                  <p style={{ color: "red" }}>Nickname is required</p>
-                </Form.Text>
+                <Form.Control.Feedback type='invalid'>Nickname is Required</Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>* Your Email</Form.Label>
@@ -238,19 +248,19 @@ class NewReview extends React.Component {
                   onChange={(e) => this.handleChange(e)}
                   placeholder="Example: jackson11@email.com"
                   maxLength={60}
+                  required
                 />
                 <Form.Text>
                   <small>
                     For authentication reasons, you will not be emailed
                   </small>
                 </Form.Text>
-                <Form.Text className="text-muted">
-                  <p style={{ color: "red" }}>Email is required</p>
-                </Form.Text>
+                <Form.Control.Feedback type='invalid'>Email is Required</Form.Control.Feedback>
               </Form.Group>
               <button
+                type='submit'
                 className="main-action-button review-button"
-                onClick={(e) => this.handleSubmit(this.state)}
+                onSubmit={(e) => this.handleSubmit(e, this.state)}
               >
                 Submit Review
               </button>
