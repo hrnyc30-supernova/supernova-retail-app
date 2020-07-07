@@ -78,7 +78,7 @@ class RatingFilters extends React.Component {
                   .map((possibleRating, i) => {
                     return (
                       <div key={i} id="rating-filter-container">
-                        <p className="star-rating-filter-elem" value={i+1} onClick={e=>this.toggleFilter(e, i+1)}>
+                        <div className="star-rating-filter-elem" value={i+1} onClick={e=>this.toggleFilter(e, i+1)}>
                           {`${Number(i) + 1} Stars`}
                           <div className="rating-filter-background">
                             <div
@@ -89,7 +89,7 @@ class RatingFilters extends React.Component {
                           <small className="star-rating-filter-elem">{`${this.getReviewsWithRating(
                             i + 1
                           )} Reviews`}</small>
-                        </p>
+                        </div>
                       </div>
                     );
                   })
