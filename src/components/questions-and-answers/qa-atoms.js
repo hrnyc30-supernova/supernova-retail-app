@@ -1,4 +1,4 @@
-import { atom } from 'recoil';
+import { atom, selector } from 'recoil';
 
 const displayAmountState = atom({
   key: 'displayAmountState',
@@ -20,9 +20,29 @@ const addAnswerState = atom({
   default: false,
 });
 
+const searchState = atom({
+  key: 'searchState',
+  default: '',
+});
+
+const showSearchState = selector({
+  key: 'showSearchState',
+  get: ({ get }) => {
+    const legnth = get(searchState).length;
+
+    if (legnth > 2) {
+      return true;
+    } else {
+      return false;
+    }
+  },
+});
+
 export {
   displayAmountState,
   allQuestionsState,
   quesitonIdState,
   addAnswerState,
+  searchState,
+  showSearchState,
 };
