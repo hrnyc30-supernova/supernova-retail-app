@@ -27,6 +27,7 @@ const RatingsBreakdown = (props) => {
             recommend={props.recommend}
             currentProductRatings={props.currentProductRatings}
             currentRating={props.currentRating}
+            handleFilter={props.handleFilter}
           />
           <small>{`${props.recommend}% of reviews recommend this product`}</small>
           <RatingFilters
@@ -34,6 +35,7 @@ const RatingsBreakdown = (props) => {
             recommend={props.recommend}
             currentProductRatings={props.currentProductRatings}
             currentRating={props.currentRating}
+            handleFilter={props.handleFilter}
           />
         </>
       ) : null}

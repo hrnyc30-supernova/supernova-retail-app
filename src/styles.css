@@ -557,24 +557,37 @@ ul.characteristics {
   align-content: baseline space-between;
 }
 
-.rating-filter-container {
+#rating-filter-container {
   clear: both;
-  padding-top: 20px;
+  width: 300px;
 }
 
 .rating-filter-background {
+  width: 100px;
+  height: 8px;
+  background: #ccc;
+  display:inline-block;
+}
+
+.rating-filter-filler {
+  height: 8px;
+  background-color: #25b354;
+
+}
+
+.characteristic-background {
   width: 300px;
   height: 8px;
   background: #ccc;
 }
 
-.rating-filter-filler {
+.characteristic-filler {
   height: 8px;
   background-color: #ccc;
   position: relative;
 }
 
-.rating-filter-filler > .characteristic-icon {
+.characteristic-filler > .characteristic-icon {
   z-index: 0;
   float: right;
   height: 24px;
@@ -583,10 +596,11 @@ ul.characteristics {
 }
 
 .star-rating-filter-elem {
-  padding: 0px 5px;
+  padding: 0 10px;
 }
 
-.filter-elem:hover {
+.characteristic-filter-elem:hover,
+.star-rating-filter-elem:hover {
   text-decoration: underline;
   color: gray;
 }
@@ -614,9 +628,6 @@ small {
   padding-left: 80px;
 }
 
-.progress-bar {
-  background-color: #25b354;
-}
 
 .progress-rating {
   width: 150px;
@@ -627,16 +638,6 @@ small {
   width: 270px;
   background-color: rgb(221, 217, 217);
   position: relative;
-}
-.characteristic-icon {
-  z-index: 0;
-  float: center;
-  overflow: visible;
-  height: 150%;
-}
-
-.progress:hover {
-  background-color: lightgray;
 }
 
 .review-response {
