@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
@@ -10,6 +11,9 @@ class PhotoContainer extends React.Component {
     this.state = {
       selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
+      isZoomView: false,
+      mouseCoordinates: null,
+      zoomedImageDims: null,
     };
 
     this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
@@ -69,7 +73,35 @@ class PhotoContainer extends React.Component {
         photoContainerWidth: "photo-container-standard",
       });
     }
+    this.setState({
+      isZoomView: true,
+    });
     this.props.updateTextContainerVisibility();
+  }
+
+  handleMouseMove(e) {
+    console.log("mouse moving!");
+    if (this.state.isZoomView === true) {
+      this.setState({
+        mouseCoordinates: [e.nativeEvent.offsetX, e.nativeEvent.offsetY, e],
+        zoomedImageDims: [
+          Number(
+            window
+              .getComputedStyle(ReactDOM.findDOMNode(e.target))
+              .getPropertyValue("width")
+              .split("px")
+              .join("")
+          ),
+          Number(
+            window
+              .getComputedStyle(ReactDOM.findDOMNode(e.target))
+              .getPropertyValue("height")
+              .split("px")
+              .join("")
+          ),
+        ],
+      });
+    }
   }
 
   render() {
@@ -77,12 +109,29 @@ class PhotoContainer extends React.Component {
       <div
         id="product-detail-photo-container"
         className={this.state.photoContainerWidth}
+        onMouseMove={(e) => this.handleMouseMove(e)}
       >
         {this.props.selectedStyle !== null ? (
           <img
             id="product-photo-main"
             src={
               this.props.selectedStyle.photos[this.state.selectedPhotoIndex].url
+            }
+            style={
+              this.state.isZoomView && this.state.mouseCoordinates
+                ? {
+                    objectPosition: `${
+                      (this.state.mouseCoordinates[0] * 100) /
+                      this.state.zoomedImageDims[0]
+                    }% ${
+                      (this.state.mouseCoordinates[1] * 100) /
+                      this.state.zoomedImageDims[1]
+                    }%`,
+                    overflow: "hidden",
+                    transform: "scale(2.5)",
+                    objectFit: "none",
+                  }
+                : null
             }
           ></img>
         ) : null}

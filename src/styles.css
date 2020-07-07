@@ -151,6 +151,7 @@ input {
   position: relative;
   height: 600px;
   float: left;
+  overflow: hidden;
 }
 
 .photo-container-standard {
