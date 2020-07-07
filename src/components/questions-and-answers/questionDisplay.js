@@ -28,7 +28,7 @@ const QuestionDisplay = (props) => {
         setQuestions(data.results);
       })
       .catch((err) => console.log(err));
-  }, []);
+  }, [props.productID]);
 
   if (showSearch) {
     return (
