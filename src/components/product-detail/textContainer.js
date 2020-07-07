@@ -59,6 +59,12 @@ class TextContainer extends React.Component {
     }
   }
 
+  selectSize(event) {
+    this.setState({
+      currentlySelectedSize: event.target.id,
+    });
+  }
+
   render() {
     return (
       <div
@@ -120,15 +126,19 @@ class TextContainer extends React.Component {
         </div>
         <div className="main-action-dropdown">
           <span className="main-action-button" id="size-selector">
-            Select Size
+            {this.state.currentlySelectedSize}
             <span className="main-action-button-symbol main-action-button-symbol-floated">
               <FiChevronDown />
             </span>
             <div className="main-action-dropdown-content">
               {this.props.selectedStyle !== null
-                ? Object.keys(this.props.selectedStyle.skus).map((key) => (
-                    <a id={key}>{key}</a>
-                  ))
+                ? Object.keys(this.props.selectedStyle.skus).map((key) =>
+                    key != this.state.currentlySelected ? (
+                      <a id={key} onClick={(event) => this.selectSize(event)}>
+                        {key}
+                      </a>
+                    ) : null
+                  )
                 : null}
             </div>
           </span>
