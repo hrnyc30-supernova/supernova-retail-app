@@ -3,12 +3,15 @@ import apiMaster from './apiMaster';
 import { hot } from 'react-hot-loader/root';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import NavigationBar from './components/navigationBar';
-import AlertBar from './components/alertBar';
-import ProductDetail from './components/product-detail/productDetail';
-import RelatedItems from './components/related-items-creation/relatedItems';
-import QuestionsAndAnswers from './components/questions-and-answers/questionsAndAnswers';
-import RatingsReviews from './components/ratings-and-reviews/ratingsReviews';
+import Cookies from "universal-cookie";
+import randomToken from "random-token";
+
+import NavigationBar from "./components/navigationBar";
+import AlertBar from "./components/alertBar";
+import ProductDetail from "./components/product-detail/productDetail";
+import RelatedItems from "./components/related-items-creation/relatedItems";
+import QuestionsAndAnswers from "./components/questions-and-answers/questionsAndAnswers";
+import RatingsReviews from "./components/ratings-and-reviews/ratingsReviews";
 
 class App extends React.Component {
   constructor(props) {
@@ -16,12 +19,14 @@ class App extends React.Component {
     this.state = {
       currentProduct: {},
       averageRating: 0,
+      userToken: null,
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
   }
 
   componentDidMount() {
+    this.generateUserToken();
     apiMaster
       .getProductInfo()
       .then(({ data }) => {
@@ -42,6 +47,18 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  generateUserToken() {
+    const cookies = new Cookies();
+    if (cookies.get("user") === undefined) {
+      var userid = randomToken(16);
+      cookies.set("user", userid);
+      console.log(cookies.get("user"));
+    }
+    this.setState({
+      userToken: cookies.get("user"),
+    });
   }
 
   calculateAverageRating(obj) {
@@ -65,6 +82,7 @@ class App extends React.Component {
           <ProductDetail
             product={this.state.currentProduct}
             averageRating={this.state.averageRating}
+            userToken={this.state.userToken}
           />
         </div>
         <div>
