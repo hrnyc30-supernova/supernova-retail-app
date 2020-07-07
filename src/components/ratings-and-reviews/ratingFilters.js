@@ -17,6 +17,7 @@ class RatingFilters extends React.Component {
       filters: {}
     };
     this.toggleFilter = this.toggleFilter.bind(this);
+    this.removeFilters = this.removeFilters.bind(this);
   }
 
   findPercentage(i) {
@@ -41,6 +42,12 @@ class RatingFilters extends React.Component {
       filters: temp
     })
     this.props.handleFilter(this.state.filters);
+  }
+
+  removeFilters() {
+    this.setState({
+      filters: {}
+    })
   }
 
   defineCountObj() {
@@ -74,6 +81,7 @@ class RatingFilters extends React.Component {
             {this.props.currentProductRatings ? (
               <>
                 Rating Breakdown <br />
+                {Object.keys(this.state.filters).length === 0 ? null : <small>{`Applied Filters: ${Object.keys(this.state.filters).join(' ')}`}<span onClick={this.removeFilters}>{`  Remove all filters`}</span></small>}
                 {[...Array(5)]
                   .map((possibleRating, i) => {
                     return (
