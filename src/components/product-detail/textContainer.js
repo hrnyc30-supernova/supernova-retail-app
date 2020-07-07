@@ -12,11 +12,13 @@ class TextContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      bagError: "",
       bagMessage: "Add to Bag",
       bagIcon: <FiPlus />,
       favoriteStatus: false,
       favoriteIcon: <AiOutlineStar />,
       currentlySelectedSize: "Select Size",
+      currentlySelectedQuantity: "-",
     };
 
     this.handleAddToBag = this.handleAddToBag.bind(this);
@@ -24,25 +26,31 @@ class TextContainer extends React.Component {
   }
 
   handleAddToBag() {
-    console.log(parseInt(this.props.userToken));
-    console.log(this.props.product.id);
-    var tokenAsNum = parseInt(this.props.userToken);
-    apiMaster
-      .addToCart(tokenAsNum, this.props.product.id)
-      .then(() => {
-        this.setState({
-          bagMessage: "Added",
-          bagIcon: <GrFormCheckmark />,
+    if (
+      this.state.currentlySelectedSize !== "Select Size" &&
+      this.state.currentlySelectedQuantity !== "-"
+    ) {
+      apiMaster
+        .addToCart(parseInt(this.props.userToken), this.props.product.id)
+        .then(() => {
+          this.setState({
+            bagMessage: "Added",
+            bagIcon: <GrFormCheckmark />,
+          });
+          setTimeout(
+            () =>
+              this.setState({ bagMessage: "Add to Bag", bagIcon: <FiPlus /> }),
+            3000
+          );
+        })
+        .catch((err) => {
+          console.log(err);
         });
-        setTimeout(
-          () =>
-            this.setState({ bagMessage: "Add to Bag", bagIcon: <FiPlus /> }),
-          3000
-        );
-      })
-      .catch((err) => {
-        console.log(err);
+    } else {
+      this.setState({
+        bagError: "Please select a size and quantity!",
       });
+    }
   }
 
   handleFavorite() {
@@ -57,6 +65,41 @@ class TextContainer extends React.Component {
         favoriteIcon: <AiOutlineStar />,
       });
     }
+  }
+
+  selectSize(event) {
+    if (this.state.currentlySelectedSize === "Select Size") {
+      this.setState({
+        currentlySelectedQuantity: 1,
+      });
+    } else if (event.target.id === "Select Size") {
+      this.setState({
+        currentlySelectedQuantity: "-",
+      });
+    }
+
+    this.setState({
+      bagError: "",
+      currentlySelectedSize: event.target.id,
+    });
+
+    if (
+      this.props.selectedStyle.skus[event.target.id] <
+      this.state.currentlySelectedQuantity
+    ) {
+      this.setState({
+        currentlySelectedQuantity: this.props.selectedStyle.skus[
+          event.target.id
+        ],
+      });
+    }
+  }
+
+  selectQuantity(event) {
+    this.setState({
+      bagError: "",
+      currentlySelectedQuantity: event.target.id,
+    });
   }
 
   render() {
@@ -120,14 +163,26 @@ class TextContainer extends React.Component {
         </div>
         <div className="main-action-dropdown">
           <span className="main-action-button" id="size-selector">
-            Select Size
+            {this.state.currentlySelectedSize}
             <span className="main-action-button-symbol main-action-button-symbol-floated">
               <FiChevronDown />
             </span>
             <div className="main-action-dropdown-content">
+              {this.props.selectedStyle !== null ? (
+                this.state.currentlySelectedSize !== "Select Size" ? (
+                  <a
+                    id="Select Size"
+                    onClick={(event) => this.selectSize(event)}
+                  >
+                    Select Size
+                  </a>
+                ) : null
+              ) : null}
               {this.props.selectedStyle !== null
                 ? Object.keys(this.props.selectedStyle.skus).map((key) => (
-                    <a id={key}>{key}</a>
+                    <a id={key} onClick={(event) => this.selectSize(event)}>
+                      {key}
+                    </a>
                   ))
                 : null}
             </div>
@@ -135,15 +190,33 @@ class TextContainer extends React.Component {
         </div>
         <div className="main-action-dropdown">
           <span className="main-action-button" id="quantity-selector">
-            1
+            {this.state.currentlySelectedQuantity}
             <span className="main-action-button-symbol main-action-button-symbol-floated">
               <FiChevronDown />
             </span>
             <div className="main-action-dropdown-content">
-              {this.props.selectedStyle !== null
-                ? Object.keys(this.props.selectedStyle.skus).map((key) => (
-                    <a id={this.props.selectedStyle.skus[key]}>
-                      {this.props.selectedStyle.skus[key]}
+              {this.props.selectedStyle !== null &&
+              this.state.currentlySelectedSize === "Select Size" ? (
+                this.state.currentlySelectedQuantity !== "-" ? (
+                  <a id="-" onClick={(event) => this.selectQuantity(event)}>
+                    -
+                  </a>
+                ) : null
+              ) : null}
+              {this.props.selectedStyle !== null &&
+              this.state.currentlySelectedSize !== "Select Size"
+                ? [
+                    ...Array(
+                      this.props.selectedStyle.skus[
+                        this.state.currentlySelectedSize
+                      ]
+                    ),
+                  ].map((item, i) => (
+                    <a
+                      id={i + 1}
+                      onClick={(event) => this.selectQuantity(event)}
+                    >
+                      {i + 1}
                     </a>
                   ))
                 : null}
@@ -169,6 +242,7 @@ class TextContainer extends React.Component {
             {this.state.favoriteIcon}
           </span>
         </span>
+        <div id="bag-error">{this.state.bagError}</div>
       </div>
     );
   }
