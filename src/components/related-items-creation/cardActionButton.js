@@ -18,16 +18,19 @@ class CardActionButton extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
+    if (this.props.currentProductName !== prevProps.currentProductName) {
+      // console.log('componentDidUpdate in cardActionButton ran!');
       this.createCharacteristics();
     }
   }
 
   handleClick() {
+    this.createCharacteristics();
     this.setState({ wasClicked: !this.state.wasClicked });
   }
 
-  async createCharacteristics() {
+  createCharacteristics() {
+    // console.log('createCharacteristics ran!');
     let combinedFeatures = [];
     let featureProductFeatures = [];
     let relatedProductFeatures = [];
@@ -69,13 +72,16 @@ class CardActionButton extends React.Component {
       combinedFeatures.push(valueText + featureText);
       relatedProductFeatures.push(valueText + featureText);
     }
-    const uniqueFeatures = await new Set(combinedFeatures);
+    const uniqueFeatures = new Set(combinedFeatures);
     const uniqueFeaturesArray = Array.from(uniqueFeatures);
-    this.setState({
-      characteristicsList: uniqueFeaturesArray,
-      featureCharacteristicsList: featureProductFeatures,
-      relatedCharacteristicsList: relatedProductFeatures,
-    });
+    const functionWrapper = () => {
+      this.setState({
+        characteristicsList: uniqueFeaturesArray,
+        featureCharacteristicsList: featureProductFeatures,
+        relatedCharacteristicsList: relatedProductFeatures,
+      });
+    };
+    functionWrapper();
   }
 
   render() {

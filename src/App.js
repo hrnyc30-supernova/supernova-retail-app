@@ -3,14 +3,14 @@ import apiMaster from './apiMaster';
 import { hot } from 'react-hot-loader/root';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Cookies from "universal-cookie";
+import Cookies from 'universal-cookie';
 
-import NavigationBar from "./components/navigationBar";
-import AlertBar from "./components/alertBar";
-import ProductDetail from "./components/product-detail/productDetail";
-import RelatedItems from "./components/related-items-creation/relatedItems";
-import QuestionsAndAnswers from "./components/questions-and-answers/questionsAndAnswers";
-import RatingsReviews from "./components/ratings-and-reviews/ratingsReviews";
+import NavigationBar from './components/navigationBar';
+import AlertBar from './components/alertBar';
+import ProductDetail from './components/product-detail/productDetail';
+import RelatedItems from './components/related-items-creation/relatedItems';
+import QuestionsAndAnswers from './components/questions-and-answers/questionsAndAnswers';
+import RatingsReviews from './components/ratings-and-reviews/ratingsReviews';
 
 class App extends React.Component {
   constructor(props) {
@@ -22,6 +22,7 @@ class App extends React.Component {
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
+    this.productCardClicked = this.productCardClicked.bind(this);
   }
 
   componentDidMount() {
@@ -50,13 +51,13 @@ class App extends React.Component {
 
   generateUserToken() {
     const cookies = new Cookies();
-    if (cookies.get("user") === undefined) {
+    if (cookies.get('user') === undefined) {
       var userid = Math.floor(Math.random() * 999999999);
-      cookies.set("user", userid);
-      console.log(cookies.get("user"));
+      cookies.set('user', userid);
+      console.log(cookies.get('user'));
     }
     this.setState({
-      userToken: cookies.get("user"),
+      userToken: cookies.get('user'),
     });
   }
 
@@ -70,6 +71,29 @@ class App extends React.Component {
     }
     let averageRatings = stars / lengthOfRatings;
     return averageRatings;
+  }
+
+  productCardClicked(productId) {
+    apiMaster
+      .getProductInfo(productId)
+      .then(({ data }) => {
+        this.setState({ currentProduct: data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    apiMaster
+      .getReviewMetaData(productId)
+      .then(({ data }) => {
+        let averageRating = this.calculateAverageRating(data.ratings);
+        this.setState({
+          averageRating: averageRating,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   render() {
@@ -90,6 +114,7 @@ class App extends React.Component {
             currentProductName={this.state.currentProduct.name}
             currentProductFeatures={this.state.currentProduct.features}
             calculateAverageRating={this.calculateAverageRating}
+            productCardClicked={this.productCardClicked}
           />
         </div>
         <div className="widget">
