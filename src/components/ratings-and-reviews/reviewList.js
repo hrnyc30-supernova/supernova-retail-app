@@ -57,11 +57,20 @@ class ReviewList extends React.Component {
     });
   }
 
+  filterReviews(reviews) {
+    let showReviews = [];
+    this.props.filteredReviews.forEach(filteredReview => {
+      let temp = reviews.filter(review => {
+        return review.review_id === filteredReview.review_id
+      })
+      showReviews = showReviews.concat(temp);
+    })
+    return showReviews;
+  }
+
   render() {
     let reviewsToShow =
-      this.state.isSorted === true
-        ? this.state.sortedReviews
-        : this.props.reviews.slice(0, this.state.count);
+      this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? this.filterReviews(this.state.sortedReviews) : this.state.sortedReviews) : (this.props.filteredReviews > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
     return this.props.reviews.length === 0 ? (
       <div id="review-list-container">
         {" "}
@@ -75,10 +84,13 @@ class ReviewList extends React.Component {
       </div>
     ) : (
       <div id='review-list-container'>
-        <SortBy
-          currentProductID={this.props.currentProductID}
-          onSelect={this.handleSortByChange}
-        />
+        <div id='sort-and-add-review-container'>
+          <SortBy
+            currentProductID={this.props.currentProductID}
+            onSelect={this.handleSortByChange}
+          />
+          
+        </div>
         <div className="scroll">
           {reviewsToShow.map((review) => {
             return <ReviewTile key={review.review_id} review={review} />;
@@ -88,11 +100,12 @@ class ReviewList extends React.Component {
           ) : null}
         </div>
         <AddReviewButton
-          currentProductCharacteristics={
-            this.props.currentProductCharacteristics
-          }
-          currentProductName={this.props.currentProductName}
-        />
+            id="add-new-review-button"
+            currentProductCharacteristics={
+              this.props.currentProductCharacteristics
+            }
+            currentProductName={this.props.currentProductName}
+          />
       </div>
     );
   }
