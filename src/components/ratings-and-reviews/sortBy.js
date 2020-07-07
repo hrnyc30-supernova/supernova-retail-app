@@ -25,7 +25,7 @@ class SortBy extends React.Component {
 
   render() {
     return (
-      <div className="sort-by-container">
+      <div className="sort-by-container inline-display">
         <label htmlFor="sort-by">Sort by </label>
         <select
           value={this.state.currentSort}

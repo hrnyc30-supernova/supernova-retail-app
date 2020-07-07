@@ -500,6 +500,7 @@ ul.characteristics {
   position: relative;
   width: 1200px;
   margin-top: 50px;
+
 }
 
 #ratings-breakdown-container {
@@ -512,14 +513,14 @@ ul.characteristics {
 
 #review-list-container {
   position: absolute;
-  margin-left: 420px;
-  width: 700px;
+  margin-left: 380px;
+  width: 750px;
   display: block;
   float: left;
 }
 
 .scroll {
-  height: 85vh;
+  height: calc(600px + 0.5vw);
   overflow: auto;
   text-align: justify;
 }
@@ -529,21 +530,22 @@ ul.characteristics {
 }
 
 #add-new-review {
-  margin-top: 20px;
-}
-
-.review-button {
   width: 200px;
   background-color: white;
+  margin-bottom: 30px;
 }
 
-#upload-photos-modal-button {
-  width: 300px;
+.inline-display{
+  display: inline;
 }
 
 #sort-by {
   margin: 5px;
   padding: 5px;
+}
+
+#upload-photos-modal-button {
+  width: 300px;
 }
 
 .ratings-filters-container {

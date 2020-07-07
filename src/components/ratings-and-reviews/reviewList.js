@@ -84,10 +84,13 @@ class ReviewList extends React.Component {
       </div>
     ) : (
       <div id='review-list-container'>
-        <SortBy
-          currentProductID={this.props.currentProductID}
-          onSelect={this.handleSortByChange}
-        />
+        <div id='sort-and-add-review-container'>
+          <SortBy
+            currentProductID={this.props.currentProductID}
+            onSelect={this.handleSortByChange}
+          />
+          
+        </div>
         <div className="scroll">
           {reviewsToShow.map((review) => {
             return <ReviewTile key={review.review_id} review={review} />;
@@ -97,11 +100,12 @@ class ReviewList extends React.Component {
           ) : null}
         </div>
         <AddReviewButton
-          currentProductCharacteristics={
-            this.props.currentProductCharacteristics
-          }
-          currentProductName={this.props.currentProductName}
-        />
+            id="add-new-review-button"
+            currentProductCharacteristics={
+              this.props.currentProductCharacteristics
+            }
+            currentProductName={this.props.currentProductName}
+          />
       </div>
     );
   }
