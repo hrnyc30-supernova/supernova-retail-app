@@ -27,7 +27,7 @@ class CardActionButton extends React.Component {
     this.setState({ wasClicked: !this.state.wasClicked });
   }
 
-  createCharacteristics() {
+  async createCharacteristics() {
     let combinedFeatures = [];
     let featureProductFeatures = [];
     let relatedProductFeatures = [];
