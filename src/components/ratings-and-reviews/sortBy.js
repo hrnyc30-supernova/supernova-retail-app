@@ -32,6 +32,7 @@ class SortBy extends React.Component {
           onChange={(e) => this.handleChange(e)}
           name="sort"
           id="sort-by"
+          className="main-action-button"
         >
           <option value="relevant">Relevance</option>
           <option value="helpful">Helpfulness</option>
