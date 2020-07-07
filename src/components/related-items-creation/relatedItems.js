@@ -9,11 +9,13 @@ class RelatedItems extends React.Component {
       relatedProductIds: null,
       relatedItemFeatures: [],
       relatedItemNames: [],
+      relatedItemRatings: [],
     };
 
     this.getRelatedIds = this.getRelatedIds.bind(this);
     this.getRelatedItemFeatures = this.getRelatedItemFeatures.bind(this);
     this.getRelatedItemNames = this.getRelatedItemNames.bind(this);
+    this.getRelatedItemRatings = this.getRelatedItemRatings.bind(this);
   }
 
   componentDidMount() {
@@ -33,6 +35,7 @@ class RelatedItems extends React.Component {
       .then(() => {
         this.getRelatedItemFeatures();
         this.getRelatedItemNames();
+        this.getRelatedItemRatings();
       })
       .catch((err) => {
         console.log('err in getRelatedIds: ', err);
@@ -79,10 +82,33 @@ class RelatedItems extends React.Component {
       });
   }
 
+  getRelatedItemRatings() {
+    let promises = [];
+    for (let i = 0; i < this.state.relatedProductIds.length; i++) {
+      promises.push(
+        apiMaster
+          .getReviewMetaData(this.state.relatedProductIds[i])
+          .then(({ data }) => {
+            let averageRating = this.props.calculateAverageRating(data.ratings);
+            return averageRating;
+          })
+      );
+    }
+    Promise.all(promises)
+      .then((data) => {
+        this.setState({
+          relatedItemRatings: data,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div className="related-products-container">
-        <h1>Related Products</h1>
+        RELATED PRODUCTS
         <ProductCard
           relatedProducts={this.state.relatedProductIds}
           relatedProductNames={this.state.relatedItemNames}
@@ -90,6 +116,8 @@ class RelatedItems extends React.Component {
           currentProductName={this.props.currentProductName}
           currentProductFeatures={this.props.currentProductFeatures}
           relatedItemFeatures={this.state.relatedItemFeatures}
+          relatedItemRatings={this.state.relatedItemRatings}
+        />
         />
       </div>
     );

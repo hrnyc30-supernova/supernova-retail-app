@@ -342,6 +342,7 @@ input {
   width: 1000px;
   height: 25rem;
   padding-left: 60px;
+  padding-top: 16px;
 }
 
 .products-card {

@@ -189,7 +189,7 @@ class ProductCard extends React.Component {
                       })}
                     </span>
                     <div className="stars-body">
-                      <CardStars />
+                      <CardStars rating={this.props.relatedItemRatings[i]} />
                     </div>
                   </div>
                 </div>

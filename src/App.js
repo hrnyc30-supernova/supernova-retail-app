@@ -72,6 +72,7 @@ class App extends React.Component {
             currentProductID={this.state.currentProduct.id}
             currentProductName={this.state.currentProduct.name}
             currentProductFeatures={this.state.currentProduct.features}
+            calculateAverageRating={this.calculateAverageRating}
           />
         </div>
         <div className="widget">
