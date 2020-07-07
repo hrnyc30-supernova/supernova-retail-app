@@ -2,15 +2,25 @@ import React, { useState } from 'react';
 import SearchQuestion from './searchQuestion';
 import QuestionDisplay from './questionDisplay';
 import AskQuestionModal from './questionForm.js';
+import AddAnswerModal from './addAnswerModal.js';
 import Button from 'react-bootstrap/Button';
 import { RecoilRoot } from 'recoil';
 import MoreQuestions from './moreQuestions';
 
 const QuestionsAndAnswers = (props) => {
   const [AddQuestionModal, setAddQuestionModal] = useState(false);
+  const [AddAnswer, setAddAnswer] = useState(false);
 
   const closeModal = () => {
     setAddQuestionModal(false);
+  };
+
+  const closeAddQuestionModal = () => {
+    setAddAnswer(false);
+  };
+
+  const showAddAnswerModal = () => {
+    setAddAnswer(true);
   };
 
   if (AddQuestionModal) {
@@ -22,13 +32,27 @@ const QuestionsAndAnswers = (props) => {
         productID={props.currentProductID}
       />
     );
+  } else if (AddAnswer) {
+    return (
+      <RecoilRoot>
+        <AddAnswerModal
+          closeModal={closeAddQuestionModal}
+          show={AddAnswer}
+          name={props.currentProductName}
+          productID={props.currentProductID}
+        />
+      </RecoilRoot>
+    );
   } else {
     return (
       <RecoilRoot>
         <div>
           <h1>Questions and Answers</h1>
           <SearchQuestion />
-          <QuestionDisplay productID={props.currentProductID} />
+          <QuestionDisplay
+            productID={props.currentProductID}
+            showModal={showAddAnswerModal}
+          />
           <br></br>
           <MoreQuestions />
           <Button

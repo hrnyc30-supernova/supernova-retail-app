@@ -1,7 +1,7 @@
-import React from "react";
-import apiMaster from "./apiMaster";
-import { hot } from "react-hot-loader/root";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import apiMaster from './apiMaster';
+import { hot } from 'react-hot-loader/root';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Cookies from "universal-cookie";
 import randomToken from "random-token";
@@ -88,7 +88,9 @@ class App extends React.Component {
         <div>
           <RelatedItems
             currentProductID={this.state.currentProduct.id}
+            currentProductName={this.state.currentProduct.name}
             currentProductFeatures={this.state.currentProduct.features}
+            calculateAverageRating={this.calculateAverageRating}
           />
         </div>
         <div className="widget">

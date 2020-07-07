@@ -342,6 +342,7 @@ input {
   width: 1000px;
   height: 25rem;
   padding-left: 60px;
+  padding-top: 16px;
 }
 
 .products-card {
@@ -402,16 +403,45 @@ input {
 .close-card-modal {
   max-width: 100px;
   text-align: center;
+  margin-bottom: 16px;
 }
 
 ul.characteristics {
   white-space: nowrap;
   text-align: left;
   padding: 0;
+  padding-top: 11px;
+  margin-bottom: 15px;
+  font-size: 14px;
 }
 
 .show-grid {
   width: 480px;
+  padding-top: 45px;
+}
+
+.product-features-checkmark-hidden {
+  visibility: hidden;
+}
+
+.characteristics-icon {
+  min-height: 32px;
+  text-align: center;
+  padding-left: 0;
+}
+
+.modal-title {
+  font-size: 14px;
+  position: absolute;
+  top: 3px;
+  left: 12px;
+  padding-left: 36px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.col-md-4 {
+  text-align: center;
 }
 
 /* -------- QA WIDGET -------- */
@@ -432,7 +462,6 @@ ul.characteristics {
   position: absolute;
   display: flex;
   flex-direction: column;
-  /* align-items: baseline; */
   width: 400px;
   float: left;
 }
@@ -459,6 +488,20 @@ ul.characteristics {
   margin-top: 20px;
 }
 
+.review-button {
+  width: 200px;
+  background-color: white;
+}
+
+#upload-photos-modal-button{
+  width: 300px;
+}
+
+#sort-by{
+  margin:5px;
+  padding: 5px;
+}
+
 .ratings-filters-container {
   width: 300px;
 }
@@ -467,22 +510,28 @@ ul.characteristics {
 #rating-filter-container {
   display: flex;
   flex-direction: row;
-  /* check below - should move stars and progress bars to center vertically*/
+  width: 300px;
   align-content: baseline space-between;
+}
+
+.filter-elem{
+  padding: 0 5px;
+}
+
+.filter-elem:hover{
+  text-decoration: underline;
+  color: gray;
 }
 
 .review-photo {
   width: 70px;
-  height: "auto";
+  height: 'auto';
   padding: 5px 10px;
-}
-
-.filter-elem {
-  padding: 10px 0;
 }
 
 small {
   color: rgb(148, 148, 148);
+  padding-left: 10px;
 }
 
 #ratings-breakdown-container > span > small {
@@ -509,6 +558,13 @@ small {
 .progress-characteristic {
   width: 270px;
   background-color: rgb(221, 217, 217);
+  position: relative;
+}
+.characteristic-icon{
+  z-index: 0;
+  float: center;
+  overflow: visible;
+  height:150%;
 }
 
 .progress:hover {
@@ -527,5 +583,5 @@ small {
 
 .modal {
   max-height: calc(100vh - 210px);
-  overflow-y: "auto";
+  overflow-y: 'auto';
 }

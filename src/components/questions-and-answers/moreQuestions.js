@@ -7,12 +7,20 @@ import { displayAmountState, allQuestionsState } from './qa-atoms';
 const MoreQuestions = (props) => {
   let qLength = useRecoilValue(allQuestionsState).length;
   const [questionsLen, setquestionsLen] = useRecoilState(displayAmountState);
+  const [display, setDisplay] = useState(true);
   if (qLength <= 4) {
     return <></>;
   } else {
     return (
       <>
-        <Button variant="primary" onClick={() => setquestionsLen(qLength)}>
+        <Button
+          variant="primary"
+          onClick={() => {
+            setquestionsLen(qLength);
+            setDisplay(false);
+          }}
+          style={{ display: display ? 'inline' : 'none' }}
+        >
           More Questions
         </Button>{' '}
       </>
