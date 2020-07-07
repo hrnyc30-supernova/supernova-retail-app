@@ -59,8 +59,13 @@ class NewReview extends React.Component {
     });
   }
 
-  toggleModal(e) {
+  toggleModal(e, images) {
     e.preventDefault();
+    if (images.length > 0) {
+      this.setState({
+        photos: images
+      })
+    }
     let temp = this.state.showImgModal;
     this.setState({
       showImgModal: !temp,
@@ -198,7 +203,7 @@ class NewReview extends React.Component {
                 <UploadPhotos
                   currentProductName={this.props.currentProductName}
                   showImgModal={this.state.showImgModal}
-                  onClick={this.toggleModal}
+                  toggleModal={this.toggleModal}
                 />
               ) : null}
               <br />

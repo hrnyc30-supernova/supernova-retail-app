@@ -9,15 +9,18 @@ class UploadPhotos extends React.Component {
     };
     this.handleChange = this.handleChange.bind(this);
   }
+
   handleChange(e) {
-      console.log(e.target.files[e.target.id].name);
       let temp = this.state.images;
-      temp.push(e.target.files[e.target.id]);
+      temp.push(e.target.files[0]);
       this.setState({
           images: temp
-      }, () => {
-          console.log(this.state.images);
       })
+  }
+
+  handleUpload(e) {
+      console.log(e.target.value);
+      console.log(this.state.images);
   }
 
   render() {
@@ -49,7 +52,8 @@ class UploadPhotos extends React.Component {
         <Modal.Footer>
           <button
             className="main-action-button review-button"
-            onClick={(e) => this.props.onClick(e)}
+            value={this.state.images}
+            onClick={(e) => this.handleUpload(e)}
           >
             Upload
           </button>
