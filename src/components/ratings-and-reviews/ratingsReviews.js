@@ -54,22 +54,16 @@ class RatingsReviews extends React.Component {
   }
 
   filterReviews(rating){
-    console.log('all reviews', this.state.reviews)
-    console.log('this is being send to filterReviews', rating);
     let filteredReviews =[];
     for (var count in rating) {
       let countFilter = this.state.reviews.filter((review) => {
-        console.log('should be what I clicked on', count)
-        console.log('should be review rating', review.rating)
         return Number(review.rating) === Number(count)
       }) 
-      console.log('first filter through', countFilter)
       filteredReviews = filteredReviews.concat(countFilter);
     }
-    console.log('sending to state', filteredReviews)
     this.setState({
       filtered: filteredReviews
-    }, () => console.log('filtered', this.state.filtered))
+    })
   }
 
   getRecommendation(reviewsArray) {
