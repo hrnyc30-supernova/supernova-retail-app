@@ -528,6 +528,13 @@ small {
 .progress-characteristic {
   width: 270px;
   background-color: rgb(221, 217, 217);
+  position: relative;
+}
+.characteristic-icon{
+  z-index: 0;
+  float: center;
+  overflow: visible;
+  height:150%;
 }
 
 .progress:hover {
