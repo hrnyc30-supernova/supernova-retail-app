@@ -8,10 +8,12 @@ class RelatedItems extends React.Component {
     this.state = {
       relatedProductIds: null,
       relatedItemFeatures: [],
+      relatedItemNames: [],
     };
 
     this.getRelatedIds = this.getRelatedIds.bind(this);
     this.getRelatedItemFeatures = this.getRelatedItemFeatures.bind(this);
+    this.getRelatedItemNames = this.getRelatedItemNames.bind(this);
   }
 
   componentDidMount() {
@@ -30,6 +32,7 @@ class RelatedItems extends React.Component {
       })
       .then(() => {
         this.getRelatedItemFeatures();
+        this.getRelatedItemNames();
       })
       .catch((err) => {
         console.log('err in getRelatedIds: ', err);
@@ -56,12 +59,33 @@ class RelatedItems extends React.Component {
       });
   }
 
+  getRelatedItemNames() {
+    let promises = [];
+    for (let i = 0; i < this.state.relatedProductIds.length; i++) {
+      promises.push(
+        apiMaster
+          .getProductInfo(this.state.relatedProductIds[i])
+          .then((res) => {
+            return res.data.name;
+          })
+      );
+    }
+    Promise.all(promises)
+      .then((data) => {
+        this.setState({ relatedItemNames: data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div className="related-products-container">
         <h1>Related Products</h1>
         <ProductCard
           relatedProducts={this.state.relatedProductIds}
+          relatedProductNames={this.state.relatedItemNames}
           currentProductId={this.props.currentProductID}
           currentProductName={this.props.currentProductName}
           currentProductFeatures={this.props.currentProductFeatures}

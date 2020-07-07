@@ -140,6 +140,7 @@ class ProductCard extends React.Component {
                       currentProductFeatures={this.props.currentProductFeatures}
                       currentProductName={this.props.currentProductName}
                       relatedProductFeatures={this.props.relatedItemFeatures[i]}
+                      relatedProductName={this.props.relatedProductNames[i]}
                     />
                   </div>
                   <div className="card-body">

@@ -5,6 +5,7 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
+import { GrFormCheckmark } from 'react-icons/gr';
 
 class ProductCompareModal extends React.Component {
   constructor(props) {
@@ -32,16 +33,34 @@ class ProductCompareModal extends React.Component {
             <Container>
               <Row className="show-grid-row">
                 <Col xs={6} md={4}>
-                  <div>{this.props.currentProductName}</div>
+                  <strong>{this.props.currentProductName}</strong>
                 </Col>
                 <Col xs={6} md={4}></Col>
                 <Col xs={6} md={4}>
-                  <div>Compared Product Name</div>
+                  <strong>{this.props.relatedProductName}</strong>
                 </Col>
               </Row>
 
               <Row className="show-grid-row">
-                <Col xs={6} md={4}></Col>
+                <Col xs={6} md={4}>
+                  {this.props.characteristicsList.map((characteristic, i) => {
+                    if (
+                      this.props.currentProductFeatures.includes(characteristic)
+                    ) {
+                      return (
+                        <ul className="characteristics-icon" key={i}>
+                          <GrFormCheckmark className="product-features-checkmark" />
+                        </ul>
+                      );
+                    } else {
+                      return (
+                        <ul className="characteristics-icon" key={i}>
+                          <GrFormCheckmark className="product-features-checkmark-hidden" />
+                        </ul>
+                      );
+                    }
+                  })}
+                </Col>
                 <Col xs={6} md={4}>
                   {this.props.characteristicsList.map((characteristic, i) => {
                     return (
@@ -51,7 +70,25 @@ class ProductCompareModal extends React.Component {
                     );
                   })}
                 </Col>
-                <Col xs={6} md={4}></Col>
+                <Col xs={6} md={4}>
+                  {this.props.characteristicsList.map((characteristic, i) => {
+                    if (
+                      this.props.relatedProductFeatures.includes(characteristic)
+                    ) {
+                      return (
+                        <ul className="characteristics-icon" key={i}>
+                          <GrFormCheckmark className="product-features-checkmark" />
+                        </ul>
+                      );
+                    } else {
+                      return (
+                        <ul className="characteristics-icon" key={i}>
+                          <GrFormCheckmark className="product-features-checkmark-hidden" />
+                        </ul>
+                      );
+                    }
+                  })}
+                </Col>
               </Row>
             </Container>
           </Modal.Body>
