@@ -31,7 +31,7 @@ class ProductCompareModal extends React.Component {
           <Modal.Title className="product-card-modal-title">
             Comparing
           </Modal.Title>
-          <Modal.Body className="show-grid">
+          <Modal.Body className="show-grid card-compare-modal-body">
             <Container>
               <Row className="show-grid-row">
                 <Col xs={6} md={4}>
@@ -95,7 +95,7 @@ class ProductCompareModal extends React.Component {
             </Container>
           </Modal.Body>
           <Button
-            className="close-card-modal"
+            id="close-button-card"
             variant="outline-danger"
             size="sm"
             onClick={this.props.handleClick}

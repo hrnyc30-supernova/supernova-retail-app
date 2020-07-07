@@ -19,7 +19,7 @@ class CardActionButton extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.currentProductName !== prevProps.currentProductName) {
-      console.log('componentDidUpdate in cardActionButton ran!');
+      // console.log('componentDidUpdate in cardActionButton ran!');
       this.createCharacteristics();
     }
   }
@@ -30,7 +30,7 @@ class CardActionButton extends React.Component {
   }
 
   createCharacteristics() {
-    console.log('createCharacteristics ran!');
+    // console.log('createCharacteristics ran!');
     let combinedFeatures = [];
     let featureProductFeatures = [];
     let relatedProductFeatures = [];
