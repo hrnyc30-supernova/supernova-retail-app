@@ -43,4 +43,13 @@ const charScales = {
     }
 };
 
+const ratingScale = {
+  "1": "Poor",
+	"2": "Fair",
+	"3": "Average",
+	"4": "Good",
+	"5": "Great"
+}
+
 module.exports.charScales = charScales;
+module.exports.ratingScale = ratingScale;

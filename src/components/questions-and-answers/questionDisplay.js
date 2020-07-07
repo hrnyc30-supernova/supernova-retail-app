@@ -2,12 +2,17 @@ import React, { useState, useEffect } from 'react';
 import apiMaster from '../../apiMaster';
 import Answer from './answer';
 import Card from 'react-bootstrap/Card';
-import { displayAmountState, allQuestionsState } from './qa-atoms';
+import {
+  displayAmountState,
+  allQuestionsState,
+  quesitonIdState,
+} from './qa-atoms';
 import { useRecoilState } from 'recoil';
 
 const QuestionDisplay = (props) => {
   const [questions, setQestions] = useRecoilState(allQuestionsState);
   const [questionsLen, setquestionsLen] = useRecoilState(displayAmountState);
+  const [questionID, setquestionID] = useRecoilState(quesitonIdState);
 
   useEffect(() => {
     apiMaster
@@ -30,7 +35,15 @@ const QuestionDisplay = (props) => {
               Q: {question.question_body}{' '}
               <div style={{ float: 'right' }}>
                 Helpful? <u> YES</u> ({question.question_helpfulness}) |
-                <u> Add Answer</u>
+                <u
+                  onClick={() => {
+                    setquestionID(question.question_id);
+                    props.showModal();
+                  }}
+                >
+                  {' '}
+                  Add Answer
+                </u>
               </div>
             </Card.Header>
             <Answer id={question.question_id} />

@@ -1,7 +1,9 @@
-import React from "react";
-import apiMaster from "./apiMaster";
-import { hot } from "react-hot-loader/root";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import apiMaster from './apiMaster';
+import { hot } from 'react-hot-loader/root';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Cookies from "universal-cookie";
 
 import NavigationBar from "./components/navigationBar";
 import AlertBar from "./components/alertBar";
@@ -16,12 +18,14 @@ class App extends React.Component {
     this.state = {
       currentProduct: {},
       averageRating: 0,
+      userToken: null,
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
   }
 
   componentDidMount() {
+    this.generateUserToken();
     apiMaster
       .getProductInfo()
       .then(({ data }) => {
@@ -42,6 +46,18 @@ class App extends React.Component {
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  generateUserToken() {
+    const cookies = new Cookies();
+    if (cookies.get("user") === undefined) {
+      var userid = Math.floor(Math.random() * 999999999);
+      cookies.set("user", userid);
+      console.log(cookies.get("user"));
+    }
+    this.setState({
+      userToken: cookies.get("user"),
+    });
   }
 
   calculateAverageRating(obj) {
@@ -65,12 +81,15 @@ class App extends React.Component {
           <ProductDetail
             product={this.state.currentProduct}
             averageRating={this.state.averageRating}
+            userToken={this.state.userToken}
           />
         </div>
         <div>
           <RelatedItems
             currentProductID={this.state.currentProduct.id}
+            currentProductName={this.state.currentProduct.name}
             currentProductFeatures={this.state.currentProduct.features}
+            calculateAverageRating={this.calculateAverageRating}
           />
         </div>
         <div className="widget">
