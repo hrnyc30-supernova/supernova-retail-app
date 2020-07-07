@@ -481,18 +481,38 @@ ul.characteristics {
 #rating-filter-container {
   display: flex;
   flex-direction: row;
+  width: 300px;
   /* check below - should move stars and progress bars to center vertically*/
   align-content: baseline space-between;
+}
+
+/* .rating-filter-container {
+  width: 300px;
+  line-height: 10px;
+  /* position: absolute; */
+
+
+/* 
+.rating-filter-background{
+  position: relative;
+  color: lightslategrey;
+  width: 150px;
+} */
+/* 
+.rating-filter-filler{
+  position: relative;
+  background-color: #25b354
+} */ 
+
+.filter-elem:hover{
+  text-decoration: underline;
+  color: gray;
 }
 
 .review-photo {
   width: 70px;
   height: "auto";
   padding: 5px 10px;
-}
-
-.filter-elem {
-  padding: 10px 0;
 }
 
 small {
