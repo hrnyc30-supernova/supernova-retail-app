@@ -6,7 +6,7 @@ class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      relatedProductIds: null,
+      relatedProductIds: [],
       relatedItemFeatures: [],
       relatedItemNames: [],
       relatedItemRatings: [],
@@ -19,9 +19,10 @@ class RelatedItems extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props !== prevProps) {
+    if (this.props.currentProductID !== prevProps.currentProductID) {
       // console.log('apiMaster: ', apiMaster);
       // console.log('this.props: ', this.props);
+      console.log('componentDidUpdate for RelatedItems ran!');
       this.getRelatedIds();
     }
   }
