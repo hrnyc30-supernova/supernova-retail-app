@@ -23,6 +23,7 @@ body {
   border: 1px solid #525252;
   padding: 20px;
   letter-spacing: 0.4px;
+  cursor: pointer;
 }
 
 .main-action-button-symbol {
@@ -32,6 +33,45 @@ body {
 
 .main-action-button-symbol-floated {
   float: right;
+}
+
+.main-action-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.main-action-dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: white;
+  border: 1px solid #525252;
+  left: -10px;
+  top: 90px;
+  width: inherit;
+  border-radius: 3px;
+  z-index: 5;
+  max-height: 150px;
+  margin-left: 10px;
+  overflow: scroll;
+}
+
+.main-action-dropdown-content a {
+  font-family: 'Roboto', sans-serif;
+  letter-spacing: 1.1px;
+  font-size: 14px;
+  font-weight: 600;
+  text-align: center;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.main-action-dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.main-action-dropdown:hover .main-action-dropdown-content {
+  display: block;
 }
 
 /* ---------TEMP WIDGET STYLER -------- */
@@ -105,7 +145,6 @@ input {
 #product-detail-columns-container {
   width: 1200px;
   height: 600px;
-  overflow: hidden;
 }
 
 #product-detail-photo-container {
@@ -238,12 +277,16 @@ input {
   margin-top: 10px;
 }
 
+#overridden-price {
+  text-decoration: line-through;
+  margin-right: 8px;
+}
+
 #styles-menu {
   margin-top: 25px;
 }
 
 #styles-menu-heading {
-  text-transform: uppercase;
   letter-spacing: 0.4px;
 }
 
@@ -327,6 +370,7 @@ input {
   font-size: 14px;
   line-height: 16px;
   text-align: left;
+  min-height: 90px;
   width: 294px;
   padding-left: 10px;
   float: left;
@@ -396,7 +440,7 @@ input {
   display: none;
 }
 
-.modal-content {
+.product-card-modal {
   align-items: center;
 }
 
@@ -430,7 +474,7 @@ ul.characteristics {
   padding-left: 0;
 }
 
-.modal-title {
+.product-card-modal-title {
   font-size: 14px;
   position: absolute;
   top: 3px;
@@ -462,7 +506,6 @@ ul.characteristics {
   position: absolute;
   display: flex;
   flex-direction: column;
-  /* align-items: baseline; */
   width: 400px;
   float: left;
 }
@@ -489,6 +532,20 @@ ul.characteristics {
   margin-top: 20px;
 }
 
+.review-button {
+  width: 200px;
+  background-color: white;
+}
+
+#upload-photos-modal-button {
+  width: 300px;
+}
+
+#sort-by {
+  margin: 5px;
+  padding: 5px;
+}
+
 .ratings-filters-container {
   width: 300px;
 }
@@ -497,8 +554,17 @@ ul.characteristics {
 #rating-filter-container {
   display: flex;
   flex-direction: row;
-  /* check below - should move stars and progress bars to center vertically*/
+  width: 300px;
   align-content: baseline space-between;
+}
+
+.filter-elem {
+  padding: 0 5px;
+}
+
+.filter-elem:hover {
+  text-decoration: underline;
+  color: gray;
 }
 
 .review-photo {
@@ -507,12 +573,9 @@ ul.characteristics {
   padding: 5px 10px;
 }
 
-.filter-elem {
-  padding: 10px 0;
-}
-
 small {
   color: rgb(148, 148, 148);
+  padding-left: 10px;
 }
 
 #ratings-breakdown-container > span > small {
@@ -539,6 +602,13 @@ small {
 .progress-characteristic {
   width: 270px;
   background-color: rgb(221, 217, 217);
+  position: relative;
+}
+.characteristic-icon {
+  z-index: 0;
+  float: center;
+  overflow: visible;
+  height: 150%;
 }
 
 .progress:hover {

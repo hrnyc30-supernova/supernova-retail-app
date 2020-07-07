@@ -65,6 +65,7 @@ class ProductDetail extends React.Component {
             product={this.props.product}
             styles={this.state.styles}
             selectedStyle={this.state.selectedStyle}
+            userToken={this.props.userToken}
             textContainerVisibility={this.state.textContainerVisibility}
             averageRating={this.props.averageRating}
             updateSelectedStyle={this.updateSelectedStyle}
@@ -78,24 +79,19 @@ class ProductDetail extends React.Component {
             <div>{this.props.product.description}</div>
           </span>
           <span id="product-features">
-            <div>
-              <span className="product-features-checkmark">
-                <GrFormCheckmark />
-              </span>
-              A feature
-            </div>
-            <div>
-              <span className="product-features-checkmark">
-                <GrFormCheckmark />
-              </span>
-              Another feature
-            </div>
-            <div>
-              <span className="product-features-checkmark">
-                <GrFormCheckmark />
-              </span>
-              Yet another feature
-            </div>
+            {this.props.product !== null &&
+            this.props.product.features !== undefined
+              ? this.props.product.features.map((item) => {
+                  return (
+                    <div>
+                      <span className="product-features-checkmark">
+                        <GrFormCheckmark />
+                      </span>
+                      <strong>{item.feature}:</strong> {item.value}
+                    </div>
+                  );
+                })
+              : null}
           </span>
         </div>
       </div>
