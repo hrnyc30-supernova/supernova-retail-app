@@ -36,7 +36,14 @@ const Answer = (props) => {
 
       {showMore ? (
         <Card.Body className="text-center">
-          <Button variant="primary" size="sm">
+          <Button
+            variant="primary"
+            size="sm"
+            onClick={() => {
+              setShowMore(false);
+              setanswerLen(answers.length);
+            }}
+          >
             More Answers
           </Button>
         </Card.Body>

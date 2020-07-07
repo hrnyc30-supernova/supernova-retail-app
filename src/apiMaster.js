@@ -24,7 +24,7 @@ const getReviewMetaData = (id = 13) => {
   return axios.get(`http://18.224.200.47/reviews/${id}/meta`);
 };
 
-const getReviewsOfProduct = (id = 13, sortString = "relevant", count = 20) => {
+const getReviewsOfProduct = (id = 13, sortString = 'relevant', count = 20) => {
   return axios.get(
     `http://18.224.200.47/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
   );
@@ -82,7 +82,7 @@ const askQuestion = (id, text, name, email) => {
   });
 };
 
-const answerQuestion = (questionId, text, name, email, photos) => {
+const answerQuestion = (questionId, text, name, email, photos = []) => {
   return axios.post(`http://18.224.200.47/qa/${questionId}/answers`, {
     body: text,
     name: name,
