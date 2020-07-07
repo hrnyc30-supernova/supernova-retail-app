@@ -4,7 +4,6 @@ import { hot } from 'react-hot-loader/root';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Cookies from "universal-cookie";
-import randomToken from "random-token";
 
 import NavigationBar from "./components/navigationBar";
 import AlertBar from "./components/alertBar";
@@ -52,7 +51,7 @@ class App extends React.Component {
   generateUserToken() {
     const cookies = new Cookies();
     if (cookies.get("user") === undefined) {
-      var userid = randomToken(16);
+      var userid = Math.floor(Math.random() * 999999999);
       cookies.set("user", userid);
       console.log(cookies.get("user"));
     }
