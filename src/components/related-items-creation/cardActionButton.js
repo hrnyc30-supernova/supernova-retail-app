@@ -69,8 +69,7 @@ class CardActionButton extends React.Component {
       combinedFeatures.push(valueText + featureText);
       relatedProductFeatures.push(valueText + featureText);
     }
-    // console.log('combinedFeatures: ', combinedFeatures);
-    const uniqueFeatures = new Set(combinedFeatures);
+    const uniqueFeatures = await new Set(combinedFeatures);
     const uniqueFeaturesArray = Array.from(uniqueFeatures);
     this.setState({
       characteristicsList: uniqueFeaturesArray,

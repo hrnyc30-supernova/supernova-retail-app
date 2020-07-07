@@ -1,6 +1,7 @@
 import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import {charScales} from "./constants.js";
+import { charScales } from "./constants.js";
+import { FaCaretDown } from "react-icons/fa";
 
 class RatingFilters extends React.Component {
   constructor(props) {
@@ -93,14 +94,18 @@ class RatingFilters extends React.Component {
                 ? Object.entries(chars).map(([char, val]) => {
                     return (
                       <div key={val.id} id="characteristic-rating-container">
-                        <label className="filter-elem">
+                      {console.log(chars)}
+                        <label className="filter-elem"></label>
                           {`${char}`}
-                          <ProgressBar className="progress-characteristic" />
-                        </label>
-                        <br />
+                          
+                          <ProgressBar className="progress-characteristic"><FaCaretDown className='characteristic-icon' /></ProgressBar>
                         <small>
                           {[1, 5].map((item, i) => {
-                            return <span key={i}>{this.getScaleValue(char, item)}</span>;
+                            return (
+                              <span key={i}>
+                                {this.getScaleValue(char, item)}
+                              </span>
+                            );
                           })}
                         </small>
                       </div>
@@ -116,3 +121,14 @@ class RatingFilters extends React.Component {
 }
 
 export default RatingFilters;
+
+//CONSIDER THIS APPROACH...
+  // <div className="rating-filter-container">
+  //   <label id="filter-elem">{`${i + 1} Stars`}
+  //   <div className="rating-filter-background">
+  // <div className="rating-filter-filler" style={{ width: `${this.findPercentage(i + 1)}%` }}>
+  //       {/* <span className="rating-bar-icon">{icon}</span> */}
+  //     </div>
+  //   </div>
+  //   </label>
+  // </div>

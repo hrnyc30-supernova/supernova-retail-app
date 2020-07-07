@@ -9,4 +9,20 @@ const allQuestionsState = atom({
   key: 'allQuestionsState',
   default: [],
 });
-export { displayAmountState, allQuestionsState };
+
+const quesitonIdState = atom({
+  key: 'quesitonIdState',
+  default: null,
+});
+
+const addAnswerState = atom({
+  key: 'addAnswerState',
+  default: false,
+});
+
+export {
+  displayAmountState,
+  allQuestionsState,
+  quesitonIdState,
+  addAnswerState,
+};
