@@ -27,7 +27,7 @@ class CardActionButton extends React.Component {
     this.setState({ wasClicked: !this.state.wasClicked });
   }
 
-  createCharacteristics() {
+  async createCharacteristics() {
     let combinedFeatures = [];
     let featureProductFeatures = [];
     let relatedProductFeatures = [];
@@ -69,7 +69,7 @@ class CardActionButton extends React.Component {
       combinedFeatures.push(valueText + featureText);
       relatedProductFeatures.push(valueText + featureText);
     }
-    const uniqueFeatures = new Set(combinedFeatures);
+    const uniqueFeatures = await new Set(combinedFeatures);
     const uniqueFeaturesArray = Array.from(uniqueFeatures);
     this.setState({
       characteristicsList: uniqueFeaturesArray,
