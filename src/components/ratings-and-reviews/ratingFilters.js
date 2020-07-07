@@ -1,7 +1,7 @@
 import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { charScales } from "./constants.js";
-import { FaCaretDown } from "react-icons/fa";
+import { FaCaretUp, FaTruckMonster } from "react-icons/fa";
 
 class RatingFilters extends React.Component {
   constructor(props) {
@@ -14,8 +14,10 @@ class RatingFilters extends React.Component {
         "4": 0,
         "5": 0,
       },
+      filters: {}
     };
-    this.getScaleValue = this.getScaleValue.bind(this);
+    this.toggleFilter = this.toggleFilter.bind(this);
+    this.removeFilters = this.removeFilters.bind(this);
   }
 
   findPercentage(i) {
@@ -27,6 +29,25 @@ class RatingFilters extends React.Component {
       countObj[num] = percentage;
     }
     return countObj[i];
+  }
+
+  toggleFilter(e, rating) {
+    let temp = this.state.filters;
+    if (temp[rating] !== undefined) {
+      delete temp[rating]
+    } else {
+      temp[rating] = true; 
+    }
+    this.setState({
+      filters: temp
+    })
+    this.props.handleFilter(this.state.filters);
+  }
+
+  removeFilters() {
+    this.setState({
+      filters: {}
+    })
   }
 
   defineCountObj() {
@@ -47,11 +68,6 @@ class RatingFilters extends React.Component {
     return countObj[i];
   }
 
-  getScaleValue(characteristic, rating) {
-    rating = rating.toString();
-    return charScales[characteristic][rating];
-  }
-
   render() {
     let chars;
     this.props.currentRating !== undefined &&
@@ -65,22 +81,24 @@ class RatingFilters extends React.Component {
             {this.props.currentProductRatings ? (
               <>
                 Rating Breakdown <br />
+                {Object.keys(this.state.filters).length === 0 ? null : <small>{`Applied Filters: ${Object.keys(this.state.filters).join(' ')}`}<span onClick={this.removeFilters}>{`  Remove all filters`}</span></small>}
                 {[...Array(5)]
                   .map((possibleRating, i) => {
                     return (
-                      <span key={i} id="rating-filter-container">
-                        <label className="filter-elem">{`${
-                          i + 1
-                        } Stars`}</label>
-                        <ProgressBar
-                          now={this.findPercentage(i + 1)}
-                          className="progress-rating"
-                        />
-                        <>{"   "}</>
-                        <small className="filter-elem">{`${this.getReviewsWithRating(
-                          i + 1
-                        )} Reviews`}</small>
-                      </span>
+                      <div key={i} id="rating-filter-container">
+                        <div className="star-rating-filter-elem" value={i+1} onClick={e=>this.toggleFilter(e, i+1)}>
+                          {`${Number(i) + 1} Stars`}
+                          <div className="rating-filter-background">
+                            <div
+                              className="rating-filter-filler"
+                              style={{ width: this.findPercentage(i + 1) }}
+                            ></div>
+                          </div>
+                          <small className="star-rating-filter-elem">{`${this.getReviewsWithRating(
+                            i + 1
+                          )} Reviews`}</small>
+                        </div>
+                      </div>
                     );
                   })
                   .reverse()}
@@ -94,20 +112,32 @@ class RatingFilters extends React.Component {
                 ? Object.entries(chars).map(([char, val]) => {
                     return (
                       <div key={val.id} id="characteristic-rating-container">
-                      {console.log(chars)}
-                        <label className="filter-elem"></label>
+                        <label className="characteristic-filter-elem">
                           {`${char}`}
-                          
-                          <ProgressBar className="progress-characteristic"><FaCaretDown className='characteristic-icon' /></ProgressBar>
-                        <small>
-                          {[1, 5].map((item, i) => {
-                            return (
-                              <span key={i}>
-                                {this.getScaleValue(char, item)}
-                              </span>
-                            );
-                          })}
-                        </small>
+                          <div className="rating-filter-container">
+                            <div className="characteristic-background">
+                              <div
+                                className="characteristic-filler"
+                                style={{ width: val.value * 60 }}
+                              >
+                                <FaCaretUp className="characteristic-icon" />
+                              </div>
+                            </div>
+                          </div>
+
+                          <small className="characteristic-scale">
+                            {[1, 5].map((item, i) => {
+                              return (
+                                <span
+                                  className="characteristic-scale-item"
+                                  key={i}
+                                >
+                                  {charScales[char][item]}
+                                </span>
+                              );
+                            })}
+                          </small>
+                        </label>
                       </div>
                     );
                   })
@@ -121,14 +151,3 @@ class RatingFilters extends React.Component {
 }
 
 export default RatingFilters;
-
-//CONSIDER THIS APPROACH...
-  // <div className="rating-filter-container">
-  //   <label id="filter-elem">{`${i + 1} Stars`}
-  //   <div className="rating-filter-background">
-  // <div className="rating-filter-filler" style={{ width: `${this.findPercentage(i + 1)}%` }}>
-  //       {/* <span className="rating-bar-icon">{icon}</span> */}
-  //     </div>
-  //   </div>
-  //   </label>
-  // </div>

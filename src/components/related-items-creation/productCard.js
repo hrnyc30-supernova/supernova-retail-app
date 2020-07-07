@@ -27,10 +27,19 @@ class ProductCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.relatedProducts !== prevProps.relatedProducts) {
-      this.getCardPrices();
-      this.getCardImages();
+    if (
+      JSON.stringify(this.props.relatedProducts) !==
+      JSON.stringify(prevProps.relatedProducts)
+    ) {
+      // console.log('componentDidUpdate for ProductCard ran!');
+      this.setState({
+        cardDetailsLoaded: false,
+        cardImagesLoaded: false,
+        cardPricesLoaded: false,
+      });
       this.getCardDetails();
+      this.getCardImages();
+      this.getCardPrices();
     }
   }
 
@@ -80,6 +89,7 @@ class ProductCard extends React.Component {
 
   getCardPrices() {
     let promises = [];
+    // console.log('getCardPrices ran!');
     for (let i = 0; i < this.props.relatedProducts.length; i++) {
       promises.push(
         apiMaster
@@ -94,7 +104,7 @@ class ProductCard extends React.Component {
       );
     }
     Promise.all(promises).then((res) => {
-      // console.log('res: ', res);
+      // console.log('getCardPrices res: ', res);
       this.setState({
         cardPrices: res,
         cardPricesLoaded: true,
@@ -143,7 +153,12 @@ class ProductCard extends React.Component {
                       relatedProductName={this.props.relatedProductNames[i]}
                     />
                   </div>
-                  <div className="card-body">
+                  <div
+                    className="card-body"
+                    onClick={() => {
+                      this.props.productCardClicked(card.id);
+                    }}
+                  >
                     <div className="card-subtitle">{card.category}</div>
                     <div className="card-title">{card.name}</div>
                     <span

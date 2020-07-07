@@ -143,7 +143,7 @@ class NewReview extends React.Component {
                         <Form.Label>{char}</Form.Label> <br />
                         {["1", "2", "3", "4", "5"].map((item, i) => {
                           return (
-                            <Form.Check>
+                            <Form.Check key={i}>
                               <Form.Check.Input
                                 type="radio"
                                 name={char}
