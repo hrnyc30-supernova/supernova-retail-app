@@ -1,15 +1,47 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
+
+/* -------- BOOTSTRAP DEFAULT STYLES TO WATCH OUT FOR -------- */
+
+* {
+  box-sizing: border-box;
+}
+
+/* -------- GLOBAL -------- */
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #525252;
   width: 1200px;
   margin: auto;
 }
 
+.main-action-button {
+  display: inline-block;
+  text-transform: uppercase;
+  font-weight: bold;
+  border: 1px solid #525252;
+  padding: 20px;
+  letter-spacing: 0.4px;
+}
+
+.main-action-button-symbol {
+  line-height: 16px;
+  font-size: 22px;
+}
+
+.main-action-button-symbol-floated {
+  float: right;
+}
+
+/* ---------TEMP WIDGET STYLER -------- */
+
+.widget {
+  margin: 100px 0px;
+}
+
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
 }
 
@@ -20,11 +52,10 @@ input {
   background-color: #525252;
   height: 75px;
   padding: 20px 28px;
-  box-sizing: border-box;
 }
 
 #logo {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -58,16 +89,15 @@ input {
   font-size: 14px;
   height: 45px;
   text-align: center;
-  box-sizing: border-box;
   padding-top: 13px;
 }
 
-.alert::before {
-  content: "\00a0\00a0\00a0";
+.alert-bar-message::before {
+  content: '\00a0\00a0\00a0';
 }
 
-.alert::after {
-  content: "\00a0\00a0\00a0";
+.alert-bar-message::after {
+  content: '\00a0\00a0\00a0';
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -103,9 +133,8 @@ input {
 #product-detail-text-container {
   width: 450px;
   height: 600px;
-  padding: 20px;
+  padding: 30px 0px 30px 30px;
   float: left;
-  box-sizing: border-box;
 }
 
 .text-container-visible {
@@ -125,7 +154,11 @@ input {
 }
 
 #product-photo-main {
-  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   max-height: 600px;
   max-width: 750px;
   margin: auto;
@@ -138,21 +171,25 @@ input {
   overflow: scroll;
 }
 
-.product-photo-icon-frame {
-  background-color: white;
+.product-photo-icon {
+  position: relative;
+  background-size: cover;
+  background-position: center;
   border: 1px solid #525252;
   height: 60px;
   width: 60px;
   margin-bottom: 20px;
   cursor: pointer;
+  box-sizing: content-box;
 }
 
-.product-photo-icon {
-  background-color: white;
-  display: block;
-  max-height: 60px;
-  max-width: 60px;
-  margin: auto;
+#selected-photo-bar {
+  position: absolute;
+  top: 64px;
+  left: 0px;
+  background-color: #525252;
+  width: 62px;
+  height: 4px;
 }
 
 .arrow {
@@ -179,38 +216,153 @@ input {
   cursor: pointer;
 }
 
-#product-description {
+#reviews-link {
+  color: #525252;
+  font-size: 12px;
+  text-decoration: underline;
+  margin-left: 7px;
+}
+
+#product-category {
+  text-transform: uppercase;
+  margin-top: 15px;
+  letter-spacing: 0.4px;
+}
+
+#product-name {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+#product-price {
+  margin-top: 10px;
+}
+
+#styles-menu {
+  margin-top: 25px;
+}
+
+#styles-menu-heading {
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+#product-style-icon-container {
+  width: 340px;
+  height: 145px;
+}
+
+.product-style-icon {
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  border: 1px solid #525252;
+  float: left;
+  height: 60px;
+  width: 60px;
+  margin: 12.5px 25px 12.5px 0px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+#selected-style-checkmark-frame {
+  background-color: white;
+  border: 1px solid #525252;
+  position: absolute;
+  left: 45px;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+}
+
+#selected-style-checkmark {
+  position: absolute;
+  top: -6px;
+  left: 45px;
+}
+
+#size-selector {
+  width: 245px;
+  margin-top: 25px;
+  margin-right: 25px;
+}
+
+#quantity-selector {
+  width: 130px;
+  margin-top: 25px;
+}
+
+#add-to-bag-button {
+  width: 310px;
+  margin-top: 25px;
+  margin-right: 25px;
+}
+
+#favorite-button {
+  width: 65px;
+  margin-top: 25px;
+}
+
+#product-notes {
+  display: inline-block;
   clear: both;
   text-align: center;
-  padding: 40px;
+  margin: 55px 120px;
+}
+
+#product-description {
+  font-size: 14px;
+  text-align: left;
+  width: 665px;
+  float: left;
+}
+
+#product-slogan {
+  font-size: 18px;
+  padding-bottom: 10px;
+}
+
+#product-features {
+  border-left: 2px solid #525252;
+  font-size: 14px;
+  line-height: 16px;
+  text-align: left;
+  width: 294px;
+  padding-left: 10px;
+  float: left;
+}
+
+.product-features-checkmark {
+  font-size: 32px;
 }
 
 /* -------- RELATED ITEMS WIDGET -------- */
 
 .carousel-wrapper {
   width: 1000px;
+  height: 25rem;
   padding-left: 60px;
 }
 
-.card {
+.products-card {
   color: #525252;
   border-style: solid;
   border-width: 2px;
   border-color: #525252;
-  min-height: 15rem;
-  max-height: 15rem;
-  width: auto;
+  height: 95%;
+  width: 15rem;
 }
 
 .img-wrapper {
   overflow: hidden;
   position: relative;
+  min-height: 15rem;
+  max-height: 15rem;
 }
 
 .card-img-top {
-  max-width: 100%;
-  min-height: 10rem;
-  max-height: 10rem;
+  width: 15rem;
+  height: auto;
   align-items: center;
   transition: transform 0.5s;
   z-index: -1;
@@ -219,6 +371,10 @@ input {
 
 .card-img-top:hover {
   transform: scale(1.5);
+}
+
+.stars-body {
+  padding-bottom: 15px;
 }
 
 .action-button {
@@ -239,16 +395,40 @@ input {
   display: none;
 }
 
+.modal-content {
+  align-items: center;
+}
+
+.close-card-modal {
+  max-width: 100px;
+  text-align: center;
+}
+
+ul.characteristics {
+  white-space: nowrap;
+  text-align: left;
+  padding: 0;
+}
+
+.show-grid {
+  width: 480px;
+}
+
+/* -------- QA WIDGET -------- */
+
+.question {
+  margin: 20px 0px;
+}
 
 /*----------- RATINGS & REVIEWS WIDGET -----------*/
 
-#reviews-ratings-container{
+#reviews-ratings-container {
   position: relative;
   width: 1200px;
   margin-top: 50px;
 }
 
-#ratings-breakdown-container{
+#ratings-breakdown-container {
   position: absolute;
   display: flex;
   flex-direction: column;
@@ -257,18 +437,25 @@ input {
   float: left;
 }
 
-#review-list-container{
+#review-list-container {
   position: absolute;
   margin-left: 420px;
-  width: 600px;
+  width: 700px;
   display: block;
   float: left;
 }
-#review-tile-container{
+
+.scroll{
+  height: 85vh; 
+  overflow: auto; 
+  text-align:justify; 
+}
+
+#review-tile-container {
   border-bottom: 1px solid #525252;
 }
 
-#add-new-review{
+#add-new-review {
   margin-top: 20px;
 }
 
@@ -284,43 +471,61 @@ input {
   align-content: baseline space-between;
 }
 
-.filter-elem{
+.review-photo {
+  width: 70px;
+  height: "auto";
+  padding: 5px 10px;
+}
+
+.filter-elem {
   padding: 10px 0;
 }
 
-.progress-bar{
+small {
+  color: rgb(148, 148, 148);
+}
+
+#ratings-breakdown-container > span > small {
+  font: 100px;
+}
+
+#characteristic-rating-container > small > span:first-child {
+  padding-left: 20px;
+}
+
+#characteristic-rating-container > small > span:last-child {
+  padding-left: 80px;
+}
+
+.progress-bar {
   background-color: #25b354;
 }
 
-.progress-gray {
+.progress-rating {
   width: 150px;
   background-color: rgb(221, 217, 217);
 }
+
+.progress-characteristic {
+  width: 270px;
+  background-color: rgb(221, 217, 217);
+}
+
 .progress:hover {
   background-color: lightgray;
 }
+
 .review-response {
   background-color: lightgray;
   padding: 15px;
 }
-.link{
+.link {
   cursor: pointer;
   color: blue;
   text-decoration: underline;
 }
-/* .modal {
-  width: 500px;
-  background: white;
-  border: 1px solid #ccc;
-  transition: 1.1s ease-out;
-  box-shadow: 
-    -2rem 2rem 2rem rgba(black, 0.2);
-  filter: blur(0);
-  transform: scale(1);  
-  opacity: 1;
-  visibility: visible;
-} */
 
-small{
-  color: rgb(211, 211, 211);
+.modal {
+  max-height: calc(100vh - 210px);
+  overflow-y: "auto";
 }
