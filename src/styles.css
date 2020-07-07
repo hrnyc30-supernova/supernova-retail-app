@@ -537,12 +537,12 @@ ul.characteristics {
   background-color: white;
 }
 
-#upload-photos-modal-button{
+#upload-photos-modal-button {
   width: 300px;
 }
 
-#sort-by{
-  margin:5px;
+#sort-by {
+  margin: 5px;
   padding: 5px;
 }
 
@@ -550,26 +550,50 @@ ul.characteristics {
   width: 300px;
 }
 
-#avg-rating,
-#rating-filter-container {
+#avg-rating {
   display: flex;
   flex-direction: row;
   width: 300px;
   align-content: baseline space-between;
 }
 
-.filter-elem{
-  padding: 0 5px;
+.rating-filter-container {
+  clear: both;
+  padding-top: 20px;
 }
 
-.filter-elem:hover{
+.rating-filter-background {
+  width: 300px;
+  height: 8px;
+  background: #ccc;
+}
+
+.rating-filter-filler {
+  height: 8px;
+  background-color: #ccc;
+  position: relative;
+}
+
+.rating-filter-filler > .characteristic-icon {
+  z-index: 0;
+  float: right;
+  height: 24px;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.star-rating-filter-elem {
+  padding: 0px 5px;
+}
+
+.filter-elem:hover {
   text-decoration: underline;
   color: gray;
 }
 
 .review-photo {
   width: 70px;
-  height: 'auto';
+  height: "auto";
   padding: 5px 10px;
 }
 
@@ -604,11 +628,11 @@ small {
   background-color: rgb(221, 217, 217);
   position: relative;
 }
-.characteristic-icon{
+.characteristic-icon {
   z-index: 0;
   float: center;
   overflow: visible;
-  height:150%;
+  height: 150%;
 }
 
 .progress:hover {
@@ -627,5 +651,5 @@ small {
 
 .modal {
   max-height: calc(100vh - 210px);
-  overflow-y: 'auto';
+  overflow-y: "auto";
 }

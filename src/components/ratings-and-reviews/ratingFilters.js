@@ -1,7 +1,7 @@
 import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import { charScales } from "./constants.js";
-import { FaCaretDown } from "react-icons/fa";
+import { FaCaretUp } from "react-icons/fa";
 
 class RatingFilters extends React.Component {
   constructor(props) {
@@ -28,6 +28,7 @@ class RatingFilters extends React.Component {
     }
     return countObj[i];
   }
+
 
   defineCountObj() {
     let countObj = this.props.currentProductRatings.reduce(
@@ -69,7 +70,7 @@ class RatingFilters extends React.Component {
                   .map((possibleRating, i) => {
                     return (
                       <span key={i} id="rating-filter-container">
-                        <label className="filter-elem">{`${
+                        <label className="star-rating-filter-elem">{`${
                           i + 1
                         } Stars`}</label>
                         <ProgressBar
@@ -77,7 +78,7 @@ class RatingFilters extends React.Component {
                           className="progress-rating"
                         />
                         <>{"   "}</>
-                        <small className="filter-elem">{`${this.getReviewsWithRating(
+                        <small className="star-rating-filter-elem">{`${this.getReviewsWithRating(
                           i + 1
                         )} Reviews`}</small>
                       </span>
@@ -95,10 +96,17 @@ class RatingFilters extends React.Component {
                     return (
                       <div key={val.id} id="characteristic-rating-container">
                       {console.log(chars)}
-                        <label className="filter-elem"></label>
+                      {console.log(val.value)}
+                        <label className="characteristic-filter-elem">
                           {`${char}`}
-                          
-                          <ProgressBar className="progress-characteristic"><FaCaretDown className='characteristic-icon' /></ProgressBar>
+                          <div className="rating-filter-container">
+                            <div className="rating-filter-background">
+                              <div className="rating-filter-filler" style={{ width: val.value*60 }}>
+                                <FaCaretUp className="characteristic-icon" />
+                              </div>
+                            </div>
+                          </div>
+
                         <small>
                           {[1, 5].map((item, i) => {
                             return (
@@ -107,7 +115,7 @@ class RatingFilters extends React.Component {
                               </span>
                             );
                           })}
-                        </small>
+                        </small></label>
                       </div>
                     );
                   })
@@ -132,3 +140,5 @@ export default RatingFilters;
   //   </div>
   //   </label>
   // </div>
+
+  {/* <ProgressBar className="progress-characteristic" now={val.value}/><FaCaretDown className='characteristic-icon' /> */}
