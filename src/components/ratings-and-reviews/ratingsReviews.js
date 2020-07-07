@@ -83,6 +83,7 @@ class RatingsReviews extends React.Component {
           currentProductCharacteristics={
             this.state.currentRating.characteristics
           }
+          filteredReviews={this.state.filtered}
           currentProductName={this.props.currentProductName}
           reviews={this.state.reviews}
           currentProductID={this.props.currentProductID}
