@@ -118,7 +118,6 @@ class RelatedItems extends React.Component {
           relatedItemFeatures={this.state.relatedItemFeatures}
           relatedItemRatings={this.state.relatedItemRatings}
         />
-        />
       </div>
     );
   }

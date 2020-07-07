@@ -23,12 +23,14 @@ class ProductCompareModal extends React.Component {
     if (this.state.visible) {
       return (
         <Modal
-          className="card-modal"
+          className="product-card-modal"
           show={this.state.visible}
           animation={true}
           centered
         >
-          <Modal.Title>Comparing</Modal.Title>
+          <Modal.Title className="product-card-modal-title">
+            Comparing
+          </Modal.Title>
           <Modal.Body className="show-grid">
             <Container>
               <Row className="show-grid-row">
