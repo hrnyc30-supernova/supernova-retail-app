@@ -21,6 +21,23 @@ class ProductDetail extends React.Component {
     this.updateSelectedStyle = this.updateSelectedStyle.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.product !== this.props.product) {
+      console.log("updating");
+      apiMaster
+        .getProductStyles(this.props.product.id)
+        .then(({ data }) => {
+          this.setState({
+            styles: data.results,
+            selectedStyle: data.results[0],
+          });
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
+  }
+
   componentDidMount() {
     apiMaster
       .getProductStyles()
