@@ -1,6 +1,6 @@
 import React from "react";
 import ProgressBar from "react-bootstrap/ProgressBar";
-import {charScales} from "./constants.js";
+import { charScales } from "./constants.js";
 
 class RatingFilters extends React.Component {
   constructor(props) {
@@ -67,15 +67,6 @@ class RatingFilters extends React.Component {
                 {[...Array(5)]
                   .map((possibleRating, i) => {
                     return (
-                      // <div className="rating-filter-container">
-                      //   <label id="filter-elem">{`${i + 1} Stars`}
-                      //   <div className="rating-filter-background">
-                          // <div className="rating-filter-filler" style={{ width: `${this.findPercentage(i + 1)}%` }}>
-                      //       {/* <span className="rating-bar-icon">{icon}</span> */}
-                      //     </div>
-                      //   </div>
-                      //   </label>
-                      // </div>
                       <span key={i} id="rating-filter-container">
                         <label className="filter-elem">{`${
                           i + 1
@@ -109,7 +100,11 @@ class RatingFilters extends React.Component {
                         <br />
                         <small>
                           {[1, 5].map((item, i) => {
-                            return <span key={i}>{this.getScaleValue(char, item)}</span>;
+                            return (
+                              <span key={i}>
+                                {this.getScaleValue(char, item)}
+                              </span>
+                            );
                           })}
                         </small>
                       </div>
@@ -126,4 +121,13 @@ class RatingFilters extends React.Component {
 
 export default RatingFilters;
 
-
+//CONSIDER THIS APPROACH...
+  // <div className="rating-filter-container">
+  //   <label id="filter-elem">{`${i + 1} Stars`}
+  //   <div className="rating-filter-background">
+  // <div className="rating-filter-filler" style={{ width: `${this.findPercentage(i + 1)}%` }}>
+  //       {/* <span className="rating-bar-icon">{icon}</span> */}
+  //     </div>
+  //   </div>
+  //   </label>
+  // </div>
