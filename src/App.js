@@ -19,6 +19,7 @@ class App extends React.Component {
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
+    this.productCardClicked = this.productCardClicked.bind(this);
   }
 
   componentDidMount() {
@@ -56,6 +57,29 @@ class App extends React.Component {
     return averageRatings;
   }
 
+  productCardClicked(productId) {
+    apiMaster
+      .getProductInfo(productId)
+      .then(({ data }) => {
+        this.setState({ currentProduct: data });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    apiMaster
+      .getReviewMetaData(productId)
+      .then(({ data }) => {
+        let averageRating = this.calculateAverageRating(data.ratings);
+        this.setState({
+          averageRating: averageRating,
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
   render() {
     return (
       <div>
@@ -73,6 +97,7 @@ class App extends React.Component {
             currentProductName={this.state.currentProduct.name}
             currentProductFeatures={this.state.currentProduct.features}
             calculateAverageRating={this.calculateAverageRating}
+            productCardClicked={this.productCardClicked}
           />
         </div>
         <div className="widget">

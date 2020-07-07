@@ -27,10 +27,13 @@ class ProductCard extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.relatedProducts !== prevProps.relatedProducts) {
-      this.getCardPrices();
-      this.getCardImages();
+    if (
+      JSON.stringify(this.props.relatedProducts) !==
+      JSON.stringify(prevProps.relatedProducts)
+    ) {
       this.getCardDetails();
+      this.getCardImages();
+      this.getCardPrices();
     }
   }
 
@@ -143,7 +146,12 @@ class ProductCard extends React.Component {
                       relatedProductName={this.props.relatedProductNames[i]}
                     />
                   </div>
-                  <div className="card-body">
+                  <div
+                    className="card-body"
+                    onClick={() => {
+                      this.props.productCardClicked(card.id);
+                    }}
+                  >
                     <div className="card-subtitle">{card.category}</div>
                     <div className="card-title">{card.name}</div>
                     <span

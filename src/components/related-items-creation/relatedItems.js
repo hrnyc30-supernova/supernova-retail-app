@@ -18,10 +18,12 @@ class RelatedItems extends React.Component {
     this.getRelatedItemRatings = this.getRelatedItemRatings.bind(this);
   }
 
-  componentDidMount() {
-    // console.log('apiMaster: ', apiMaster);
-    // console.log('this.props: ', this.props);
-    this.getRelatedIds();
+  componentDidUpdate(prevProps) {
+    if (this.props !== prevProps) {
+      // console.log('apiMaster: ', apiMaster);
+      // console.log('this.props: ', this.props);
+      this.getRelatedIds();
+    }
   }
 
   getRelatedIds() {
@@ -117,7 +119,7 @@ class RelatedItems extends React.Component {
           currentProductFeatures={this.props.currentProductFeatures}
           relatedItemFeatures={this.state.relatedItemFeatures}
           relatedItemRatings={this.state.relatedItemRatings}
-        />
+          productCardClicked={this.props.productCardClicked}
         />
       </div>
     );
