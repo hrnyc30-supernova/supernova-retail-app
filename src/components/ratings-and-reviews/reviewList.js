@@ -18,6 +18,15 @@ class ReviewList extends React.Component {
     this.showMoreReviews = this.showMoreReviews.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.reviews !== this.props.reviews || prevProps.currentProductID !== this.props.currentProductID) {
+      this.setState({
+        sortedReviews: [],
+        isSorted: false,
+        count: 2
+      });
+    }
+  }
   handleSortByChange(sortString) {
     apiMaster
       .getReviewsOfProduct(
