@@ -28,28 +28,32 @@ class App extends React.Component {
 
   componentDidMount() {
     this.generateUserToken();
-    apiMaster
-      .getProductInfo()
-      .then(({ data }) => {
-        this.setState({ currentProduct: data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    apiMaster
-      .getReviewMetaData()
-      .then(({ data }) => {
-        let averageRating = this.calculateAverageRating(data.ratings);
+    let promises = [];
+    promises.push(apiMaster.getProductInfo()    
+      .then(({ data }) => ({
+        data
+      }))
+    );
+    promises.push(apiMaster.getReviewMetaData()
+      .then(({ data }) => ({
+        data
+      }))
+    );
+    Promise.all(promises)
+      .then((resolvedData) => {
+        let averageRating = this.calculateAverageRating(resolvedData[1].data.ratings);
+        console.log('this is resolved data', resolvedData);
+        console.log('this should be AVG', averageRating);
         this.setState({
           averageRating: averageRating,
-          currentRating: data
+          currentRating: resolvedData[1].data,
+          currentProduct: resolvedData[0].data
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+    }
 
   generateUserToken() {
     const cookies = new Cookies();
