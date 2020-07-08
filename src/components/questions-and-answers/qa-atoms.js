@@ -25,6 +25,11 @@ const searchState = atom({
   default: '',
 });
 
+const questionBody = atom({
+  key: 'questionBody',
+  default: 'Question Body',
+});
+
 const showSearchState = selector({
   key: 'showSearchState',
   get: ({ get }) => {
@@ -45,4 +50,5 @@ export {
   addAnswerState,
   searchState,
   showSearchState,
+  questionBody,
 };
