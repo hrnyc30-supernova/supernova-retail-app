@@ -164,10 +164,16 @@ input {
 
 .photo-container-expanded {
   width: 1200px;
+  cursor: zoom-in;
   -webkit-transition: width 300ms ease-in-out;
   -moz-transition: width 300ms ease-in-out;
   -o-transition: width 300ms ease-in-out;
   transition: width 300ms ease-in-out;
+}
+
+.photo-container-zoom {
+  width: 1200px;
+  cursor: zoom-out;
 }
 
 #product-detail-text-container {
@@ -520,7 +526,6 @@ ul.characteristics {
   position: relative;
   width: 1200px;
   margin-top: 50px;
-
 }
 
 #ratings-breakdown-container {
@@ -555,7 +560,7 @@ ul.characteristics {
   margin-bottom: 30px;
 }
 
-.inline-display{
+.inline-display {
   display: inline;
 }
 
@@ -588,13 +593,12 @@ ul.characteristics {
   width: 100px;
   height: 8px;
   background: #ccc;
-  display:inline-block;
+  display: inline-block;
 }
 
 .rating-filter-filler {
   height: 8px;
   background-color: #25b354;
-
 }
 
 .characteristic-background {
@@ -649,7 +653,6 @@ small {
 #characteristic-rating-container > small > span:last-child {
   padding-left: 80px;
 }
-
 
 .progress-rating {
   width: 150px;

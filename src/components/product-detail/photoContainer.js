@@ -11,7 +11,6 @@ class PhotoContainer extends React.Component {
     this.state = {
       selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
-      isZoomView: false,
       mouseCoordinates: null,
       zoomedImageDims: null,
     };
@@ -73,17 +72,25 @@ class PhotoContainer extends React.Component {
         photoContainerWidth: "photo-container-standard",
       });
     }
-    this.setState({
-      isZoomView: true,
-    });
     this.props.updateTextContainerVisibility();
   }
 
-  handleMouseMove(e) {
-    console.log("mouse moving!");
-    if (this.state.isZoomView === true) {
+  handleImgClick() {
+    if (this.state.photoContainerWidth === "photo-container-expanded") {
       this.setState({
-        mouseCoordinates: [e.nativeEvent.offsetX, e.nativeEvent.offsetY, e],
+        photoContainerWidth: "photo-container-zoom",
+      });
+    } else if (this.state.photoContainerWidth === "photo-container-zoom") {
+      this.setState({
+        photoContainerWidth: "photo-container-expanded",
+      });
+    }
+  }
+
+  handleMouseMove(e) {
+    if ((this.state.photoContainerWidth === "photo-container-zoom") === true) {
+      this.setState({
+        mouseCoordinates: [e.nativeEvent.layerX, e.nativeEvent.layerY, e],
         zoomedImageDims: [
           Number(
             window
@@ -118,7 +125,8 @@ class PhotoContainer extends React.Component {
               this.props.selectedStyle.photos[this.state.selectedPhotoIndex].url
             }
             style={
-              this.state.isZoomView && this.state.mouseCoordinates
+              this.state.photoContainerWidth === "photo-container-zoom" &&
+              this.state.mouseCoordinates
                 ? {
                     objectPosition: `${
                       (this.state.mouseCoordinates[0] * 100) /
@@ -128,11 +136,12 @@ class PhotoContainer extends React.Component {
                       this.state.zoomedImageDims[1]
                     }%`,
                     overflow: "hidden",
-                    transform: "scale(2.5)",
+                    transform: "scale(2)",
                     objectFit: "none",
                   }
                 : null
             }
+            onClick={(e) => this.handleImgClick(e)}
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
