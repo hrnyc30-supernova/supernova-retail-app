@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
 
 /* -------- BOOTSTRAP DEFAULT STYLES TO WATCH OUT FOR -------- */
 
@@ -10,7 +10,7 @@
 /* -------- GLOBAL -------- */
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #525252;
   width: 1200px;
   margin: auto;
@@ -56,7 +56,7 @@ body {
 }
 
 .main-action-dropdown-content a {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 1.1px;
   font-size: 14px;
   font-weight: 600;
@@ -81,7 +81,7 @@ body {
 }
 
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
 }
 
@@ -95,7 +95,7 @@ input {
 }
 
 #logo {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -133,11 +133,11 @@ input {
 }
 
 .alert-bar-message::before {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 .alert-bar-message::after {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -389,6 +389,10 @@ input {
 
 /* -------- RELATED ITEMS WIDGET -------- */
 
+.related-products-container {
+  margin-bottom: 16px;
+}
+
 .carousel-wrapper {
   width: 1000px;
   height: 25rem;
@@ -412,9 +416,14 @@ input {
   max-height: 15rem;
 }
 
+.card-body {
+  transition: color 0.5s;
+}
+
 .card-body:hover {
   cursor: pointer;
   font-weight: bold;
+  color: #007bff;
 }
 
 .card-img-top {
@@ -508,6 +517,66 @@ ul.characteristics {
 .card-compare-modal-body {
   overflow-y: scroll;
 }
+
+/* -------- YOUR OUTFIT -------- */
+
+.add-outfit-base-card {
+  min-width: 240px;
+  width: 240px;
+  height: 380px;
+  color: #525252;
+  border-style: solid;
+  border-width: 2px;
+  border-color: #525252;
+  position: relative;
+  margin-top: 16px;
+  margin-left: 100px;
+  transition: border-color 0.3s;
+}
+
+.add-outfit-base-card:hover {
+  border-style: solid;
+  border-color: #007bff;
+  cursor: pointer;
+}
+
+.add-outfit-base-card:hover #big-plus-sign {
+  fill: #007bff;
+}
+
+#big-plus-sign {
+  position: absolute;
+  left: 70px;
+  top: 140px;
+  fill: #525252;
+  transition: fill 1s;
+}
+
+.your-outfit-container {
+  display: flex;
+}
+
+.outfit-carousel-wrapper {
+  width: 760px;
+  height: 25rem;
+  margin-top: 16px;
+}
+
+.action-button-outfit {
+  position: absolute;
+  color: lightgray;
+  top: 5px;
+  right: 5px;
+  text-align: right;
+  transition: transform 0.3s, color 0.5s;
+}
+
+.action-button-outfit:hover {
+  transform: scale(1.2);
+  color: red;
+  cursor: pointer;
+}
+
 /* -------- QA WIDGET -------- */
 
 .question {
@@ -520,7 +589,6 @@ ul.characteristics {
   position: relative;
   width: 1200px;
   margin-top: 50px;
-
 }
 
 #ratings-breakdown-container {
@@ -555,7 +623,7 @@ ul.characteristics {
   margin-bottom: 30px;
 }
 
-.inline-display{
+.inline-display {
   display: inline;
 }
 
@@ -588,13 +656,12 @@ ul.characteristics {
   width: 100px;
   height: 8px;
   background: #ccc;
-  display:inline-block;
+  display: inline-block;
 }
 
 .rating-filter-filler {
   height: 8px;
   background-color: #25b354;
-
 }
 
 .characteristic-background {
@@ -629,7 +696,7 @@ ul.characteristics {
 
 .review-photo {
   width: 70px;
-  height: "auto";
+  height: 'auto';
   padding: 5px 10px;
 }
 
@@ -649,7 +716,6 @@ small {
 #characteristic-rating-container > small > span:last-child {
   padding-left: 80px;
 }
-
 
 .progress-rating {
   width: 150px;
@@ -684,5 +750,5 @@ small {
 
 .modal {
   max-height: calc(100vh - 210px);
-  overflow-y: "auto";
+  overflow-y: 'auto';
 }

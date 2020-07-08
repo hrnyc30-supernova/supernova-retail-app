@@ -1,6 +1,7 @@
 import React from 'react';
 import apiMaster from '../../apiMaster';
 import ProductCard from './productCard';
+import YourOutfit from './yourOutfit';
 
 class RelatedItems extends React.Component {
   constructor(props) {
@@ -110,19 +111,29 @@ class RelatedItems extends React.Component {
 
   render() {
     return (
-      <div className="related-products-container">
-        RELATED PRODUCTS
-        <ProductCard
-          relatedProducts={this.state.relatedProductIds}
-          relatedProductNames={this.state.relatedItemNames}
-          currentProductId={this.props.currentProductID}
-          currentProductName={this.props.currentProductName}
-          currentProductFeatures={this.props.currentProductFeatures}
-          relatedItemFeatures={this.state.relatedItemFeatures}
-          relatedItemRatings={this.state.relatedItemRatings}
-          productCardClicked={this.props.productCardClicked}
-        />
-      </div>
+      <>
+        <div className="related-products-container">
+          RELATED PRODUCTS
+          <ProductCard
+            relatedProducts={this.state.relatedProductIds}
+            relatedProductNames={this.state.relatedItemNames}
+            currentProductId={this.props.currentProductID}
+            currentProductName={this.props.currentProductName}
+            currentProductFeatures={this.props.currentProductFeatures}
+            relatedItemFeatures={this.state.relatedItemFeatures}
+            relatedItemRatings={this.state.relatedItemRatings}
+            productCardClicked={this.props.productCardClicked}
+          />
+        </div>
+        <div>
+          YOUR OUTFIT
+          <YourOutfit
+            currentProductInfo={this.props.currentProductInfo}
+            averageRating={this.props.averageRating}
+            productCardClicked={this.props.productCardClicked}
+          />
+        </div>
+      </>
     );
   }
 }

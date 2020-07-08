@@ -112,9 +112,11 @@ class App extends React.Component {
           <RelatedItems
             currentProductID={this.state.currentProduct.id}
             currentProductName={this.state.currentProduct.name}
+            currentProductInfo={this.state.currentProduct}
             currentProductFeatures={this.state.currentProduct.features}
             calculateAverageRating={this.calculateAverageRating}
             productCardClicked={this.productCardClicked}
+            averageRating={this.state.averageRating}
           />
         </div>
         <div className="widget">
