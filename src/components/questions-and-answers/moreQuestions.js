@@ -14,6 +14,7 @@ const MoreQuestions = (props) => {
     return (
       <>
         <Button
+          className="qa-button"
           variant="primary"
           onClick={() => {
             setquestionsLen(qLength);
