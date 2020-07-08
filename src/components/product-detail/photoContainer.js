@@ -83,7 +83,7 @@ class PhotoContainer extends React.Component {
     console.log("mouse moving!");
     if (this.state.isZoomView === true) {
       this.setState({
-        mouseCoordinates: [e.nativeEvent.offsetX, e.nativeEvent.offsetY, e],
+        mouseCoordinates: [e.nativeEvent.layerX, e.nativeEvent.layerY, e],
         zoomedImageDims: [
           Number(
             window
