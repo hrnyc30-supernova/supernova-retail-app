@@ -23,6 +23,7 @@ class ReviewList extends React.Component {
       this.setState({
         sortedReviews: [],
         isSorted: false,
+        count: 2
       });
     }
   }

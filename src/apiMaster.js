@@ -34,17 +34,7 @@ const reportReview = (reviewId) => {
   return axios.put(`http://18.224.200.47/reviews/report/${reviewId}`);
 };
 
-const postReview = (
-  id = 1,
-  rating,
-  summary,
-  body,
-  recommend,
-  name,
-  email,
-  photos,
-  characteristics
-) => {
+const postReview = (id = 1, rating, summary, body, recommend, name, email, photos, characteristics) => {
   return axios.post(`http://18.224.200.47/reviews/${id}`, {
     rating: rating,
     summary: summary,
