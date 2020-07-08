@@ -36,6 +36,7 @@ class ProductCard extends React.Component {
         cardDetailsLoaded: false,
         cardImagesLoaded: false,
         cardPricesLoaded: false,
+        activeItemIndex: 0,
       });
       this.getCardDetails();
       this.getCardImages();
