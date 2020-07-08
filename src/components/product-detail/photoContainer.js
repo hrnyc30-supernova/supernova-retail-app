@@ -67,7 +67,6 @@ class PhotoContainer extends React.Component {
     if (this.state.photoContainerWidth === "photo-container-standard") {
       this.setState({
         photoContainerWidth: "photo-container-expanded",
-        isZoomView: true,
       });
     } else {
       this.setState({
@@ -76,6 +75,21 @@ class PhotoContainer extends React.Component {
       });
     }
     this.props.updateTextContainerVisibility();
+  }
+
+  handleImgClick() {
+    if (
+      this.state.photoContainerWidth === "photo-container-expanded" &&
+      this.state.isZoomView === false
+    ) {
+      this.setState({
+        isZoomView: true,
+      });
+    } else {
+      this.setState({
+        isZoomView: false,
+      });
+    }
   }
 
   handleMouseMove(e) {
@@ -131,6 +145,7 @@ class PhotoContainer extends React.Component {
                   }
                 : null
             }
+            onClick={(e) => this.handleImgClick(e)}
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
