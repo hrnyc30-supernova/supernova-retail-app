@@ -11,7 +11,6 @@ class PhotoContainer extends React.Component {
     this.state = {
       selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
-      isZoomView: false,
       mouseCoordinates: null,
       zoomedImageDims: null,
     };
@@ -71,29 +70,25 @@ class PhotoContainer extends React.Component {
     } else {
       this.setState({
         photoContainerWidth: "photo-container-standard",
-        isZoomView: false,
       });
     }
     this.props.updateTextContainerVisibility();
   }
 
   handleImgClick() {
-    if (
-      this.state.photoContainerWidth === "photo-container-expanded" &&
-      this.state.isZoomView === false
-    ) {
+    if (this.state.photoContainerWidth === "photo-container-expanded") {
       this.setState({
-        isZoomView: true,
+        photoContainerWidth: "photo-container-zoom",
       });
-    } else {
+    } else if (this.state.photoContainerWidth === "photo-container-zoom") {
       this.setState({
-        isZoomView: false,
+        photoContainerWidth: "photo-container-expanded",
       });
     }
   }
 
   handleMouseMove(e) {
-    if (this.state.isZoomView === true) {
+    if ((this.state.photoContainerWidth === "photo-container-zoom") === true) {
       this.setState({
         mouseCoordinates: [e.nativeEvent.layerX, e.nativeEvent.layerY, e],
         zoomedImageDims: [
@@ -130,7 +125,8 @@ class PhotoContainer extends React.Component {
               this.props.selectedStyle.photos[this.state.selectedPhotoIndex].url
             }
             style={
-              this.state.isZoomView && this.state.mouseCoordinates
+              this.state.photoContainerWidth === "photo-container-zoom" &&
+              this.state.mouseCoordinates
                 ? {
                     objectPosition: `${
                       (this.state.mouseCoordinates[0] * 100) /
@@ -140,7 +136,7 @@ class PhotoContainer extends React.Component {
                       this.state.zoomedImageDims[1]
                     }%`,
                     overflow: "hidden",
-                    transform: "scale(2.5)",
+                    transform: "scale(2)",
                     objectFit: "none",
                   }
                 : null
