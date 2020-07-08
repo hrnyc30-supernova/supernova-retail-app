@@ -105,6 +105,7 @@ class ReviewList extends React.Component {
               this.props.currentProductCharacteristics
             }
             currentProductName={this.props.currentProductName}
+            currentProductID={this.props.currentProductID}
           />
       </div>
     );

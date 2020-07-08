@@ -10,6 +10,7 @@ class NewReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      product_id: this.props.currentProductID,
       rating: 0,
       recommend: 1,
       characteristics: {},
@@ -29,22 +30,34 @@ class NewReview extends React.Component {
   }
 
   handleSubmit(e, reviewObj) {
+    e.preventDefault();
+    console.log('should be current product ID', reviewObj.product_id);
     console.log("this is the review that we will send to the API", reviewObj);
+    console.log("should be the overall rating", reviewObj.rating);
+    console.log("should be the summary", reviewObj.summary);
+    console.log("should be the body", reviewObj.body);
+    console.log("should be the recommendation", reviewObj.recommend);
+    console.log("should be the nickname", reviewObj.nickname);
+    console.log("should be the email", reviewObj.email);
+    console.log("should be the photos", reviewObj.photos);
+    console.log("should be the characteristics", reviewObj.characteristics);
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     }
     this.setState({
       validated: true
     })
-    // apiMaster.postReview({ rating, summary, body, recommend, nickname, email, photos, characteristics })
-    //   .then(() => {
-    //     console.log('the review was posted successfully!')
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //   })
+    if (form.checkValidity() === true && this.state.validated === true) {
+      apiMaster.postReview({ product_id, rating, summary, body, recommend, nickname, email, photos, characteristics })
+        .then(() => {
+          console.log('the review was posted successfully!')
+        })
+        .catch(err => {
+          console.error(err);
+        })
+    }
   }
 
   handleChange(e) {
@@ -81,6 +94,7 @@ class NewReview extends React.Component {
   }
 
   render() {
+    console.log('current chars', this.props.currentProductCharacteristics);
     if (
       this.props.currentProductCharacteristics &&
       this.props.currentProductName
@@ -115,7 +129,6 @@ class NewReview extends React.Component {
                 <br />
                 <Form.Check
                   inline
-                  checked
                   type="radio"
                   name="recommend"
                   value="1"
@@ -138,6 +151,8 @@ class NewReview extends React.Component {
                 <br />
                 {Object.keys(this.props.currentProductCharacteristics).map(
                   (char) => {
+                    console.log('this is the characteristic', char);
+                    console.log('and the associated characteristic id', this.props.currentProductCharacteristics[char].id)
                     return (
                       <div key={char}>
                         <Form.Label>{char}</Form.Label> <br />
@@ -149,7 +164,7 @@ class NewReview extends React.Component {
                                 name={char}
                                 value={item}
                                 onChange={(e) => this.handleCharChange(e)}
-                                id={`${char}${item}`}
+                                id={`${this.props.currentProductCharacteristics[char].id}`}
                                 required
                               /><Form.Check.Label>{charScales[char][item]}</Form.Check.Label>
                               <Form.Control.Feedback type='invalid'>Characteristics Ratings Required</Form.Control.Feedback>

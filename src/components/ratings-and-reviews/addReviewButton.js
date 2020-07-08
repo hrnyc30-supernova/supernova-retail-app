@@ -30,6 +30,7 @@ class AddReviewButton extends React.Component {
             }
             show={this.state.show}
             currentProductName={this.props.currentProductName}
+            currentProductID={this.props.currentProductID}
           />
         ) : null}
       </>
