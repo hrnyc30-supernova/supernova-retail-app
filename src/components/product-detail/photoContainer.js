@@ -116,7 +116,6 @@ class PhotoContainer extends React.Component {
       <div
         id="product-detail-photo-container"
         className={this.state.photoContainerWidth}
-        onMouseMove={(e) => this.handleMouseMove(e)}
       >
         {this.props.selectedStyle !== null ? (
           <img
@@ -141,6 +140,7 @@ class PhotoContainer extends React.Component {
                   }
                 : null
             }
+            onMouseMove={(e) => this.handleMouseMove(e)}
             onClick={(e) => this.handleImgClick(e)}
           ></img>
         ) : null}
