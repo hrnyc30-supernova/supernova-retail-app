@@ -11,6 +11,7 @@
     "build-dev": "webpack -d --mode development",
     "build-prod": "webpack -p --mode production",
     "start": "webpack-dev-server --hot --mode development",
+    "sass": "sass --watch src/styles.scss src/styles.css",
     "test": "jest --coverage"
   },
   "dependencies": {
@@ -43,6 +44,8 @@
     "enzyme-to-json": "^3.5.0",
     "file-loader": "^6.0.0",
     "jest": "^26.1.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^9.0.2",
     "style-loader": "^1.2.1",
     "universal-cookie": "^4.0.3",
     "webpack": "^4.43.0",
