@@ -67,20 +67,18 @@ class PhotoContainer extends React.Component {
     if (this.state.photoContainerWidth === "photo-container-standard") {
       this.setState({
         photoContainerWidth: "photo-container-expanded",
+        isZoomView: true,
       });
     } else {
       this.setState({
         photoContainerWidth: "photo-container-standard",
+        isZoomView: false,
       });
     }
-    this.setState({
-      isZoomView: true,
-    });
     this.props.updateTextContainerVisibility();
   }
 
   handleMouseMove(e) {
-    console.log("mouse moving!");
     if (this.state.isZoomView === true) {
       this.setState({
         mouseCoordinates: [e.nativeEvent.layerX, e.nativeEvent.layerY, e],
