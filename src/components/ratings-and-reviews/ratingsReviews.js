@@ -12,40 +12,32 @@ class RatingsReviews extends React.Component {
       filtered: [],
       currentProductRatings: [],
       recommendProduct: 0,
-      currentRating: {},
     };
     this.getRatings = this.getRatings.bind(this);
     this.getRecommendation = this.getRecommendation.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
   }
 
-  componentDidMount() {
-    apiMaster
-      .getReviewsOfProduct(this.props.currentProductId, 20)
-      .then(({ data }) => {
-        let ratings = this.getRatings(data.results);
-        let recommend = this.getRecommendation(data.results);
-        this.setState({
-          reviews: data.results,
-          currentProductRatings: ratings,
-          recommendProduct: recommend,
+  componentDidUpdate(prevProps) {
+    if ( prevProps.currentProductID !== this.props.currentProductID || prevProps.currentProductName !== this.props.currentProductName || prevProps.averageRating !== this.props.averageRating || prevProps.currentRating !== this.props.currentRating) {
+      apiMaster
+        .getReviewsOfProduct(this.props.currentProductID, 'relevant', 20)
+        .then(({ data }) => {
+          let ratings = this.getRatings(data.results);
+          let recommend = this.getRecommendation(data.results);
+          this.setState({
+            reviews: data.results,
+            currentProductRatings: ratings,
+            recommendProduct: recommend,
+            filtered: []
+          });
+        })
+        .catch((err) => {
+          console.error(err);
         });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-
-    apiMaster
-      .getReviewMetaData(this.props.currentProductId)
-      .then(({ data }) => {
-        this.setState({
-          currentRating: data,
-        });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    }
   }
+
 
   getRatings(reviewsArray) {
     return reviewsArray.map((review) => {
@@ -81,7 +73,7 @@ class RatingsReviews extends React.Component {
         RATINGS AND REVIEWS
         <ReviewList
           currentProductCharacteristics={
-            this.state.currentRating.characteristics
+            this.props.currentRating.characteristics
           }
           filteredReviews={this.state.filtered}
           currentProductName={this.props.currentProductName}
@@ -89,7 +81,7 @@ class RatingsReviews extends React.Component {
           currentProductID={this.props.currentProductID}
         />
         <RatingsBreakdown
-          currentRating={this.state.currentRating}
+          currentRating={this.props.currentRating}
           recommend={this.state.recommendProduct}
           currentProductRatings={this.state.currentProductRatings}
           currentProductName={this.props.currentProductName}

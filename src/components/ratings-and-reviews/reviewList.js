@@ -4,7 +4,6 @@ import MoreReviewsButton from "./moreReviewsButton.js";
 import AddReviewButton from "./addReviewButton.js";
 import SortBy from "./sortBy.js";
 import apiMaster from "../../apiMaster.js";
-import axios from "axios";
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -16,6 +15,16 @@ class ReviewList extends React.Component {
     };
     this.handleSortByChange = this.handleSortByChange.bind(this);
     this.showMoreReviews = this.showMoreReviews.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if(prevProps.currentProductCharacteristics !== this.props.currentProductCharacteristics || prevProps.currentProductName !== this.props.currentProductName || prevProps.reviews !== this.props.reviews || prevProps.currentProductID !== this.props.currentProductID) {
+      this.setState({
+        sortedReviews: [],
+        isSorted: false,
+        count: 2
+      })
+    }
   }
 
   handleSortByChange(sortString) {

@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       currentProduct: {},
       averageRating: 0,
+      currentRating: {},
       userToken: null,
     };
 
@@ -42,10 +43,28 @@ class App extends React.Component {
         let averageRating = this.calculateAverageRating(data.ratings);
         this.setState({
           averageRating: averageRating,
-        });
+          currentRating: data
+        }, () => console.log('new app state', this.state.currentRating));
       })
       .catch((err) => {
         console.log(err);
+      });
+    apiMaster
+      .getReviewsOfProduct(this.props.currentProductId, 'relevant', 20)
+      .then(({ data }) => {
+        let ratings = this.getRatings(data.results);
+        let recommend = this.getRecommendation(data.results);
+        this.setState({
+          reviews: data.results,
+          currentProductRatings: ratings,
+          recommendProduct: recommend,
+          filtered: []
+        }, () => {
+          console.log('RATINGS AND REVIEWS HAS BEEN UPDATED --- see if it passes down to review list now!', this.state)
+        });
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }
 
@@ -89,11 +108,13 @@ class App extends React.Component {
         let averageRating = this.calculateAverageRating(data.ratings);
         this.setState({
           averageRating: averageRating,
+          currentRating: data
         });
       })
       .catch((err) => {
         console.log(err);
       });
+    
   }
 
   render() {
@@ -128,6 +149,7 @@ class App extends React.Component {
             currentProductName={this.state.currentProduct.name}
             currentProductID={this.state.currentProduct.id}
             averageRating={this.state.averageRating}
+            currentRating={this.state.currentRating}
           />
         </div>
       </div>
