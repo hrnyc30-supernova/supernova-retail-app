@@ -44,27 +44,10 @@ class App extends React.Component {
         this.setState({
           averageRating: averageRating,
           currentRating: data
-        }, () => console.log('new app state', this.state.currentRating));
+        })
       })
       .catch((err) => {
         console.log(err);
-      });
-    apiMaster
-      .getReviewsOfProduct(this.props.currentProductId, 'relevant', 20)
-      .then(({ data }) => {
-        let ratings = this.getRatings(data.results);
-        let recommend = this.getRecommendation(data.results);
-        this.setState({
-          reviews: data.results,
-          currentProductRatings: ratings,
-          recommendProduct: recommend,
-          filtered: []
-        }, () => {
-          console.log('RATINGS AND REVIEWS HAS BEEN UPDATED --- see if it passes down to review list now!', this.state)
-        });
-      })
-      .catch((err) => {
-        console.error(err);
       });
   }
 

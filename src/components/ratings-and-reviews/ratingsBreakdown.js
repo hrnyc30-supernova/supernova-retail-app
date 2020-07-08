@@ -13,9 +13,6 @@ class RatingsBreakdown extends React.Component {
   }
 
   render() {
-    console.log('this is the rating that is being sent down to ratingsbreakdown', this.props.recommend)
-    // console.log('this is the rating that is being sent down to ratingsbreakdown', this.props.currentRating)
-    // console.log('this is the rating that is being sent down to ratingsbreakdown', this.props.currentRating)
     let chars;
     this.props.currentRating !== undefined &&
     this.props.currentRating.characteristics !== undefined
@@ -42,7 +39,7 @@ class RatingsBreakdown extends React.Component {
               currentRating={this.props.currentRating}
               handleFilter={this.props.handleFilter}
             />
-            <small>{`${this.props.recommend.toFixed(2)}% of reviews recommend this product`}</small>
+            <small>{`${this.props.recommend.toFixed(0)}% of reviews recommend this product`}</small>
             <RatingFilters
               class="characteristics-ratings-container"
               recommend={this.props.recommend}
