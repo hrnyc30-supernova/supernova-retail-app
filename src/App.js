@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       currentProduct: {},
       averageRating: 0,
+      currentRating: {},
       userToken: null,
     };
 
@@ -42,6 +43,7 @@ class App extends React.Component {
         let averageRating = this.calculateAverageRating(data.ratings);
         this.setState({
           averageRating: averageRating,
+          currentRating: data
         });
       })
       .catch((err) => {
@@ -89,6 +91,7 @@ class App extends React.Component {
         let averageRating = this.calculateAverageRating(data.ratings);
         this.setState({
           averageRating: averageRating,
+          currentRating: data
         });
       })
       .catch((err) => {
@@ -130,6 +133,7 @@ class App extends React.Component {
             currentProductName={this.state.currentProduct.name}
             currentProductID={this.state.currentProduct.id}
             averageRating={this.state.averageRating}
+            currentRating={this.state.currentRating}
           />
         </div>
       </div>
