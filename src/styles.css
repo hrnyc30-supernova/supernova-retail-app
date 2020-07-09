@@ -752,8 +752,8 @@ small {
   text-decoration: underline;
 }
 
-.modal {
-  max-height: calc(100vh - 210px);
+.new-review-modal {
+  max-height: calc(80vh - 210px);
   overflow-y: 'auto';
 }
 

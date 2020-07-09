@@ -83,7 +83,7 @@ class ReviewTile extends React.Component {
                     key={photo.id}
                     src={photo.url}
                     value={photo.url}
-                    onClick={(e) => this.handleImgClick(e)}
+                    onClick={this.handleImgClick}
                   />
                 );
               })}
@@ -91,7 +91,7 @@ class ReviewTile extends React.Component {
             <Modal
               show={this.state.showImgModal}
               animation={false}
-              onHide={(e) => this.handleImgClick(e)}
+              onHide={this.handleImgClick}
             >
               <Modal.Header closeButton />
               <Modal.Body><img src={this.state.imageUrl} class="img-fluid"></img></Modal.Body>
