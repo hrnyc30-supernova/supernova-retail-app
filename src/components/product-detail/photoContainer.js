@@ -1,28 +1,42 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { FaArrowLeft } from "react-icons/fa";
+import { FaArrowLeft, FaThList } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { FiChevronUp } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 import { FaExpand } from "react-icons/fa";
 
 class PhotoContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentPhotoIcons: [],
+      morePhotoIconsAvailable: false,
+      movedToNextPhotoIconPage: false,
+      currentPageOfIcons: 0,
       selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
       mouseCoordinates: null,
       zoomedImageDims: null,
     };
 
+    this.paginatePhotoIcons = this.paginatePhotoIcons.bind(this);
     this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
     this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
+    this.handleUpChevronClick = this.handleUpChevronClick.bind(this);
+    this.handleDownChevronClick = this.handleDownChevronClick.bind(this);
     this.handleIconClick = this.handleIconClick.bind(this);
     this.handleProductPhotoExpand = this.handleProductPhotoExpand.bind(this);
   }
 
+  componentDidMount() {
+    this.paginatePhotoIcons();
+  }
+
   componentDidUpdate(prevProps) {
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
+      this.paginatePhotoIcons();
       this.setState({
         selectedPhotoIndex: 0,
       });
@@ -54,6 +68,34 @@ class PhotoContainer extends React.Component {
         selectedPhotoIndex: this.state.selectedPhotoIndex + 1,
       });
     }
+  }
+
+  paginatePhotoIcons() {
+    if (this.props.selectedStyle != undefined) {
+      if (this.state.addedPhotos === []) {
+        var addedPhotos = [];
+        this.props.selectedStyle.photos.map((photo) => addedPhotos.push(photo));
+      }
+
+      if (addedPhotos.length > 7) {
+        var firstSevenPhotos = addedPhotos.slice(0, 7);
+        this.setState({
+          morePhotoIconsAvailable: true,
+        });
+      }
+      this.setState({
+        currentPhotoIcons: firstSevenPhotos || addedPhotos,
+      });
+    }
+  }
+
+  handleUpChevronClick() {}
+
+  handleDownChevronClick() {
+    this.setState({
+      movedToNextPhotoIconPage: true,
+      currentPageOfIcons: this.state.currentPageOfIcons + 1,
+    });
   }
 
   handleIconClick(index) {
@@ -145,8 +187,8 @@ class PhotoContainer extends React.Component {
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
-          {this.props.selectedStyle != undefined
-            ? this.props.selectedStyle.photos.map((photo, index) => (
+          {this.state.currentPhotoIcons != []
+            ? this.state.currentPhotoIcons.map((photo, index) => (
                 <div
                   className="product-photo-icon"
                   style={{
@@ -168,19 +210,41 @@ class PhotoContainer extends React.Component {
           <FaExpand />
         </span>
         <span
-          className="arrow"
+          className="photo-selector-arrows"
           id="left-arrow"
           onClick={(event) => this.handleLeftArrowClick(event)}
         >
           <FaArrowLeft />
         </span>
         <span
-          className="arrow"
+          className="photo-selector-arrows"
           id="right-arrow"
           onClick={(event) => this.handleRightArrowClick(event)}
         >
           <FaArrowRight />
         </span>
+        {this.props.selectedStyle != undefined &&
+        this.props.selectedStyle.photos.length > 7 &&
+        this.state.movedToNextPhotoIconPage === true ? (
+          <span
+            className="photo-selector-chevrons"
+            id="up-chevron"
+            onClick={(event) => this.handleUpChevronClick(event)}
+          >
+            <FiChevronUp />
+          </span>
+        ) : null}
+        {this.props.selectedStyle != undefined &&
+        this.props.selectedStyle.photos.length > 7 &&
+        this.state.morePhotoIconsAvailable === true ? (
+          <span
+            className="photo-selector-chevrons"
+            id="down-chevron"
+            onClick={(event) => this.handleDownChevronClick(event)}
+          >
+            <FiChevronDown />
+          </span>
+        ) : null}
       </div>
     );
   }
