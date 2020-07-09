@@ -77,16 +77,13 @@ class NewReview extends React.Component {
         photos: images
       }, () => {console.log(this.state.photos)})
     }
-    console.log(this.state);
     let temp = this.state.showImgModal;
-    console.log(temp)
     this.setState({
       showImgModal: !temp,
     });
   }
 
   render() {
-    console.log('current chars', this.props.currentProductCharacteristics);
     if (
       this.props.currentProductCharacteristics &&
       this.props.currentProductName
@@ -142,13 +139,7 @@ class NewReview extends React.Component {
                 <Form.Label>* Characteristics</Form.Label>
                 <br />
                 {Object.keys(this.props.currentProductCharacteristics).map(
-<<<<<<< Updated upstream
-                  (char) => {
-                    console.log('this is the characteristic', char);
-                    console.log('and the associated characteristic id', this.props.currentProductCharacteristics[char].id)
-=======
                   (char, index) => {
->>>>>>> Stashed changes
                     return (
                       <div key={this.props.currentProductCharacteristics[char].id}>
                         <Form.Label>{char}</Form.Label> <br />
@@ -160,7 +151,7 @@ class NewReview extends React.Component {
                                 name={this.props.currentProductCharacteristics[char].id}
                                 value={item}
                                 onChange={(e) => this.handleCharChange(e)}
-                                id={`${this.props.currentProductCharacteristics[char].id}`}
+                                id={`${char}${item}`}
                                 required
                               /><Form.Check.Label>{charScales[char][item]}</Form.Check.Label>
                               <Form.Control.Feedback type='invalid'>Characteristics Ratings Required</Form.Control.Feedback>

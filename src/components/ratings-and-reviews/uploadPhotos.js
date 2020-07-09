@@ -21,7 +21,7 @@ class UploadPhotos extends React.Component {
   }
 
   handleUpload(e) {
-      this.props.toggleModal(e, this.state.images);
+      this.props.toggleImgModal(e, this.state.images);
   }
 
   render() {
