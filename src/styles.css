@@ -694,7 +694,6 @@ ul.characteristics {
   padding: 0 10px;
 }
 
-.characteristic-filter-elem:hover,
 .star-rating-filter-elem:hover {
   text-decoration: underline;
   color: gray;
@@ -750,7 +749,6 @@ small {
 }
 .link {
   cursor: pointer;
-  color: blue;
   text-decoration: underline;
 }
 
