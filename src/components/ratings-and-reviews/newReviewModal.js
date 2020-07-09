@@ -4,18 +4,20 @@ import UploadPhotos from "./uploadPhotos.js";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { charScales, ratingScale } from "./constants.js";
+import apiMaster from "../.././apiMaster.js"
 
 class NewReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: this.props.currentProductID,
       rating: 0,
-      recommend: 1,
+      recommend: true,
       characteristics: {},
       summary: "",
       body: "",
-      photos: {},
-      nickname: "",
+      photos: [],
+      name: "",
       email: "",
       showImgModal: false,
       validated: false,
@@ -27,8 +29,9 @@ class NewReview extends React.Component {
     this.toggleImgModal = this.toggleImgModal.bind(this);
   }
 
-  handleSubmit(e, reviewObj) {
-    console.log("this is the review that we will send to the API", reviewObj);
+  handleSubmit(e, { id, rating, summary, body, recommend, name, email, photos, characteristics }) {
+    e.preventDefault();
+    
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -36,19 +39,26 @@ class NewReview extends React.Component {
     }
     this.setState({
       validated: true
-    })
-    // apiMaster.postReview({ rating, summary, body, recommend, nickname, email, photos, characteristics })
-    //   .then(() => {
-    //     console.log('the review was posted successfully!')
-    //   })
-    //   .catch(err => {
-    //     console.error(err);
-    //   })
+    }, () => console.log(this.state))
+    if (form.checkValidity() === true) {
+    this.props.showModal();
+    apiMaster.postReview(id, rating, summary, body, recommend, name, email, photos, characteristics)
+      .then(({ data }) => {         
+        console.log('the review was posted successfully!', data)
+      })
+      .catch(err => {
+        console.error(err);
+      })
+    }  
   }
 
   handleChange(e) {
     let temp = {};
-    temp[e.target.name] = e.target.value;
+    if (e.target.name === 'recommend') {
+      temp[e.target.name] = !!e.target.value;
+    } else {
+      temp[e.target.name] = e.target.value;
+    }
     this.setState(temp);
   }
 
@@ -72,9 +82,7 @@ class NewReview extends React.Component {
         photos: images
       }, () => {console.log(this.state.photos)})
     }
-    console.log(this.state);
     let temp = this.state.showImgModal;
-    console.log(temp)
     this.setState({
       showImgModal: !temp,
     });
@@ -115,10 +123,9 @@ class NewReview extends React.Component {
                 <br />
                 <Form.Check
                   inline
-                  checked
                   type="radio"
                   name="recommend"
-                  value="1"
+                  value="true"
                   label="Yes"
                   id="1"
                   onChange={(e) => this.handleChange(e)}
@@ -127,7 +134,7 @@ class NewReview extends React.Component {
                   inline
                   type="radio"
                   name="recommend"
-                  value="0"
+                  value="false"
                   label="No"
                   id="0"
                   onChange={(e) => this.handleChange(e)}
@@ -137,16 +144,16 @@ class NewReview extends React.Component {
                 <Form.Label>* Characteristics</Form.Label>
                 <br />
                 {Object.keys(this.props.currentProductCharacteristics).map(
-                  (char) => {
+                  (char, index) => {
                     return (
-                      <div key={char}>
+                      <div key={this.props.currentProductCharacteristics[char].id}>
                         <Form.Label>{char}</Form.Label> <br />
                         {["1", "2", "3", "4", "5"].map((item, i) => {
                           return (
                             <Form.Check key={i}>
                               <Form.Check.Input
                                 type="radio"
-                                name={char}
+                                name={this.props.currentProductCharacteristics[char].id}
                                 value={item}
                                 onChange={(e) => this.handleCharChange(e)}
                                 id={`${char}${item}`}
@@ -218,13 +225,13 @@ class NewReview extends React.Component {
                 />
               ) : null}
               <br />
-              <Form.Group controlId="nickname">
-                <Form.Label>* What is your nickname?</Form.Label>
+              <Form.Group controlId="name">
+                <Form.Label>* What is your name?</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter email"
-                  name="nickname"
-                  value={this.state.nickname}
+                  name="name"
+                  value={this.state.name}
                   onChange={(e) => this.handleChange(e)}
                   placeholder="Example: jackson11!"
                   maxLength={60}
@@ -236,7 +243,7 @@ class NewReview extends React.Component {
                     address
                   </small>
                 </Form.Text>
-                <Form.Control.Feedback type='invalid'>Nickname is Required</Form.Control.Feedback>
+                <Form.Control.Feedback type='invalid'>name is Required</Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>* Your Email</Form.Label>

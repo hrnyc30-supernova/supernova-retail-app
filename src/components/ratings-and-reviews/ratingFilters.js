@@ -88,8 +88,8 @@ class RatingFilters extends React.Component {
                   .map((possibleRating, i) => {
                     return (
                       <div key={i} id="rating-filter-container">
-                        <div className="star-rating-filter-elem" value={i+1} onClick={e=>this.toggleFilter(e, i+1)}>
-                          {`${Number(i) + 1} Stars`}
+                        <div value={i+1} onClick={e=>this.toggleFilter(e, i+1)}>
+                          <span className="star-rating-filter-number"> {`${Number(i) + 1} Stars`}</span>
                           <div className="rating-filter-background">
                             <div
                               className="rating-filter-filler"
@@ -109,7 +109,7 @@ class RatingFilters extends React.Component {
           </div>
         ) : (
           <div className="characteristics-ratings-container">
-            <>
+            <>Characteristic Breakdown<br/>
               {chars !== null
                 ? Object.entries(chars).map(([char, val]) => {
                     return (
@@ -126,20 +126,17 @@ class RatingFilters extends React.Component {
                               </div>
                             </div>
                           </div>
-
-                          <small className="characteristic-scale">
                             {[1, 5].map((item, i) => {
                               return (
                                 <span
-                                  className="characteristic-scale-item"
-                                  key={i}
+                                className="characteristic-scale-item"
+                                key={i}
                                 >
-                                  {charScales[char][item]}
+                                  <small>{charScales[char][item]}</small>
                                 </span>
                               );
                             })}
-                          </small>
-                        </label>
+                            </label>
                       </div>
                     );
                   })

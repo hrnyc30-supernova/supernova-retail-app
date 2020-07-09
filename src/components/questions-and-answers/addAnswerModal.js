@@ -6,16 +6,18 @@ import { useForm } from 'react-hook-form';
 import apiMaster from '../../apiMaster';
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { quesitonIdState, questionBody } from './qa-atoms';
+import UplaodPhoto from './uploadPhoto';
 
 const AddAnswerModal = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const [show, setShow] = useState(props.show);
   const [questionID, setquestionID] = useRecoilState(quesitonIdState);
   const question_body = useRecoilValue(questionBody);
+  const [photos, setPhotos] = useState([]);
 
   const onSubmit = (data) => {
     apiMaster
-      .answerQuestion(questionID, data.body, data.name, data.email)
+      .answerQuestion(questionID, data.body, data.name, data.email, photos)
       .then(() => {
         setShow(false);
         props.closeModal();
@@ -93,13 +95,11 @@ const AddAnswerModal = (props) => {
                 <p style={{ color: 'red' }}>Answer is required</p>
               )}
             </Form.Text>
+            <UplaodPhoto setPhoto={setPhotos} />
           </Form.Group>
           <Button variant="success" type="submit" className="qa-button">
             Submit
           </Button>{' '}
-          <Button variant="primary" className="qa-button">
-            Upload Photos
-          </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer></Modal.Footer>

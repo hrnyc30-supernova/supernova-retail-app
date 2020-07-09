@@ -1,5 +1,7 @@
 import React from "react";
 import Stars from "./stars.js";
+import Helpful from "./helpful.js";
+import Report from "./report.js";
 import Modal from "react-bootstrap/Modal";
 import moment from "moment";
 import { FaCheck, FaCheckCircle } from "react-icons/fa";
@@ -108,7 +110,7 @@ class ReviewTile extends React.Component {
                 Response from seller: {this.props.review.response}
               </p>
             )}
-            <p>Helpful? ({this.props.review.helpfulness}) | Report Link HERE</p>
+            <p className='helpful-wrapper'><Helpful id={this.props.review.review_id} widget='review' helpfulCount={this.props.review.helpfulness}/> | <Report id={this.props.review.review_id} widget='review'/></p>
           </>
         ) : null}
       </div>
