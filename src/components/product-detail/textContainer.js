@@ -12,6 +12,7 @@ class TextContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      stylesMenuWidth: "styles-menu-4-across",
       bagError: "",
       bagMessage: "Add to Bag",
       bagIcon: <FiPlus />,
@@ -134,35 +135,39 @@ class TextContainer extends React.Component {
             )}
           </div>
         ) : null}
-        <div id="styles-menu">
+        <div
+          id={
+            this.props.styles.length <= 8
+              ? "styles-menu-4-across"
+              : "styles-menu-5-across"
+          }
+        >
           <div id="styles-menu-heading">
             <strong>STYLE ></strong>
             {this.props.selectedStyle != undefined ? (
               <span> {this.props.selectedStyle.name}</span>
             ) : null}
           </div>
-          <div id="product-style-icon-container">
-            {this.props.styles !== [] && this.props.styles != undefined
-              ? this.props.styles.map((style, index) => (
-                  <div
-                    className="product-style-icon"
-                    style={{
-                      backgroundImage: `url(${style.photos[0].thumbnail_url})`,
-                    }}
-                    onClick={() => this.props.updateSelectedStyle(index)}
-                  >
-                    {this.props.selectedStyle === style ? (
-                      <span>
-                        <span id="selected-style-checkmark-frame"></span>
-                        <span id="selected-style-checkmark">
-                          <GrFormCheckmark />
-                        </span>
+          {this.props.styles !== [] && this.props.styles != undefined
+            ? this.props.styles.map((style, index) => (
+                <div
+                  className="product-style-icon"
+                  style={{
+                    backgroundImage: `url(${style.photos[0].thumbnail_url})`,
+                  }}
+                  onClick={() => this.props.updateSelectedStyle(index)}
+                >
+                  {this.props.selectedStyle === style ? (
+                    <span>
+                      <span id="selected-style-checkmark-frame"></span>
+                      <span id="selected-style-checkmark">
+                        <GrFormCheckmark />
                       </span>
-                    ) : null}
-                  </div>
-                ))
-              : null}
-          </div>
+                    </span>
+                  ) : null}
+                </div>
+              ))
+            : null}
         </div>
         <div className="main-action-dropdown">
           <span className="main-action-button" id="size-selector">

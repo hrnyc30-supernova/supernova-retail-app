@@ -289,17 +289,20 @@ input {
   margin-right: 8px;
 }
 
-#styles-menu {
+#styles-menu-4-across {
   margin-top: 25px;
+  width: 340px;
+  height: 205px;
+}
+
+#styles-menu-5-across {
+  margin-top: 25px;
+  width: 430px;
+  height: 205px;
 }
 
 #styles-menu-heading {
   letter-spacing: 0.4px;
-}
-
-#product-style-icon-container {
-  width: 340px;
-  height: 145px;
 }
 
 .product-style-icon {
