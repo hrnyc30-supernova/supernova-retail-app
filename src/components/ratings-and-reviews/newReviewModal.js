@@ -10,14 +10,14 @@ class NewReview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product_id: this.props.currentProductID,
+      id: this.props.currentProductID,
       rating: 0,
       recommend: true,
       characteristics: {},
       summary: "",
       body: "",
       photos: [],
-      nickname: "",
+      name: "",
       email: "",
       showImgModal: false,
       validated: false,
@@ -29,8 +29,9 @@ class NewReview extends React.Component {
     this.toggleImgModal = this.toggleImgModal.bind(this);
   }
 
-  handleSubmit(e, { product_id, rating, summary, body, recommend, nickname, email, photos, characteristics }) {
+  handleSubmit(e, { id, rating, summary, body, recommend, name, email, photos, characteristics }) {
     e.preventDefault();
+    
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -38,22 +39,25 @@ class NewReview extends React.Component {
     }
     this.setState({
       validated: true
-    })
-    if (form.checkValidity() === true && this.state.validated === true) {
-    apiMaster.postReview({ product_id, rating, summary, body, recommend, nickname, email, photos, characteristics })
-      .then((data) => {
-        
+    }, () => console.log(this.state))
+    this.props.showModal();
+    apiMaster.postReview(id, rating, summary, body, recommend, name, email, photos, characteristics)
+      .then(({ data }) => {         
         console.log('the review was posted successfully!', data)
       })
       .catch(err => {
         console.error(err);
       })
-    }
+  
   }
 
   handleChange(e) {
     let temp = {};
-    temp[e.target.name] = e.target.value;
+    if (e.target.name === 'recommend') {
+      temp[e.target.name] = !!e.target.value;
+    } else {
+      temp[e.target.name] = e.target.value;
+    }
     this.setState(temp);
   }
 
@@ -220,13 +224,13 @@ class NewReview extends React.Component {
                 />
               ) : null}
               <br />
-              <Form.Group controlId="nickname">
-                <Form.Label>* What is your nickname?</Form.Label>
+              <Form.Group controlId="name">
+                <Form.Label>* What is your name?</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="Enter email"
-                  name="nickname"
-                  value={this.state.nickname}
+                  name="name"
+                  value={this.state.name}
                   onChange={(e) => this.handleChange(e)}
                   placeholder="Example: jackson11!"
                   maxLength={60}
@@ -238,7 +242,7 @@ class NewReview extends React.Component {
                     address
                   </small>
                 </Form.Text>
-                <Form.Control.Feedback type='invalid'>Nickname is Required</Form.Control.Feedback>
+                <Form.Control.Feedback type='invalid'>name is Required</Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
                 <Form.Label>* Your Email</Form.Label>
