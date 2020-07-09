@@ -35,7 +35,7 @@ const Report = (props) => {
   }, []);
 
   return (
-    <p>
+    <>
       {" "}
       {report === true ? (
         <span className="report">Reported</span>
@@ -51,7 +51,7 @@ const Report = (props) => {
         
       )}
       
-    </p>
+    </>
   );
 };
 

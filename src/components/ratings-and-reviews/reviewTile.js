@@ -110,7 +110,7 @@ class ReviewTile extends React.Component {
                 Response from seller: {this.props.review.response}
               </p>
             )}
-            <p><Helpful id={this.props.review.review_id} widget='review' helpfulCount={this.props.review.helpfulness}/> | <Report id={this.props.review.review_id} widget='review'/></p>
+            <p className='helpful-wrapper'><Helpful id={this.props.review.review_id} widget='review' helpfulCount={this.props.review.helpfulness}/> | <Report id={this.props.review.review_id} widget='review'/></p>
           </>
         ) : null}
       </div>

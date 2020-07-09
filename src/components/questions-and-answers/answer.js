@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import moment from 'moment';
 import Helpful from ".././ratings-and-reviews/helpful.js";
+import Report from ".././ratings-and-reviews/report.js";
 
 const Answer = (props) => {
   const [answers, setAnswer] = useState([]);
@@ -35,9 +36,11 @@ const Answer = (props) => {
             <Card.Body key={answer.answer_id}>
               <Card.Title>A: {answer.body}</Card.Title>
               <Card.Text>
+              <div className='helpful-wrapper'>
                 By: {by}, {date} | 
                 <Helpful id={answer.answer_id} widget='answer' helpfulCount={answer.helpfulness}/>
-                |<u style={{ cursor: 'pointer' }}> Report</u>
+                |<Report id={answer.answer_id} widget='answer'/>
+              </div>
               </Card.Text>
             </Card.Body>
           );

@@ -800,3 +800,12 @@ small {
   text-transform: uppercase;
   color: #525252;
 }
+
+.helpful-wrapper{
+  font-size: 12px;
+  display: inline;
+}
+
+.helpful-wrapper a {
+  cursor: pointer;
+}
