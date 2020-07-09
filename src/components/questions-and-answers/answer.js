@@ -35,6 +35,15 @@ const Answer = (props) => {
           return (
             <Card.Body key={answer.answer_id}>
               <Card.Title>A: {answer.body}</Card.Title>
+              {answer.photos.map((image) => {
+                return (
+                  <img
+                    key={image.url}
+                    src="https://images.unsplash.com/photo-1529088148495-2d9f231db829?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80"
+                    style={{ maxHeight: '100px', maxWidth: '100px' }}
+                  />
+                );
+              })}
               <Card.Text>
               <div className='helpful-wrapper'>
                 By: {by}, {date} | 
