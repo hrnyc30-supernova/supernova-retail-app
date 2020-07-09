@@ -20,38 +20,43 @@ class App extends React.Component {
       averageRating: 0,
       currentRating: {},
       userToken: null,
+      clickData: [],
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
     this.productCardClicked = this.productCardClicked.bind(this);
+    this.clickTracker = this.clickTracker.bind(this);
   }
 
   componentDidMount() {
     this.generateUserToken();
+    document.addEventListener('click', this.clickTracker);
     let promises = [];
-    promises.push(apiMaster.getProductInfo()    
-      .then(({ data }) => ({
-        data
+    promises.push(
+      apiMaster.getProductInfo().then(({ data }) => ({
+        data,
       }))
     );
-    promises.push(apiMaster.getReviewMetaData()
-      .then(({ data }) => ({
-        data
+    promises.push(
+      apiMaster.getReviewMetaData().then(({ data }) => ({
+        data,
       }))
     );
     Promise.all(promises)
       .then((resolvedData) => {
-        let averageRating = this.calculateAverageRating(resolvedData[1].data.ratings);
+        let averageRating = this.calculateAverageRating(
+          resolvedData[1].data.ratings
+        );
         this.setState({
           averageRating: averageRating,
           currentRating: resolvedData[1].data,
-          currentProduct: resolvedData[0].data
+          currentProduct: resolvedData[0].data,
         });
       })
       .catch((err) => {
         console.log(err);
       });
-    }
+  }
 
   generateUserToken() {
     const cookies = new Cookies();
@@ -93,12 +98,41 @@ class App extends React.Component {
         let averageRating = this.calculateAverageRating(data.ratings);
         this.setState({
           averageRating: averageRating,
-          currentRating: data
+          currentRating: data,
         });
       })
       .catch((err) => {
         console.log(err);
       });
+  }
+
+  clickTracker(e) {
+    if (window.localStorage.getItem(this.state.userToken) == undefined) {
+      const userActivity = [
+        {
+          elementClicked: e.target.outerHTML,
+          timeSinceVisit: e.timeStamp,
+        },
+      ];
+      // console.log(userActivity);
+      window.localStorage.setItem(
+        this.state.userToken,
+        JSON.stringify(userActivity)
+      );
+    } else {
+      let oldActivity = JSON.parse(
+        window.localStorage.getItem(this.state.userToken)
+      );
+      let newActivity = oldActivity.slice();
+      newActivity.push({
+        elementClicked: e.target.outerHTML,
+        timeSinceVisit: e.timeStamp,
+      });
+      window.localStorage.setItem(
+        this.state.userToken,
+        JSON.stringify(newActivity)
+      );
+    }
   }
 
   render() {
