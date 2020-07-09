@@ -112,12 +112,15 @@ class TextContainer extends React.Component {
         <a href="#reviews-ratings-container" id="reviews-link">
           Read all reviews
         </a>
-        <div id="product-category">{this.props.product.category}</div>
-        <div id="product-name">{this.props.product.name}</div>
-        {this.props.selectedStyle !== null ? (
+        <div id="product-category">
+          {this.props.product != undefined ? this.props.product.category : null}
+        </div>
+        <div id="product-name">
+          {this.props.product != undefined ? this.props.product.name : null}
+        </div>
+        {this.props.selectedStyle != undefined ? (
           <div id="product-price">
-            {this.props.selectedStyle !== null &&
-            this.props.selectedStyle.sale_price != 0 &&
+            {this.props.selectedStyle.sale_price != 0 &&
             this.props.selectedStyle.sale_price !==
               this.props.selectedStyle.original_price ? (
               <span>
@@ -134,12 +137,12 @@ class TextContainer extends React.Component {
         <div id="styles-menu">
           <div id="styles-menu-heading">
             <strong>STYLE ></strong>
-            {this.props.selectedStyle !== null ? (
+            {this.props.selectedStyle != undefined ? (
               <span> {this.props.selectedStyle.name}</span>
             ) : null}
           </div>
           <div id="product-style-icon-container">
-            {this.props.styles !== []
+            {this.props.styles !== [] && this.props.styles != undefined
               ? this.props.styles.map((style, index) => (
                   <div
                     className="product-style-icon"
@@ -168,7 +171,7 @@ class TextContainer extends React.Component {
               <FiChevronDown />
             </span>
             <div className="main-action-dropdown-content">
-              {this.props.selectedStyle !== null ? (
+              {this.props.selectedStyle != undefined ? (
                 this.state.currentlySelectedSize !== "Select Size" ? (
                   <a
                     id="Select Size"
@@ -178,7 +181,7 @@ class TextContainer extends React.Component {
                   </a>
                 ) : null
               ) : null}
-              {this.props.selectedStyle !== null
+              {this.props.selectedStyle != undefined
                 ? Object.keys(this.props.selectedStyle.skus).map((key) => (
                     <a id={key} onClick={(event) => this.selectSize(event)}>
                       {key}
@@ -195,7 +198,7 @@ class TextContainer extends React.Component {
               <FiChevronDown />
             </span>
             <div className="main-action-dropdown-content">
-              {this.props.selectedStyle !== null &&
+              {this.props.selectedStyle != undefined &&
               this.state.currentlySelectedSize === "Select Size" ? (
                 this.state.currentlySelectedQuantity !== "-" ? (
                   <a id="-" onClick={(event) => this.selectQuantity(event)}>
@@ -203,7 +206,7 @@ class TextContainer extends React.Component {
                   </a>
                 ) : null
               ) : null}
-              {this.props.selectedStyle !== null &&
+              {this.props.selectedStyle != undefined &&
               this.state.currentlySelectedSize !== "Select Size"
                 ? [
                     ...Array(

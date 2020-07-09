@@ -12,7 +12,7 @@ const RatingsBreakdown = (props) => {
     <div id="ratings-breakdown-container">
       {props.currentProductRatings &&
       props.averageRating &&
-      props.recommend &&
+      (props.recommend === 0 || props.recommend) &&
       props.currentRating ? (
         <>
           <div id="avg-rating">
@@ -29,7 +29,7 @@ const RatingsBreakdown = (props) => {
             currentRating={props.currentRating}
             handleFilter={props.handleFilter}
           />
-          <small>{`${props.recommend}% of reviews recommend this product`}</small>
+          <small>{`${props.recommend.toFixed(0)}% of reviews recommend this product`}</small>
           <RatingFilters
             class="characteristics-ratings-container"
             recommend={props.recommend}

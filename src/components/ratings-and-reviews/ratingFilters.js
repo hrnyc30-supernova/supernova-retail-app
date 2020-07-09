@@ -47,6 +47,8 @@ class RatingFilters extends React.Component {
   removeFilters() {
     this.setState({
       filters: {}
+    }, () => {
+      this.props.handleFilter(this.state.filters);
     })
   }
 
@@ -81,7 +83,7 @@ class RatingFilters extends React.Component {
             {this.props.currentProductRatings ? (
               <>
                 Rating Breakdown <br />
-                {Object.keys(this.state.filters).length === 0 ? null : <small>{`Applied Filters: ${Object.keys(this.state.filters).join(' ')}`}<span onClick={this.removeFilters}>{`  Remove all filters`}</span></small>}
+                {Object.keys(this.state.filters).length === 0 ? null : <small>{`Applied Filters: ${Object.keys(this.state.filters).join(' ')}`}<span className='link' onClick={this.removeFilters}>{`  Remove all filters`}</span></small>}
                 {[...Array(5)]
                   .map((possibleRating, i) => {
                     return (

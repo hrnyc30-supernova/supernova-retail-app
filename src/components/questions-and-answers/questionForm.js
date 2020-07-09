@@ -86,7 +86,7 @@ const AskQuestionModal = (props) => {
               )}
             </Form.Text>
           </Form.Group>
-          <Button variant="success" type="submit">
+          <Button variant="success" type="submit" className="qa-button">
             Submit
           </Button>
         </Form>

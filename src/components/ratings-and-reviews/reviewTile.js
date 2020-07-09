@@ -1,5 +1,7 @@
 import React from "react";
 import Stars from "./stars.js";
+import Helpful from "./helpful.js";
+import Report from "./report.js";
 import Modal from "react-bootstrap/Modal";
 import moment from "moment";
 import { FaCheck, FaCheckCircle } from "react-icons/fa";
@@ -8,7 +10,7 @@ class ReviewTile extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      showAll: false,
+      showFullBody: false,
       showImgModal: false,
     };
     this.handleClick = this.handleClick.bind(this);
@@ -16,17 +18,25 @@ class ReviewTile extends React.Component {
   }
 
   handleClick() {
-    let temp = this.state.showAll;
+    let temp = this.state.showFullBody;
     this.setState({
-      showAll: !temp,
+      showFullBody: !temp,
     });
   }
 
   handleImgClick(e) {
     let temp = this.state.showImgModal;
-    this.setState({
-      showImgModal: !temp,
-    });
+    if (e !== undefined) {
+      this.setState({
+        imageUrl: e.currentTarget.src,
+        showImgModal: !temp,
+      });
+    } else {
+      this.setState({
+        imageUrl: '', 
+        showImgModal: !temp
+      })
+    }
   }
 
   render() {
@@ -48,7 +58,7 @@ class ReviewTile extends React.Component {
             </p>
             <p>
               {this.props.review.body.length > 250 ? (
-                this.state.showAll === false ? (
+                this.state.showFullBody === false ? (
                   <>
                     {this.props.review.body.slice(0, 251)}
                     <span className="link" onClick={this.handleClick}>
@@ -75,7 +85,7 @@ class ReviewTile extends React.Component {
                     key={photo.id}
                     src={photo.url}
                     value={photo.url}
-                    onClick={(e) => this.handleImgClick(e)}
+                    onClick={this.handleImgClick}
                   />
                 );
               })}
@@ -83,10 +93,10 @@ class ReviewTile extends React.Component {
             <Modal
               show={this.state.showImgModal}
               animation={false}
-              onHide={(e) => this.handleImgClick(e)}
+              onHide={this.handleImgClick}
             >
               <Modal.Header closeButton />
-              <Modal.Body>Image goes here!</Modal.Body>
+              <Modal.Body><img src={this.state.imageUrl} class="img-fluid"></img></Modal.Body>
             </Modal>
             <p>
               {this.props.review.recommend === 0 ? (
@@ -100,7 +110,7 @@ class ReviewTile extends React.Component {
                 Response from seller: {this.props.review.response}
               </p>
             )}
-            <p>Helpful? ({this.props.review.helpfulness}) | Report Link HERE</p>
+            <p className='helpful-wrapper'><Helpful id={this.props.review.review_id} widget='review' helpfulCount={this.props.review.helpfulness}/> | <Report id={this.props.review.review_id} widget='review'/></p>
           </>
         ) : null}
       </div>

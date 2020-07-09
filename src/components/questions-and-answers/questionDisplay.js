@@ -2,12 +2,14 @@ import React, { useState, useEffect } from 'react';
 import apiMaster from '../../apiMaster';
 import Answer from './answer';
 import Card from 'react-bootstrap/Card';
+import Helpful from ".././ratings-and-reviews/helpful.js";
 import {
   displayAmountState,
   allQuestionsState,
   quesitonIdState,
   searchState,
   showSearchState,
+  questionBody,
 } from './qa-atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -17,6 +19,7 @@ const QuestionDisplay = (props) => {
   const [questionID, setquestionID] = useRecoilState(quesitonIdState);
   const [search, setSearch] = useRecoilState(searchState);
   const showSearch = useRecoilValue(showSearchState);
+  const [q, setq] = useRecoilState(questionBody);
 
   useEffect(() => {
     apiMaster
@@ -45,6 +48,7 @@ const QuestionDisplay = (props) => {
                     <u
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
+                        setq(question.question_body);
                         setquestionID(question.question_id);
                         props.showModal();
                       }}
@@ -70,11 +74,11 @@ const QuestionDisplay = (props) => {
               <Card.Header>
                 Q: {question.question_body}{' '}
                 <div style={{ float: 'right' }}>
-                  Helpful? <u style={{ cursor: 'pointer' }}> YES</u> (
-                  {question.question_helpfulness}) |
+                  <Helpful id={question.question_id} widget='question' helpfulCount={question.question_helpfulness}/>
                   <u
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
+                      setq(question.question_body);
                       setquestionID(question.question_id);
                       props.showModal();
                     }}

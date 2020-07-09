@@ -18,6 +18,7 @@ class App extends React.Component {
     this.state = {
       currentProduct: {},
       averageRating: 0,
+      currentRating: {},
       userToken: null,
     };
 
@@ -27,27 +28,30 @@ class App extends React.Component {
 
   componentDidMount() {
     this.generateUserToken();
-    apiMaster
-      .getProductInfo()
-      .then(({ data }) => {
-        this.setState({ currentProduct: data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    apiMaster
-      .getReviewMetaData()
-      .then(({ data }) => {
-        let averageRating = this.calculateAverageRating(data.ratings);
+    let promises = [];
+    promises.push(apiMaster.getProductInfo()    
+      .then(({ data }) => ({
+        data
+      }))
+    );
+    promises.push(apiMaster.getReviewMetaData()
+      .then(({ data }) => ({
+        data
+      }))
+    );
+    Promise.all(promises)
+      .then((resolvedData) => {
+        let averageRating = this.calculateAverageRating(resolvedData[1].data.ratings);
         this.setState({
           averageRating: averageRating,
+          currentRating: resolvedData[1].data,
+          currentProduct: resolvedData[0].data
         });
       })
       .catch((err) => {
         console.log(err);
       });
-  }
+    }
 
   generateUserToken() {
     const cookies = new Cookies();
@@ -89,6 +93,7 @@ class App extends React.Component {
         let averageRating = this.calculateAverageRating(data.ratings);
         this.setState({
           averageRating: averageRating,
+          currentRating: data
         });
       })
       .catch((err) => {
@@ -130,6 +135,7 @@ class App extends React.Component {
             currentProductName={this.state.currentProduct.name}
             currentProductID={this.state.currentProduct.id}
             averageRating={this.state.averageRating}
+            currentRating={this.state.currentRating}
           />
         </div>
       </div>

@@ -24,7 +24,7 @@ class AddReviewButton extends React.Component {
         </button>
         {this.state.show ? (
           <NewReview
-            toggleModal={this.showModal}
+            showModal={this.showModal}
             currentProductCharacteristics={
               this.props.currentProductCharacteristics
             }
