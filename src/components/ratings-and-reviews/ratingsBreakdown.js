@@ -29,7 +29,7 @@ const RatingsBreakdown = (props) => {
             currentRating={props.currentRating}
             handleFilter={props.handleFilter}
           />
-          <small>{`${props.recommend}% of reviews recommend this product`}</small>
+          <small>{`${props.recommend.toFixed(0)}% of reviews recommend this product`}</small>
           <RatingFilters
             class="characteristics-ratings-container"
             recommend={props.recommend}

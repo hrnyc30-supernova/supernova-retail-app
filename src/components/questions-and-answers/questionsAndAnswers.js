@@ -49,14 +49,17 @@ const QuestionsAndAnswers = (props) => {
         <div>
           <h1>Questions and Answers</h1>
           <SearchQuestion />
-          <QuestionDisplay
-            productID={props.currentProductID}
-            showModal={showAddAnswerModal}
-          />
-          <br></br>
+          <div className="allCards">
+            <QuestionDisplay
+              productID={props.currentProductID}
+              showModal={showAddAnswerModal}
+            />
+          </div>
+          <hr></hr>
           <MoreQuestions />
           <Button
             variant="success"
+            className="qa-button"
             onClick={() => {
               setAddQuestionModal(true);
             }}

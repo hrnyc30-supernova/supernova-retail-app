@@ -8,6 +8,7 @@ const Answer = (props) => {
   const [answers, setAnswer] = useState([]);
   const [answerLen, setanswerLen] = useState(2);
   const [showMore, setShowMore] = useState(false);
+  const [showCollapse, setshowCollapse] = useState(false);
 
   useEffect(() => {
     apiMaster
@@ -41,18 +42,38 @@ const Answer = (props) => {
           );
         })}
       </>
-
       {showMore ? (
         <Card.Body className="text-center">
           <Button
             variant="primary"
+            className="qa-button"
             size="sm"
             onClick={() => {
               setShowMore(false);
+              setshowCollapse(true);
               setanswerLen(answers.length);
             }}
           >
-            More Answers
+            Show More Answers
+          </Button>
+        </Card.Body>
+      ) : (
+        ''
+      )}
+
+      {showCollapse ? (
+        <Card.Body className="text-center">
+          <Button
+            variant="primary"
+            className="qa-button"
+            size="sm"
+            onClick={() => {
+              setShowMore(true);
+              setshowCollapse(false);
+              setanswerLen(2);
+            }}
+          >
+            Collapse Answer
           </Button>
         </Card.Body>
       ) : (

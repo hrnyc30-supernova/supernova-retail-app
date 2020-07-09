@@ -8,6 +8,7 @@ import {
   quesitonIdState,
   searchState,
   showSearchState,
+  questionBody,
 } from './qa-atoms';
 import { useRecoilState, useRecoilValue } from 'recoil';
 
@@ -17,6 +18,7 @@ const QuestionDisplay = (props) => {
   const [questionID, setquestionID] = useRecoilState(quesitonIdState);
   const [search, setSearch] = useRecoilState(searchState);
   const showSearch = useRecoilValue(showSearchState);
+  const [q, setq] = useRecoilState(questionBody);
 
   useEffect(() => {
     apiMaster
@@ -45,6 +47,7 @@ const QuestionDisplay = (props) => {
                     <u
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
+                        setq(question.question_body);
                         setquestionID(question.question_id);
                         props.showModal();
                       }}
@@ -75,6 +78,7 @@ const QuestionDisplay = (props) => {
                   <u
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
+                      setq(question.question_body);
                       setquestionID(question.question_id);
                       props.showModal();
                     }}

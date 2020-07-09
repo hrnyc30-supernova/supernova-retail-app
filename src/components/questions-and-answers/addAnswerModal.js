@@ -4,13 +4,14 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { useForm } from 'react-hook-form';
 import apiMaster from '../../apiMaster';
-import { useRecoilState } from 'recoil';
-import { quesitonIdState } from './qa-atoms';
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { quesitonIdState, questionBody } from './qa-atoms';
 
 const AddAnswerModal = (props) => {
   const { register, handleSubmit, errors } = useForm();
   const [show, setShow] = useState(props.show);
   const [questionID, setquestionID] = useRecoilState(quesitonIdState);
+  const question_body = useRecoilValue(questionBody);
 
   const onSubmit = (data) => {
     apiMaster
@@ -24,6 +25,7 @@ const AddAnswerModal = (props) => {
 
   return (
     <Modal
+      className="qamodals"
       show={show}
       backdrop="static"
       keyboard={false}
@@ -35,7 +37,9 @@ const AddAnswerModal = (props) => {
       <Modal.Header closeButton>
         <Modal.Title>
           <h1>Submit your Answer</h1>
-          <p>Product Name: Question Body</p>
+          <p>
+            {props.name} : {question_body}
+          </p>
         </Modal.Title>
       </Modal.Header>
       <Modal.Body>
@@ -90,10 +94,12 @@ const AddAnswerModal = (props) => {
               )}
             </Form.Text>
           </Form.Group>
-          <Button variant="success" type="submit">
+          <Button variant="success" type="submit" className="qa-button">
             Submit
           </Button>{' '}
-          <Button variant="primary">Upload Photos</Button>
+          <Button variant="primary" className="qa-button">
+            Upload Photos
+          </Button>
         </Form>
       </Modal.Body>
       <Modal.Footer></Modal.Footer>
