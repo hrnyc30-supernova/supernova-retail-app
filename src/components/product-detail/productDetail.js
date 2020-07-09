@@ -89,15 +89,23 @@ class ProductDetail extends React.Component {
           />
         </div>
         <div id="product-notes">
-          <span id="product-description">
-            <div id="product-slogan">
-              <strong>{this.props.product.slogan}</strong>
+          <span id="product-description" data-testid="productDescription">
+            <div id="product-slogan" data-testid="productSlogan">
+              <strong>
+                {this.props.product != undefined
+                  ? this.props.product.slogan
+                  : null}
+              </strong>
             </div>
-            <div>{this.props.product.description}</div>
+            <div>
+              {this.props.product != undefined
+                ? this.props.product.description
+                : null}
+            </div>
           </span>
-          <span id="product-features">
-            {this.props.product !== null &&
-            this.props.product.features !== undefined
+          <span id="product-features" data-testid="productFeatures">
+            {this.props.product != undefined &&
+            this.props.product.features != undefined
               ? this.props.product.features.map((item) => {
                   return (
                     <div>

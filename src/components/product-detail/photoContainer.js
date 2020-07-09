@@ -117,7 +117,7 @@ class PhotoContainer extends React.Component {
         id="product-detail-photo-container"
         className={this.state.photoContainerWidth}
       >
-        {this.props.selectedStyle !== null ? (
+        {this.props.selectedStyle != undefined ? (
           <img
             id="product-photo-main"
             src={
@@ -145,7 +145,7 @@ class PhotoContainer extends React.Component {
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
-          {this.props.selectedStyle !== null
+          {this.props.selectedStyle != undefined
             ? this.props.selectedStyle.photos.map((photo, index) => (
                 <div
                   className="product-photo-icon"
