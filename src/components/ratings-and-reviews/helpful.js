@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import Cookies from "universal-cookie";
 
 const Helpful = (props) => {
-  const [helpfulCookie, setHelpfulCook] = useState({ review: [], question: [], answer: [] });
   const [helpful, setHelpful] = useState(false);
 
   const handleClick = (id, widget) => {
