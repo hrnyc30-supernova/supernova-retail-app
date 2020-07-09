@@ -21,7 +21,7 @@ class RatingsReviews extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.currentProductID !== this.props.currentProductID || prevProps.currentProductName !== this.props.currentProductName || prevProps.averageRating !== this.props.averageRating || prevProps.currentRating !== this.props.currentRating) {
     apiMaster
-      .getReviewsOfProduct(this.props.currentProductID, 20)
+      .getReviewsOfProduct(13, 20)
       .then(({ data }) => {
         let ratings = this.getRatings(data.results);
         let recommend = this.getRecommendation(data.results);
@@ -44,6 +44,7 @@ class RatingsReviews extends React.Component {
   }
 
   filterReviews(rating){
+    
     let filteredReviews =[];
     for (var count in rating) {
       let countFilter = this.state.reviews.filter((review) => {
@@ -53,7 +54,7 @@ class RatingsReviews extends React.Component {
     }
     this.setState({
       filtered: filteredReviews
-    })
+    }, () => {console.log('making sure to set state', this.state.filtered);})
   }
 
   getRecommendation(reviewsArray) {

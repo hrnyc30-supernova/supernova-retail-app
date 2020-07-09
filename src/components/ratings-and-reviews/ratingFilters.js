@@ -76,8 +76,6 @@ class RatingFilters extends React.Component {
       : (chars = null);
     return (
       <>
-      {console.log(this.props.currentRating)}
-      {console.log(this.props.currentProductRatings)}
         {this.props.class === "ratings-filters-container" ? (
           <div className="ratings-filters-container">
             {this.props.currentProductRatings ? (

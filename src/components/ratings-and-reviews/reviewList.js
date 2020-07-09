@@ -16,6 +16,7 @@ class ReviewList extends React.Component {
     };
     this.handleSortByChange = this.handleSortByChange.bind(this);
     this.showMoreReviews = this.showMoreReviews.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -30,7 +31,7 @@ class ReviewList extends React.Component {
   handleSortByChange(sortString) {
     apiMaster
       .getReviewsOfProduct(
-        this.props.currentProductId,
+        13,
         sortString,
         this.state.count
       )
@@ -68,18 +69,22 @@ class ReviewList extends React.Component {
 
   filterReviews(reviews) {
     let showReviews = [];
+    console.log('are reviews getting into function?', reviews);
     this.props.filteredReviews.forEach(filteredReview => {
       let temp = reviews.filter(review => {
         return review.review_id === filteredReview.review_id
       })
       showReviews = showReviews.concat(temp);
     })
+    console.log('show reviews after filter', showReviews);
     return showReviews;
   }
 
   render() {
     let reviewsToShow =
-      this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? this.filterReviews(this.state.sortedReviews) : this.state.sortedReviews) : (this.props.filteredReviews > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
+      this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? (this.filterReviews(this.state.sortedReviews)) : this.state.sortedReviews) : (this.props.filteredReviews.length > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
+      console.log('chosen reviews', reviewsToShow);
+      console.log('this is the current state', this.state);
     return this.props.reviews.length === 0 ? (
       <div id="review-list-container">
         {" "}
