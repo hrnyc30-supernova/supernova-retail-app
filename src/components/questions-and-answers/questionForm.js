@@ -12,7 +12,7 @@ const AskQuestionModal = (props) => {
   const onSubmit = (data) => {
     apiMaster
       .askQuestion(props.productID, data.body, data.name, data.email)
-      .then(() => {
+      .then((data) => {
         setShow(false);
         props.closeModal();
       })

@@ -4,6 +4,7 @@ import UploadPhotos from "./uploadPhotos.js";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { charScales, ratingScale } from "./constants.js";
+import apiMaster from "../.././apiMaster.js"
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -11,11 +12,11 @@ class NewReview extends React.Component {
     this.state = {
       product_id: this.props.currentProductID,
       rating: 0,
-      recommend: 1,
+      recommend: true,
       characteristics: {},
       summary: "",
       body: "",
-      photos: {},
+      photos: [],
       nickname: "",
       email: "",
       showImgModal: false,
@@ -28,18 +29,8 @@ class NewReview extends React.Component {
     this.toggleImgModal = this.toggleImgModal.bind(this);
   }
 
-  handleSubmit(e, reviewObj) {
+  handleSubmit(e, { product_id, rating, summary, body, recommend, nickname, email, photos, characteristics }) {
     e.preventDefault();
-    console.log('should be current product ID', reviewObj.product_id);
-    console.log("this is the review that we will send to the API", reviewObj);
-    console.log("should be the overall rating", reviewObj.rating);
-    console.log("should be the summary", reviewObj.summary);
-    console.log("should be the body", reviewObj.body);
-    console.log("should be the recommendation", reviewObj.recommend);
-    console.log("should be the nickname", reviewObj.nickname);
-    console.log("should be the email", reviewObj.email);
-    console.log("should be the photos", reviewObj.photos);
-    console.log("should be the characteristics", reviewObj.characteristics);
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
@@ -49,13 +40,14 @@ class NewReview extends React.Component {
       validated: true
     })
     if (form.checkValidity() === true && this.state.validated === true) {
-      apiMaster.postReview({ product_id, rating, summary, body, recommend, nickname, email, photos, characteristics })
-        .then(() => {
-          console.log('the review was posted successfully!')
-        })
-        .catch(err => {
-          console.error(err);
-        })
+    apiMaster.postReview({ product_id, rating, summary, body, recommend, nickname, email, photos, characteristics })
+      .then((data) => {
+        
+        console.log('the review was posted successfully!', data)
+      })
+      .catch(err => {
+        console.error(err);
+      })
     }
   }
 
@@ -131,7 +123,7 @@ class NewReview extends React.Component {
                   inline
                   type="radio"
                   name="recommend"
-                  value="1"
+                  value="true"
                   label="Yes"
                   id="1"
                   onChange={(e) => this.handleChange(e)}
@@ -140,7 +132,7 @@ class NewReview extends React.Component {
                   inline
                   type="radio"
                   name="recommend"
-                  value="0"
+                  value="false"
                   label="No"
                   id="0"
                   onChange={(e) => this.handleChange(e)}
@@ -150,18 +142,22 @@ class NewReview extends React.Component {
                 <Form.Label>* Characteristics</Form.Label>
                 <br />
                 {Object.keys(this.props.currentProductCharacteristics).map(
+<<<<<<< Updated upstream
                   (char) => {
                     console.log('this is the characteristic', char);
                     console.log('and the associated characteristic id', this.props.currentProductCharacteristics[char].id)
+=======
+                  (char, index) => {
+>>>>>>> Stashed changes
                     return (
-                      <div key={char}>
+                      <div key={this.props.currentProductCharacteristics[char].id}>
                         <Form.Label>{char}</Form.Label> <br />
                         {["1", "2", "3", "4", "5"].map((item, i) => {
                           return (
                             <Form.Check key={i}>
                               <Form.Check.Input
                                 type="radio"
-                                name={char}
+                                name={this.props.currentProductCharacteristics[char].id}
                                 value={item}
                                 onChange={(e) => this.handleCharChange(e)}
                                 id={`${this.props.currentProductCharacteristics[char].id}`}

@@ -24,6 +24,7 @@ class AddReviewButton extends React.Component {
         </button>
         {this.state.show ? (
           <NewReview
+            currentProductID={this.props.currentProductID}
             showModal={this.showModal}
             currentProductCharacteristics={
               this.props.currentProductCharacteristics
