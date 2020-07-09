@@ -16,6 +16,7 @@ class ReviewList extends React.Component {
     };
     this.handleSortByChange = this.handleSortByChange.bind(this);
     this.showMoreReviews = this.showMoreReviews.bind(this);
+    this.filterReviews = this.filterReviews.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -30,7 +31,7 @@ class ReviewList extends React.Component {
   handleSortByChange(sortString) {
     apiMaster
       .getReviewsOfProduct(
-        this.props.currentProductId,
+        this.props.currentProductID,
         sortString,
         this.state.count
       )
@@ -79,7 +80,7 @@ class ReviewList extends React.Component {
 
   render() {
     let reviewsToShow =
-      this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? this.filterReviews(this.state.sortedReviews) : this.state.sortedReviews) : (this.props.filteredReviews > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
+      this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? (this.filterReviews(this.state.sortedReviews)) : this.state.sortedReviews) : (this.props.filteredReviews.length > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
     return this.props.reviews.length === 0 ? (
       <div id="review-list-container">
         {" "}

@@ -4,7 +4,6 @@ import UploadPhotos from "./uploadPhotos.js";
 import Modal from "react-bootstrap/Modal";
 import Form from "react-bootstrap/Form";
 import { charScales, ratingScale } from "./constants.js";
-import apiMaster from "../../apiMaster.js";
 
 class NewReview extends React.Component {
   constructor(props) {
@@ -19,21 +18,21 @@ class NewReview extends React.Component {
       nickname: "",
       email: "",
       showImgModal: false,
-      validated: false
+      validated: false,
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleRatingChange = this.handleRatingChange.bind(this);
     this.handleCharChange = this.handleCharChange.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.toggleImgModal = this.toggleImgModal.bind(this);
   }
 
   handleSubmit(e, reviewObj) {
     console.log("this is the review that we will send to the API", reviewObj);
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
-      event.preventDefault();
-      event.stopPropagation();
+      e.preventDefault();
+      e.stopPropagation();
     }
     this.setState({
       validated: true
@@ -67,14 +66,15 @@ class NewReview extends React.Component {
     });
   }
 
-  toggleModal(e, images) {
-    e.preventDefault();
+  toggleImgModal(e, images) {
     if (images && images.length > 0) {
       this.setState({
         photos: images
       }, () => {console.log(this.state.photos)})
     }
+    console.log(this.state);
     let temp = this.state.showImgModal;
+    console.log(temp)
     this.setState({
       showImgModal: !temp,
     });
@@ -86,8 +86,8 @@ class NewReview extends React.Component {
       this.props.currentProductName
     ) {
       return (
-        <Modal className="modal" show={this.props.show}>
-          <Modal.Header>
+        <Modal className="new-review-modal" show={this.props.show} onHide={this.props.showModal}>
+          <Modal.Header closeButton>
             <Modal.Title>
               <h4>Write Your Review</h4>
               <h6>
@@ -160,7 +160,6 @@ class NewReview extends React.Component {
                     );
                   }
                 )}{" "}
-                {/* <Form.Check.Feedback type='invalid'>Characteristics Ratings Required</Form.Check.Feedback> */}
               </Form.Group>
               <Form.Group controlId="reviewSummary">
                 <Form.Label>* Review Summary</Form.Label>
@@ -204,9 +203,10 @@ class NewReview extends React.Component {
                 <Form.Control.Feedback type='invalid'>Body Required (minimum of 50 characters)</Form.Control.Feedback>
               </Form.Group>
               <button
+                type='button'
                 id="upload-photos-modal-button"
                 className="main-action-button review-button"
-                onClick={(e) => this.toggleModal(e)}
+                onClick={(e) => this.toggleImgModal(e)}
               >
                 Upload your photos
               </button>
@@ -214,7 +214,7 @@ class NewReview extends React.Component {
                 <UploadPhotos
                   currentProductName={this.props.currentProductName}
                   showImgModal={this.state.showImgModal}
-                  toggleModal={this.toggleModal}
+                  toggleImgModal={this.toggleImgModal}
                 />
               ) : null}
               <br />

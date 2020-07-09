@@ -12,7 +12,7 @@ const RatingsBreakdown = (props) => {
     <div id="ratings-breakdown-container">
       {props.currentProductRatings &&
       props.averageRating &&
-      props.recommend &&
+      (props.recommend === 0 || props.recommend) &&
       props.currentRating ? (
         <>
           <div id="avg-rating">
