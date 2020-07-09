@@ -694,7 +694,6 @@ ul.characteristics {
   padding: 0 10px;
 }
 
-.characteristic-filter-elem:hover,
 .star-rating-filter-elem:hover {
   text-decoration: underline;
   color: gray;
@@ -750,12 +749,11 @@ small {
 }
 .link {
   cursor: pointer;
-  color: blue;
   text-decoration: underline;
 }
 
-.modal {
-  max-height: calc(100vh - 210px);
+.new-review-modal {
+  max-height: calc(120vh - 210px);
   overflow-y: 'auto';
 }
 

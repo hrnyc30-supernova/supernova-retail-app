@@ -42,8 +42,6 @@ class App extends React.Component {
     Promise.all(promises)
       .then((resolvedData) => {
         let averageRating = this.calculateAverageRating(resolvedData[1].data.ratings);
-        console.log('this is resolved data', resolvedData);
-        console.log('this should be AVG', averageRating);
         this.setState({
           averageRating: averageRating,
           currentRating: resolvedData[1].data,

@@ -44,6 +44,7 @@ class RatingsReviews extends React.Component {
   }
 
   filterReviews(rating){
+    
     let filteredReviews =[];
     for (var count in rating) {
       let countFilter = this.state.reviews.filter((review) => {
