@@ -36,14 +36,14 @@ const reportReview = (reviewId) => {
 
 const postReview = (id = 1, rating, summary, body, recommend, name, email, photos, characteristics) => {
   return axios.post(`http://18.224.200.47/reviews/${id}`, {
-    rating: rating,
-    summary: summary,
-    body: body,
-    recommend: recommend,
-    name: name,
-    email: email,
-    photos: photos,
-    characteristics: characteristics,
+    'rating': rating,
+    'summary': summary,
+    'body': body,
+    'recommend': recommend,
+    'name': name,
+    'email': email,
+    'photos': photos,
+    'characteristics': characteristics,
   });
 };
 
@@ -55,8 +55,8 @@ const addToCart = (user_token, sku_id) => {
   console.log(user_token);
   console.log(sku_id);
   return axios.post(`http://18.224.200.47/cart/`, {
-    user_token: user_token,
-    sku_id: sku_id,
+    'user_token': user_token,
+    'sku_id': sku_id,
   });
 };
 
@@ -66,18 +66,18 @@ const getSpecificAnswers = (questionId) => {
 
 const askQuestion = (id, text, name, email) => {
   return axios.post(`http://18.224.200.47/qa/${id}`, {
-    body: text,
-    name: name,
-    email: email,
+    'body': text,
+    'name': name,
+    'email': email,
   });
 };
 
 const answerQuestion = (questionId, text, name, email, photos = []) => {
   return axios.post(`http://18.224.200.47/qa/${questionId}/answers`, {
-    body: text,
-    name: name,
-    email: email,
-    photos: photos,
+    'body': text,
+    'name': name,
+    'email': email,
+    'photos': photos,
   });
 };
 
