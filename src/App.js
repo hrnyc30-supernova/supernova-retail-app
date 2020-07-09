@@ -9,6 +9,7 @@ import NavigationBar from './components/navigationBar';
 import AlertBar from './components/alertBar';
 import ProductDetail from './components/product-detail/productDetail';
 import RelatedItems from './components/related-items-creation/relatedItems';
+import Footer from './components/related-items-creation/footer';
 import QuestionsAndAnswers from './components/questions-and-answers/questionsAndAnswers';
 import RatingsReviews from './components/ratings-and-reviews/ratingsReviews';
 
@@ -21,16 +22,18 @@ class App extends React.Component {
       currentRating: {},
       userToken: null,
       clickData: [],
+      eventIsListening: true,
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
     this.productCardClicked = this.productCardClicked.bind(this);
+    this.startListening = this.startListening.bind(this);
     this.clickTracker = this.clickTracker.bind(this);
   }
 
   componentDidMount() {
     this.generateUserToken();
-    document.addEventListener('click', this.clickTracker);
+    this.startListening();
     let promises = [];
     promises.push(
       apiMaster.getProductInfo().then(({ data }) => ({
@@ -106,6 +109,12 @@ class App extends React.Component {
       });
   }
 
+  startListening() {
+    if (this.state.eventIsListening) {
+      document.addEventListener('click', this.clickTracker);
+    }
+  }
+
   clickTracker(e) {
     if (window.localStorage.getItem(this.state.userToken) == undefined) {
       const userActivity = [
@@ -133,6 +142,16 @@ class App extends React.Component {
         JSON.stringify(newActivity)
       );
     }
+
+    let activityData = JSON.parse(
+      window.localStorage.getItem(this.state.userToken)
+    );
+
+    const syncWrapper = () => {
+      console.log('syncWrapper ran! activityData: ', activityData);
+      this.setState({ clickData: activityData });
+    };
+    syncWrapper();
   }
 
   render() {
@@ -171,6 +190,9 @@ class App extends React.Component {
             averageRating={this.state.averageRating}
             currentRating={this.state.currentRating}
           />
+        </div>
+        <div className="footer-section">
+          <Footer clickData={this.state.clickData} />
         </div>
       </div>
     );
