@@ -12,9 +12,11 @@ class UploadPhotos extends React.Component {
 
   handleChange(e) {
       let temp = this.state.images;
-      temp.push(e.target.files[0]);
+      temp.push(URL.createObjectURL(e.target.files[0]));
       this.setState({
           images: temp
+      }, () => {
+        console.log('images array', this.state.images)
       })
   }
 
@@ -29,8 +31,9 @@ class UploadPhotos extends React.Component {
         show={this.props.showImgModal}
         animation={false}
         centered
+        onHide={e => this.props.toggleImgModal(e, null)}
       >
-        <Modal.Header>
+        <Modal.Header closeButton>
           <Modal.Title>
             <h4>Upload Your Photos</h4>
             <h6>
@@ -42,8 +45,7 @@ class UploadPhotos extends React.Component {
           <form>
             <label className='label-container' htmlFor='photo'>Choose up to 5 photos: <br/>
                 {['1', '2', '3', '4', '5'].map((item, i) => {
-                    console.log((this.state.images.length === i))
-                    return this.state.images.length >= item ? <><img src={`${this.state.images[i].name}`} className="review-photo"/><br/></> : <input type="file" id={i} name="photo" onChange={this.handleChange} accept="image/png, image/jpeg, image/jpg"/>
+                    return this.state.images.length >= item ? <><img src={`${this.state.images[i]}`} className="review-photo"/><br/></> : <input type="file" id={i} name="photo" onChange={this.handleChange} accept="image/png, image/jpeg, image/jpg"/>
                 }) }
             </label>
           </form>

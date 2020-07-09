@@ -753,7 +753,7 @@ small {
 }
 
 .new-review-modal {
-  max-height: calc(80vh - 210px);
+  max-height: calc(120vh - 210px);
   overflow-y: 'auto';
 }
 
