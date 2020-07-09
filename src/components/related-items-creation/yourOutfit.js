@@ -37,20 +37,7 @@ class YourOutfit extends React.Component {
     this.generateOutfitCookie();
   }
 
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (
-  //     JSON.stringify(prevState.favoriteOutfits) !==
-  //     JSON.stringify(this.state.favoriteOutfits)
-  //   ) {
-  //     this.resetLoadedState();
-  //     this.getCardDetails(); // get all card details from api
-  //     this.getCardImages(); // get all card images from api
-  //     this.getCardPrices(); // get all card prices from api
-  //   }
-  // }
-
   resetLoadedState() {
-    console.log('resetLoadedState ran!');
     this.setState({
       cardDetailsLoaded: false,
       cardImagesLoaded: false,
@@ -59,7 +46,6 @@ class YourOutfit extends React.Component {
   }
 
   async generateOutfitCookie() {
-    console.log('generateOutfitCookie ran!');
     const cookies = new Cookies();
     let storedIds = [];
     if (cookies.get('outfit') === undefined) {
@@ -81,15 +67,13 @@ class YourOutfit extends React.Component {
   }
 
   addOutfitToCookie(id) {
-    console.log('addOutfitToCookie ran!');
     const cookies = new Cookies();
     let oldArray = cookies.get('outfit');
-    // console.log('oldArray: ', oldArray);
-    let newArray = oldArray.slice();
-    newArray.push(id);
-    // console.log('newArray: ', newArray);
-    // let newlist = data.push(id);
-    cookies.set('outfit', newArray);
+    if (!oldArray.includes(id)) {
+      let newArray = oldArray.slice();
+      newArray.push(id);
+      cookies.set('outfit', newArray);
+    }
   }
 
   deleteOutfitFromCookie(index) {
@@ -163,7 +147,6 @@ class YourOutfit extends React.Component {
   }
 
   getCardDetails() {
-    console.log('getCardDetails ran!');
     let promises = [];
     for (let i = 0; i < this.state.favoriteOutfits.length; i++) {
       promises.push(
@@ -174,7 +157,6 @@ class YourOutfit extends React.Component {
     }
     Promise.all(promises)
       .then((res) => {
-        // console.log('res: ', res);
         this.setState({ cardDetails: res, cardDetailsLoaded: true });
       })
       .catch((err) => {
@@ -189,14 +171,13 @@ class YourOutfit extends React.Component {
     if (areDetailsLoaded && areImagesLoaded && arePricesLoaded) {
       return (
         <div className="your-outfit-container">
-          <div className="add-outfit-base-card">
-            <AiOutlinePlus
-              size={100}
-              id="big-plus-sign"
-              onClick={() => {
-                this.addToOutfit();
-              }}
-            />
+          <div
+            className="add-outfit-base-card"
+            onClick={() => {
+              this.addToOutfit();
+            }}
+          >
+            <AiOutlinePlus size={100} id="big-plus-sign" />
           </div>
           <div className="outfit-carousel-wrapper">
             <ItemsCarousel
@@ -239,8 +220,12 @@ class YourOutfit extends React.Component {
                         this.props.productCardClicked(card.id);
                       }}
                     >
-                      <div className="card-subtitle">{card.category}</div>
-                      <div className="card-title">{card.name}</div>
+                      <div className="card-subtitle product-card-subtitle">
+                        {card.category}
+                      </div>
+                      <div className="card-title product-card-title">
+                        {card.name}
+                      </div>
                       <span
                         className={
                           this.state.cardPrices[i].sale_price === '0'
@@ -267,6 +252,7 @@ class YourOutfit extends React.Component {
                         })}
                       </span>
                       <span
+                        className="main-price-display"
                         style={{
                           textDecoration:
                             this.state.cardPrices[i].sale_price !== '0'
