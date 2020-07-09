@@ -422,11 +422,11 @@ input {
   max-height: 15rem;
 }
 
-.card-body {
+.related-card-body {
   transition: color 0.5s;
 }
 
-.card-body:hover {
+.related-card-body:hover {
   cursor: pointer;
   font-weight: bold;
   color: #007bff;
@@ -563,9 +563,10 @@ ul.characteristics {
 }
 
 .outfit-carousel-wrapper {
-  width: 760px;
+  width: 647px;
   height: 25rem;
   margin-top: 16px;
+  margin-left: 12px;
 }
 
 .action-button-outfit {

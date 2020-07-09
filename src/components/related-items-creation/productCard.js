@@ -155,7 +155,7 @@ class ProductCard extends React.Component {
                     />
                   </div>
                   <div
-                    className="card-body"
+                    className="card-body related-card-body"
                     onClick={() => {
                       this.props.productCardClicked(card.id);
                     }}
