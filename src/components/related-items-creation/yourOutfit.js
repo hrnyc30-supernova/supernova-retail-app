@@ -7,12 +7,13 @@ import {
   FaRegArrowAltCircleRight,
 } from 'react-icons/fa';
 import { AiOutlinePlus, AiOutlineClose } from 'react-icons/ai';
-// import CardActionButton from './cardActionButton';
+import Cookies from 'universal-cookie';
 
 class YourOutfit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      favoriteOutfits: [],
       cardDetails: [],
       cardImages: [],
       cardPrices: [],
@@ -25,32 +26,92 @@ class YourOutfit extends React.Component {
     this.updateOutfit = this.addToOutfit.bind(this);
     this.getCardImages = this.getCardImages.bind(this);
     this.getCardPrices = this.getCardPrices.bind(this);
+    this.generateOutfitCookie = this.generateOutfitCookie.bind(this);
+    this.addOutfitToCookie = this.addOutfitToCookie.bind(this);
+    this.getCardDetails = this.getCardDetails.bind(this);
+    this.resetLoadedState = this.resetLoadedState.bind(this);
+    this.deleteOutfitFromCookie = this.deleteOutfitFromCookie.bind(this);
+  }
+
+  componentDidMount() {
+    this.generateOutfitCookie();
+  }
+
+  resetLoadedState() {
+    this.setState({
+      cardDetailsLoaded: false,
+      cardImagesLoaded: false,
+      cardPricesLoaded: false,
+    });
+  }
+
+  async generateOutfitCookie() {
+    const cookies = new Cookies();
+    let storedIds = [];
+    if (cookies.get('outfit') === undefined) {
+      let outfitIds = [];
+      cookies.set('outfit', outfitIds);
+    } else {
+      storedIds = cookies.get('outfit');
+    }
+
+    await this.setState({
+      favoriteOutfits: storedIds,
+    });
+
+    if (this.state.favoriteOutfits.length > 0) {
+      this.getCardDetails(); // get all card details from api
+      this.getCardImages(); // get all card images from api
+      this.getCardPrices(); // get all card prices from api
+    }
+  }
+
+  addOutfitToCookie(id) {
+    const cookies = new Cookies();
+    let oldArray = cookies.get('outfit');
+    if (!oldArray.includes(id)) {
+      let newArray = oldArray.slice();
+      newArray.push(id);
+      cookies.set('outfit', newArray);
+    }
+  }
+
+  deleteOutfitFromCookie(index) {
+    const cookies = new Cookies();
+    let oldArray = cookies.get('outfit');
+    let newArray = oldArray.slice();
+    newArray.splice(index, 1);
+    cookies.set('outfit', newArray);
+    this.resetLoadedState();
+    this.generateOutfitCookie(); // sets state with new list of ids
   }
 
   addToOutfit() {
-    let container = [this.props.currentProductInfo];
-    this.setState({
-      cardDetails: container,
-      cardDetailsLoaded: true,
-    });
-    // console.log('cardDetails: ', this.state.cardDetails);
-    this.getCardImages();
-    this.getCardPrices();
+    let currentProductId = this.props.currentProductInfo.id;
+    this.addOutfitToCookie(currentProductId); // updates browser cookie with new id
+    this.resetLoadedState();
+    this.generateOutfitCookie(); // sets state with new list of ids
   }
 
   getCardImages() {
-    apiMaster
-      .getProductStyles(this.props.id)
-      .then(
-        (res) =>
-          res.data.results[0].photos[0].thumbnail_url ||
-          'https://images.unsplash.com/photo-1529088148495-2d9f231db829?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80'
-      )
+    console.log('getCardImages ran!');
+    let promises = [];
+    for (let i = 0; i < this.state.favoriteOutfits.length; i++) {
+      promises.push(
+        apiMaster
+          .getProductStyles(this.state.favoriteOutfits[i])
+          .then(
+            (res) =>
+              res.data.results[0].photos[0].thumbnail_url ||
+              'https://images.unsplash.com/photo-1529088148495-2d9f231db829?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1100&q=80'
+          )
+      );
+    }
+
+    Promise.all(promises)
       .then((res) => {
-        // console.log('res: ', res);
-        let container = [res];
         this.setState({
-          cardImages: container,
+          cardImages: res,
           cardImagesLoaded: true,
         });
       })
@@ -60,19 +121,43 @@ class YourOutfit extends React.Component {
   }
 
   getCardPrices() {
-    apiMaster
-      .getProductStyles(this.props.id)
-      .then((res) => ({
-        original_price: res.data.results[0].original_price,
-        sale_price: res.data.results[0].sale_price,
-      }))
+    console.log('getCardPrices ran!');
+    let promises = [];
+    for (let i = 0; i < this.state.favoriteOutfits.length; i++) {
+      promises.push(
+        apiMaster
+          .getProductStyles(this.state.favoriteOutfits[i])
+          .then((res) => ({
+            original_price: res.data.results[0].original_price,
+            sale_price: res.data.results[0].sale_price,
+          }))
+      );
+    }
+
+    Promise.all(promises)
       .then((res) => {
-        // console.log('getCardPrices res: ', res);
-        let container = [res];
         this.setState({
-          cardPrices: container,
+          cardPrices: res,
           cardPricesLoaded: true,
         });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }
+
+  getCardDetails() {
+    let promises = [];
+    for (let i = 0; i < this.state.favoriteOutfits.length; i++) {
+      promises.push(
+        apiMaster
+          .getProductInfo(this.state.favoriteOutfits[i])
+          .then((res) => res.data)
+      );
+    }
+    Promise.all(promises)
+      .then((res) => {
+        this.setState({ cardDetails: res, cardDetailsLoaded: true });
       })
       .catch((err) => {
         console.log(err);
@@ -86,13 +171,18 @@ class YourOutfit extends React.Component {
     if (areDetailsLoaded && areImagesLoaded && arePricesLoaded) {
       return (
         <div className="your-outfit-container">
-          <div className="add-outfit-base-card">
+          <div
+            className="add-outfit-base-card"
+            onClick={() => {
+              this.addToOutfit();
+            }}
+          >
             <AiOutlinePlus size={100} id="big-plus-sign" />
           </div>
           <div className="outfit-carousel-wrapper">
             <ItemsCarousel
               infiniteLoop={false}
-              gutter={26}
+              gutter={20}
               activePosition={'center'}
               chevronWidth={60}
               disableSwipe={false}
@@ -120,26 +210,22 @@ class YourOutfit extends React.Component {
                       <AiOutlineClose
                         className="action-button-outfit"
                         onClick={() => {
-                          this.setState({
-                            cardDetails: [],
-                            cardImages: [],
-                            cardPrices: [],
-                            cardDetailsLoaded: false,
-                            cardImagesLoaded: false,
-                            cardPricesLoaded: false,
-                            activeItemIndex: 0,
-                          });
+                          this.deleteOutfitFromCookie(i);
                         }}
                       />
                     </div>
                     <div
-                      className="card-body"
+                      className="card-body related-card-body"
                       onClick={() => {
                         this.props.productCardClicked(card.id);
                       }}
                     >
-                      <div className="card-subtitle">{card.category}</div>
-                      <div className="card-title">{card.name}</div>
+                      <div className="card-subtitle product-card-subtitle">
+                        {card.category}
+                      </div>
+                      <div className="card-title product-card-title">
+                        {card.name}
+                      </div>
                       <span
                         className={
                           this.state.cardPrices[i].sale_price === '0'
@@ -166,6 +252,7 @@ class YourOutfit extends React.Component {
                         })}
                       </span>
                       <span
+                        className="main-price-display"
                         style={{
                           textDecoration:
                             this.state.cardPrices[i].sale_price !== '0'

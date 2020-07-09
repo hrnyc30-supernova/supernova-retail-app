@@ -31,7 +31,6 @@ class ProductCard extends React.Component {
       JSON.stringify(this.props.relatedProducts) !==
       JSON.stringify(prevProps.relatedProducts)
     ) {
-      // console.log('componentDidUpdate for ProductCard ran!');
       this.setState({
         cardDetailsLoaded: false,
         cardImagesLoaded: false,
@@ -55,10 +54,8 @@ class ProductCard extends React.Component {
             console.log(err);
           })
       );
-      // console.log('cardDetails: ', i, cardDetails);
     }
     Promise.all(promises).then((res) => {
-      // console.log('res: ', res);
       this.setState({ cardDetails: res, cardDetailsLoaded: true });
     });
   }
@@ -80,7 +77,6 @@ class ProductCard extends React.Component {
       );
     }
     Promise.all(promises).then((res) => {
-      // console.log('res: ', res);
       this.setState({
         cardImages: res,
         cardImagesLoaded: true,
@@ -90,7 +86,6 @@ class ProductCard extends React.Component {
 
   getCardPrices() {
     let promises = [];
-    // console.log('getCardPrices ran!');
     for (let i = 0; i < this.props.relatedProducts.length; i++) {
       promises.push(
         apiMaster
@@ -105,7 +100,6 @@ class ProductCard extends React.Component {
       );
     }
     Promise.all(promises).then((res) => {
-      // console.log('getCardPrices res: ', res);
       this.setState({
         cardPrices: res,
         cardPricesLoaded: true,
@@ -155,13 +149,17 @@ class ProductCard extends React.Component {
                     />
                   </div>
                   <div
-                    className="card-body"
+                    className="card-body related-card-body"
                     onClick={() => {
                       this.props.productCardClicked(card.id);
                     }}
                   >
-                    <div className="card-subtitle">{card.category}</div>
-                    <div className="card-title">{card.name}</div>
+                    <div className="card-subtitle product-card-subtitle">
+                      {card.category}
+                    </div>
+                    <div className="card-title product-card-title">
+                      {card.name}
+                    </div>
                     <span
                       className={
                         this.state.cardPrices[i].sale_price === '0'
@@ -188,6 +186,7 @@ class ProductCard extends React.Component {
                       })}
                     </span>
                     <span
+                      className="main-price-display"
                       style={{
                         textDecoration:
                           this.state.cardPrices[i].sale_price !== '0'
