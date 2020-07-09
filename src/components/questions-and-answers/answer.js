@@ -3,6 +3,7 @@ import apiMaster from '../../apiMaster';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import moment from 'moment';
+import Helpful from ".././ratings-and-reviews/helpful.js";
 
 const Answer = (props) => {
   const [answers, setAnswer] = useState([]);
@@ -34,8 +35,8 @@ const Answer = (props) => {
             <Card.Body key={answer.answer_id}>
               <Card.Title>A: {answer.body}</Card.Title>
               <Card.Text>
-                By: {by}, {date} | Helpful?{' '}
-                <u style={{ cursor: 'pointer' }}> YES</u> ({answer.helpfulness})
+                By: {by}, {date} | 
+                <Helpful id={answer.answer_id} widget='answer' helpfulCount={answer.helpfulness}/>
                 |<u style={{ cursor: 'pointer' }}> Report</u>
               </Card.Text>
             </Card.Body>
