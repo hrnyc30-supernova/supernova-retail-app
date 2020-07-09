@@ -18,7 +18,6 @@ class App extends React.Component {
     this.state = {
       currentProduct: {},
       averageRating: 0,
-      currentRating: {},
       userToken: null,
     };
 
@@ -48,12 +47,14 @@ class App extends React.Component {
           averageRating: averageRating,
           currentRating: resolvedData[1].data,
           currentProduct: resolvedData[0].data
+        }, () => {
+          console.log('STATE', this.state);
         });
       })
       .catch((err) => {
         console.log(err);
       });
-    }
+  }
 
   generateUserToken() {
     const cookies = new Cookies();
@@ -80,22 +81,26 @@ class App extends React.Component {
   }
 
   productCardClicked(productId) {
-    apiMaster
-      .getProductInfo(productId)
-      .then(({ data }) => {
-        this.setState({ currentProduct: data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-
-    apiMaster
-      .getReviewMetaData(productId)
-      .then(({ data }) => {
-        let averageRating = this.calculateAverageRating(data.ratings);
+    let promises = [];
+    promises.push(apiMaster.getProductInfo(productId)    
+      .then(({ data }) => ({
+        data
+      }))
+    );
+    promises.push(apiMaster.getReviewMetaData(productId)
+      .then(({ data }) => ({
+        data
+      }))
+    );
+    Promise.all(promises)
+      .then((resolvedData) => {
+        let averageRating = this.calculateAverageRating(resolvedData[1].data.ratings);
+        console.log('this is resolved data', resolvedData);
+        console.log('this should be AVG', averageRating);
         this.setState({
           averageRating: averageRating,
-          currentRating: data
+          currentRating: resolvedData[1].data,
+          currentProduct: resolvedData[0].data
         });
       })
       .catch((err) => {
