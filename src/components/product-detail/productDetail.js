@@ -23,7 +23,6 @@ class ProductDetail extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (prevProps.product !== this.props.product) {
-      console.log("updating");
       apiMaster
         .getProductStyles(this.props.product.id)
         .then(({ data }) => {

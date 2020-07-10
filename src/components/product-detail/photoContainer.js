@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
-import { FaArrowLeft, FaThList } from "react-icons/fa";
+import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import { FiChevronUp } from "react-icons/fi";
 import { FiChevronDown } from "react-icons/fi";
@@ -38,6 +38,7 @@ class PhotoContainer extends React.Component {
         currentPhotoIcons: [],
         currentPageOfIcons: 0,
       });
+
       this.paginatePhotoIcons();
     }
   }
@@ -102,7 +103,6 @@ class PhotoContainer extends React.Component {
   }
 
   updatePhotoIcons() {
-    console.log("runnin?");
     var allPhotoIcons = [];
     var nextSevenPhotos = [];
     var numberOfPages;
@@ -134,33 +134,39 @@ class PhotoContainer extends React.Component {
   }
 
   handleUpChevronClick() {
-    this.updatePhotoIcons();
+    this.setState(
+      {
+        currentPageOfIcons: this.state.currentPageOfIcons - 1,
+        moreIconsDown: true,
+      },
+      () => {
+        if (this.state.currentPageOfIcons === 0) {
+          this.setState({
+            moreIconsUp: false,
+          });
+        }
 
-    this.setState({
-      currentPageOfIcons: this.state.currentPageOfIcons - 1,
-      moreIconsDown: true,
-    });
-
-    if (this.state.currentPageOfIcons === 0) {
-      this.setState({
-        moreIconsUp: false,
-      });
-    }
+        this.updatePhotoIcons();
+      }
+    );
   }
 
   handleDownChevronClick() {
-    this.updatePhotoIcons();
+    this.setState(
+      {
+        currentPageOfIcons: this.state.currentPageOfIcons + 1,
+        moreIconsUp: true,
+      },
+      () => {
+        if (this.state.numberOfPages === this.state.currentPageOfIcons + 1) {
+          this.setState({
+            moreIconsDown: false,
+          });
+        }
 
-    this.setState({
-      currentPageOfIcons: this.state.currentPageOfIcons + 1,
-      moreIconsUp: true,
-    });
-
-    if (this.state.numberOfPages === this.state.currentPageOfIcons + 1) {
-      this.setState({
-        moreIconsDown: false,
-      });
-    }
+        this.updatePhotoIcons();
+      }
+    );
   }
 
   handleIconClick(index) {
@@ -252,11 +258,6 @@ class PhotoContainer extends React.Component {
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
-          {this.state.currentPhotoIcons != [] &&
-          this.state.currentPhotoIcons != undefined
-            ? this.state.currentPhotoIcons.map((item) => console.log(item[1]))
-            : null}
-
           {this.state.currentPhotoIcons != [] &&
           this.state.currentPhotoIcons != undefined
             ? this.state.currentPhotoIcons.map((item) => (
