@@ -14,6 +14,7 @@ class PhotoContainer extends React.Component {
       currentPhotoIcons: [],
       moreIconsDown: false,
       moreIconsUp: false,
+      numberOfPages: 1,
       currentPageOfIcons: 0,
       selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
@@ -71,23 +72,61 @@ class PhotoContainer extends React.Component {
   paginatePhotoIcons() {
     var allPhotoIcons = [];
     var nextSevenPhotos = [];
+    var numberOfPages;
 
     if (this.props.selectedStyle != undefined) {
       this.props.selectedStyle.photos.map((photo, index) =>
         allPhotoIcons.push([photo, index])
       );
 
+      numberOfPages = Math.ceil(allPhotoIcons.length / 7);
+
       if (allPhotoIcons.length > 7) {
         nextSevenPhotos = allPhotoIcons.slice(
           this.state.currentPageOfIcons * 7,
-          this.state.currentPageOfIcons * 7 + 6
+          this.state.currentPageOfIcons * 7 + 7
         );
 
         this.setState({
+          numberOfPages: numberOfPages,
+          currentPhotoIcons: nextSevenPhotos,
+          moreIconsDown: true,
+        });
+      } else {
+        this.setState({
+          numberOfPages: 1,
+          currentPhotoIcons: allPhotoIcons,
+        });
+      }
+    }
+  }
+
+  updatePhotoIcons() {
+    console.log("runnin?");
+    var allPhotoIcons = [];
+    var nextSevenPhotos = [];
+    var numberOfPages;
+
+    if (this.props.selectedStyle != undefined) {
+      this.props.selectedStyle.photos.map((photo, index) =>
+        allPhotoIcons.push([photo, index])
+      );
+
+      numberOfPages = Math.ceil(allPhotoIcons.length / 7);
+
+      if (allPhotoIcons.length > 7) {
+        nextSevenPhotos = allPhotoIcons.slice(
+          this.state.currentPageOfIcons * 7,
+          this.state.currentPageOfIcons * 7 + 7
+        );
+
+        this.setState({
+          numberOfPages: numberOfPages,
           currentPhotoIcons: nextSevenPhotos,
         });
       } else {
         this.setState({
+          numberOfPages: 1,
           currentPhotoIcons: allPhotoIcons,
         });
       }
@@ -95,15 +134,33 @@ class PhotoContainer extends React.Component {
   }
 
   handleUpChevronClick() {
+    this.updatePhotoIcons();
+
     this.setState({
       currentPageOfIcons: this.state.currentPageOfIcons - 1,
+      moreIconsDown: true,
     });
+
+    if (this.state.currentPageOfIcons === 0) {
+      this.setState({
+        moreIconsUp: false,
+      });
+    }
   }
 
   handleDownChevronClick() {
+    this.updatePhotoIcons();
+
     this.setState({
       currentPageOfIcons: this.state.currentPageOfIcons + 1,
+      moreIconsUp: true,
     });
+
+    if (this.state.numberOfPages === this.state.currentPageOfIcons + 1) {
+      this.setState({
+        moreIconsDown: false,
+      });
+    }
   }
 
   handleIconClick(index) {
@@ -239,7 +296,7 @@ class PhotoContainer extends React.Component {
         </span>
         {this.props.selectedStyle != undefined &&
         this.props.selectedStyle.photos.length > 7 &&
-        this.state.movedToNextPhotoIconPage === true ? (
+        this.state.moreIconsUp === true ? (
           <span
             className="photo-selector-chevrons"
             id="up-chevron"
@@ -250,7 +307,7 @@ class PhotoContainer extends React.Component {
         ) : null}
         {this.props.selectedStyle != undefined &&
         this.props.selectedStyle.photos.length > 7 &&
-        this.state.morePhotoIconsAvailable === true ? (
+        this.state.moreIconsDown === true ? (
           <span
             className="photo-selector-chevrons"
             id="down-chevron"
