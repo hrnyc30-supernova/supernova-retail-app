@@ -48,9 +48,7 @@ const Report = (props) => {
         >
           Report
         </a>
-        
       )}
-      
     </>
   );
 };

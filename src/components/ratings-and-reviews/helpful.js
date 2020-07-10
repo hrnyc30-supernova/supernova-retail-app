@@ -38,7 +38,7 @@ const Helpful = (props) => {
     <>
       {" "}
       {helpful === true ? (
-        <span className="helpful">Helpful  ({props.helpfulCount + 1})</span>
+        <span className="helpful">Helpful ({props.helpfulCount + 1})</span>
       ) : (
         <a
           onClick={() => {
@@ -46,12 +46,9 @@ const Helpful = (props) => {
           }}
           className="helpful"
         >
-          Helpful? Yes 
-          ({props.helpfulCount})
+          Helpful? Yes ({props.helpfulCount})
         </a>
-        
       )}
-      
     </>
   );
 };

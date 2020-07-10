@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import apiMaster from '../../apiMaster';
 import Answer from './answer';
 import Card from 'react-bootstrap/Card';
-import Helpful from ".././ratings-and-reviews/helpful.js";
+import Helpful from '.././ratings-and-reviews/helpful.js';
 import {
   displayAmountState,
   allQuestionsState,
@@ -37,7 +37,7 @@ const QuestionDisplay = (props) => {
     return (
       <div>
         {questions.map((question) => {
-          if (question.question_body.indexOf(search) > 0) {
+          if (question.question_body.indexOf(search) > -1) {
             return (
               <Card key={question.question_id} className="question">
                 <Card.Header>
@@ -74,7 +74,11 @@ const QuestionDisplay = (props) => {
               <Card.Header>
                 Q: {question.question_body}{' '}
                 <div style={{ float: 'right' }}>
-                  <Helpful id={question.question_id} widget='question' helpfulCount={question.question_helpfulness}/>
+                  <Helpful
+                    id={question.question_id}
+                    widget="question"
+                    helpfulCount={question.question_helpfulness}
+                  />
                   <u
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
