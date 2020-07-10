@@ -31,7 +31,7 @@ const QuestionsAndAnswers = (props) => {
   } else {
     return (
       <div>
-        <h1>Questions and Answers</h1>
+        <div className="widget-headings">Questions and Answers</div>
         <SearchQuestion />
         <div className="allCards">
           <QuestionDisplay

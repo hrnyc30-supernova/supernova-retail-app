@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
 $primary-color: #525252;
 $secondary-color: #808080;
 $tertiary-color: #d3d3d3;
@@ -16,7 +16,7 @@ $alert-color: #cc0000;
 /* -------- GLOBAL -------- */
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: $primary-color;
   width: 1200px;
   margin: auto;
@@ -62,7 +62,7 @@ body {
 }
 
 .main-action-dropdown-content a {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 1.1px;
   font-size: 14px;
   font-weight: 600;
@@ -87,7 +87,7 @@ body {
 }
 
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
 }
 
@@ -101,7 +101,7 @@ input {
 }
 
 #logo {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -139,11 +139,11 @@ input {
 }
 
 .alert-bar-message::before {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 .alert-bar-message::after {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -759,7 +759,7 @@ ul.characteristics {
 
 .review-photo {
   width: 70px;
-  height: "auto";
+  height: 'auto';
   padding: 5px 10px;
 }
 
@@ -816,7 +816,7 @@ small {
 
 .new-review-modal {
   max-height: calc(120vh - 210px);
-  overflow-y: "auto";
+  overflow-y: 'auto';
 }
 
 .allCards {
@@ -840,7 +840,7 @@ small {
 
 .qamodals {
   text-transform: uppercase;
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   color: $primary-color;
 }
@@ -855,7 +855,7 @@ small {
 }
 
 .qa-div {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   color: $primary-color;
 }
@@ -907,4 +907,9 @@ small {
 
 .footer-data-row {
   margin-bottom: 8px;
+}
+
+.widget-headings {
+  font-size: 36px;
+  font-weight: bold;
 }
