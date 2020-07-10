@@ -26,6 +26,21 @@ class TextContainer extends React.Component {
     this.handleFavorite = this.handleFavorite.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps.product !== this.props.product) {
+      apiMaster
+        .getReviewsOfProduct(this.props.product.id)
+        .then(({ data }) => {
+          this.setState({
+            reviewsLength: data.results.length,
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }
+
   handleAddToBag() {
     if (
       this.state.currentlySelectedSize !== "Select Size" &&
@@ -111,7 +126,7 @@ class TextContainer extends React.Component {
       >
         <Stars rating={this.props.averageRating} />
         <a href="#reviews-ratings-container" id="reviews-link">
-          Read all reviews
+          Read all {this.state.reviewsLength} reviews
         </a>
         <div id="product-category">
           {this.props.product != undefined ? this.props.product.category : null}
