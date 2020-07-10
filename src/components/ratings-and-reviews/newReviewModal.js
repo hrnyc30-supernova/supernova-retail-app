@@ -39,7 +39,7 @@ class NewReview extends React.Component {
     }
     this.setState({
       validated: true
-    }, () => console.log(this.state))
+    })
     if (form.checkValidity() === true) {
     this.props.showModal();
     apiMaster.postReview(id, rating, summary, body, recommend, name, email, photos, characteristics)
