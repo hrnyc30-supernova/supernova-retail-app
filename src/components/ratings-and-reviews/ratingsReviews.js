@@ -2,7 +2,6 @@ import React from "react";
 import ReviewList from "./reviewList.js";
 import RatingsBreakdown from "./ratingsBreakdown.js";
 import apiMaster from "../../apiMaster.js";
-import { ratingScale } from "./constants.js";
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -19,21 +18,21 @@ class RatingsReviews extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.currentProductID !== this.props.currentProductID || prevProps.currentProductName !== this.props.currentProductName || prevProps.averageRating !== this.props.averageRating || prevProps.currentRating !== this.props.currentRating) {
-    apiMaster
-      .getReviewsOfProduct(this.props.currentProductID, 20)
-      .then(({ data }) => {
-        let ratings = this.getRatings(data.results);
-        let recommend = this.getRecommendation(data.results);
-        this.setState({
-          reviews: data.results,
-          currentProductRatings: ratings,
-          recommendProduct: recommend,
+    if (prevProps.currentProductID !== this.props.currentProductID) {
+      apiMaster
+        .getReviewsOfProduct(this.props.currentProductID, 20)
+        .then(({ data }) => {
+          let ratings = this.getRatings(data.results);
+          let recommend = this.getRecommendation(data.results);
+          this.setState({
+            reviews: data.results,
+            currentProductRatings: ratings,
+            recommendProduct: recommend,
+          });
+        })
+        .catch((err) => {
+          console.error(err);
         });
-      })
-      .catch((err) => {
-        console.error(err);
-      });
     }
   }
 
@@ -43,18 +42,17 @@ class RatingsReviews extends React.Component {
     });
   }
 
-  filterReviews(rating){
-    
-    let filteredReviews =[];
+  filterReviews(rating) {
+    let filteredReviews = [];
     for (var count in rating) {
       let countFilter = this.state.reviews.filter((review) => {
-        return Number(review.rating) === Number(count)
-      }) 
+        return Number(review.rating) === Number(count);
+      });
       filteredReviews = filteredReviews.concat(countFilter);
     }
     this.setState({
-      filtered: filteredReviews
-    })
+      filtered: filteredReviews,
+    });
   }
 
   getRecommendation(reviewsArray) {
@@ -83,8 +81,6 @@ class RatingsReviews extends React.Component {
           currentRating={this.props.currentRating}
           recommend={this.state.recommendProduct}
           currentProductRatings={this.state.currentProductRatings}
-          currentProductName={this.props.currentProductName}
-          currentProductID={this.props.currentProductID}
           averageRating={this.props.averageRating}
           handleFilter={this.filterReviews}
         />

@@ -621,7 +621,7 @@ ul.characteristics {
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 300px;
   float: left;
 }
 
@@ -645,7 +645,15 @@ ul.characteristics {
   border-bottom: 1px solid #525252;
 }
 
-#add-new-review {
+#review-name-and-date{
+  float: right;
+}
+
+#review-summary{
+  padding-top: 10px;
+}
+
+.review-button {
   width: 200px;
   background-color: white;
   margin-bottom: 30px;
@@ -740,10 +748,10 @@ small {
   display: block;
 }
 
-#characteristic-rating-container
-  > .characteristic-filter-elem
-  > .characteristic-scale-item:first-child {
-  float: left;
+#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:first-child {
+  // float:left;
+  // width: 60px;
+  display: inline;
 }
 
 #characteristic-rating-container
@@ -824,4 +832,53 @@ small {
   font-family: 'Open Sans', sans-serif;
   font-weight: 600;
   color: #525252;
+}
+    
+/* -------- FOOTER -------- */
+
+.footer-section {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  font-size: 14px;
+  color: #525252;
+}
+
+.footer-admin {
+  font-size: 12px;
+  margin-right: 8px;
+  text-decoration: underline;
+  transition: color 0.5s;
+}
+
+.footer-admin:hover {
+  color: #007bff;
+  cursor: pointer;
+}
+
+#footer-close-button-card {
+  width: 100px;
+  margin-left: 350px;
+  margin-bottom: 16px;
+}
+
+.footer-element-clicked {
+  white-space: nowrap;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
+
+.footer-modal-body {
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.footer-modal-title {
+  margin-left: 15px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.footer-data-row {
+  margin-bottom: 8px;
 }
