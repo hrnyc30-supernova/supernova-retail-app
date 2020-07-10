@@ -48,8 +48,10 @@ class ReviewTile extends React.Component {
         {this.props.review ? (
           <>
             <Stars rating={Number(this.props.review.rating)} />
-            <p>{`${this.props.review.reviewer_name}, ${date}`}</p>
-            <p>
+            <p id="review-name-and-date">
+              <small>{`${this.props.review.reviewer_name}, ${date}`}</small>
+            </p>
+            <p id="review-summary">
               <strong>
                 {this.props.review.summary.length <= 60
                   ? this.props.review.summary
