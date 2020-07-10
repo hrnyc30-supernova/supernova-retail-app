@@ -6,14 +6,14 @@ class Stars extends React.Component {
     super(props);
     this.state = {
       rating: this.props.rating,
-    }
+    };
   }
 
   handleChange(e) {
     this.props.handleChange(e);
     this.setState({
-      rating: e
-    })
+      rating: e,
+    });
   }
   render() {
     if (this.props.allowChange) {

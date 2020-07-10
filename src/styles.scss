@@ -621,7 +621,7 @@ ul.characteristics {
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 300px;
   float: left;
 }
 
@@ -645,7 +645,15 @@ ul.characteristics {
   border-bottom: 1px solid #525252;
 }
 
-#add-new-review {
+#review-name-and-date{
+  float: right;
+}
+
+#review-summary{
+  padding-top: 10px;
+}
+
+.review-button {
   width: 200px;
   background-color: white;
   margin-bottom: 30px;
@@ -740,10 +748,10 @@ small {
   display: block;
 }
 
-#characteristic-rating-container
-  > .characteristic-filter-elem
-  > .characteristic-scale-item:first-child {
-  float: left;
+#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:first-child{
+  // float:left;
+  // width: 60px;
+  display: inline;
 }
 
 #characteristic-rating-container

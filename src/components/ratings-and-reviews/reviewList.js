@@ -4,7 +4,6 @@ import MoreReviewsButton from "./moreReviewsButton.js";
 import AddReviewButton from "./addReviewButton.js";
 import SortBy from "./sortBy.js";
 import apiMaster from "../../apiMaster.js";
-import axios from "axios";
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -20,11 +19,14 @@ class ReviewList extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.reviews !== this.props.reviews || prevProps.currentProductID !== this.props.currentProductID) {
+    if (
+      prevProps.reviews !== this.props.reviews ||
+      prevProps.currentProductID !== this.props.currentProductID
+    ) {
       this.setState({
         sortedReviews: [],
         isSorted: false,
-        count: 2
+        count: 2,
       });
     }
   }
@@ -69,18 +71,25 @@ class ReviewList extends React.Component {
 
   filterReviews(reviews) {
     let showReviews = [];
-    this.props.filteredReviews.forEach(filteredReview => {
-      let temp = reviews.filter(review => {
-        return review.review_id === filteredReview.review_id
-      })
-      showReviews = showReviews.concat(temp);
-    })
+    reviews.forEach((review) => {
+      this.props.filteredReviews.forEach((filteredReview) => {
+        if (review.review_id === filteredReview.review_id) {
+          showReviews.push(review);
+        }
+      });
+    });
     return showReviews;
   }
 
   render() {
     let reviewsToShow =
-      this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? (this.filterReviews(this.state.sortedReviews)) : this.state.sortedReviews) : (this.props.filteredReviews.length > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
+      this.state.isSorted === true
+        ? this.props.filteredReviews.length > 0
+          ? this.filterReviews(this.state.sortedReviews)
+          : this.state.sortedReviews
+        : this.props.filteredReviews.length > 0
+        ? this.filterReviews(this.props.reviews)
+        : this.props.reviews.slice(0, this.state.count);
     return this.props.reviews.length === 0 ? (
       <div id="review-list-container">
         {" "}
@@ -94,13 +103,12 @@ class ReviewList extends React.Component {
         />{" "}
       </div>
     ) : (
-      <div id='review-list-container'>
-        <div id='sort-and-add-review-container'>
+      <div id="review-list-container">
+        <div id="sort-and-add-review-container">
           <SortBy
             currentProductID={this.props.currentProductID}
             onSelect={this.handleSortByChange}
           />
-          
         </div>
         <div className="scroll">
           {reviewsToShow.map((review) => {
@@ -111,14 +119,14 @@ class ReviewList extends React.Component {
           ) : null}
         </div>
         <AddReviewButton
-            id="add-new-review-button"
-            currentProductID={this.props.currentProductID}
-            currentProductCharacteristics={
-              this.props.currentProductCharacteristics
-            }
-            currentProductName={this.props.currentProductName}
-            currentProductID={this.props.currentProductID}
-          />
+          id="add-new-review-button"
+          currentProductID={this.props.currentProductID}
+          currentProductCharacteristics={
+            this.props.currentProductCharacteristics
+          }
+          currentProductName={this.props.currentProductName}
+          currentProductID={this.props.currentProductID}
+        />
       </div>
     );
   }

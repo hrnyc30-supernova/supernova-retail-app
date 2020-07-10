@@ -4,7 +4,7 @@ import Helpful from "./helpful.js";
 import Report from "./report.js";
 import Modal from "react-bootstrap/Modal";
 import moment from "moment";
-import { FaCheck, FaCheckCircle } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 
 class ReviewTile extends React.Component {
   constructor(props) {
@@ -33,9 +33,9 @@ class ReviewTile extends React.Component {
       });
     } else {
       this.setState({
-        imageUrl: '', 
-        showImgModal: !temp
-      })
+        imageUrl: "",
+        showImgModal: !temp,
+      });
     }
   }
 
@@ -48,8 +48,10 @@ class ReviewTile extends React.Component {
         {this.props.review ? (
           <>
             <Stars rating={Number(this.props.review.rating)} />
-            <p>{`${this.props.review.reviewer_name}, ${date}`}</p>
-            <p>
+            <p id="review-name-and-date">
+              <small>{`${this.props.review.reviewer_name}, ${date}`}</small>
+            </p>
+            <p id="review-summary">
               <strong>
                 {this.props.review.summary.length <= 60
                   ? this.props.review.summary
@@ -96,7 +98,9 @@ class ReviewTile extends React.Component {
               onHide={this.handleImgClick}
             >
               <Modal.Header closeButton />
-              <Modal.Body><img src={this.state.imageUrl} class="img-fluid"></img></Modal.Body>
+              <Modal.Body>
+                <img src={this.state.imageUrl} class="img-fluid"></img>
+              </Modal.Body>
             </Modal>
             <p>
               {this.props.review.recommend === 0 ? (
@@ -110,7 +114,14 @@ class ReviewTile extends React.Component {
                 Response from seller: {this.props.review.response}
               </p>
             )}
-            <p className='helpful-wrapper'><Helpful id={this.props.review.review_id} widget='review' helpfulCount={this.props.review.helpfulness}/> | <Report id={this.props.review.review_id} widget='review'/></p>
+            <p className="helpful-wrapper">
+              <Helpful
+                id={this.props.review.review_id}
+                widget="review"
+                helpfulCount={this.props.review.helpfulness}
+              />{" "}
+              | <Report id={this.props.review.review_id} widget="review" />
+            </p>
           </>
         ) : null}
       </div>
