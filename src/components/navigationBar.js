@@ -21,7 +21,7 @@ class NavigationBar extends React.Component {
   render() {
     return (
       <div id="nav-bar">
-        <span id="logo">Greenfield</span>
+        <span id="logo">Supernova</span>
         <span id="main-search">
           <input
             type="text"

@@ -11,6 +11,7 @@ import ProductDetail from "./components/product-detail/productDetail";
 import RelatedItems from "./components/related-items-creation/relatedItems";
 import QuestionsAndAnswers from "./components/questions-and-answers/questionsAndAnswers";
 import RatingsReviews from "./components/ratings-and-reviews/ratingsReviews";
+import Footer from "./components/related-items-creation/footer";
 
 class App extends React.Component {
   constructor(props) {
