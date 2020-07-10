@@ -17,6 +17,7 @@ class RelatedItems extends React.Component {
     this.getRelatedItemFeatures = this.getRelatedItemFeatures.bind(this);
     this.getRelatedItemNames = this.getRelatedItemNames.bind(this);
     this.getRelatedItemRatings = this.getRelatedItemRatings.bind(this);
+    this.removeDuplicateRelatedIds = this.removeDuplicateRelatedIds.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -33,7 +34,7 @@ class RelatedItems extends React.Component {
       .getRelatedProducts(this.props.currentProductID)
       .then((ids) => {
         this.setState({
-          relatedProductIds: ids.data,
+          relatedProductIds: this.removeDuplicateRelatedIds(ids.data),
         });
       })
       .then(() => {
@@ -44,6 +45,12 @@ class RelatedItems extends React.Component {
       .catch((err) => {
         console.log('err in getRelatedIds: ', err);
       });
+  }
+
+  removeDuplicateRelatedIds(array) {
+    const uniqueIds = new Set(array);
+    const uniqueIdsArray = Array.from(uniqueIds);
+    return uniqueIdsArray;
   }
 
   getRelatedItemFeatures() {
