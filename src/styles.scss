@@ -621,7 +621,7 @@ ul.characteristics {
   position: absolute;
   display: flex;
   flex-direction: column;
-  width: 400px;
+  width: 300px;
   float: left;
 }
 
@@ -740,8 +740,10 @@ small {
   display: block;
 }
 
-#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:first-child {
-  float:left;
+#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:first-child{
+  // float:left;
+  // width: 60px;
+  display: inline;
 }
 
 #characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:last-child {
