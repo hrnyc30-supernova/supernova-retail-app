@@ -69,11 +69,12 @@ class ReviewList extends React.Component {
 
   filterReviews(reviews) {
     let showReviews = [];
-    this.props.filteredReviews.forEach(filteredReview => {
-      let temp = reviews.filter(review => {
-        return review.review_id === filteredReview.review_id
+    reviews.forEach(review => {
+      this.props.filteredReviews.forEach(filteredReview => {
+        if(review.review_id === filteredReview.review_id){
+          showReviews.push(review)
+        }
       })
-      showReviews = showReviews.concat(temp);
     })
     return showReviews;
   }
@@ -81,6 +82,7 @@ class ReviewList extends React.Component {
   render() {
     let reviewsToShow =
       this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? (this.filterReviews(this.state.sortedReviews)) : this.state.sortedReviews) : (this.props.filteredReviews.length > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
+      console.log(reviewsToShow)
     return this.props.reviews.length === 0 ? (
       <div id="review-list-container">
         {" "}

@@ -54,7 +54,7 @@ class RatingsReviews extends React.Component {
     }
     this.setState({
       filtered: filteredReviews
-    })
+    }, () => {console.log('set state', this.state.filtered)})
   }
 
   getRecommendation(reviewsArray) {
