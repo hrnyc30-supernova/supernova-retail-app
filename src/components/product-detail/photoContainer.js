@@ -12,8 +12,8 @@ class PhotoContainer extends React.Component {
     super(props);
     this.state = {
       currentPhotoIcons: [],
-      morePhotoIconsAvailable: false,
-      movedToNextPhotoIconPage: false,
+      moreIconsDown: false,
+      moreIconsUp: false,
       currentPageOfIcons: 0,
       selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
@@ -30,16 +30,14 @@ class PhotoContainer extends React.Component {
     this.handleProductPhotoExpand = this.handleProductPhotoExpand.bind(this);
   }
 
-  componentDidMount() {
-    this.paginatePhotoIcons();
-  }
-
   componentDidUpdate(prevProps) {
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
-      this.paginatePhotoIcons();
       this.setState({
         selectedPhotoIndex: 0,
+        currentPhotoIcons: [],
+        currentPageOfIcons: 0,
       });
+      this.paginatePhotoIcons();
     }
   }
 
@@ -71,29 +69,39 @@ class PhotoContainer extends React.Component {
   }
 
   paginatePhotoIcons() {
-    if (this.props.selectedStyle != undefined) {
-      if (this.state.addedPhotos === []) {
-        var addedPhotos = [];
-        this.props.selectedStyle.photos.map((photo) => addedPhotos.push(photo));
-      }
+    var allPhotoIcons = [];
+    var nextSevenPhotos = [];
 
-      if (addedPhotos.length > 7) {
-        var firstSevenPhotos = addedPhotos.slice(0, 7);
+    if (this.props.selectedStyle != undefined) {
+      this.props.selectedStyle.photos.map((photo, index) =>
+        allPhotoIcons.push([photo, index])
+      );
+
+      if (allPhotoIcons.length > 7) {
+        nextSevenPhotos = allPhotoIcons.slice(
+          this.state.currentPageOfIcons * 7,
+          this.state.currentPageOfIcons * 7 + 6
+        );
+
         this.setState({
-          morePhotoIconsAvailable: true,
+          currentPhotoIcons: nextSevenPhotos,
+        });
+      } else {
+        this.setState({
+          currentPhotoIcons: allPhotoIcons,
         });
       }
-      this.setState({
-        currentPhotoIcons: firstSevenPhotos || addedPhotos,
-      });
     }
   }
 
-  handleUpChevronClick() {}
+  handleUpChevronClick() {
+    this.setState({
+      currentPageOfIcons: this.state.currentPageOfIcons - 1,
+    });
+  }
 
   handleDownChevronClick() {
     this.setState({
-      movedToNextPhotoIconPage: true,
       currentPageOfIcons: this.state.currentPageOfIcons + 1,
     });
   }
@@ -187,16 +195,22 @@ class PhotoContainer extends React.Component {
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
-          {this.state.currentPhotoIcons != []
-            ? this.state.currentPhotoIcons.map((photo, index) => (
+          {this.state.currentPhotoIcons != [] &&
+          this.state.currentPhotoIcons != undefined
+            ? this.state.currentPhotoIcons.map((item) => console.log(item[1]))
+            : null}
+
+          {this.state.currentPhotoIcons != [] &&
+          this.state.currentPhotoIcons != undefined
+            ? this.state.currentPhotoIcons.map((item) => (
                 <div
                   className="product-photo-icon"
                   style={{
-                    backgroundImage: `url(${photo.thumbnail_url})`,
+                    backgroundImage: `url(${item[0].thumbnail_url})`,
                   }}
-                  onClick={() => this.handleIconClick(index)}
+                  onClick={() => this.handleIconClick(item[1])}
                 >
-                  {this.state.selectedPhotoIndex === index ? (
+                  {this.state.selectedPhotoIndex === item[1] ? (
                     <span id="selected-photo-bar"></span>
                   ) : null}
                 </div>
