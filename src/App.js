@@ -22,7 +22,6 @@ class App extends React.Component {
       currentRating: {},
       userToken: null,
       clickData: [],
-      eventIsListening: true,
     };
 
     this.calculateAverageRating = this.calculateAverageRating.bind(this);
@@ -110,9 +109,7 @@ class App extends React.Component {
   }
 
   startListening() {
-    if (this.state.eventIsListening) {
-      document.addEventListener('click', this.clickTracker);
-    }
+    document.addEventListener('click', this.clickTracker);
   }
 
   clickTracker(e) {
@@ -148,7 +145,6 @@ class App extends React.Component {
     );
 
     const syncWrapper = () => {
-      console.log('syncWrapper ran! activityData: ', activityData);
       this.setState({ clickData: activityData });
     };
     syncWrapper();
@@ -192,7 +188,10 @@ class App extends React.Component {
           />
         </div>
         <div className="footer-section">
-          <Footer clickData={this.state.clickData} />
+          <Footer
+            clickData={this.state.clickData}
+            userToken={this.state.userToken}
+          />
         </div>
       </div>
     );

@@ -809,6 +809,15 @@ small {
   color: #525252;
 }
 
+.helpful-wrapper {
+  font-size: 12px;
+  display: inline;
+}
+
+.helpful-wrapper a {
+  cursor: pointer;
+}
+
 /* -------- FOOTER -------- */
 
 .footer-section {
@@ -830,11 +839,30 @@ small {
   color: #007bff;
   cursor: pointer;
 }
-.helpful-wrapper {
-  font-size: 12px;
-  display: inline;
+
+#footer-close-button-card {
+  width: 100px;
+  margin-left: 350px;
+  margin-bottom: 16px;
 }
 
-.helpful-wrapper a {
-  cursor: pointer;
+.footer-element-clicked {
+  white-space: nowrap;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
+
+.footer-modal-body {
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.footer-modal-title {
+  margin-left: 15px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.footer-data-row {
+  margin-bottom: 8px;
 }
