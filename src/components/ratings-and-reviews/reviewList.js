@@ -94,7 +94,6 @@ class ReviewList extends React.Component {
         review.body.indexOf(keyword) > -1 ||
         review.summary.indexOf(keyword) > -1
       ) {
-        console.log(review.body);
         showReviews.push(review);
       }
     });
