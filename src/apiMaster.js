@@ -1,5 +1,5 @@
-import axios from 'axios';
-const url = 'http://18.224.200.47';
+import axios from "axios";
+const url = "http://18.224.200.47";
 
 const getProductList = () => {
   return axios.get(`${url}/products`);
@@ -25,7 +25,7 @@ const getReviewMetaData = (id = 1) => {
   return axios.get(`${url}/reviews/${id}/meta`);
 };
 
-const getReviewsOfProduct = (id = 1, sortString = 'relevant', count = 20) => {
+const getReviewsOfProduct = (id = 1, sortString = "relevant", count = 20) => {
   return axios.get(
     `${url}/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
   );
