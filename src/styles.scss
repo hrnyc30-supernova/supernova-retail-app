@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
 
 /* -------- BOOTSTRAP DEFAULT STYLES TO WATCH OUT FOR -------- */
 
@@ -10,7 +10,7 @@
 /* -------- GLOBAL -------- */
 
 body {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   color: #525252;
   width: 1200px;
   margin: auto;
@@ -56,7 +56,7 @@ body {
 }
 
 .main-action-dropdown-content a {
-  font-family: "Roboto", sans-serif;
+  font-family: 'Roboto', sans-serif;
   letter-spacing: 1.1px;
   font-size: 14px;
   font-weight: 600;
@@ -81,7 +81,7 @@ body {
 }
 
 input {
-  font-family: "Open Sans", sans-serif;
+  font-family: 'Open Sans', sans-serif;
   font-size: 14px;
 }
 
@@ -95,7 +95,7 @@ input {
 }
 
 #logo {
-  font-family: "Kanit", sans-serif;
+  font-family: 'Kanit', sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -133,11 +133,11 @@ input {
 }
 
 .alert-bar-message::before {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 .alert-bar-message::after {
-  content: "\00a0\00a0\00a0";
+  content: '\00a0\00a0\00a0';
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -735,7 +735,7 @@ ul.characteristics {
 
 .review-photo {
   width: 70px;
-  height: "auto";
+  height: 'auto';
   padding: 5px 10px;
 }
 
@@ -744,7 +744,7 @@ small {
   padding-left: 10px;
 }
 
-.characteristic-filter-elem{
+.characteristic-filter-elem {
   display: block;
 }
 
@@ -754,7 +754,9 @@ small {
   display: inline;
 }
 
-#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:last-child {
+#characteristic-rating-container
+  > .characteristic-filter-elem
+  > .characteristic-scale-item:last-child {
   float: right;
 }
 
@@ -788,7 +790,7 @@ small {
 
 .new-review-modal {
   max-height: calc(120vh - 210px);
-  overflow-y: "auto";
+  overflow-y: 'auto';
 }
 
 .allCards {
@@ -815,11 +817,60 @@ small {
   color: #525252;
 }
 
-.helpful-wrapper{
+.helpful-wrapper {
   font-size: 12px;
   display: inline;
 }
 
 .helpful-wrapper a {
   cursor: pointer;
+}
+
+/* -------- FOOTER -------- */
+
+.footer-section {
+  position: fixed;
+  right: 15px;
+  bottom: 15px;
+  font-size: 14px;
+  color: #525252;
+}
+
+.footer-admin {
+  font-size: 12px;
+  margin-right: 8px;
+  text-decoration: underline;
+  transition: color 0.5s;
+}
+
+.footer-admin:hover {
+  color: #007bff;
+  cursor: pointer;
+}
+
+#footer-close-button-card {
+  width: 100px;
+  margin-left: 350px;
+  margin-bottom: 16px;
+}
+
+.footer-element-clicked {
+  white-space: nowrap;
+  overflow: scroll;
+  text-overflow: ellipsis;
+}
+
+.footer-modal-body {
+  max-height: 700px;
+  overflow-y: auto;
+}
+
+.footer-modal-title {
+  margin-left: 15px;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.footer-data-row {
+  margin-bottom: 8px;
 }
