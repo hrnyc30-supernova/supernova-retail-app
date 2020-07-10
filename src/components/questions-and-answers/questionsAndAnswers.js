@@ -46,8 +46,8 @@ const QuestionsAndAnswers = (props) => {
   } else {
     return (
       <RecoilRoot>
-        <div>
-          <h1>Questions and Answers</h1>
+        <div className="qa-div">
+          <h1 className="qa-div">Questions and Answers</h1>
           <SearchQuestion />
           <div className="allCards">
             <QuestionDisplay
