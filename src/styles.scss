@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Kanit:ital,wght@1,600&display=swap");
 
 /* -------- BOOTSTRAP DEFAULT STYLES TO WATCH OUT FOR -------- */
 
@@ -10,7 +10,7 @@
 /* -------- GLOBAL -------- */
 
 body {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   color: #525252;
   width: 1200px;
   margin: auto;
@@ -56,7 +56,7 @@ body {
 }
 
 .main-action-dropdown-content a {
-  font-family: 'Roboto', sans-serif;
+  font-family: "Roboto", sans-serif;
   letter-spacing: 1.1px;
   font-size: 14px;
   font-weight: 600;
@@ -81,7 +81,7 @@ body {
 }
 
 input {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-size: 14px;
 }
 
@@ -95,7 +95,7 @@ input {
 }
 
 #logo {
-  font-family: 'Kanit', sans-serif;
+  font-family: "Kanit", sans-serif;
   font-size: 24px;
   text-decoration: underline;
 }
@@ -133,11 +133,11 @@ input {
 }
 
 .alert-bar-message::before {
-  content: '\00a0\00a0\00a0';
+  content: "\00a0\00a0\00a0";
 }
 
 .alert-bar-message::after {
-  content: '\00a0\00a0\00a0';
+  content: "\00a0\00a0\00a0";
 }
 
 /* -------- PRODUCT DETAILS WIDGET -------- */
@@ -301,6 +301,7 @@ input {
 }
 
 #overridden-price {
+  color: #cc0000;
   text-decoration: line-through;
   margin-right: 8px;
 }
@@ -664,11 +665,11 @@ ul.characteristics {
   border-bottom: 1px solid #525252;
 }
 
-#review-name-and-date{
+#review-name-and-date {
   float: right;
 }
 
-#review-summary{
+#review-summary {
   padding-top: 10px;
 }
 
@@ -754,7 +755,7 @@ ul.characteristics {
 
 .review-photo {
   width: 70px;
-  height: 'auto';
+  height: "auto";
   padding: 5px 10px;
 }
 
@@ -767,7 +768,9 @@ small {
   display: block;
 }
 
-#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:first-child {
+#characteristic-rating-container
+  > .characteristic-filter-elem
+  > .characteristic-scale-item:first-child {
   // float:left;
   // width: 60px;
   display: inline;
@@ -809,7 +812,7 @@ small {
 
 .new-review-modal {
   max-height: calc(120vh - 210px);
-  overflow-y: 'auto';
+  overflow-y: "auto";
 }
 
 .allCards {
@@ -833,7 +836,7 @@ small {
 
 .qamodals {
   text-transform: uppercase;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   color: #525252;
 }
@@ -848,11 +851,11 @@ small {
 }
 
 .qa-div {
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
   font-weight: 600;
   color: #525252;
 }
-    
+
 /* -------- FOOTER -------- */
 
 .footer-section {
