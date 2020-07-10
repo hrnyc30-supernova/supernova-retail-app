@@ -12,6 +12,7 @@ class TextContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      reviewsLength: 0,
       stylesMenuWidth: "styles-menu-4-across",
       bagError: "",
       bagMessage: "Add to Bag",
@@ -24,6 +25,21 @@ class TextContainer extends React.Component {
 
     this.handleAddToBag = this.handleAddToBag.bind(this);
     this.handleFavorite = this.handleFavorite.bind(this);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.product !== this.props.product) {
+      apiMaster
+        .getReviewsOfProduct(this.props.product.id)
+        .then(({ data }) => {
+          this.setState({
+            reviewsLength: data.results.length,
+          });
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }
 
   handleAddToBag() {
@@ -111,7 +127,7 @@ class TextContainer extends React.Component {
       >
         <Stars rating={this.props.averageRating} />
         <a href="#reviews-ratings-container" id="reviews-link">
-          Read all reviews
+          Read all {this.state.reviewsLength} reviews
         </a>
         <div id="product-category">
           {this.props.product != undefined ? this.props.product.category : null}
@@ -219,14 +235,16 @@ class TextContainer extends React.Component {
                         this.state.currentlySelectedSize
                       ]
                     ),
-                  ].map((item, i) => (
-                    <a
-                      id={i + 1}
-                      onClick={(event) => this.selectQuantity(event)}
-                    >
-                      {i + 1}
-                    </a>
-                  ))
+                  ].map((item, i) =>
+                    i <= 14 ? (
+                      <a
+                        id={i + 1}
+                        onClick={(event) => this.selectQuantity(event)}
+                      >
+                        {i + 1}
+                      </a>
+                    ) : null
+                  )
                 : null}
             </div>
           </span>
