@@ -1,17 +1,9 @@
 import React from "react";
-import { charScales } from "./constants.js";
 
 class RatingFilters extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      ratingPercentages: {
-        "1": 0,
-        "2": 0,
-        "3": 0,
-        "4": 0,
-        "5": 0,
-      },
       filters: {},
     };
     this.toggleFilter = this.toggleFilter.bind(this);

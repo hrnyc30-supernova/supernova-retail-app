@@ -11,17 +11,20 @@ class UploadPhotos extends React.Component {
   }
 
   handleChange(e) {
-      let temp = this.state.images;
-      temp.push(URL.createObjectURL(e.target.files[0]));
-      this.setState({
-          images: temp
-      }, () => {
-        console.log('images array', this.state.images)
-      })
+    let temp = this.state.images;
+    temp.push(URL.createObjectURL(e.target.files[0]));
+    this.setState(
+      {
+        images: temp,
+      },
+      () => {
+        console.log("images array", this.state.images);
+      }
+    );
   }
 
   handleUpload(e) {
-      this.props.toggleImgModal(e, this.state.images);
+    this.props.toggleImgModal(e, this.state.images);
   }
 
   render() {
@@ -31,7 +34,7 @@ class UploadPhotos extends React.Component {
         show={this.props.showImgModal}
         animation={false}
         centered
-        onHide={e => this.props.toggleImgModal(e, null)}
+        onHide={(e) => this.props.toggleImgModal(e, null)}
       >
         <Modal.Header closeButton>
           <Modal.Title>
@@ -43,10 +46,27 @@ class UploadPhotos extends React.Component {
         </Modal.Header>
         <Modal.Body>
           <form>
-            <label className='label-container' htmlFor='photo'>Choose up to 5 photos: <br/>
-                {['1', '2', '3', '4', '5'].map((item, i) => {
-                    return this.state.images.length >= item ? <><img src={`${this.state.images[i]}`} className="review-photo"/><br/></> : <input type="file" id={i} name="photo" onChange={this.handleChange} accept="image/png, image/jpeg, image/jpg"/>
-                }) }
+            <label className="label-container" htmlFor="photo">
+              Choose up to 5 photos: <br />
+              {["1", "2", "3", "4", "5"].map((item, i) => {
+                return this.state.images.length >= item ? (
+                  <>
+                    <img
+                      src={`${this.state.images[i]}`}
+                      className="review-photo"
+                    />
+                    <br />
+                  </>
+                ) : (
+                  <input
+                    type="file"
+                    id={i}
+                    name="photo"
+                    onChange={this.handleChange}
+                    accept="image/png, image/jpeg, image/jpg"
+                  />
+                );
+              })}
             </label>
           </form>
         </Modal.Body>

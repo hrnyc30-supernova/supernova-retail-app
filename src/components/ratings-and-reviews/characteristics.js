@@ -2,7 +2,7 @@ import React from "react";
 import { charScales } from "./constants.js";
 import { FaCaretUp } from "react-icons/fa";
 
-const Characteristics = ({currentRating}) => {
+const Characteristics = ({ currentRating }) => {
   let chars;
   currentRating !== undefined && currentRating.characteristics !== undefined
     ? (chars = currentRating.characteristics)
