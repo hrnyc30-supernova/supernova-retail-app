@@ -4,6 +4,7 @@ import MoreReviewsButton from "./moreReviewsButton.js";
 import AddReviewButton from "./addReviewButton.js";
 import SortBy from "./sortBy.js";
 import apiMaster from "../../apiMaster.js";
+import KeywordSearch from "./keywordSearch.js";
 
 class ReviewList extends React.Component {
   constructor(props) {
@@ -12,10 +13,14 @@ class ReviewList extends React.Component {
       sortedReviews: [],
       isSorted: false,
       count: 2,
+      isSearching: false,
+      searchedReviews: [],
     };
     this.handleSortByChange = this.handleSortByChange.bind(this);
     this.showMoreReviews = this.showMoreReviews.bind(this);
     this.filterReviews = this.filterReviews.bind(this);
+    this.searchReviews = this.searchReviews.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -81,9 +86,34 @@ class ReviewList extends React.Component {
     return showReviews;
   }
 
+  searchReviews(keyword) {
+    this.setState({ isSearching: true });
+    let showReviews = [];
+    this.props.reviews.forEach((review) => {
+      if (
+        review.body.indexOf(keyword) > -1 ||
+        review.summary.indexOf(keyword) > -1
+      ) {
+        showReviews.push(review);
+      }
+    });
+    this.setState({
+      searchedReviews: showReviews,
+    });
+  }
+
+  clearSearch() {
+
+    this.setState({
+      isSearching: false,
+      searchedReviews: []
+    })
+  }
   render() {
     let reviewsToShow =
-      this.state.isSorted === true
+      this.state.isSearching === true
+        ? this.state.searchedReviews
+        : this.state.isSorted === true
         ? this.props.filteredReviews.length > 0
           ? this.filterReviews(this.state.sortedReviews)
           : this.state.sortedReviews
@@ -104,6 +134,7 @@ class ReviewList extends React.Component {
       </div>
     ) : (
       <div id="review-list-container">
+        <KeywordSearch searchReviews={this.searchReviews} clearSearch={this.clearSearch}/>
         <div id="sort-and-add-review-container">
           <SortBy
             currentProductID={this.props.currentProductID}
