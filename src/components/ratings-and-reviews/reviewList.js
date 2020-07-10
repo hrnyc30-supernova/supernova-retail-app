@@ -86,6 +86,7 @@ class ReviewList extends React.Component {
         {" "}
         There are currently no reviews for this product <br />
         <AddReviewButton
+          currentProductID={this.props.currentProductID}
           currentProductCharacteristics={
             this.props.currentProductCharacteristics
           }
@@ -111,10 +112,12 @@ class ReviewList extends React.Component {
         </div>
         <AddReviewButton
             id="add-new-review-button"
+            currentProductID={this.props.currentProductID}
             currentProductCharacteristics={
               this.props.currentProductCharacteristics
             }
             currentProductName={this.props.currentProductName}
+            currentProductID={this.props.currentProductID}
           />
       </div>
     );
