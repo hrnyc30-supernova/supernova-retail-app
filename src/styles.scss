@@ -748,7 +748,7 @@ small {
   display: block;
 }
 
-#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:first-child{
+#characteristic-rating-container > .characteristic-filter-elem >.characteristic-scale-item:first-child {
   // float:left;
   // width: 60px;
   display: inline;
@@ -814,6 +814,8 @@ small {
 
 .qamodals {
   text-transform: uppercase;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
   color: #525252;
 }
 
@@ -826,6 +828,12 @@ small {
   cursor: pointer;
 }
 
+.qa-div {
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+  color: #525252;
+}
+    
 /* -------- FOOTER -------- */
 
 .footer-section {
