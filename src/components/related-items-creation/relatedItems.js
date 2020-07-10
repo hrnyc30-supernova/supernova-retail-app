@@ -120,7 +120,7 @@ class RelatedItems extends React.Component {
     return (
       <>
         <div className="related-products-container">
-          RELATED PRODUCTS
+          <div className="widget-headings">Related Products</div>
           <ProductCard
             relatedProducts={this.state.relatedProductIds}
             relatedProductNames={this.state.relatedItemNames}
@@ -133,7 +133,7 @@ class RelatedItems extends React.Component {
           />
         </div>
         <div>
-          YOUR OUTFIT
+          <div className="widget-headings">Your Outfit</div>
           <YourOutfit
             currentProductInfo={this.props.currentProductInfo}
             averageRating={this.props.averageRating}

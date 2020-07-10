@@ -1,7 +1,7 @@
-import React from "react";
-import ReviewList from "./reviewList.js";
-import RatingsBreakdown from "./ratingsBreakdown.js";
-import apiMaster from "../../apiMaster.js";
+import React from 'react';
+import ReviewList from './reviewList.js';
+import RatingsBreakdown from './ratingsBreakdown.js';
+import apiMaster from '../../apiMaster.js';
 
 class RatingsReviews extends React.Component {
   constructor(props) {
@@ -67,7 +67,7 @@ class RatingsReviews extends React.Component {
   render() {
     return (
       <div id="reviews-ratings-container">
-        RATINGS AND REVIEWS
+        <div className="widget-headings">Ratings and Reviews</div>
         <ReviewList
           currentProductCharacteristics={
             this.props.currentRating.characteristics
