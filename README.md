@@ -34,7 +34,10 @@ Tech Stack
 
 - React
 - react-router
-- Redux
+- Recoil
+- React Bootstrap
+- Moment.js
+- url-loader
 - Webpack
 - Babel
 - Jest
