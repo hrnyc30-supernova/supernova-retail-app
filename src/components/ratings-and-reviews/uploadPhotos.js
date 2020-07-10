@@ -16,9 +16,6 @@ class UploadPhotos extends React.Component {
     this.setState(
       {
         images: temp,
-      },
-      () => {
-        console.log("images array", this.state.images);
       }
     );
   }
@@ -61,7 +58,7 @@ class UploadPhotos extends React.Component {
                   <input
                     type="file"
                     id={i}
-                    name="photo"
+                    name="photos"
                     onChange={this.handleChange}
                     accept="image/png, image/jpeg, image/jpg"
                   />

@@ -299,7 +299,7 @@ class NewReview extends React.Component {
                   </small>
                 </Form.Text>
                 <Form.Control.Feedback type="invalid">
-                  name is Required
+                  Name is Required
                 </Form.Control.Feedback>
               </Form.Group>
               <Form.Group controlId="formBasicEmail">
