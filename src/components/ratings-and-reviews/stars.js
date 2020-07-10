@@ -19,7 +19,7 @@ class Stars extends React.Component {
     if (this.props.allowChange) {
       return (
         <StarRatings
-          starEmptyColor="#ebebeb"
+          starEmptyColor="#d3d3d3"
           starRatedColor="#525252"
           rating={this.state.rating}
           starDimension="20px"
@@ -32,7 +32,7 @@ class Stars extends React.Component {
     } else {
       return (
         <StarRatings
-          starEmptyColor="#ebebeb"
+          starEmptyColor="#d3d3d3"
           starRatedColor="#525252"
           rating={this.props.rating}
           starDimension="20px"
