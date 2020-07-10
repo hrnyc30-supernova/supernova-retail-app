@@ -4,7 +4,6 @@ import QuestionDisplay from './questionDisplay';
 import AskQuestionModal from './questionForm.js';
 import AddAnswerModal from './addAnswerModal.js';
 import Button from 'react-bootstrap/Button';
-import { RecoilRoot } from 'recoil';
 import MoreQuestions from './moreQuestions';
 
 const QuestionsAndAnswers = (props) => {
@@ -34,40 +33,36 @@ const QuestionsAndAnswers = (props) => {
     );
   } else if (AddAnswer) {
     return (
-      <RecoilRoot>
-        <AddAnswerModal
-          closeModal={closeAddQuestionModal}
-          show={AddAnswer}
-          name={props.currentProductName}
-          productID={props.currentProductID}
-        />
-      </RecoilRoot>
+      <AddAnswerModal
+        closeModal={closeAddQuestionModal}
+        show={AddAnswer}
+        name={props.currentProductName}
+        productID={props.currentProductID}
+      />
     );
   } else {
     return (
-      <RecoilRoot>
-        <div>
-          <h1>Questions and Answers</h1>
-          <SearchQuestion />
-          <div className="allCards">
-            <QuestionDisplay
-              productID={props.currentProductID}
-              showModal={showAddAnswerModal}
-            />
-          </div>
-          <hr></hr>
-          <MoreQuestions />
-          <Button
-            variant="success"
-            className="qa-button"
-            onClick={() => {
-              setAddQuestionModal(true);
-            }}
-          >
-            Add A Question
-          </Button>
+      <div>
+        <h1>Questions and Answers</h1>
+        <SearchQuestion />
+        <div className="allCards">
+          <QuestionDisplay
+            productID={props.currentProductID}
+            showModal={showAddAnswerModal}
+          />
         </div>
-      </RecoilRoot>
+        <hr></hr>
+        <MoreQuestions />
+        <Button
+          variant="success"
+          className="qa-button"
+          onClick={() => {
+            setAddQuestionModal(true);
+          }}
+        >
+          Add A Question
+        </Button>
+      </div>
     );
   }
 };
