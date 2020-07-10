@@ -222,8 +222,8 @@ input {
   background-size: cover;
   background-position: center;
   border: 1px solid #525252;
-  height: 60px;
-  width: 60px;
+  height: 57px;
+  width: 57px;
   margin-bottom: 20px;
   cursor: pointer;
   box-sizing: content-box;
@@ -238,7 +238,7 @@ input {
   height: 4px;
 }
 
-.arrow {
+.photo-selector-arrows {
   z-index: 1;
   position: absolute;
   font-size: 20px;
@@ -252,6 +252,22 @@ input {
 
 #right-arrow {
   right: 50px;
+}
+
+.photo-selector-chevrons {
+  z-index: 1;
+  position: absolute;
+  font-size: 20px;
+  left: 51px;
+  cursor: pointer;
+}
+
+#up-chevron {
+  top: -5px;
+}
+
+#down-chevron {
+  bottom: 7px;
 }
 
 #product-photo-expand {
@@ -289,17 +305,20 @@ input {
   margin-right: 8px;
 }
 
-#styles-menu {
+#styles-menu-4-across {
   margin-top: 25px;
+  width: 340px;
+  height: 205px;
+}
+
+#styles-menu-5-across {
+  margin-top: 25px;
+  width: 430px;
+  height: 205px;
 }
 
 #styles-menu-heading {
   letter-spacing: 0.4px;
-}
-
-#product-style-icon-container {
-  width: 340px;
-  height: 145px;
 }
 
 .product-style-icon {

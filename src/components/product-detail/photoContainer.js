@@ -3,20 +3,30 @@ import ReactDOM from "react-dom";
 
 import { FaArrowLeft } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
+import { FiChevronUp } from "react-icons/fi";
+import { FiChevronDown } from "react-icons/fi";
 import { FaExpand } from "react-icons/fa";
 
 class PhotoContainer extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      currentPhotoIcons: [],
+      moreIconsDown: false,
+      moreIconsUp: false,
+      numberOfPages: 1,
+      currentPageOfIcons: 0,
       selectedPhotoIndex: 0,
       photoContainerWidth: "photo-container-standard",
       mouseCoordinates: null,
       zoomedImageDims: null,
     };
 
+    this.paginatePhotoIcons = this.paginatePhotoIcons.bind(this);
     this.handleLeftArrowClick = this.handleLeftArrowClick.bind(this);
     this.handleRightArrowClick = this.handleRightArrowClick.bind(this);
+    this.handleUpChevronClick = this.handleUpChevronClick.bind(this);
+    this.handleDownChevronClick = this.handleDownChevronClick.bind(this);
     this.handleIconClick = this.handleIconClick.bind(this);
     this.handleProductPhotoExpand = this.handleProductPhotoExpand.bind(this);
   }
@@ -25,7 +35,11 @@ class PhotoContainer extends React.Component {
     if (prevProps.selectedStyle !== this.props.selectedStyle) {
       this.setState({
         selectedPhotoIndex: 0,
+        currentPhotoIcons: [],
+        currentPageOfIcons: 0,
       });
+
+      this.paginatePhotoIcons();
     }
   }
 
@@ -54,6 +68,105 @@ class PhotoContainer extends React.Component {
         selectedPhotoIndex: this.state.selectedPhotoIndex + 1,
       });
     }
+  }
+
+  paginatePhotoIcons() {
+    var allPhotoIcons = [];
+    var nextSevenPhotos = [];
+    var numberOfPages;
+
+    if (this.props.selectedStyle != undefined) {
+      this.props.selectedStyle.photos.map((photo, index) =>
+        allPhotoIcons.push([photo, index])
+      );
+
+      numberOfPages = Math.ceil(allPhotoIcons.length / 7);
+
+      if (allPhotoIcons.length > 7) {
+        nextSevenPhotos = allPhotoIcons.slice(
+          this.state.currentPageOfIcons * 7,
+          this.state.currentPageOfIcons * 7 + 7
+        );
+
+        this.setState({
+          numberOfPages: numberOfPages,
+          currentPhotoIcons: nextSevenPhotos,
+          moreIconsDown: true,
+        });
+      } else {
+        this.setState({
+          numberOfPages: 1,
+          currentPhotoIcons: allPhotoIcons,
+        });
+      }
+    }
+  }
+
+  updatePhotoIcons() {
+    var allPhotoIcons = [];
+    var nextSevenPhotos = [];
+    var numberOfPages;
+
+    if (this.props.selectedStyle != undefined) {
+      this.props.selectedStyle.photos.map((photo, index) =>
+        allPhotoIcons.push([photo, index])
+      );
+
+      numberOfPages = Math.ceil(allPhotoIcons.length / 7);
+
+      if (allPhotoIcons.length > 7) {
+        nextSevenPhotos = allPhotoIcons.slice(
+          this.state.currentPageOfIcons * 7,
+          this.state.currentPageOfIcons * 7 + 7
+        );
+
+        this.setState({
+          numberOfPages: numberOfPages,
+          currentPhotoIcons: nextSevenPhotos,
+        });
+      } else {
+        this.setState({
+          numberOfPages: 1,
+          currentPhotoIcons: allPhotoIcons,
+        });
+      }
+    }
+  }
+
+  handleUpChevronClick() {
+    this.setState(
+      {
+        currentPageOfIcons: this.state.currentPageOfIcons - 1,
+        moreIconsDown: true,
+      },
+      () => {
+        if (this.state.currentPageOfIcons === 0) {
+          this.setState({
+            moreIconsUp: false,
+          });
+        }
+
+        this.updatePhotoIcons();
+      }
+    );
+  }
+
+  handleDownChevronClick() {
+    this.setState(
+      {
+        currentPageOfIcons: this.state.currentPageOfIcons + 1,
+        moreIconsUp: true,
+      },
+      () => {
+        if (this.state.numberOfPages === this.state.currentPageOfIcons + 1) {
+          this.setState({
+            moreIconsDown: false,
+          });
+        }
+
+        this.updatePhotoIcons();
+      }
+    );
   }
 
   handleIconClick(index) {
@@ -145,16 +258,17 @@ class PhotoContainer extends React.Component {
           ></img>
         ) : null}
         <div id="product-photo-icon-container">
-          {this.props.selectedStyle != undefined
-            ? this.props.selectedStyle.photos.map((photo, index) => (
+          {this.state.currentPhotoIcons != [] &&
+          this.state.currentPhotoIcons != undefined
+            ? this.state.currentPhotoIcons.map((item) => (
                 <div
                   className="product-photo-icon"
                   style={{
-                    backgroundImage: `url(${photo.thumbnail_url})`,
+                    backgroundImage: `url(${item[0].thumbnail_url})`,
                   }}
-                  onClick={() => this.handleIconClick(index)}
+                  onClick={() => this.handleIconClick(item[1])}
                 >
-                  {this.state.selectedPhotoIndex === index ? (
+                  {this.state.selectedPhotoIndex === item[1] ? (
                     <span id="selected-photo-bar"></span>
                   ) : null}
                 </div>
@@ -168,19 +282,41 @@ class PhotoContainer extends React.Component {
           <FaExpand />
         </span>
         <span
-          className="arrow"
+          className="photo-selector-arrows"
           id="left-arrow"
           onClick={(event) => this.handleLeftArrowClick(event)}
         >
           <FaArrowLeft />
         </span>
         <span
-          className="arrow"
+          className="photo-selector-arrows"
           id="right-arrow"
           onClick={(event) => this.handleRightArrowClick(event)}
         >
           <FaArrowRight />
         </span>
+        {this.props.selectedStyle != undefined &&
+        this.props.selectedStyle.photos.length > 7 &&
+        this.state.moreIconsUp === true ? (
+          <span
+            className="photo-selector-chevrons"
+            id="up-chevron"
+            onClick={(event) => this.handleUpChevronClick(event)}
+          >
+            <FiChevronUp />
+          </span>
+        ) : null}
+        {this.props.selectedStyle != undefined &&
+        this.props.selectedStyle.photos.length > 7 &&
+        this.state.moreIconsDown === true ? (
+          <span
+            className="photo-selector-chevrons"
+            id="down-chevron"
+            onClick={(event) => this.handleDownChevronClick(event)}
+          >
+            <FiChevronDown />
+          </span>
+        ) : null}
       </div>
     );
   }
