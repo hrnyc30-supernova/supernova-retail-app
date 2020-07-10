@@ -1,7 +1,5 @@
 import React from "react";
-import ProgressBar from "react-bootstrap/ProgressBar";
 import { charScales } from "./constants.js";
-import { FaCaretUp, FaTruckMonster } from "react-icons/fa";
 
 class RatingFilters extends React.Component {
   constructor(props) {
@@ -14,7 +12,7 @@ class RatingFilters extends React.Component {
         "4": 0,
         "5": 0,
       },
-      filters: {}
+      filters: {},
     };
     this.toggleFilter = this.toggleFilter.bind(this);
     this.removeFilters = this.removeFilters.bind(this);
@@ -34,22 +32,25 @@ class RatingFilters extends React.Component {
   toggleFilter(e, rating) {
     let temp = this.state.filters;
     if (temp[rating] !== undefined) {
-      delete temp[rating]
+      delete temp[rating];
     } else {
-      temp[rating] = true; 
+      temp[rating] = true;
     }
     this.setState({
-      filters: temp
-    })
+      filters: temp,
+    });
     this.props.handleFilter(this.state.filters);
   }
 
   removeFilters() {
-    this.setState({
-      filters: {}
-    }, () => {
-      this.props.handleFilter(this.state.filters);
-    })
+    this.setState(
+      {
+        filters: {},
+      },
+      () => {
+        this.props.handleFilter(this.state.filters);
+      }
+    );
   }
 
   defineCountObj() {
@@ -77,74 +78,50 @@ class RatingFilters extends React.Component {
       ? (chars = this.props.currentRating.characteristics)
       : (chars = null);
     return (
-      <>
-        {this.props.class === "ratings-filters-container" ? (
-          <div className="ratings-filters-container">
-            {this.props.currentProductRatings ? (
-              <>
-                Rating Breakdown <br />
-                {Object.keys(this.state.filters).length === 0 ? null : <small>{`Applied Filters: ${Object.keys(this.state.filters).join(' ')}`}<span className='link' onClick={this.removeFilters}>{`  Remove all filters`}</span></small>}
-                {[...Array(5)]
-                  .map((possibleRating, i) => {
-                    return (
-                      <div key={i} id="rating-filter-container">
-                        <div value={i+1} onClick={e=>this.toggleFilter(e, i+1)}>
-                          <span className="star-rating-filter-number"> {`${Number(i) + 1} Stars`}</span>
-                          <div className="rating-filter-background">
-                            <div
-                              className="rating-filter-filler"
-                              style={{ width: this.findPercentage(i + 1) }}
-                            ></div>
-                          </div>
-                          <small className="star-rating-filter-elem">{`${this.getReviewsWithRating(
-                            i + 1
-                          )} Reviews`}</small>
-                        </div>
+      <div className="ratings-filters-container">
+        {this.props.currentProductRatings ? (
+          <>
+            Rating Breakdown <br />
+            {Object.keys(this.state.filters).length === 0 ? null : (
+              <small>
+                {`Applied Filters: ${Object.keys(this.state.filters).join(
+                  " "
+                )}`}
+                <span
+                  className="link"
+                  onClick={this.removeFilters}
+                >{`  Remove all filters`}</span>
+              </small>
+            )}
+            {[...Array(5)]
+              .map((possibleRating, i) => {
+                return (
+                  <div key={i} id="rating-filter-container">
+                    <div
+                      value={i + 1}
+                      onClick={(e) => this.toggleFilter(e, i + 1)}
+                    >
+                      <span className="star-rating-filter-number">
+                        {" "}
+                        {`${Number(i) + 1} Stars`}
+                      </span>
+                      <div className="rating-filter-background">
+                        <div
+                          className="rating-filter-filler"
+                          style={{ width: this.findPercentage(i + 1) }}
+                        ></div>
                       </div>
-                    );
-                  })
-                  .reverse()}
-              </>
-            ) : null}
-          </div>
-        ) : (
-          <div className="characteristics-ratings-container">
-            <>Characteristic Breakdown<br/>
-              {chars !== null
-                ? Object.entries(chars).map(([char, val]) => {
-                    return (
-                      <div key={val.id} id="characteristic-rating-container">
-                        <label className="characteristic-filter-elem">
-                          {`${char}`}
-                          <div className="rating-filter-container">
-                            <div className="characteristic-background">
-                              <div
-                                className="characteristic-filler"
-                                style={{ width: val.value * 60 }}
-                              >
-                                <FaCaretUp className="characteristic-icon" />
-                              </div>
-                            </div>
-                          </div>
-                            {[1, 5].map((item, i) => {
-                              return (
-                                <span
-                                className="characteristic-scale-item"
-                                key={i}
-                                >
-                                  <small>{charScales[char][item]}</small>
-                                </span>
-                              );
-                            })}
-                            </label>
-                      </div>
-                    );
-                  })
-                : null}
-            </>
-          </div>
-        )}
-      </>
+                      <small className="star-rating-filter-elem">{`${this.getReviewsWithRating(
+                        i + 1
+                      )} Reviews`}</small>
+                    </div>
+                  </div>
+                );
+              })
+              .reverse()}
+          </>
+        ) : null}
+      </div>
     );
   }
 }

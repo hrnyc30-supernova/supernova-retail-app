@@ -1,6 +1,7 @@
 import React from "react";
 import Stars from "./stars.js";
 import RatingFilters from "./ratingFilters.js";
+import Characteristics from "./characteristics.js";
 
 const RatingsBreakdown = ({currentRating, recommend, currentProductRatings, currentProductName, currentProductID, averageRating, handleFilter}) => {
   let chars;
@@ -23,19 +24,14 @@ const RatingsBreakdown = ({currentRating, recommend, currentProductRatings, curr
           </div>
           <small>{`${currentProductRatings.length} Reviews of this product`}</small>
           <RatingFilters
-            class="ratings-filters-container"
             recommend={recommend}
             currentProductRatings={currentProductRatings}
             currentRating={currentRating}
             handleFilter={handleFilter}
           />
           <small>{`${recommend.toFixed(0)}% of reviews recommend this product`}</small> <br/>
-          <RatingFilters
-            class="characteristics-ratings-container"
-            recommend={recommend}
-            currentProductRatings={currentProductRatings}
+          <Characteristics
             currentRating={currentRating}
-            handleFilter={handleFilter}
           />
         </>
       ) : null}
