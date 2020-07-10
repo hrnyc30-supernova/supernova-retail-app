@@ -8,34 +8,22 @@ import MoreQuestions from './moreQuestions';
 
 const QuestionsAndAnswers = (props) => {
   const [AddQuestionModal, setAddQuestionModal] = useState(false);
-  const [AddAnswer, setAddAnswer] = useState(false);
-
-  const closeModal = () => {
-    setAddQuestionModal(false);
-  };
-
-  const closeAddQuestionModal = () => {
-    setAddAnswer(false);
-  };
-
-  const showAddAnswerModal = () => {
-    setAddAnswer(true);
-  };
+  const [isAddAnswerModalOpen, setisAddAnswerModalOpen] = useState(false);
 
   if (AddQuestionModal) {
     return (
       <AskQuestionModal
-        closeModal={closeModal}
+        closeModal={() => setAddQuestionModal(false)}
         show={AddQuestionModal}
         name={props.currentProductName}
         productID={props.currentProductID}
       />
     );
-  } else if (AddAnswer) {
+  } else if (isAddAnswerModalOpen) {
     return (
       <AddAnswerModal
-        closeModal={closeAddQuestionModal}
-        show={AddAnswer}
+        closeModal={() => setisAddAnswerModalOpen(false)}
+        show={isAddAnswerModalOpen}
         name={props.currentProductName}
         productID={props.currentProductID}
       />
@@ -48,7 +36,7 @@ const QuestionsAndAnswers = (props) => {
         <div className="allCards">
           <QuestionDisplay
             productID={props.currentProductID}
-            showModal={showAddAnswerModal}
+            showModal={() => setisAddAnswerModalOpen(true)}
           />
         </div>
         <hr></hr>
