@@ -82,7 +82,6 @@ class ReviewList extends React.Component {
   render() {
     let reviewsToShow =
       this.state.isSorted === true ? (this.props.filteredReviews.length > 0 ? (this.filterReviews(this.state.sortedReviews)) : this.state.sortedReviews) : (this.props.filteredReviews.length > 0 ? this.filterReviews(this.props.reviews) : this.props.reviews.slice(0, this.state.count));
-      console.log(reviewsToShow)
     return this.props.reviews.length === 0 ? (
       <div id="review-list-container">
         {" "}

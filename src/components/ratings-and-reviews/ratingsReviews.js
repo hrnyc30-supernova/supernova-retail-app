@@ -44,7 +44,6 @@ class RatingsReviews extends React.Component {
   }
 
   filterReviews(rating){
-    
     let filteredReviews =[];
     for (var count in rating) {
       let countFilter = this.state.reviews.filter((review) => {
@@ -54,7 +53,7 @@ class RatingsReviews extends React.Component {
     }
     this.setState({
       filtered: filteredReviews
-    }, () => {console.log('set state', this.state.filtered)})
+    })
   }
 
   getRecommendation(reviewsArray) {
