@@ -102,14 +102,9 @@ class NewReview extends React.Component {
 
   toggleImgModal(e, images) {
     if (images && images.length > 0) {
-      this.setState(
-        {
-          photos: images,
-        },
-        () => {
-          console.log(this.state.photos);
-        }
-      );
+      this.setState({
+        photos: images,
+      });
     }
     let temp = this.state.showImgModal;
     this.setState({
