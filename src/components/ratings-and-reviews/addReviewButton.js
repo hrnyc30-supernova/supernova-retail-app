@@ -20,6 +20,7 @@ class AddReviewButton extends React.Component {
     return (
       <>
         <button
+          id="add-review-button"
           className="main-action-button review-button inline-display"
           onClick={(e) => this.showModal()}
         >
