@@ -103,11 +103,10 @@ class ReviewList extends React.Component {
   }
 
   clearSearch() {
-
     this.setState({
       isSearching: false,
-      searchedReviews: []
-    })
+      searchedReviews: [],
+    });
   }
   render() {
     let reviewsToShow =
@@ -134,7 +133,10 @@ class ReviewList extends React.Component {
       </div>
     ) : (
       <div id="review-list-container">
-        <KeywordSearch searchReviews={this.searchReviews} clearSearch={this.clearSearch}/>
+        <KeywordSearch
+          searchReviews={this.searchReviews}
+          clearSearch={this.clearSearch}
+        />
         <div id="sort-and-add-review-container">
           <SortBy
             currentProductID={this.props.currentProductID}
