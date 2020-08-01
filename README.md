@@ -1,4 +1,4 @@
-# supernova
+# Hydrogen Retail App
 
 ## Building and running on localhost
 
@@ -26,25 +26,19 @@ To create a development build:
 npm run build-dev
 ```
 
-## Running
+## Tech Stack
 
-Open the file `dist/index.html` in your browser
-
-Tech Stack
-
-- React
-- react-router
-- Recoil
-- React Bootstrap
+- Axios
+- Babel
+- Express
 - Moment.js
+- React
+- React Bootstrap
+- Recoil
 - url-loader
 - Webpack
-- Babel
-- Jest
-- Enzyme
-- Axios
 
-## Git Workflow
+## Git Feature Branch Workflow
 
 Check Status Through
 
