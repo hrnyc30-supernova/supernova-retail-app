@@ -83,7 +83,7 @@ body {
 /* ---------TEMP WIDGET STYLER -------- */
 
 .widget {
-  margin: 100px 0px;
+  margin: 50px 0px;
 }
 
 input {
@@ -103,7 +103,7 @@ input {
 #logo {
   font-family: 'Kanit', sans-serif;
   font-size: 24px;
-  text-decoration: underline;
+  text-decoration: none;
 }
 
 #main-search {
@@ -389,7 +389,7 @@ input {
   display: inline-block;
   clear: both;
   text-align: center;
-  margin: 55px 120px;
+  margin: 50px 120px 0px 120px;
 }
 
 #product-description {
@@ -911,6 +911,7 @@ small {
 }
 
 .widget-headings {
-  font-size: 36px;
+  font-size: 18px;
   font-weight: bold;
+  padding-bottom: 8px;
 }

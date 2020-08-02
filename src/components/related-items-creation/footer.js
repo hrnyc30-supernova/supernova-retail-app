@@ -92,7 +92,7 @@ class Footer extends React.Component {
           >
             Admin
           </span>
-          Supernova <AiOutlineCopyright /> 2020
+          Hydrogen <AiOutlineCopyright /> 2020
         </div>
       );
     }

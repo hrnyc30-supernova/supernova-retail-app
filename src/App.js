@@ -1,17 +1,17 @@
-import React from "react";
-import apiMaster from "./apiMaster";
-import { hot } from "react-hot-loader/root";
-import "bootstrap/dist/css/bootstrap.min.css";
+import React from 'react';
+import apiMaster from './apiMaster';
+import { hot } from 'react-hot-loader/root';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Cookies from "universal-cookie";
+import Cookies from 'universal-cookie';
 
-import NavigationBar from "./components/navigationBar";
-import AlertBar from "./components/alertBar";
-import ProductDetail from "./components/product-detail/productDetail";
-import RelatedItems from "./components/related-items-creation/relatedItems";
-import QuestionsAndAnswers from "./components/questions-and-answers/questionsAndAnswers";
-import RatingsReviews from "./components/ratings-and-reviews/ratingsReviews";
-import Footer from "./components/related-items-creation/footer";
+import NavigationBar from './components/navigationBar';
+import AlertBar from './components/alertBar';
+import ProductDetail from './components/product-detail/productDetail';
+import RelatedItems from './components/related-items-creation/relatedItems';
+import QuestionsAndAnswers from './components/questions-and-answers/questionsAndAnswers';
+import RatingsReviews from './components/ratings-and-reviews/ratingsReviews';
+import Footer from './components/related-items-creation/footer';
 
 class App extends React.Component {
   constructor(props) {
@@ -62,13 +62,13 @@ class App extends React.Component {
 
   generateUserToken() {
     const cookies = new Cookies();
-    if (cookies.get("user") === undefined) {
+    if (cookies.get('user') === undefined) {
       var userid = Math.floor(Math.random() * 999999999);
-      cookies.set("user", userid);
-      console.log(cookies.get("user"));
+      cookies.set('user', userid);
+      console.log(cookies.get('user'));
     }
     this.setState({
-      userToken: cookies.get("user"),
+      userToken: cookies.get('user'),
     });
   }
 
@@ -109,7 +109,7 @@ class App extends React.Component {
   }
 
   startListening() {
-    document.addEventListener("click", this.clickTracker);
+    document.addEventListener('click', this.clickTracker);
   }
 
   clickTracker(e) {
@@ -162,7 +162,7 @@ class App extends React.Component {
             userToken={this.state.userToken}
           />
         </div>
-        <div>
+        <div className="widget">
           <RelatedItems
             currentProductID={this.state.currentProduct.id}
             currentProductName={this.state.currentProduct.name}
@@ -187,12 +187,12 @@ class App extends React.Component {
             currentRating={this.state.currentRating}
           />
         </div>
-        <div className="footer-section">
+        {/* <div className="footer-section">
           <Footer
             clickData={this.state.clickData}
             userToken={this.state.userToken}
           />
-        </div>
+        </div> */}
       </div>
     );
   }

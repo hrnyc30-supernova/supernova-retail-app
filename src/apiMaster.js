@@ -1,31 +1,31 @@
-import axios from "axios";
-const url = "http://18.224.200.47";
+import axios from 'axios';
+const url = 'http://18.224.200.47';
 
 const getProductList = () => {
   return axios.get(`${url}/products`);
 };
 
-const getProductInfo = (id = 1) => {
+const getProductInfo = (id = 4) => {
   return axios.get(`${url}/products/${id}`);
 };
 
-const getProductStyles = (id = 1) => {
+const getProductStyles = (id = 4) => {
   return axios.get(`${url}/products/${id}/styles`);
 };
 
-const getRelatedProducts = (id = 1) => {
+const getRelatedProducts = (id = 4) => {
   return axios.get(`${url}/products/${id}/related`);
 };
 
-const getQA = (id = 1) => {
+const getQA = (id = 4) => {
   return axios.get(`${url}/qa/${id}`);
 };
 
-const getReviewMetaData = (id = 1) => {
+const getReviewMetaData = (id = 4) => {
   return axios.get(`${url}/reviews/${id}/meta`);
 };
 
-const getReviewsOfProduct = (id = 1, sortString = "relevant", count = 20) => {
+const getReviewsOfProduct = (id = 4, sortString = 'relevant', count = 20) => {
   return axios.get(
     `${url}/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
   );
@@ -36,7 +36,7 @@ const reportReview = (reviewId) => {
 };
 
 const postReview = (
-  id = 1,
+  id = 4,
   rating,
   summary,
   body,

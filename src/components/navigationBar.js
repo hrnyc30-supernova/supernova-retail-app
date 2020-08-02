@@ -1,12 +1,12 @@
-import React from "react";
+import React from 'react';
 
-import { FaSearch } from "react-icons/fa";
+import { FaSearch } from 'react-icons/fa';
 
 class NavigationBar extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      search: "",
+      search: '',
     };
 
     this.handleFormChange = this.handleFormChange.bind(this);
@@ -21,7 +21,7 @@ class NavigationBar extends React.Component {
   render() {
     return (
       <div id="nav-bar">
-        <span id="logo">Supernova</span>
+        <span id="logo">Hydrogen</span>
         <span id="main-search">
           <input
             type="text"
