@@ -1,20 +1,37 @@
 import axios from "axios";
 const url = "http://18.224.200.47";
+const pURL = "http://localhost:1128";
 
 const getProductList = () => {
-  return axios.get(`${url}/products`);
+  return axios({
+    method: 'get',
+    url: `/products`,
+    baseURL: pURL
+  });
 };
 
 const getProductInfo = (id = 1) => {
-  return axios.get(`${url}/products/${id}`);
+  return axios({
+    method: 'get',
+    url: `/products/${id}`,
+    baseURL: pURL
+  });
 };
 
 const getProductStyles = (id = 1) => {
-  return axios.get(`${url}/products/${id}/styles`);
+  return axios({
+    method: 'get',
+    url: `/products/${id}/styles`,
+    baseURL: pURL
+  });
 };
 
 const getRelatedProducts = (id = 1) => {
-  return axios.get(`${url}/products/${id}/related`);
+  return axios({
+    method: 'get',
+    url: `/products/${id}/related`,
+    baseURL: pURL
+  });
 };
 
 const getQA = (id = 1) => {
