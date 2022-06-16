@@ -1,5 +1,6 @@
 import axios from "axios";
 const url = "http://18.224.200.47";
+const questionsUrl="http://18.208.240.168:3000";
 
 const getProductList = () => {
   return axios.get(`${url}/products`);
@@ -18,7 +19,7 @@ const getRelatedProducts = (id = 1) => {
 };
 
 const getQA = (id = 1) => {
-  return axios.get(`${url}/qa/${id}`);
+  return axios.get(`${questionsUrl}/qa/questions?product_id=${id}`);
 };
 
 const getReviewMetaData = (id = 1) => {
@@ -72,19 +73,20 @@ const addToCart = (user_token, sku_id) => {
 };
 
 const getSpecificAnswers = (questionId) => {
-  return axios.get(`${url}/qa/${questionId}/answers`);
+  return axios.get(`${questionsUrl}/qa/questions/${questionId}/answers`);
 };
 
 const askQuestion = (id, text, name, email) => {
-  return axios.post(`${url}/qa/${id}`, {
+  return axios.post(`${questionsUrl}/qa/questions`, {
     body: text,
     name: name,
     email: email,
+    product_id: id,
   });
 };
 
 const answerQuestion = (questionId, text, name, email, photos = []) => {
-  return axios.post(`${url}/qa/${questionId}/answers`, {
+  return axios.post(`${questionsUrl}/qa/questions/${questionId}/answers`, {
     body: text,
     name: name,
     email: email,
@@ -93,19 +95,19 @@ const answerQuestion = (questionId, text, name, email, photos = []) => {
 };
 
 const markQAsHelpful = (questionId) => {
-  return axios.put(`${url}/qa/question/${questionId}/helpful`);
+  return axios.put(`${questionsUrl}/qa/questions/${questionId}/helpful`);
 };
 
 const reportQuestion = (questionId) => {
-  return axios.put(`${url}/qa/question/${questionId}/report`);
+  return axios.put(`${questionsUrl}/qa/questions/${questionId}/report`);
 };
 
 const markAnsAsHelpful = (answerID) => {
-  return axios.put(`${url}/qa/answer/${answerID}/helpful`);
+  return axios.put(`${questionsUrl}/qa/answers/${answerID}/helpful`);
 };
 
 const reportAns = (answerID) => {
-  return axios.put(`${url}/qa/answer/${answerID}/report`);
+  return axios.put(`${questionsUrl}/qa/answers/${answerID}/report`);
 };
 
 const apiMaster = {
