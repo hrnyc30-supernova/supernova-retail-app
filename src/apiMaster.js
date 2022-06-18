@@ -1,7 +1,8 @@
 import axios from "axios";
 //require("dotenv").config();
 const url = "http://18.224.200.47";
-const pURL = 'http://ec2-34-202-182-39.compute-1.amazonaws.com:3000';
+const pURL = 'http://ec2-34-202-182-39.compute-1.amazonaws.com';
+const qurl = 'http://ec2-3-129-7-246.us-east-2.compute.amazonaws.com';
 
 const getProductList = () => {
   return axios({
@@ -36,7 +37,7 @@ const getRelatedProducts = (id = 1) => {
 };
 
 const getQA = (id = 1) => {
-  return axios.get(`${url}/qa/${id}`);
+  return axios.get(`${qurl}/qa/questions?product_id=${id}`);
 };
 
 const getReviewMetaData = (id = 1) => {
@@ -90,19 +91,20 @@ const addToCart = (user_token, sku_id) => {
 };
 
 const getSpecificAnswers = (questionId) => {
-  return axios.get(`${url}/qa/${questionId}/answers`);
+  return axios.get(`${qurl}/qa/questions${questionId}/answers`);
 };
 
 const askQuestion = (id, text, name, email) => {
-  return axios.post(`${url}/qa/${id}`, {
+  return axios.post(`${qUrl}/qa/questions`, {
     body: text,
     name: name,
     email: email,
+    product_id: id,
   });
 };
 
 const answerQuestion = (questionId, text, name, email, photos = []) => {
-  return axios.post(`${url}/qa/${questionId}/answers`, {
+  return axios.post(`${qUrl}/qa/questions/${questionId}/answers`, {
     body: text,
     name: name,
     email: email,
@@ -111,19 +113,19 @@ const answerQuestion = (questionId, text, name, email, photos = []) => {
 };
 
 const markQAsHelpful = (questionId) => {
-  return axios.put(`${url}/qa/question/${questionId}/helpful`);
+  return axios.put(`${qUrl}/qa/questions/${questionId}/helpful`);
 };
 
 const reportQuestion = (questionId) => {
-  return axios.put(`${url}/qa/question/${questionId}/report`);
+  return axios.put(`${qUrl}/qa/questions/${questionId}/report`);
 };
 
 const markAnsAsHelpful = (answerID) => {
-  return axios.put(`${url}/qa/answer/${answerID}/helpful`);
+  return axios.put(`${qUrl}/qa/answers/${answerID}/helpful`);
 };
 
 const reportAns = (answerID) => {
-  return axios.put(`${url}/qa/answer/${answerID}/report`);
+  return axios.put(`${qUrl}/qa/answers/${answerID}/report`);
 };
 
 const apiMaster = {
