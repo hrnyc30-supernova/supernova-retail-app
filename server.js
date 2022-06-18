@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const port = 8080;
 const path = require('path');
-require("dotenv").config();
 
 app.use(express.static('dist'));
 
