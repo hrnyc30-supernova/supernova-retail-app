@@ -1,6 +1,7 @@
 import axios from "axios";
+//require("dotenv").config();
 const url = "http://18.224.200.47";
-const pURL = "http://localhost:1128";
+const pURL = 'http://ec2-34-202-182-39.compute-1.amazonaws.com:3000';
 
 const getProductList = () => {
   return axios({
