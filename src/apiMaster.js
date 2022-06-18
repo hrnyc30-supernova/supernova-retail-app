@@ -1,5 +1,6 @@
 import axios from "axios";
 const url = "http://18.224.200.47";
+const reviews_url = 'http://18.237.237.199:3000';
 
 const getProductList = () => {
   return axios.get(`${url}/products`);
@@ -22,17 +23,17 @@ const getQA = (id = 1) => {
 };
 
 const getReviewMetaData = (id = 1) => {
-  return axios.get(`${url}/reviews/${id}/meta`);
+  return axios.get(`${reviews_url}/reviews/metadata?product_id=${id}`);
 };
 
 const getReviewsOfProduct = (id = 1, sortString = "relevant", count = 20) => {
   return axios.get(
-    `${url}/reviews/${id}/list?sort=${sortString}:asc&count=${count}}`
+    `${reviews_url}/reviews?product_id=${id}&count=${count}`
   );
 };
 
 const reportReview = (reviewId) => {
-  return axios.put(`${url}/reviews/report/${reviewId}`);
+  return axios.put(`${reviews_url}/reviews/${reviewId}/report`);
 };
 
 const postReview = (
@@ -46,7 +47,7 @@ const postReview = (
   photos,
   characteristics
 ) => {
-  return axios.post(`${url}/reviews/${id}`, {
+  return axios.post(`${reviews_url}/reviews/${id}`, {
     rating: rating,
     summary: summary,
     body: body,

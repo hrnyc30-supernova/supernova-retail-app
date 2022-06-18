@@ -13,6 +13,10 @@ import QuestionsAndAnswers from "./components/questions-and-answers/questionsAnd
 import RatingsReviews from "./components/ratings-and-reviews/ratingsReviews";
 import Footer from "./components/related-items-creation/footer";
 
+// apiMaster.getReviewsOfProduct(1)
+//   .then(res => console.log('yo look at my reviews!', res))
+//   .catch(err => console.error('this didnt work', err))
+
 class App extends React.Component {
   constructor(props) {
     super(props);
